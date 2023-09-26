@@ -1,0 +1,122 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 400,
+  "background": "lightskyblue",
+  "description": "A lollipop chart with highlighting on hover and selecting on click. Rule mark offset can be sqrt of size (radius) + stroke width?",
+  "data": {
+    "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"
+  },
+  "transform": [
+    {
+        "joinaggregate": [{
+            "op": "count",
+            "field": "Variety",
+            "as": "Count"
+        }],
+        "groupby": [
+            "Variety"
+        ]
+    },
+    {
+        "filter": "(datum.Variety != '') && (datum.Variety != 'unknown') && (datum.Count >= 3)"
+    }],
+  "layer": [
+    {
+        "params": [
+            {
+              "name": "highlight",
+              "select": {"type": "point", "on": "mouseover"}
+            },
+            {"name": "select", "select": "point"}
+          ],
+        "mark": {"type": "circle", "cursor":"pointer", "xOffset":9, "tooltip": true},
+        "encoding": {
+            "color": {
+                "field": "Count",
+                "type": "quantitative",
+                "scale": {"range": ["#ffffe5",
+                "#fff7bc",
+                "#fee391",
+                "#fec44f",
+                "#fe9929",
+                "#ec7014",
+                "#cc4c02",
+                "#993404",
+                "#662506"]}
+            }
+        ,
+        "x": {
+            "field": "Count",
+            "type": "quantitative"
+        },
+        "y": {
+            "field": "Variety",
+            "type": "nominal",
+            "sort": "-x"
+        },
+        "size":{
+            "value": 300
+        },
+        "fillOpacity": {
+            "condition": {"param": "select", "value": 1},
+            "value": 0.05
+        },
+        "tooltip": [
+            {"field": "Variety", "type": "nominal"},
+            {"field": "Count", "type": "quantitative"}
+        ]
+      }
+    },
+    {
+        "mark": {"type": "rule"},
+        "encoding": {
+            "x": {
+                "field": "Count",
+                "type": "quantitative"
+            },
+            "y": {
+                "field": "Variety",
+                "type": "nominal",
+                "sort": "-x"
+            },
+            "color": {
+                "condition":{
+                    "selection": "select",
+                    "field": "Count",
+                    "type": "quantitative",
+                    "scale": {"range": ["#ffffe5",
+                    "#fff7bc",
+                    "#fee391",
+                    "#fec44f",
+                    "#fe9929",
+                    "#ec7014",
+                    "#cc4c02",
+                    "#993404",
+                    "#662506"]}
+                },
+                "value": "lightgrey"
+            },
+            "tooltip": [
+                {"field": "Variety", "type": "nominal"},
+                {"field": "Count", "type": "quantitative"}
+            ],
+            "strokeWidth": {
+                "condition": [
+                  {
+                    "param": "select",
+                    "empty": false,
+                    "value": 3.5
+                  },
+                  {
+                    "param": "highlight",
+                    "empty": false,
+                    "value": 3
+                  }
+                ],
+                "value": 1
+              }
+            }
+        }
+    ]
+}

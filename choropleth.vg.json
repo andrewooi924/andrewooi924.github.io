@@ -1,0 +1,204 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "An interactive world map supporting pan and zoom.",
+    "width": 900,
+    "height": 700,
+    "autosize": "none",
+    "title": "Quality of Coffee in Countries working with the CQI as of May 2023",
+  
+    "signals": [
+      { "name": "tx", "update": "width / 2" },
+      { "name": "ty", "update": "height / 2" },
+      {
+        "name": "scale",
+        "value": 150,
+        "on": [{
+          "events": {"type": "wheel", "consume": true},
+          "update": "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)"
+        }]
+      },
+      {
+        "name": "angles",
+        "value": [0, 0],
+        "on": [{
+          "events": "pointerdown",
+          "update": "[rotateX, centerY]"
+        }]
+      },
+      {
+        "name": "cloned",
+        "value": null,
+        "on": [{
+          "events": "pointerdown",
+          "update": "copy('projection')"
+        }]
+      },
+      {
+        "name": "start",
+        "value": null,
+        "on": [{
+          "events": "pointerdown",
+          "update": "invert(cloned, xy())"
+        }]
+      },
+      {
+        "name": "drag", "value": null,
+        "on": [{
+          "events": "[pointerdown, window:pointerup] > window:pointermove",
+          "update": "invert(cloned, xy())"
+        }]
+      },
+      {
+        "name": "delta", "value": null,
+        "on": [{
+          "events": {"signal": "drag"},
+          "update": "[drag[0] - start[0], start[1] - drag[1]]"
+        }]
+      },
+      {
+        "name": "rotateX", "value": 0,
+        "on": [{
+          "events": {"signal": "delta"},
+          "update": "angles[0] + delta[0]"
+        }]
+      },
+      {
+        "name": "centerY", "value": 0,
+        "on": [{
+          "events": {"signal": "delta"},
+          "update": "clamp(angles[1] + delta[1], -60, 60)"
+        }]
+      }
+    ],
+  
+    "projections": [
+      {
+        "name": "projection",
+        "type": "equalEarth",
+        "scale": {"signal": "scale"},
+        "rotate": [{"signal": "rotateX"}, 0, 0],
+        "center": [0, {"signal": "centerY"}],
+        "translate": [{"signal": "tx"}, {"signal": "ty"}]
+      }
+    ],
+  
+    "data": [
+      {
+        "name": "arabica",
+        "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv",
+        "format": {
+            "type": "csv",
+            "parse": "auto"
+        }
+      },
+      {
+        "name": "world",
+        "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/ne_110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        },
+        "transform": [
+            { "type": "lookup", "from": "arabica", "key": "Country of Origin", "fields": ["properties.NAME"], "values": ["Total Cup Points"]},
+            { "type": "filter", "expr": "datum['Total Cup Points'] != null" }
+          ]
+      },
+      {
+        "name": "graticule",
+        "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/ne_110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_graticules_30"
+        }
+      },
+      {
+        "name": "sea",
+        "values": [{"type": "Sphere"}]
+      },
+      {
+        "name": "land",
+        "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/ne_110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        },
+        "transform": [
+            { "type": "lookup", "from": "arabica", "key": "Country of Origin", "fields": ["properties.NAME"], "values": ["Total Cup Points"]},
+            { "type": "filter", "expr": "datum['Total Cup Points'] == null" }
+          ]
+      }
+
+    ],
+    "scales": [
+        {
+          "name": "color",
+          "type": "quantize",
+          "domain": [78, 85],
+          "range": {"scheme": "yelloworangebrown", "count": 10}
+        }
+      ],
+    "marks": [
+      {
+        "type": "shape",
+        "from": {"data": "sea"},
+        "encode": {
+            "update": {
+                "fill": {"value": "lightskyblue"},
+                "stroke": {"value": "black"},
+                "strokeWidth": {"value": 1.5}
+            }
+        },
+        "transform": [
+            {"type": "geoshape", "projection": "projection"}
+        ]
+      },
+      {
+        "type": "shape",
+        "from": {"data": "graticule"},
+        "encode": {
+          "enter": {
+            "strokeWidth": {"value": 1},
+            "stroke": {"value": "gray"},
+            "fill": {"value": null}
+          }
+        },
+        "transform": [
+          { "type": "geoshape", "projection": "projection" }
+        ]
+      },
+      {
+        "type": "shape",
+        "from": {"data": "world"},
+        "encode": {
+          "enter": {
+            "tooltip": {
+                "signal": "{title: datum.properties.NAME, 'Average Score': datum['Total Cup Points']}"
+              },
+            "strokeWidth": {"value": 0.5},
+            "stroke": {"value": "white"},
+            "fill": {"value": ""}
+          },
+          "update": { "fill": {"scale": "color", "field": "Total Cup Points"} },
+          "hover": { "fill": {"value": "red"} }
+        },
+        "transform": [
+          { "type": "geoshape", "projection": "projection" }
+        ]
+      },
+      {
+        "type": "shape",
+        "from": {"data": "land"},
+        "encode": {
+          "enter": {
+            "tooltip": {"signal": "'No data regarding manufacture of coffee in ' + datum.properties.NAME"},
+            "strokeWidth": {"value": 0.5},
+            "stroke": {"value": "white"},
+            "fill": {"value": "lightgray"}
+          }
+        },
+        "transform": [
+          { "type": "geoshape", "projection": "projection" }
+        ]
+      }
+    ]
+  }
