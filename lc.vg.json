@@ -82,7 +82,7 @@
             },
             "color": {
                 "condition":{
-                    "selection": "select",
+                    "param": "select",
                     "field": "Count",
                     "type": "quantitative",
                     "scale": {"range": ["#ffffe5",
