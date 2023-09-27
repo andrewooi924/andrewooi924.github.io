@@ -1,0 +1,37 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Pie Chart",
+    "data": {
+      "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"
+    },
+    "transform": [{
+        "joinaggregate": [{
+            "op": "count",
+            "field": "Processing Method",
+            "as": "Count"
+        }],
+        "groupby": ["Count"]
+    },
+    {
+        "filter": "datum['Processing Method'] != ''"
+    }],
+    "layer": [{
+        "mark": {"type": "arc"},
+        "encoding": {
+            "theta": {"field": "Count", "type": "quantitative", "aggregate":"count"},
+            "color": {
+                "field": "Processing Method", 
+                "type": "nominal", 
+                "scale": {"range": ["#ffffe5","#ffffe5","#fff7bc","#fee391","#fec44f","#fe9929","#ec7014","#cc4c02","#993404","#662506"]},
+                "sort": {"field":"Count", "order":"ascending"}
+            },
+            "order": {"field":"Count", "aggregate":"count", "sort": "ascending"},
+            "tooltip":[
+                {"field": "Count", "type":"quantitative", "aggregate":"count", "title":"Count"},
+                {"field": "Processing Method", "type": "nominal"}
+            ]
+         }   
+        }
+    ]
+  }
+  

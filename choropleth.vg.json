@@ -134,7 +134,15 @@
           "name": "color",
           "type": "quantize",
           "domain": [78, 85],
-          "range": {"scheme": "yelloworangebrown", "count": 10}
+          "range": ["#ffffe5",
+          "#fff7bc",
+          "#fee391",
+          "#fec44f",
+          "#fe9929",
+          "#ec7014",
+          "#cc4c02",
+          "#993404",
+          "#662506"]
         }
       ],
     "marks": [

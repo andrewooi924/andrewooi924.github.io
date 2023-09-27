@@ -1,0 +1,31 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"},
+    "transform": [{
+        "filter": "datum.Variety != ''"
+    },
+    {
+      "aggregate": [{"op": "sum"}],
+      "groupby": ["Color", "Variety"]
+    }],
+    "mark": {"type": "bar"},
+    "encoding": {
+      "y": {
+        "aggregate": "count",
+        "type": "quantitative"
+      },
+      "color": {
+        "field": "Color",
+        "type": "nominal",
+        "title": "Coffee Colors",
+        "scale": {
+          "domain": ["blue-green", "bluish-green", "brownish", "brownish-green", "green", "greenish", "pale yellow", "yellow-green", "yellowish"],
+          "range": ["#41b6c4", "#02818a", "#a63603", "#8c510a", "#31a354", "#a1d99b", "#ffffb2", "#d9f0a3", "#fee391"]
+        }
+      },
+      "tooltip": [{
+        "field": "Variety", "aggregate":"count", "type": "quantitative"
+      }],
+      "order": {"aggregate":"count"}
+    }
+  }
