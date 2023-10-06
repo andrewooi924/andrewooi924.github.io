@@ -7,7 +7,7 @@
 	text-align: center;
 }
 .vis-container {
-    width: 100%;
+    width: 80px;
 	outline-style: groove;
 	outline-color: black;
 	margin: auto;
@@ -16,7 +16,7 @@
 	top:100px;
 	bottom: 100px; 
 	left: 100px;
-	right: 80px;
+	right: 100px;
 	margin: auto;
 }
 #vis2 {
