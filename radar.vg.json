@@ -1,11 +1,11 @@
 {
     "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "title": {"text": "placeholder", "dx": -30, "dy": -30},
+    "title": {"text": "Average scores for different attributes of different varieties of Coffee", "dx": -80, "dy": -30},
     "width": 200,
     "height": 0,
     "padding": 300,
     "autosize": "none",
-    "background": "white",
+    "background": "#f4f1e5",
     "signals": [
       {"name": "radius", "value": "180"},
       {"name": "radiusRange", "value": [0,180]},
@@ -178,7 +178,7 @@
           "name": "color",
           "type": "ordinal",
           "domain": {"data": "coffee", "field": "Variety", "sort":true},
-          "range": {"scheme": "turbo"}
+          "range": {"scheme": "yelloworangebrown"}
         },
         {
             "name": "average_Aroma",
@@ -299,13 +299,13 @@
                     "x2": {"value": 0},
                     "y2": {"value": 0},
                     "stroke": {"value": "black"},
-                    "strokeOpacity": {"value": 0.5}
+                    "strokeOpacity": {"value": 0.1}
                   }
                 }
               },
               {
                 "name": "label",
-                "from": {"data": "fields"},
+                "from": {"data": "facet"},
                 "type": "text",
                 "encode": {
                   "update": {
@@ -318,6 +318,11 @@
                     "baseline": {"value": "bottom"},
                     "text": {"field": "key"},
                     "align": {"value": "center"}
+                  },
+                  "enter": {
+                    "tooltip": {
+                      "signal": "{title: datum['Variety'], 'Average Aroma': format(datum.value, '0.01f'), 'Average Acidity': format(datum['average_Acidity'], '0.01f'), 'Average Aftertaste': format(datum['average_Aftertaste'], '0.01f'), 'Average Balance': format(datum['average_Balance'], '0.01f'), 'Average Body': format(datum['average_Body'], '0.01f'), 'Average Clean Cup': format(datum['average_CC'], '0.01f'), 'Average Flavor': format(datum['average_Flavor'], '0.01f'), 'Average Sweetness': format(datum['average_Sweetness'], '0.01f'), 'Average Uniformity': format(datum['average_Uniformity'], '0.01f')}"
+                    }
                   }
                 }
               },
@@ -336,7 +341,7 @@
                     "baseline": {"value": "top"},
                     "text": {"signal": "'(max of ' + format(datum.max_value, '.2f') + ')'"},
                     "align": {"value": "center"},
-                    "fill": {"value": "black"}
+                    "fill": {"value": "grey"}
                   }
                 }
               },
@@ -352,7 +357,7 @@
                     "y": {
                       "signal": "scale(datum.key, datum.value) * sin(scale('angle', datum.key))"
                     },
-                    "strokeWidth": {"value": 2},
+                    "strokeWidth": {"value": 1},
                     "interpolate": {"value": "linear-closed"},
                     "opacity": [
                         {"test": "(!domain || inrange(datum.Variety, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Variety))", "value": 0.5 },
@@ -366,7 +371,9 @@
                       ]
                   },
                   "enter": {
-                    "tooltip": {"signal": "{title: 'Variety: ' +  datum['Variety']}"}
+                    "tooltip": {
+                      "signal": "{title: 'Variety: ' +  datum['Variety'], 'Average Aroma': format(datum['average_Aroma'], '0.01f'), 'Average Acidity': format(datum['average_Acidity'], '0.01f'), 'Average Aftertaste': format(datum['average_Aftertaste'], '0.01f'), 'Average Balance': format(datum['average_Balance'], '0.01f'), 'Average Body': format(datum['average_Body'], '0.01f'), 'Average Clean Cup': format(datum['average_CC'], '0.01f'), 'Average Flavor': format(datum['average_Flavor'], '0.01f'), 'Average Sweetness': format(datum['average_Sweetness'], '0.01f'), 'Average Uniformity': format(datum['average_Uniformity'], '0.01f')}"
+                    }
                   }
                 }
               },
@@ -379,7 +386,7 @@
                     "interpolate": {"value": "linear-closed"},
                     "x": {"field": "x"},
                     "y": {"field": "y"},
-                    "stroke": {"value": "black"},
+                    "stroke": {"value": "grey"},
                     "strokeWidth": {"value": 1},
                     "strokeOpacity": {"value": 0.05}                  
                   }

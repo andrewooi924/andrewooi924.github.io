@@ -7,18 +7,20 @@
 	text-align: center;
 }
 .vis-container {
-    width: 50%;
-	outline-style: groove;
-	outline-color: black;
+    width: 80px;
 }
 #vis1 {
+	top:1px;
 	bottom: 100px; 
-	left: 100px;
-	right: 100px;
+	right: 380px;
+	margin: auto;
 }
 #vis2 {
-	top:100px;
+	top:10px;
 	bottom: 100px; 
-	left: 100px;
-	right: 80px;
+	right: 260px;
+	margin: auto;
+}
+.pure-g {
+    margin: auto;
 }

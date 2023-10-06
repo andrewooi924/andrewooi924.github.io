@@ -136,11 +136,11 @@
           "transform": [{
             "type": "fold",
             "fields": [
-              "average_Aroma",
-              "average_Acidity",
-              "average_Aftertaste",
-              "average_Balance",
-              "average_Body"
+              "Average Aroma",
+              "Average Acidity",
+              "Average Aftertaste",
+              "Average Balance",
+              "Average Body"
             ]
           }]
         },
@@ -170,34 +170,34 @@
           "range": {"scheme": "yelloworangebrown"}
         },
         {
-            "name": "average_Aroma",
+            "name": "Average Aroma",
             "type": "linear",
             "range": {"signal": "radiusRange"},
-            "domain": {"data": "coffee", "field": "average_Aroma"}
+            "domain": {"data": "coffee", "field": "Average Aroma"}
         },
         {
-            "name": "average_Acidity",
+            "name": "Average Acidity",
             "type": "linear",
             "range": {"signal": "radiusRange"},
-            "domain": {"data": "coffee", "field": "average_Acidity"}
+            "domain": {"data": "coffee", "field": "Average Acidity"}
         },
         {
-            "name": "average_Aftertaste",
+            "name": "Average Aftertaste",
             "type": "linear",
             "range": {"signal": "radiusRange"},
-            "domain": {"data": "coffee", "field": "average_Aftertaste"}
+            "domain": {"data": "coffee", "field": "Average Aftertaste"}
         },
         {
-            "name": "average_Body",
+            "name": "Average Body",
             "type": "linear",
             "range": {"signal": "radiusRange"},
-            "domain": {"data": "coffee", "field": "average_Body"}
+            "domain": {"data": "coffee", "field": "Average Body"}
         },
         {
-            "name": "average_Balance",
+            "name": "Average Balance",
             "type": "linear",
             "range": {"signal": "radiusRange"},
-            "domain": {"data": "coffee", "field": "average_Balance"}
+            "domain": {"data": "coffee", "field": "Average Balance"}
         }],
         "legends": [{
             "stroke": "color",
@@ -310,15 +310,15 @@
                     "interpolate": {"value": "linear-closed"},
                     "tooltip": {"signal": "datum"},
                     "opacity": [
-                        {"test": "(!domain || inrange(datum.average_Aroma, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.average_Aroma))", "value": 0.7 },
+                        {"test": "(!domain || inrange(datum['Average Aroma'], domain)) && (!length(data('selected')) || indata('selected', 'value', datum['Average Aroma']))", "value": 0.7 },
                         {"value": 0.15}
                       ],
                       "stroke": [
-                        {"test": "(!domain || inrange(datum.average_Aroma, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.average_Aroma))", "scale": "color", "field": "Variety"},
+                        {"test": "(!domain || inrange(datum['Average Aroma'], domain)) && (!length(data('selected')) || indata('selected', 'value', datum['Average Aroma']))", "scale": "color", "field": "Variety"},
                         {"value": "#ccc"}
                       ],
                       "fill": [
-                        {"test": "(!domain || inrange(datum.average_Aroma, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.average_Aroma))", "scale": "color", "field": "Variety"},
+                        {"test": "(!domain || inrange(datum['Average Aroma'], domain)) && (!length(data('selected')) || indata('selected', 'value', datum['Average Aroma']))", "scale": "color", "field": "Variety"},
                         {"value": "#ccc"}
                       ]
                   }
