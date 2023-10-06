@@ -7,6 +7,8 @@
 }
 .vis-container {
     width: 100%;
+	outline-style: groove;
+	outline-color: black;
 }
 #vis1 {
 	top:100px;
