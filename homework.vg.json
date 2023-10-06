@@ -40,7 +40,7 @@
                   "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"
                 },
                 "key": "Country of Origin",
-                "fields": ["Acidity", "Aftertaste", "Aroma", "Balance", "Body", "Clean Cup", "Flavor", "Sweetness", "Uniformity", "Total Cup Points"]
+                "fields": ["Acidity", "Aftertaste", "Aroma", "Balance", "Body", "CC", "Flavor", "Sweetness", "Uniformity", "Total Cup Points"]
               }
             },
             {
@@ -61,7 +61,7 @@
             {"field": "Aroma", "type": "quantitative"},
             {"field": "Balance", "type": "quantitative"},
             {"field": "Body", "type": "quantitative"},
-            {"field": "Clean Cup", "type": "quantitative"},
+            {"field": "CC", "type": "quantitative", "title":"Clean Cup"},
             {"field": "Flavor", "type": "quantitative"},
             {"field": "Sweetness", "type": "quantitative"},
             {"field": "Uniformity", "type": "quantitative"}
