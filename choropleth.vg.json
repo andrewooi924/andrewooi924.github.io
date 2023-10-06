@@ -5,6 +5,7 @@
     "height": 700,
     "autosize": "none",
     "title": "Quality of Coffee in Countries working with the CQI as of May 2023",
+    "background":"#f4f1e5",
   
     "signals": [
       { "name": "tx", "update": "width / 2" },
