@@ -9,18 +9,21 @@
     width: 100%;
 	outline-style: groove;
 	outline-color: black;
+	margin: auto;
 }
 #vis1 {
 	top:100px;
 	bottom: 100px; 
 	left: 100px;
 	right: 100px;
+	margin: auto;
 }
 #vis2 {
 	top:100px;
 	bottom: 100px; 
 	left: 100px;
 	right: 100px;
+	margin: auto;
 }
 .pure-g {
     margin: auto;
