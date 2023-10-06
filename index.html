@@ -12,19 +12,36 @@
 
 </head>
 <body>
-  
-<div id="coffee_map"></div>
-<div id="coffee lollipop"></div>
+  <div class="page">
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>FIT3179</h1>
+        <p>Homework Week 10</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="vis2" class="vis-container"></div>
+      </div>
+    </div>
 
 <script type="text/javascript">
 
   var spec1 = "homework.vg.json";
   var spec2 = "lc.vg.json";
 
-  vegaEmbed('#coffee_map', spec1).then(function(result) {
+  vegaEmbed('#vis1', spec1).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
-  vegaEmbed('#coffee lollipop', spec2).then(function(result) {
+  vegaEmbed('#vis2', spec2).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
