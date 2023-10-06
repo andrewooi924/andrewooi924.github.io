@@ -7,13 +7,12 @@
 	text-align: center;
 }
 .vis-container {
-    width: 80px;
+    width: 50px;
 	outline-style: groove;
 	outline-color: black;
 	margin: auto;
 }
 #vis1 {
-	top:100px;
 	bottom: 100px; 
 	left: 100px;
 	right: 100px;
