@@ -1,8 +1,11 @@
-#coffee_map {
-	top:100px;
-	bottom: 100px; 
-	left: 100px;
-	right: 100px;
-	/*height: 1000px;
-	width: 800px;*/
+.page {
+    width: 1100px;
+    background-color: #f4e9ae;
+    margin: auto;
+    padding: 50px;
+    padding-top: 35px;
+}
+.vis-container {
+    width: 100%;
+	/* background-color: #f1fcfe9b */
 }
