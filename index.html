@@ -14,11 +14,17 @@
 <body>
   
 <div id="coffee_map"></div>
+<div id="coffee lollipop"></div>
 
 <script type="text/javascript">
 
-  var spec2 = "homework.vg.json";
-  vegaEmbed('#coffee_map', spec2).then(function(result) {
+  var spec1 = "homework.vg.json";
+  var spec2 = "lc.vg.json";
+
+  vegaEmbed('#coffee_map', spec1).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#coffee lollipop', spec2).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>

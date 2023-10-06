@@ -5,7 +5,7 @@
     "height": 0,
     "padding": 300,
     "autosize": "none",
-    "background": "lightblue",
+    "background": "white",
     "signals": [
       {"name": "radius", "value": "180"},
       {"name": "radiusRange", "value": [0,180]},
@@ -108,7 +108,11 @@
             "Acidity": "number",
             "Aftertaste": "number",
             "Body": "number",
-            "Balance": "number"
+            "Balance": "number",
+            "CC": "number",
+            "Flavour": "number",
+            "Sweetness": "number",
+            "Uniformity": "number"
           }
         },
         "transform": [{
@@ -119,9 +123,13 @@
                 "Acidity",
                 "Aftertaste",
                 "Balance",
-                "Body"
+                "Body",
+                "CC",
+                "Flavor",
+                "Sweetness",
+                "Uniformity"
             ],
-            "ops": ["average", "average", "average", "average", "average"]
+            "ops": ["average", "average", "average", "average", "average", "average", "average", "average", "average"]
         },
         {
             "type": "joinaggregate", "fields": ["Variety"], "ops": ["count"], "as": ["Count"]
@@ -139,7 +147,11 @@
               "average_Acidity",
               "average_Aftertaste",
               "average_Balance",
-              "average_Body"
+              "average_Body",
+              "average_CC",
+              "average_Flavor",
+              "average_Sweetness",
+              "average_Uniformity"
             ]
           }]
         },
@@ -166,7 +178,7 @@
           "name": "color",
           "type": "ordinal",
           "domain": {"data": "coffee", "field": "Variety", "sort":true},
-          "range": {"scheme": "yelloworangebrown"}
+          "range": {"scheme": "turbo"}
         },
         {
             "name": "average_Aroma",
@@ -197,13 +209,40 @@
             "type": "linear",
             "range": {"signal": "radiusRange"},
             "domain": {"data": "coffee", "field": "average_Balance"}
+        },
+        {
+          "name": "average_CC",
+          "type": "linear",
+          "range": {"signal": "radiusRange"},
+          "domain": {"data": "coffee", "field": "average_CC"}
+        
+        },
+        {
+          "name": "average_Flavor",
+          "type": "linear",
+          "range": {"signal": "radiusRange"},
+          "domain": {"data": "coffee", "field": "average_Flavor"}
+        },
+        { 
+          "name": "average_Sweetness",
+          "type": "linear",
+          "range": {"signal": "radiusRange"},
+          "domain": {"data": "coffee", "field": "average_Sweetness"}
+        },
+        {
+          "name": "average_Uniformity",
+          "type": "linear",
+          "range": {"signal": "radiusRange"},
+          "domain": {"data": "coffee", "field": "average_Uniformity"}
         }],
+  
         "legends": [{
             "stroke": "color",
             "title": "Varieties",
             "orient": "none",
             "legendX": 300,
             "legendY": -200,
+            "values": ["Gesha", "Caturra", "Typica", "Bourbon", "Catuai", "Catimor", "Ethiopian Heirlooms", "SL34", "Mundo Novo", "Java", "SL14", "Yellow Bourbon", "SHG"],
             "encode": {
               "symbols": {
                 "name": "legendSymbol",
@@ -222,10 +261,14 @@
                 "name": "legendLabel",
                 "interactive": true,
                 "update": {
+                  "fill": {"value": "black"},
                   "opacity": [
                     {"test": "!length(data('selected')) || indata('selected', 'value', datum.value)", "value": 1},
                     {"value": 0.25}
                   ]
+                },
+                "hover": {
+                  "fill": {"value": "firebrick"}
                 }
               }
             }
@@ -255,7 +298,8 @@
                     },
                     "x2": {"value": 0},
                     "y2": {"value": 0},
-                    "stroke": {"value": "gray"}
+                    "stroke": {"value": "black"},
+                    "strokeOpacity": {"value": 0.5}
                   }
                 }
               },
@@ -290,16 +334,16 @@
                       "signal": "1.2 * radius * sin(scale('angle', datum.key))"
                     },
                     "baseline": {"value": "top"},
-                    "text": {"signal": "'max of ' + format(datum.max_value, '.2f')"},
+                    "text": {"signal": "'(max of ' + format(datum.max_value, '.2f') + ')'"},
                     "align": {"value": "center"},
-                    "fill": {"value": "gray"}
+                    "fill": {"value": "black"}
                   }
                 }
               },
               {
                 "type": "line",
                 "from": {"data": "facet"},
-                "interactive": false,
+                "interactive": true,
                 "encode": {
                   "update": {
                     "x": {
@@ -310,9 +354,8 @@
                     },
                     "strokeWidth": {"value": 2},
                     "interpolate": {"value": "linear-closed"},
-                    "tooltip": {"signal": "datum"},
                     "opacity": [
-                        {"test": "(!domain || inrange(datum.Variety, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Variety))", "value": 1 },
+                        {"test": "(!domain || inrange(datum.Variety, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Variety))", "value": 0.5 },
                         {"value": 0.15}
                       ],
                       "stroke": [
@@ -321,6 +364,24 @@
                       "fill": [
                         {"test": "(!domain || inrange(datum.Variety, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Variety))", "scale": "color", "field": "Variety"}
                       ]
+                  },
+                  "enter": {
+                    "tooltip": {"signal": "{title: 'Variety: ' +  datum['Variety']}"}
+                  }
+                }
+              },
+              {
+                "type": "line",
+                "name": "outer-line",
+                "from": {"data": "grid"},
+                "encode": {
+                  "update": {
+                    "interpolate": {"value": "linear-closed"},
+                    "x": {"field": "x"},
+                    "y": {"field": "y"},
+                    "stroke": {"value": "black"},
+                    "strokeWidth": {"value": 1},
+                    "strokeOpacity": {"value": 0.05}                  
                   }
                 }
               }
