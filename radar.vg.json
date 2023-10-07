@@ -316,12 +316,12 @@
                       "signal": "1.2 * radius * sin(scale('angle', datum.key))"
                     },
                     "baseline": {"value": "bottom"},
-                    "text": {"field": "key"},
+                    "text": {"signal": "replace(split(datum.key, '_')[1], 'CC', 'Clean Cup')"},
                     "align": {"value": "center"}
                   },
                   "enter": {
                     "tooltip": {
-                      "signal": "{title: datum['Variety'], 'Average Aroma': format(datum.value, '0.01f'), 'Average Acidity': format(datum['average_Acidity'], '0.01f'), 'Average Aftertaste': format(datum['average_Aftertaste'], '0.01f'), 'Average Balance': format(datum['average_Balance'], '0.01f'), 'Average Body': format(datum['average_Body'], '0.01f'), 'Average Clean Cup': format(datum['average_CC'], '0.01f'), 'Average Flavor': format(datum['average_Flavor'], '0.01f'), 'Average Sweetness': format(datum['average_Sweetness'], '0.01f'), 'Average Uniformity': format(datum['average_Uniformity'], '0.01f')}"
+                      "signal": "{title: 'Average ' + replace(split(datum.key, '_')[1], 'CC', 'Clean Cup') + ': ' + datum.value}"
                     }
                   }
                 }
@@ -372,7 +372,7 @@
                   },
                   "enter": {
                     "tooltip": {
-                      "signal": "{title: 'Variety: ' +  datum['Variety'], 'Average Aroma': format(datum['average_Aroma'], '0.01f'), 'Average Acidity': format(datum['average_Acidity'], '0.01f'), 'Average Aftertaste': format(datum['average_Aftertaste'], '0.01f'), 'Average Balance': format(datum['average_Balance'], '0.01f'), 'Average Body': format(datum['average_Body'], '0.01f'), 'Average Clean Cup': format(datum['average_CC'], '0.01f'), 'Average Flavor': format(datum['average_Flavor'], '0.01f'), 'Average Sweetness': format(datum['average_Sweetness'], '0.01f'), 'Average Uniformity': format(datum['average_Uniformity'], '0.01f')}"
+                      "signal": "{title: 'Average ' + replace(split(datum.key, '_')[1], 'CC', 'Clean Cup') + ': ' + datum.value}"
                     }
                   }
                 }

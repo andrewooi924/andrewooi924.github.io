@@ -1,0 +1,96 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"},
+    "params": [
+        {
+            "name": "x_filter",
+            "value": "Acidity",
+            "bind": {
+              "input": "select",
+              "options": [
+                "Acidity",
+                "Aftertaste",
+                "Aroma",
+                "Balance",
+                "Body",
+                "CC",
+                "Flavor",
+                "Sweetness",
+                "Uniformity",
+                "Moisture Percentage"
+              ],
+              "name": "X-Axis Filter: "
+            }
+        },
+        {
+            "name": "y_filter",
+            "value": "Aftertaste",
+            "bind": {
+              "input": "select",
+              "options": [
+                "Acidity",
+                "Aftertaste",
+                "Aroma",
+                "Balance",
+                "Body",
+                "CC",
+                "Flavor",
+                "Sweetness",
+                "Uniformity",
+                "Moisture Percentage"
+              ],
+              "name": "Y-Axis Filter: "
+            }
+        }
+    ],
+    "transform": [
+    {
+        "calculate": "datum[x_filter]", "as": "x_filter"
+    },
+    {
+        "calculate": "datum[y_filter]", "as": "y_filter"
+    }],
+    "mark": {"type": "rect"},
+    "width": 300,
+    "height": 200,
+    "encoding": {
+      "x": {
+        "bin": {"maxbins":30},
+        "field": "x_filter",
+        "type": "quantitative",
+        "axis": {
+            "title": {"expr": "x_filter"}
+        }
+      },
+      "y": {
+        "bin": {"maxbins": 30},
+        "field": "y_filter",
+        "type": "quantitative",
+        "axis": {
+            "title": {"expr": "y_filter"}
+        }
+      },
+      "color": {
+        "aggregate": "count",
+        "type": "quantitative",
+        "scale": {"range": ["#ffffe5",
+        "#fff7bc",
+        "#fee391",
+        "#fec44f",
+        "#fe9929",
+        "#ec7014",
+        "#cc4c02",
+        "#993404",
+        "#662506"]}
+      },
+      "tooltip": [
+        {"aggregate":"count", "type": "quantitative"}
+      ]
+    },
+    "config": {
+      "view": {
+        "stroke": "transparent"
+      }
+    }
+  }
+  

@@ -3,7 +3,49 @@
     "width": 800,
     "height": 400,
     "title": "Quality of Coffee in Countries working with the CQI as of May 2023",
-    "projection": {"type": "equalEarth"},
+    "params": [
+      {
+        "name": "zoom_level",
+        "value": 140,
+        "bind": {
+          "input": "range",
+          "min": 140,
+          "max": 500,
+          "step": 10,
+          "name": "Zoom: "
+        }
+      },
+      {
+        "name": "center_to",
+        "value": [0,0],
+        "bind": {
+          "input": "select",
+          "options": [
+            [0, 0],
+            [-90, 15],
+            [-60, -12.5],
+            [-100, 40],
+            [110, 10]
+          ],
+          "labels": ["Africa", "South America (North)", "South America (Centre)", "North America", "South East Asia"],
+          "name": "Map Centre: "
+        }
+      },
+      {
+        "name": "attribute_filter",
+        "value": "Average Altitude",
+        "bind": {
+          "input": "select",
+          "options": [
+            "Average Altitude",
+            "Number of Bags",
+            "Lifetime"
+          ],
+          "name": "Filter: "
+        }
+      }
+    ],
+    "projection": {"type": "equalEarth", "center": {"expr": "center_to"}, "scale": {"expr": "zoom_level"}},
     "data": {
       "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/ne_110m.json",
       "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}}, 
@@ -31,18 +73,19 @@
                       "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"
                     },
                     "key": "Country of Origin",
-                    "fields": ["Country of Origin", "Total Cup Points", "Grading Date", "Expiration", "Lifetime"]
+                    "fields": ["Country of Origin", "Total Cup Points", "Grading Date", "Expiration", "Average Altitude", "Lifetime", "Number of Bags"]
                 }
-            }
+            },
+            {"calculate": "datum[attribute_filter]", "as": "size_filter"}
         ],
         "mark": {"type": "circle"},
         "encoding": {
             "longitude": {"field": "properties.LABEL_X", "type": "quantitative"},
             "latitude": {"field": "properties.LABEL_Y", "type": "quantitative"},
             "size": {
-                "field": "Lifetime",
-                "type": "quantitative",
-                "scale": {"domain":[335,366]}
+              "field": "size_filter",
+              "type": "quantitative",
+              "title": "Filter Size"
             },
             "color": {
                 "field": "Total Cup Points",
@@ -60,7 +103,7 @@
             "tooltip": [
                 {"field": "Country of Origin", "type": "nominal"},
                 {"field": "Total Cup Points", "type": "quantitative"},
-                {"field": "Lifetime", "type": "quantitative"}
+                {"field": "size_filter", "type": "quantitative", "title": "Filter Size"}
             ]
         }
       }
