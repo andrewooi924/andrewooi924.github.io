@@ -321,7 +321,7 @@
                   },
                   "enter": {
                     "tooltip": {
-                      "signal": "{title: 'Average ' + replace(split(datum.key, '_')[1], 'CC', 'Clean Cup') + ': ' + datum.value}"
+                      "signal": "{title: 'Total Average of ' + replace(split(datum.key, '_')[1], 'CC', 'Clean Cup') + ': ' + datum.value}"
                     }
                   }
                 }
@@ -372,7 +372,7 @@
                   },
                   "enter": {
                     "tooltip": {
-                      "signal": "{title: 'Average ' + replace(split(datum.key, '_')[1], 'CC', 'Clean Cup') + ': ' + datum.value}"
+                      "signal": "{title: 'Average ' + replace(split(datum.key, '_')[1], 'CC', 'Clean Cup') + ' of ' + datum.Variety + ': ' + format(datum.value, '0.2f')}"
                     }
                   }
                 }
