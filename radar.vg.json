@@ -242,7 +242,7 @@
             "orient": "none",
             "legendX": 300,
             "legendY": -200,
-            "values": ["Gesha", "Caturra", "Typica", "Bourbon", "Catuai", "Catimor", "Ethiopian Heirlooms", "SL34", "Mundo Novo", "Java", "SL14", "Yellow Bourbon", "SHG"],
+            "values": ["Bourbon", "Catimor", "Catuai", "Caturra", "Ethiopian Heirlooms", "Gesha", "Java", "Mundo Novo", "SHG", "SL14", "SL34", "Typica", "Yellow Bourbon"],
             "encode": {
               "symbols": {
                 "name": "legendSymbol",
