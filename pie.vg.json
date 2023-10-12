@@ -17,21 +17,57 @@
         "filter": "datum['Processing Method'] != ''"
     }],
     "layer": [{
-        "mark": {"type": "arc"},
+        "params": [
+            {
+              "name": "highlight",
+              "select": {"type": "point", "on": "mouseover"}
+            },
+            {"name": "select", "select": "point"}
+        ],
+        "mark": {"type": "arc", "cursor":"pointer"},
         "encoding": {
             "theta": {"field": "Count", "type": "quantitative", "aggregate":"count"},
             "color": {
                 "field": "Processing Method", 
                 "type": "nominal", 
-                "scale": {"range": ["#ffffe5","#ffffe5","#fff7bc","#fee391","#fec44f","#fe9929","#ec7014","#cc4c02","#993404","#662506"]},
-                "sort": {"field":"Count", "order":"ascending"}
+                "scale": {"range": ["#071c40","#0b2a60","#103f8f","#1554be","#1b70fd","#0b8afd","#02a7f7","#02b6ed","#02d3db","#02e4b9"]},
+                "sort": {"field":"Count", "order":"descending"}
             },
             "order": {"field":"Count", "aggregate":"count", "sort": "ascending"},
             "tooltip":[
                 {"field": "Count", "type":"quantitative", "aggregate":"count", "title":"Count"},
                 {"field": "Processing Method", "type": "nominal"}
-            ]
-         }   
+            ],
+            "strokeWidth": {
+                "condition": [
+                  {
+                    "param": "select",
+                    "empty": false,
+                    "value": 2
+                  },
+                  {
+                    "param": "highlight",
+                    "empty": false,
+                    "value": 2
+                  }
+                ],
+                "value": 0
+              },
+              "fillOpacity": {
+                "condition": [
+                    {"param": "select", "value": 1}
+                ],
+                "value": 0.3
+              },
+              "strokeOpacity": {
+                "condition": {"param": "select", "value": 1},
+                "value": 0
+              },
+              "stroke": {
+                "condition": {"param": "select", "value": "black", "empty": false},
+                "value": null
+              }
+            }   
         }
     ]
   }

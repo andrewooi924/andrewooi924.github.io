@@ -1,0 +1,106 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "repeat": ["Acidity", "Aftertaste", "Aroma", "Balance", "Body", "Clean Cup", "Flavor", "Sweetness", "Uniformity"],
+    "columns": 3,
+    "background":"#f4f1e5",
+    "spec": {
+        "data": {
+            "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"
+          },
+          "transform": [
+            {
+                "joinaggregate": [{
+                    "op": "count",
+                    "field": "Variety",
+                    "as": "Count"
+                }],
+                "groupby": [
+                    "Variety"
+                ]
+            },
+            {
+                "filter": "(datum.Variety != '') && (datum.Variety != 'unknown') && (datum.Count >= 3)"
+            },
+            {
+                "calculate": "datum.CC", "as": "Clean Cup"
+            }],
+      "mark": "circle",
+      "params": [
+        {
+          "name": "brush",
+          "select": {
+            "type": "interval",
+            "resolve": "union",
+            "on": "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!",
+            "translate": "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!",
+            "zoom": "wheel![event.shiftKey]"
+          }
+        },
+        {
+          "name": "grid",
+          "select": {
+            "type": "interval",
+            "resolve": "global",
+            "translate": "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!",
+            "zoom": "wheel![!event.shiftKey]"
+          },
+          "bind": "scales"
+        },
+        {
+          "name": "coffee_varieties",
+          "select": {"type": "point", "fields": ["Variety"]},
+          "bind": "legend"
+        }
+      ],
+      "encoding": {
+        "x": {"field": "Total Cup Points", "type": "quantitative", "scale":{"domain":[60, 100]}},
+        "y": {
+          "field": {"repeat": "repeat"},
+          "type": "quantitative",
+          "axis": {"minExtent": 30},
+          "scale":{"domain":[6, 11]}
+        },
+        "color": {
+          "condition": {
+            "param": "brush",
+            "field": "Variety",
+            "type": "nominal",
+            "scale": {"range": [
+                "#fff7d5",
+                "#ffe9a1",
+                "#ffdf74",
+                "#ffcb52",
+                "#ffb647",
+                "#ffa836",
+                "#ff9212",
+                "#ec7a00",
+                "#cf6a00",
+                "#af5700",
+                "#582c00",
+                "#2c1600",
+                "#160b00"]}},
+          "value": "grey"
+        },
+        "tooltip": [
+            {"field":"Variety", "type": "nominal"},
+            {"field":"Country of Origin", "type": "nominal"}
+        ],
+        "opacity": {
+          "condition": {"param": "coffee_varieties", "value": 1},
+          "value": 0
+        },
+        "strokeOpacity": {
+          "condition": {"param": "coffee_varieties", "value": 1},
+          "value": 0
+        },
+        "stroke": {
+          "condition": {"param": "coffee_varieties", "value": "black", "empty": false},
+          "value": 0
+        },
+        "strokeWidth": {
+          "condition": {"param": "coffee_varieties", "value": 0.3, "empty": false},
+          "value": 0
+        }
+      }
+    }
+  }

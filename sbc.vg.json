@@ -2,34 +2,81 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {"url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"},
     "background": "#f4f1e5",
-    "transform": [{
-        "filter": "datum.Variety != ''"
-    },
+    "transform": [
     {
-      "aggregate": [{"op": "count"}],
-      "groupby": ["Color", "Variety"]
-    }],
-    "mark": "bar",
-    "encoding": {
-      "x": {
-        "field": "Variety",
-        "type": "nominal",
-        "title": "Coffee Varieties",
-        "sort": {"field": "Color", "order":"ascending"}
-      },
-      "y": {
-        "aggregate": "count",
-        "type": "quantitative",
-        "stack": "normalize"
-      },
-      "color": {
-        "field": "Color",
-        "type": "nominal",
-        "title": "Coffee Colors",
-        "scale": {
-          "domain": ["blue-green", "bluish-green", "brownish", "brownish-green", "green", "greenish", "pale yellow", "yellow-green", "yellowish"],
-          "range": ["#41b6c4", "#02818a", "#a63603", "#8c510a", "#31a354", "#a1d99b", "#ffffb2", "#d9f0a3", "#fee391"]
+      "joinaggregate": [{
+          "op": "count",
+          "field": "Variety",
+          "as": "Count"
+      }],
+      "groupby": [
+          "Variety"
+      ]
+  },
+  {
+    "calculate": "{'blue-green': 'Blue-Green', 'bluish-green': 'Bluish-Green', 'brownish': 'Brownish', 'brownish-green': 'Brownish-Green', 'green': 'Green', 'greenish': 'Greenish', 'pale yellow': 'Pale Yellow', 'yellow-green': 'Yellow-Green', 'yellowish': 'Yellowish'}[datum.Color]", "as": "Color"
+  },
+  {
+      "filter": "(datum.Variety != '') && (datum.Variety != 'unknown') && (datum.Count >= 3)"
+  }],
+  "layer": [
+    {
+      "params": [{
+        "name": "coffee_colors",
+        "select": {"type": "point", "fields": ["Color"]},
+        "bind": "legend"
+      }],
+      "mark": {"type": "bar"},
+      "encoding": {
+        "x": {
+          "field": "Variety",
+          "type": "nominal",
+          "title": "Coffee Varieties",
+          "sort": {"field": "Color", "order":"ascending"},
+          "axis": {
+            "labelAngle": -35,
+            "labelAlign":"right"
+          }
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "stack": "normalize"
+        },
+        "color": {
+          "field": "Color",
+          "type": "nominal",
+          "title": "Coffee Colors",
+          "scale": {
+            "range": ["#41b6c4", "#02818a", "#a63603", "#8c510a", "#31a354", "#a1d99b", "#ffffb2", "#d9f0a3", "#fee391"]
+          }
+        },
+        "tooltip": [
+          {"field":"Color", "type": "nominal"},
+          {"aggregate":"count", "field":"Variety", "type": "quantitative"}
+        ],
+        "opacity": {
+          "condition": {"param": "coffee_colors", "value": 1},
+          "value": 0.3
+        },
+        "strokeOpacity": {
+          "condition": {"param": "coffee_colors", "value": 1},
+          "value": 0
+        },
+        "stroke": {
+          "condition": {"param": "coffee_colors", "value": "black", "empty": false},
+          "value": null
         }
       }
+    },
+    {
+      "mark": "text",
+      "encoding": {
+        "text": {"value": "↑ Click To Filter"},
+        "color": {"value": "gray"},
+        "x": {"value": 319},
+        "y": {"value": 145}
+      }
     }
+  ]
   }

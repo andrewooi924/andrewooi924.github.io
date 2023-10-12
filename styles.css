@@ -1,5 +1,5 @@
 .page {
-    width: 1100px;
+    width: 1400px;
     background-color: #f4f1e5;
     margin: auto;
     padding: 50px;
@@ -7,20 +7,107 @@
 	text-align: center;
 }
 .vis-container {
-    width: 80px;
+    width: 100%;
 }
 #vis1 {
-	top:1px;
-	bottom: 100px; 
-	right: 380px;
+	top:auto;
+	bottom: auto;
+	right: 150px;
 	margin: auto;
 }
 #vis2 {
 	top:10px;
-	bottom: 100px; 
-	right: 260px;
+	bottom: 100px;
+	right: 35px;
+	text-align: justify;
+}
+#vis3 {
+	right: 190px;
+	margin: auto;
+}
+#vis4 {
+	top: 20px;
+	right: 20px;
+	margin: auto;
+}
+#vis5 {
+	top: 20px;
+	right: 240px;
+	margin: auto;
+}
+#vis6 {
+	right: 50px;
+	margin: auto;
+}
+#vis7 {
+	right: 100px;
+	margin: auto;
+}
+#vis8 {
+	left: 150px;
+	margin: auto;
+}
+#vis9 {
+	top: 50px;
+	left: 50px;
 	margin: auto;
 }
 .pure-g {
-    margin: auto;
+    margin-bottom: 50px;
+}
+.description-left {
+    padding-right: 180px;
+	font-size: 23px;
+}
+.description-left2 {
+	padding-top: 20px;
+    padding-right: 250px;
+	font-size: 23px;
+}
+.description-left3 {
+	font-size: 23px;
+}
+.description-left4 {
+	padding-top: 80px;
+    padding-right: 50px;
+	font-size: 23px;
+}
+.description-right {
+    padding-left: 200px;
+	font-size: 23px;
+}
+.description-right2 {
+	padding-left: 50px;
+	font-size: 23px;
+}
+.title {
+	font-size: 36px;
+}
+.header1 {
+	padding-top: 30px;
+    padding-right: 180px;
+	font-size: 22px;
+}
+.header2 {
+    padding-left: 210px;
+	font-size: 22px;
+}
+.header3 {
+	font-size: 22px;
+}
+.header4 {
+	padding-top: 80px;
+	padding-left: 50px;
+	font-size: 22px;
+}
+.header5 {
+	font-size: 22px;
+}
+.madagascar {
+	font-weight: bold;
+	color: #2b8cbe;
+}
+.brazil {
+	font-weight: bold;
+	color: #006837;
 }

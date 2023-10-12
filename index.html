@@ -5,6 +5,11 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+  integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="styles.css" media="all">
@@ -17,7 +22,10 @@
     <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h1>FIT3179 Homework Week 10</h1>
+        <div class="title">
+        <h1>THE INTRINCACIES OF GOOD COFFEE</h1>
+        </div>
+        <h1>Where and How Coffee is Made, and What Makes it Good.</h1>
       </div>
     </div>
     <!-- end pure grid group -->
@@ -25,22 +33,158 @@
     <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-2">
-        <div id="vis1" class="vis-container"></div>
+        <div class="header1">
+          <h2>Quality of Coffee</h2>
+        </div>
+        <div class="description description-left">
+          <p>First, we will introduce the countries affiliated with the <b>Coffee Quality Institute</b> and have a look at the average scores for the quality of coffee in each of the relevant countries using this interactive map on the right here where you
+            can <b>click & hold to drag</b> and <b>scroll to zoom</b> to have a closer look at the countries.
+          </p>
+          <p>
+            From the interactive map, we can clearly see that <span class="brazil">Brazil</span> has the worst quality of coffee while <span class="madagascar">Madagascar</span> has the best quality of coffee among all the relevant countries.
+          </p>
+        </div>
       </div>
       <div class="pure-u-1-2">
-        <div id="vis2" class="vis-container"></div>
+        <div id="vis1" class="vis-container"></div>
       </div>
+    </div>
+
+    <div class="pure-g">
+        <div class="pure-u-1-2">
+          <div id="vis2" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-2">
+          <div class="header2">
+            <h2>Harvest and Lifetime of Coffee</h2>
+          </div>
+        <div class="description description-right">
+          <p>
+            Here, we examine whether altitude has an effect on the quality of coffee as well as the number of bags produced and the lifetime of coffee in relevant countries through the provided filters for the interactive map.
+            The interactive map also allows zooming in and out of the map, as well as centering on different parts of the map.
+          </p>
+          <p>From the map, we can see that <b>Altitude</b> most likely does not have an effect on coffee quality. <b>Higher quality</b> of coffee is produced in <b>smaller numbers</b> and most coffee <b>last around a year</b>.</p>
+        </div>
+      </div>
+    </div>
+
+      <div class="header3">
+        <h2>The Different Varieties, Colors and Processing Methods of Coffee</h2>
+      </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+      <div class="description description-left2">
+        <p>There are a large amount of varieties of coffee around the world, each with its own unique brand of taste. In this section, we introduce the <b>top 12 most frequent</b> coffee varieties
+          Throughout the rest of the visualisation, we will be focusing on these 12 coffee varieties.</p>
+        <p>
+          From the chart, we can see that <b>Gesha</b> and <b>Caturra</b> are the most frequent varieties of coffee while <b>Java</b>, <b>SL14</b>, <b>Yellow Bourbon</b> and <b>SHG</b> are the least frequent varieties of coffee.
+        </p>
+        <p>Among all the colors, every coffee variety has a Green variation while Brownish-Green and Pale Yellow variations only appear in
+          one single variety of coffee each, <b>Catimor</b> for Brownish-Green and <b>Gesha</b> for Pale Yellow.
+        <p>
+          As for processing methods, the most widely used processing method for coffee is Washed / Wet, followed by Natural / Dry and Pulped Natural / Honey, then the rest.
+        </p>
+      </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="vis3" class="vis-container"></div>
+        <div class="pure-u-1-3">
+          <div id="vis5" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3">
+          <div id="vis4" class="vis-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div id="vis6" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-2">
+        <div class="header4">
+          <h2>Comparison of Coffee Varieties</h2>
+        </div>
+      <div class="description description-right2">
+        <p>
+          Here, we will be introducing the overall average statistical attributes for each of the 12 coffee varieties and seeing how a variety differs from another.
+        </p>
+        <p>
+          From the chart, we can observe that each of the attributes for most of the 12 coffee varieties average to a similar threshold which is around <b>7.5 points</b>.
+        </p>
+        <p>
+          An interesting observation here is that all of the 12 coffee varieties have an average of 10, which is the maximum value for the attributes <b>Clean Cup</b>, <b>Sweetness</b> and <b>Uniformity</b>.
+        </p>
+      </div>
+    </div>
+    </div>  
+
+    <div class="header5">
+      <h2>Finding Trends in Statistical Coffee Attributes</h2>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left4">
+          <p>In this final section, we will be attempting to find trends through the correlation of different statistical attributes for coffee using different modes of visualisation.</p>
+          <p>From the <b>bar chart</b>, we can observe that <b>Gesha</b> has the highest average score among all the varieties of coffee while <b>Mundo Novo</b> has the lowest average score.</p>
+          <p>In the <b>histogram heatmap</b>, filters are provided in attempts to find any possible trends between attributes. 
+            But the main point is that we are trying to observe whether <b>Moisture Percentage</b> has an affect on the quality of coffee and from the observed results, we can conclude that it does not.</p>
+          <p>Finally, in the <b>interactive trellis scatter plot</b>, we want to observe whether there are any interesting trends or details in the correlation between the various statistical attributes and the average scores
+          for each variety of coffee. The plot can be filtered through the legend for specific varieties of coffee. The plot also allows for synchronous panning (via Dragging), zooming (via Scrolling) and brushing (via pressing Shift + Dragging)</p>
+          <p>An interesting detail found is that among all the 12 varieties of coffee, only one variation of Gesha has a Uniformity score of below 10, making it an outlier.</p>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div class="pure-u-1-3">
+          <div id="vis7" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3">
+          <div id="vis8" class="vis-container"></div>
+        </div>
+          <div id="vis9" class="vis-container"></div>
+      </div>
+    </div>
     </div>
 
 <script type="text/javascript">
 
-  var spec1 = "homework.vg.json";
+  var spec1 = "choropleth.vg.json";
   var spec2 = "radar.vg.json";
+  var spec3 = "pm.vg.json"
+  var spec4 = "sbc.vg.json"
+  var spec5 = "pie.vg.json"
+  var spec6 = "lc.vg.json"
+  var spec7 = "histogram.vg.json"
+  var spec8 = "scatter.vg.json"
+  var spec9 = "bar.vg.json"
 
-  vegaEmbed('#vis1', spec1).then(function(result) {
+  vegaEmbed('#vis1', spec1, { "actions": false }).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
-  vegaEmbed('#vis2', spec2).then(function(result) {
+  vegaEmbed('#vis2', spec3, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#vis3', spec6, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#vis4', spec5, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#vis5', spec4, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#vis6', spec2, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#vis7', spec9, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#vis8', spec7, { "actions": false }).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  vegaEmbed('#vis9', spec8, { "actions": false }).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>

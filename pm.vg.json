@@ -66,6 +66,13 @@
         "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
       },
       {
+        "params": [
+          {
+            "name": "highlight",
+            "select": {"type": "point", "on": "mouseover"}
+          },
+          {"name": "select", "select": "point"}
+        ],
         "transform": [
             {
                 "lookup": "properties.NAME",
@@ -79,7 +86,7 @@
             },
             {"calculate": "datum[attribute_filter]", "as": "size_filter"}
         ],
-        "mark": {"type": "circle"},
+        "mark": {"type": "circle", "cursor":"pointer"},
         "encoding": {
             "longitude": {"field": "properties.LABEL_X", "type": "quantitative"},
             "latitude": {"field": "properties.LABEL_Y", "type": "quantitative"},
@@ -105,7 +112,34 @@
                 {"field": "Country of Origin", "type": "nominal"},
                 {"field": "Total Cup Points", "type": "quantitative"},
                 {"field": "size_filter", "type": "quantitative", "title": "Filter Size"}
-            ]
+            ],
+            "strokeWidth": {
+              "condition": [
+                {
+                  "param": "select",
+                  "empty": false,
+                  "value": 2
+                },
+                {
+                  "param": "highlight",
+                  "empty": false,
+                  "value": 1
+                }
+              ],
+              "value": 0
+            },
+            "fillOpacity": {
+              "condition": {"param": "select", "value": 1},
+              "value": 0.5
+            },
+            "strokeOpacity": {
+              "condition": {"param": "select", "value": 1},
+              "value": 0
+            },
+            "stroke": {
+              "condition": {"param": "select", "value": "black", "empty": false},
+              "value": null
+            }
         }
       }
     ]

@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega/v5.json",
     "description": "An interactive world map supporting pan and zoom.",
     "width": 900,
-    "height": 700,
+    "height": 500,
     "autosize": "none",
     "title": "Quality of Coffee in Countries working with the CQI as of May 2023",
     "background":"#f4f1e5",

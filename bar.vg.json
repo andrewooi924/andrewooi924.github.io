@@ -1,0 +1,90 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "background": "#f4f1e5",
+    "params": [
+        {
+          "name": "highlight",
+          "select": {"type": "point", "on": "mouseover"}
+        },
+        {"name": "select", "select": "point"}
+    ],
+    "data": {
+        "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"
+    },
+    "transform": [
+        {
+            "joinaggregate": [{
+                "op": "count",
+                "field": "Variety",
+                "as": "Count"
+            }],
+            "groupby": [
+                "Variety"
+            ]
+        },
+        {
+            "filter": "(datum.Variety != '') && (datum.Variety != 'unknown') && (datum.Count >= 3)"
+        },
+        {
+            "calculate": "datum.CC", "as": "Clean Cup"
+        }],
+    "mark": {"type": "bar", "cursor":"pointer"},
+    "encoding": {
+      "x": {
+        "aggregate": "average",
+        "field": "Total Cup Points",
+        "type": "quantitative"
+      },
+      "y": {"field": "Variety", "type": "nominal"},
+      "color": {
+          "field": "Variety",
+        "scale": {"range": [
+                "#fff7d5",
+                "#ffe9a1",
+                "#ffdf74",
+                "#ffcb52",
+                "#ffb647",
+                "#ffa836",
+                "#ff9212",
+                "#ec7a00",
+                "#cf6a00",
+                "#af5700",
+                "#582c00",
+                "#2c1600",
+                "#160b00"]}
+      },
+      "tooltip": [
+        {"field": "Variety", "type": "nominal"},
+        {"aggregate": "average", "field":"Total Cup Points", "type": "quantitative", "format":"0.2f"}
+      ],
+      "strokeWidth": {
+        "condition": [
+          {
+            "param": "select",
+            "empty": false,
+            "value": 2
+          },
+          {
+            "param": "highlight",
+            "empty": false,
+            "value": 2
+          }
+        ],
+        "value": 0
+      },
+      "fillOpacity": {
+        "condition": [
+            {"param": "select", "value": 1}
+        ],
+        "value": 0.3
+      },
+      "strokeOpacity": {
+        "condition": {"param": "select", "value": 1},
+        "value": 0
+      },
+      "stroke": {
+        "condition": {"param": "select", "value": "black", "empty": false},
+        "value": null
+      }
+    }
+}

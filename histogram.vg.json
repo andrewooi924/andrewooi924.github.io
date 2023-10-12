@@ -18,7 +18,8 @@
                 "Flavor",
                 "Sweetness",
                 "Uniformity",
-                "Moisture Percentage"
+                "Moisture Percentage",
+                "Total Cup Points"
               ],
               "name": "X-Axis Filter: "
             }
@@ -38,7 +39,8 @@
                 "Flavor",
                 "Sweetness",
                 "Uniformity",
-                "Moisture Percentage"
+                "Moisture Percentage",
+                "Total Cup Points"
               ],
               "name": "Y-Axis Filter: "
             }
@@ -74,15 +76,7 @@
       "color": {
         "aggregate": "count",
         "type": "quantitative",
-        "scale": {"range": ["#ffffe5",
-        "#fff7bc",
-        "#fee391",
-        "#fec44f",
-        "#fe9929",
-        "#ec7014",
-        "#cc4c02",
-        "#993404",
-        "#662506"]}
+        "scale": {"range": ["#3100f5","#1399ff","#47fe4a","#90fe3c","#cafe32","#eafe06","#fffa07"]}
       },
       "tooltip": [
         {"aggregate":"count", "type": "quantitative"}

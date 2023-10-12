@@ -177,8 +177,21 @@
         {
           "name": "color",
           "type": "ordinal",
-          "domain": {"data": "coffee", "field": "Variety", "sort":true},
-          "range": {"scheme": "yelloworangebrown"}
+          "domain": ["Bourbon", "Catimor", "Catuai", "Caturra", "Ethiopian Heirlooms", "Gesha", "Java", "Mundo Novo", "SHG", "SL14", "SL34", "Typica", "Yellow Bourbon"],
+          "range": [
+            "#fff7d5",
+            "#ffe9a1",
+            "#ffdf74",
+            "#ffcb52",
+            "#ffb647",
+            "#ffa836",
+            "#ff9212",
+            "#ec7a00",
+            "#cf6a00",
+            "#af5700",
+            "#582c00",
+            "#2c1600",
+            "#160b00"]
         },
         {
             "name": "average_Aroma",
@@ -393,6 +406,18 @@
                 }
               }
             ]
+          },
+          {
+            "type": "text",
+            "name": "filter_annotate",
+            "encode": {
+              "update": {
+                "x": {"value": 301},
+                "y": {"value": 10},
+                "text": {"value": "↑ Click To Filter"},
+                "fill": {"value": "grey"}
+              }
+            }
           }
         ]
 }
