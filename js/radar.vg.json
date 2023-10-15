@@ -1,6 +1,5 @@
 {
     "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "title": {"text": "Average scores for different attributes of different varieties of Coffee", "dx": -80, "dy": -30},
     "width": 200,
     "height": 0,
     "padding": 300,

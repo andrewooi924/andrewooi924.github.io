@@ -3,7 +3,6 @@
   "width": 800,
   "height": 400,
   "background": "#f4f1e5",
-  "title": "Frequency of Coffee Varieties in Countries working with the CQI as of May 2023",
   "description": "A lollipop chart with highlighting on hover and selecting on click. Rule mark offset can be sqrt of size (radius) + stroke width?",
   "data": {
     "url": "https://raw.githubusercontent.com/andrewooi924/andrewooi924.github.io/main/data/df_arabica_clean.csv"
