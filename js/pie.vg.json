@@ -14,7 +14,7 @@
         "groupby": ["Count"]
     },
     {
-        "filter": "datum['Processing Method'] != ''"
+        "filter": "datum['Processing Method'] != '' && datum['Processing Method'] != 'Double Anaerobic Washed' && datum['Processing Method'] != 'Semi Washed' && datum['Processing Method'] != 'Honey,Mossto' && datum['Processing Method'] != 'Double Carbonic Maceration / Natural' && datum['Processing Method'] != 'Wet Hulling' && datum['Processing Method'] != 'Anaerobico 1000h' && datum['Processing Method'] != 'SEMI-LAVADO'"
     }],
     "layer": [{
         "params": [
@@ -30,12 +30,15 @@
             "color": {
                 "field": "Processing Method", 
                 "type": "nominal", 
-                "scale": {"range": ["#071c40","#0b2a60","#103f8f","#1554be","#1b70fd","#0b8afd","#02a7f7","#02b6ed","#02d3db","#02e4b9"]},
-                "sort": {"field":"Count", "order":"descending"}
+                "scale": {"range": [        
+                "#ffb647",
+                "#ec7a00",
+                "#af5700"]},
+                "sort": {"field":"Count", "order":"ascending"}
             },
             "order": {"field":"Count", "aggregate":"count", "sort": "ascending"},
             "tooltip":[
-                {"field": "Count", "type":"quantitative", "aggregate":"count", "title":"Count"},
+                {"field": "data", "type":"quantitative", "aggregate":"count", "title":"Count"},
                 {"field": "Processing Method", "type": "nominal"}
             ],
             "strokeWidth": {

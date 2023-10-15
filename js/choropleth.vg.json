@@ -128,7 +128,6 @@
             { "type": "filter", "expr": "datum['Total Cup Points'] == null" }
           ]
       }
-
     ],
     "scales": [
         {
@@ -146,6 +145,34 @@
           "#662506"]
         }
       ],
+      "legends": [{
+        "stroke": "color",
+        "title": "Average Score",
+        "titleAnchor":"end",
+        "direction": "horizontal",
+        "orient": "none",
+        "legendX": 680,
+        "legendY": 450,
+        "values": [78, 79, 80, 81, 82, 83, 84, 85],
+        "encode": {
+          "symbols": {
+            "name": "legendSymbol",
+            "interactive": true,
+            "update": {
+              "fill": {"value": "transparent"},
+              "strokeWidth": {"value": 2},
+              "size": {"value": 64}
+            }
+          },
+          "labels": {
+            "name": "legendLabel",
+            "interactive": true,
+            "update": {
+              "fill": {"value": "black"}
+            }
+          }
+        }
+      }],
     "marks": [
       {
         "type": "shape",

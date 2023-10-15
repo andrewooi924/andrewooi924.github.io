@@ -39,13 +39,16 @@
                 "field": "Count",
                 "type": "quantitative",
                 "scale": {"range": [
-                "#fee391",
-                "#fec44f",
-                "#fe9929",
-                "#ec7014",
-                "#cc4c02",
-                "#993404",
-                "#662506"]},
+                  "#ffb647",
+                  "#ffa836",
+                  "#ff9212",
+                  "#ec7a00",
+                  "#cf6a00",
+                  "#af5700",
+                  "#824c0f",
+                  "#582c00",
+                  "#2c1600",
+                  "#160b00"]},
                 "legend": null
             },
             "value": "lightgrey"

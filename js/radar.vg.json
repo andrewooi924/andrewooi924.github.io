@@ -179,7 +179,6 @@
           "type": "ordinal",
           "domain": ["Bourbon", "Catimor", "Catuai", "Caturra", "Ethiopian Heirlooms", "Gesha", "Java", "Mundo Novo", "SHG", "SL14", "SL34", "Typica", "Yellow Bourbon"],
           "range": [
-            "#fff7d5",
             "#ffe9a1",
             "#ffdf74",
             "#ffcb52",
@@ -189,6 +188,7 @@
             "#ec7a00",
             "#cf6a00",
             "#af5700",
+            "#824c0f",
             "#582c00",
             "#2c1600",
             "#160b00"]
