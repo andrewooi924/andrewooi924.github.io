@@ -1,216 +1,963 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Most Wanted — OPTCG hunt list</title>
+<meta name="theme-color" content="#0E1B2A">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Most Wanted">
+<style>
+  :root{
+    --ink:#0E1B2A; --ink-2:#16273a; --parch:#F3EAD8; --surface:#FBF7EE;
+    --brass:#D6A23E; --brass-deep:#B5862C; --line:#E3D7BE; --line-soft:#EFE7D4;
+    --text:#1B2733; --muted:#6E7785; --muted-ink:#9DB0C4;
+    --hi:#C8102E; --md:#D6A23E; --lo:#6E7E8E;
+    --red:#C8102E; --green:#2E8B57; --blue:#2477B3; --purple:#6B4C9A; --black:#34373C; --yellow:#E3B23C;
+    --r:14px; --r-sm:9px;
+    --shadow:0 1px 2px rgba(14,27,42,.06), 0 8px 24px rgba(14,27,42,.07);
+    --tap:46px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+    background:var(--surface); color:var(--text);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    padding-bottom:calc(72px + env(safe-area-inset-bottom));
+  }
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  input,select,textarea{font:inherit}
+  .tnum{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
 
-  <!-- Import pure.css -->
-  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
-  integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  /* ---------- top bar ---------- */
+  header{
+    position:sticky;top:0;z-index:30;background:var(--ink);color:var(--parch);
+    padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;
+    box-shadow:0 1px 0 rgba(0,0,0,.2);
+  }
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand .mark{width:30px;height:30px;border-radius:8px;flex:none;display:grid;place-items:center;
+    background:radial-gradient(circle at 50% 42%, #1c3148, #0b1622); border:1px solid rgba(214,162,62,.4)}
+  .brand .mark svg{width:18px;height:18px}
+  .brand h1{margin:0;font-size:17px;font-weight:800;letter-spacing:.02em;line-height:1}
+  .brand .sub{font-size:10.5px;color:var(--muted-ink);letter-spacing:.16em;text-transform:uppercase;margin-top:3px}
+  .offline-dot{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted-ink)}
+  .offline-dot i{width:7px;height:7px;border-radius:50%;background:#3ECf8e;box-shadow:0 0 0 3px rgba(62,207,142,.15)}
+  .offline-dot.off i{background:var(--brass)}
 
+  /* ---------- search + filters ---------- */
+  .controls{position:sticky;top:0;z-index:20;background:var(--surface);
+    border-bottom:1px solid var(--line-soft);padding:10px 12px 8px}
+  .search{position:relative}
+  .search input{width:100%;height:var(--tap);border:1.5px solid var(--line);border-radius:var(--r);
+    background:#fff;padding:0 14px 0 40px;color:var(--text);outline:none}
+  .search input:focus{border-color:var(--brass)}
+  .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+  .chips{display:flex;gap:7px;overflow-x:auto;padding:9px 1px 2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;height:34px;padding:0 13px;border-radius:999px;border:1.5px solid var(--line);
+    background:#fff;color:var(--text);font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--parch);border-color:var(--ink)}
+  .chip .dot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.18)}
+  .chip .caret{font-size:10px;opacity:.6}
+  .chip.has-active{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
 
+  /* ---------- card grid ---------- */
+  main{padding:12px}
+  .meta-row{display:flex;align-items:baseline;justify-content:space-between;margin:2px 2px 12px;color:var(--muted)}
+  .meta-row .count{font-size:12.5px;font-weight:600}
+  .sortbtn{font-size:12.5px;font-weight:700;color:var(--text);display:inline-flex;align-items:center;gap:5px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .card{background:#fff;border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;text-align:left}
+  .card .imgwrap{position:relative;aspect-ratio:100/140;background:linear-gradient(160deg,#eef2f6,#e3e9ef)}
+  .card .imgwrap img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .badge{position:absolute;top:7px;left:7px;background:rgba(14,27,42,.86);color:var(--parch);
+    font-size:10px;font-weight:800;letter-spacing:.05em;padding:3px 7px;border-radius:6px}
+  .card .colors{position:absolute;top:7px;right:7px;display:flex;gap:3px}
+  .card .colors .d{width:12px;height:12px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 2px rgba(0,0,0,.3)}
+  .card .sold{position:absolute;inset:0;background:rgba(14,27,42,.45);display:grid;place-items:center;
+    color:#fff;font-weight:800;font-size:12px;letter-spacing:.1em}
+  .card .body{padding:9px 10px 11px;display:flex;flex-direction:column;gap:3px;flex:1}
+  .card .code{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.04em}
+  .card .nm{font-size:13px;font-weight:700;line-height:1.25;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em}
+  .card .vr{font-size:10.5px;color:var(--brass-deep);font-weight:700}
+  .card .price{margin-top:auto;font-size:15px;font-weight:800}
+  .card .price small{font-weight:600;color:var(--muted)}
+  .addbtn{position:absolute;bottom:9px;right:9px;width:34px;height:34px;border-radius:50%;
+    background:var(--brass);color:var(--ink);display:grid;place-items:center;box-shadow:0 2px 8px rgba(181,134,44,.5);font-size:20px;font-weight:700;line-height:0}
+  .addbtn.in{background:var(--ink);color:var(--brass)}
+  .loadmore{display:block;margin:18px auto;height:var(--tap);padding:0 22px;border-radius:var(--r);
+    background:#fff;border:1.5px solid var(--line);font-weight:700;color:var(--text)}
+
+  /* ---------- wishlist ---------- */
+  .summary{background:var(--ink);color:var(--parch);border-radius:var(--r);padding:14px 16px;margin-bottom:12px;
+    display:flex;align-items:center;gap:14px}
+  .summary .n{font-size:26px;font-weight:800;line-height:1}
+  .summary .lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-ink);margin-top:3px}
+  .summary .total{margin-left:auto;text-align:right}
+  .summary .total .v{font-size:20px;font-weight:800}
+  .toolbar{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:none}
+  .lists{display:flex;gap:7px;overflow-x:auto;padding:2px 1px 10px;scrollbar-width:none}
+  .lists::-webkit-scrollbar{display:none}
+  .lchip{flex:none;height:36px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;
+    color:var(--text);font-size:13.5px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+  .lchip.active{background:var(--ink);color:var(--parch);border-color:var(--ink)}
+  .lchip.add{border-style:dashed;color:var(--brass-deep);border-color:var(--brass)}
+  .lchip.edit{width:36px;padding:0;justify-content:center;color:var(--muted)}
+  .lmrow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .lmrow .lmname{flex:1;height:42px;border:1.5px solid var(--line);border-radius:10px;padding:0 12px;background:#fff;color:var(--text)}
+  .lmrow .lmname:focus{border-color:var(--brass);outline:none}
+  .lmrow .lmdel{flex:none;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--muted)}
+  .lmrow .lmdel:disabled{opacity:.35}
+  .lmrow .lmdel:not(:disabled):hover{color:var(--hi);border-color:var(--hi)}
+  .newlist{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line-soft)}
+  .newlist input{flex:1;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff;color:var(--text)}
+  .newlist input:focus{border-color:var(--brass);outline:none}
+  .newlist button{flex:none;padding:0 18px;border-radius:12px;background:var(--brass);color:var(--ink);font-weight:800}
+  .curtoggle{display:inline-flex;border:1.5px solid var(--line);border-radius:9px;overflow:hidden}
+  .curtoggle button{padding:5px 11px;font-size:12px;font-weight:800;color:var(--muted);background:#fff}
+  .curtoggle button.on{background:var(--ink);color:var(--parch)}
+  .pickrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 12px;margin-bottom:8px;
+    border:1.5px solid var(--line);border-radius:12px;background:#fff;font-weight:700;font-size:14px;color:var(--text)}
+  .pickrow.on{border-color:var(--brass);background:#fffaf0}
+  .pickrow .pk-check{flex:none;width:22px;height:22px;border-radius:6px;border:1.5px solid var(--line);
+    display:grid;place-items:center;color:var(--ink);font-weight:900;font-size:14px}
+  .pickrow.on .pk-check{background:var(--brass);border-color:var(--brass)}
+  .pickrow .pk-name{flex:1}
+  .toolbar::-webkit-scrollbar{display:none}
+  .tool{flex:none;height:38px;padding:0 14px;border-radius:var(--r);border:1.5px solid var(--line);
+    background:#fff;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:7px;color:var(--text)}
+  .tool.primary{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+  .tool svg{width:15px;height:15px}
+  .ptier{margin:18px 0 9px;display:flex;align-items:center;gap:9px}
+  .ptier .bar{width:4px;height:16px;border-radius:2px}
+  .ptier.high .bar{background:var(--hi)} .ptier.medium .bar{background:var(--md)} .ptier.low .bar{background:var(--lo)}
+  .ptier .t{font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .ptier .c{font-size:12px;color:var(--muted);font-weight:600}
+  .wl-item{display:flex;gap:12px;background:#fff;border:1px solid var(--line-soft);border-radius:var(--r);
+    padding:10px;box-shadow:var(--shadow);margin-bottom:10px}
+  .wl-item .th{width:62px;height:87px;flex:none;align-self:flex-start;border-radius:8px;overflow:hidden;background:#e7edf2;padding:0;border:none}
+  .listbar{display:flex;align-items:center;width:100%;background:var(--ink);color:var(--parch);border-radius:var(--r);padding:12px 16px;margin-bottom:10px;text-align:left}
+  .listbar .ll{display:flex;flex-direction:column;gap:2px}
+  .listbar .eyebrow{color:var(--muted-ink)}
+  .listbar .ln{font-size:17px;font-weight:800;line-height:1.1}
+  .listbar .lcount{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--brass)}
+  .tool[disabled]{opacity:.4}
+  .tool.done{background:#2E8B57;border-color:#2E8B57;color:#fff}
+  .lm-row{display:flex;align-items:center;gap:8px;padding:11px 4px;border-bottom:1px solid var(--line-soft)}
+  .lm-row .pick{flex:1;text-align:left;font-size:15px;font-weight:700;color:var(--text);display:flex;flex-direction:column;gap:2px}
+  .lm-row .pick small{font-weight:600;color:var(--muted);font-size:11.5px}
+  .lm-row.active .pick{color:var(--brass-deep)}
+  .lm-row .ic{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;color:var(--muted)}
+  .lm-row .ic:hover{background:var(--surface);color:var(--text)}
+  .lm-new{display:flex;gap:8px;margin-top:14px}
+  .lm-new input{flex:1;height:44px;border:1.5px solid var(--line);border-radius:10px;padding:0 12px;background:#fff}
+  .lm-new button{height:44px;padding:0 16px;border-radius:10px;background:var(--ink);color:var(--parch);font-weight:800}
+  .wl-item .th img{width:100%;height:100%;object-fit:contain}
+  .wl-item .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .wl-item .info .code{font-size:10.5px;font-weight:700;color:var(--muted)}
+  .wl-item .info .nm{font-size:14px;font-weight:700;line-height:1.2}
+  .wl-item .info .pr{font-size:15px;font-weight:800}
+  .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:9px;overflow:hidden;margin-top:4px;width:fit-content}
+  .seg button{padding:5px 10px;font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--muted)}
+  .seg button[data-on="high"]{--c:var(--hi)} .seg button[data-on="medium"]{--c:var(--md)} .seg button[data-on="low"]{--c:var(--lo)}
+  .seg button.active{background:var(--c);color:#fff}
+  .wl-item .note{margin-top:6px;width:100%;border:1px solid var(--line-soft);border-radius:8px;
+    padding:6px 9px;font-size:12.5px;resize:none;background:var(--surface);color:var(--text);outline:none}
+  .wl-item .note:focus{border-color:var(--brass);background:#fff}
+  .rm{flex:none;align-self:flex-start;width:30px;height:30px;border-radius:8px;color:var(--muted);display:grid;place-items:center}
+  .rm:hover{color:var(--hi);background:#fbeaec}
+
+  /* ---------- empty ---------- */
+  .empty{text-align:center;padding:64px 24px;color:var(--muted)}
+  .empty .em-mark{width:64px;height:64px;margin:0 auto 16px;opacity:.5}
+  .empty h2{font-size:17px;color:var(--text);margin:0 0 6px}
+  .empty p{margin:0 auto;max-width:280px;line-height:1.5;font-size:14px}
+  .filepick{margin-top:16px}
+
+  /* ---------- bottom nav ---------- */
+  nav.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(251,247,238,.94);
+    backdrop-filter:saturate(140%) blur(10px);border-top:1px solid var(--line);
+    display:flex;padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+  nav.tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0;color:var(--muted);border-radius:12px}
+  nav.tabbar button .ico{width:24px;height:24px}
+  nav.tabbar button span{font-size:10.5px;font-weight:700;letter-spacing:.02em}
+  nav.tabbar button.active{color:var(--ink)}
+  nav.tabbar button .tabbadge{position:absolute;transform:translate(14px,-4px);background:var(--hi);color:#fff;
+    font-size:9.5px;font-weight:800;min-width:16px;height:16px;border-radius:8px;padding:0 4px;display:grid;place-items:center}
+  .navwrap{position:relative}
+
+  /* ---------- sheet / modal ---------- */
+  .scrim{position:fixed;inset:0;background:rgba(14,27,42,.5);z-index:50;opacity:0;pointer-events:none;transition:opacity .18s}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;background:var(--surface);
+    border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform .24s cubic-bezier(.32,.72,0,1);
+    max-height:90vh;overflow-y:auto;padding:8px 16px calc(24px + env(safe-area-inset-bottom))}
+  .sheet.open{transform:translateY(0)}
+  .grip{width:38px;height:4px;border-radius:2px;background:var(--line);margin:8px auto 14px}
+  .detail-img{width:140px;aspect-ratio:100/140;border-radius:12px;overflow:hidden;float:left;margin:0 16px 8px 0;background:#e7edf2;box-shadow:var(--shadow)}
+  .detail-img img{width:100%;height:100%;object-fit:cover}
+  .sheet h2{font-size:19px;margin:2px 0 2px}
+  .sheet .dcode{font-size:12px;font-weight:700;color:var(--muted)}
+  .sheet .dprice{font-size:24px;font-weight:800;margin:8px 0}
+  .kv{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;clear:both}
+  .kv .k{background:#fff;border:1px solid var(--line-soft);border-radius:8px;padding:5px 9px;font-size:12px}
+  .kv .k b{font-weight:800}
+  .effect{clear:both;background:#fff;border:1px solid var(--line-soft);border-radius:12px;padding:12px;font-size:13px;line-height:1.6;margin:8px 0 14px}
+  .sheet .actions{display:flex;gap:10px;margin-top:8px}
+  .btn-lg{flex:1;height:50px;border-radius:var(--r);font-weight:800;font-size:15px;display:grid;place-items:center}
+  .btn-add{background:var(--brass);color:var(--ink)} .btn-add.in{background:var(--ink);color:var(--brass)}
+  .btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--text);flex:none;width:54px}
+  .modal{position:fixed;inset:0;z-index:60;display:none;place-items:center;padding:24px;background:rgba(14,27,42,.55)}
+  .modal.open{display:grid}
+  .modal .box{background:var(--surface);border-radius:18px;max-width:380px;width:100%;padding:20px;box-shadow:var(--shadow)}
+  .modal h3{margin:0 0 6px;font-size:17px}
+  .modal p{margin:0 0 16px;color:var(--muted);font-size:13.5px;line-height:1.5}
+  .modal .row{display:flex;gap:10px}
+  .modal .row button{flex:1;height:46px;border-radius:12px;font-weight:800}
+  .filter-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .filter-list button{padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:7px}
+  .filter-list button.active{background:var(--ink);color:var(--parch);border-color:var(--ink)}
+  .priceinputs{display:flex;gap:10px;align-items:center;margin-top:10px}
+  .priceinputs input{flex:1;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff;text-align:center}
+
+  /* toast */
+  #toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:var(--parch);padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:600;
+    z-index:80;opacity:0;pointer-events:none;transition:all .2s;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  :focus-visible{outline:3px solid var(--brass);outline-offset:2px;border-radius:6px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-  <div class="page">
-
-    <!-- pure grid group -->
-    <header>
-      <div class="overlay">
-    <h1>THE INTRINCACIES OF GOOD COFFEE</h1>
-    <h2>Where and How Coffee is Made, and What Makes it Good</h2>
-    <hr class="rounded" style="margin: auto; margin-bottom:20px;">
-    <h3 style="margin:auto;">More than 400 billion cups of coffee are consumed by people each year, making it one of the most popular beverages in the world. 
-      Despite its appearance looking pretty much the same in liquid form, coffee is surprisingly very diverse in its taste where there is a little something for everyone.</h3>
-      <br>
-      <span class="utility">Sentences with this colour indicate instructions for interacting with the visualisations!</span>
-        </div>
-    </header>
-    <!-- end pure grid group -->
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-2-5">
-        <div class="header1" style="margin-left: 70px; margin-bottom: 20px; margin-top: 70px;">
-          <h2>Quality of Coffee</h2>
-        </div>
-        <hr style="margin-left: 70px;">
-        <div class="description description-left" style="margin-left: 60px; margin-top: 30px;">
-          <p>First, we will introduce the countries affiliated with the <b>Coffee Quality Institute</b> and have a look at the <b>average scores</b> for the quality of coffee in each of the relevant countries using this interactive map on the right here where you
-            can <span class="utility">click & hold to drag and scroll to zoom to have a closer look at the countries.</span>
-          </p>
-          <br>
-          <p>
-            From the interactive map, we can clearly see that <b>Brazil has the worst quality of coffee</b> while <b>Madagascar has the best quality of coffee</b> among all the relevant countries.
-          </p>
-        </div>
-      </div>
-      <div class="pure-u-3-5">
-        <div id="vis1" class="vis-container" style="margin-left: 30px;"></div>
-      </div>
+<header>
+  <div class="brand">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#D6A23E" stroke-width="1.6"/>
+      <path d="M12 6.6l1.6 3.3 3.6.5-2.6 2.5.6 3.6L12 14.8 8.8 16.5l.6-3.6L6.8 10.4l3.6-.5z" fill="#D6A23E"/></svg>
+    </span>
+    <div>
+      <h1>Most Wanted</h1>
+      <div class="sub">OPTCG · JP market</div>
     </div>
+    <div class="offline-dot" id="netdot"><i></i><span id="netlabel">online</span></div>
+  </div>
+</header>
 
-    <div class="pure-g" style="margin-top: 80px;">
-        <div class="pure-u-3-5">
-          <div id="vis2" class="vis-container" style="margin-left: 0px;"></div>
-        </div>
-        <div class="pure-u-2-5">
-          <div class="header2" style="margin-right: 40px;margin-top: 20px;">
-            <h2>Harvest and Lifetime of Coffee</h2>
-          </div>
-          <hr style="margin-right: 40px;margin-bottom: 20px;">
-        <div class="description description-right" style="margin-right: 40px">
-          <p>
-            Here, we examine whether <b>altitude</b> has an effect on the quality of coffee as well as the <b>number of bags</b> produced and the <b>lifetime</b> of coffee in relevant countries. <br><br> <span class="utility">The filter dropdown at the bottom can be used to change between the attributes</span>
-            The interactive map also allows <span class="utility">zooming in and out of the map, as well as centering on different parts of the map.</span>
-          </p>
-          <br>
-          <p>From the map, we can see that <b>Altitude most likely does not have an effect on coffee quality.</b> <b>Higher quality</b> of coffee is produced in <b>smaller numbers</b> and most coffee <b>last around a year</b>.</p>
-        </div>
-      </div>
+<!-- BROWSE controls -->
+<div class="controls" id="browseControls">
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input id="q" type="search" inputmode="search" placeholder="Search name, code, or set…" autocomplete="off">
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<main id="view"></main>
+
+<div class="navwrap">
+<nav class="tabbar">
+  <button id="tabBrowse" class="active" data-view="browse">
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/></svg>
+    <span>Browse</span>
+  </button>
+  <button id="tabWishlist" data-view="wishlist">
+    <span class="tabbadge" id="wlBadge" style="display:none">0</span>
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 6.6l1.9 3.9 4.3.6-3.1 3 .8 4.3L12 16.4 8.1 18.4l.8-4.3-3.1-3 4.3-.6z"/></svg>
+    <span>Wishlist</span>
+  </button>
+</nav>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+
+<!-- filter picker modal -->
+<div class="modal" id="filterModal">
+  <div class="box">
+    <h3 id="fmTitle">Filter</h3>
+    <div id="fmBody"></div>
+    <div class="row" style="margin-top:18px">
+      <button class="btn-ghost" id="fmClear" style="width:auto;flex:1;background:#fff;border:1.5px solid var(--line)">Clear</button>
+      <button id="fmApply" style="background:var(--ink);color:var(--parch)">Done</button>
     </div>
+  </div>
+</div>
 
-      <div class="header3" style="margin-top: 130px;">
-        <h2>The Different Varieties, Colors and Processing Methods of Coffee</h2>
-      </div>
-      <hr width=70% style="margin: auto;margin-bottom: 20px;">
-
-    <div class="pure-g">
-      <div class="pure-u-1-3">
-      <div class="description description-left2" style="margin-top: 45px;margin-left: 100px;">
-        <p>There are a large amount of varieties of coffee around the world, each with its own unique brand of taste. In this section, we introduce the <b>top 12 most frequent coffee varieties</b>
-          Throughout the rest of the visualisation, we will be focusing on these 12 coffee varieties.</p>
-          <br>
-        <p>
-          From the chart, we can see that <b>Gesha</b> and <b>Caturra</b> are the <b>most frequent varieties of coffee</b> while <b>Java</b>, <b>SL14</b>, <b>Yellow Bourbon</b> and <b>SHG</b> are the <b>least frequent varieties of coffee.</b>
-        </p>
-        <br>
-        <p>Among all the colors, <b>every coffee variety has a Green variation</b> while <b>Brownish-Green and Pale Yellow variations only appear in
-          one single variety of coffee each</b>, Catimor for Brownish-Green and Gesha for Pale Yellow.</p> 
-          <br>
-        <p>
-          As for their processing methods, the <b>most widely used processing method for coffee is Washed / Wet</b>, followed by Natural / Dry and Pulped Natural / Honey, then the rest.
-        </p>
-      </div>
-      </div>
-      <div class="pure-u-3-5" style="margin-top: 45px;">
-        <div id="vis3" class="vis-container" style="margin-left: 70px;"></div>
-        <div class="pure-u-3-5">
-          <div id="vis5" class="vis-container"></div>
-        </div>
-        <div class="pure-u-1-4">
-          <div id="vis4" class="vis-container"></div>
-        </div>
-      </div>
+<!-- list manager modal -->
+<div class="modal" id="listModal">
+  <div class="box">
+    <h3>Your wishlists</h3>
+    <div id="listMgr"></div>
+    <div class="newlist">
+      <input id="newListName" type="text" placeholder="New list name…" maxlength="40">
+      <button id="addListBtn">Add</button>
     </div>
-
-    <div class="pure-g">
-      <div class="pure-u-1-2">
-        <div id="vis6" class="vis-container" style="margin-right: 50px"></div>
-      </div>
-      <div class="pure-u-1-2" style="margin-top: 50px">
-        <div class="header4" style="margin-right: 50px; margin-top: 40px;">
-          <h2>Comparison of Coffee Varieties</h2>
-        </div>
-        <hr width=80% style="margin-left: 45px;margin-bottom: 30px;">
-      <div class="description description-right2" style="margin-right: 70px">
-        <p>
-          Here, we will be introducing the <b>overall average statistical attributes for each of the 12 coffee varieties</b> and seeing how a variety differs from another.
-        </p>
-        <br>
-        <p>
-          From the chart, we can observe that each of the attributes for most of the 12 coffee varieties <b>average to a similar threshold</b> which is around <b>7.5 points</b>.
-        </p>
-        <br>
-        <p>
-          An interesting observation here is that <b>all of the 12 coffee varieties have an average score of 10 for the attributes Clean Cup, Sweetness and Uniformity which is the maximum</b>.
-        </p>
-      </div>
+    <div class="row" style="margin-top:16px">
+      <button id="listDone" style="background:var(--ink);color:var(--parch)">Done</button>
     </div>
-    </div>  
+  </div>
+</div>
 
-    <div class="header5">
-      <h2>Finding Trends in Statistical Coffee Attributes</h2>
+<!-- add-to-list picker -->
+<div class="modal" id="addModal">
+  <div class="box">
+    <h3 id="addTitle">Add to a wishlist</h3>
+    <p id="addCard" style="font-weight:700;color:var(--text);margin:0 0 12px"></p>
+    <div id="addLists"></div>
+    <div class="newlist">
+      <input id="addNewName" type="text" placeholder="New list name…" maxlength="40">
+      <button id="addNewBtn">Create &amp; add</button>
     </div>
-    <hr width = 70% style="margin: auto;margin-bottom: 30px;">
-    <div class="pure-g">
-      <div class="pure-u-1-3">
-        <div class="description description-left4" style="margin-left:80px;margin-top: 50px;">
-          <p>In this final section, we will be attempting to <b>find trends through the correlation of different statistical attributes</b> for coffee using different modes of visualisation.</p>
-          <br>
-          <p>From the <b>bar chart</b>, we can observe that <b>Gesha has the highest average score</b> among all the varieties of coffee while <b>Mundo Novo has the lowest average score.</b></p>
-          <br>
-          <p>In the <b>histogram heatmap</b>, <span class="utility">filters are provided to find possible trends between attributes.</span>
-            From the histogram heatmap, we can observe that <b>Moisture Percentage does not have an effect on the quality of coffee.</b></p>
-            <br>
-          <p>Finally, in the <b>interactive trellis scatter plot</b>, we want to observe whether there are any interesting trends or details in the correlation between the various statistical attributes and the average scores
-          for each variety of coffee. <span class="utility"> can be filtered through the legend for specific varieties of coffee. The plot also allows for synchronous panning (via Dragging), zooming (via Scrolling) and brushing (via pressing Shift + Dragging)</span></p>
-          <br>
-          <p>An interesting detail found is that <b>among all the 12 varieties of coffee, only one variation of Gesha has a Uniformity score of below 10, making it an outlier.</b></p>
-          <p><br><br><br><br></p>
-        </div>
-        <credit style="margin-right: 200px;">Visualisation Author: Ooi Yu Zhang</credit>
-        <br>
-        <credit style="margin-right: 335px;">Hosted on GitHub</credit>
-        <br>
-        <credit style="margin-right: 215px;">Source: Coffee Quality Institution</credit>
+    <div class="row" style="margin-top:16px">
+      <button id="addDone" style="background:var(--ink);color:var(--parch)">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- MYR rate -->
+<div class="modal" id="rateModal">
+  <div class="box">
+    <h3>MYR conversion rate</h3>
+    <p>Applied to every yen price in your wishlist. RM = ¥ price × rate.</p>
+    <div class="priceinputs"><span style="font-weight:700">¥1 =</span>
+      <input id="rateInput" type="number" step="0.0001" min="0" inputmode="decimal">
+      <span style="font-weight:700">RM</span></div>
+    <div class="row" style="margin-top:16px">
+      <button id="rateSave" style="background:var(--ink);color:var(--parch)">Save</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* =========================================================================
+   Most Wanted — local-first OPTCG wishlist.
+   Catalog: ./catalog.json (built from your scraper + price database).
+   Storage: IndexedDB (wishlist + settings). No server, fully offline.
+   ========================================================================= */
+
+const COLORS = {red:'#C8102E',green:'#2E8B57',blue:'#2477B3',purple:'#6B4C9A',black:'#34373C',yellow:'#E3B23C'};
+const PRIORITIES = ['high','medium','low'];
+let RATE=0.025, BROWSE_CUR='jpy';   // MYR per yen; browse-tab display currency
+const yen = n => (n==null ? '—' : '¥'+n.toLocaleString('en-US'));
+const myr = n => (n==null ? '—' : 'RM'+(n*RATE).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}));
+const priceMain = n => BROWSE_CUR==='myr' ? myr(n) : yen(n);
+
+/* ---------- tiny IndexedDB wrapper ---------- */
+const DB='mostwanted', ITEMS='items', SET='settings', LEGACY='wishlist';
+let _db;
+function db(){
+  if(_db) return Promise.resolve(_db);
+  return new Promise((res,rej)=>{
+    const r=indexedDB.open(DB,2);
+    r.onupgradeneeded=(e)=>{const d=r.result;
+      if(!d.objectStoreNames.contains(LEGACY)) d.createObjectStore(LEGACY,{keyPath:'id'});
+      if(!d.objectStoreNames.contains(SET)) d.createObjectStore(SET,{keyPath:'k'});
+      if(!d.objectStoreNames.contains(ITEMS)){const s=d.createObjectStore(ITEMS,{keyPath:'key'});s.createIndex('listId','listId',{unique:false});}
+    };
+    r.onsuccess=()=>{_db=r.result;res(_db)};
+    r.onerror=()=>rej(r.error);
+  });
+}
+async function tx(store,mode,fn){const d=await db();return new Promise((res,rej)=>{
+  const t=d.transaction(store,mode),s=t.objectStore(store);const out=fn(s);
+  t.oncomplete=()=>res(out&&out.result!==undefined?out.result:out);t.onerror=()=>rej(t.error);});}
+const itemsAll=()=>tx(ITEMS,'readonly',s=>s.getAll());
+const itemPut=v=>tx(ITEMS,'readwrite',s=>s.put(v));
+const itemDel=key=>tx(ITEMS,'readwrite',s=>s.delete(key));
+const legacyAll=()=>tx(LEGACY,'readonly',s=>s.getAll());
+const legacyClear=()=>tx(LEGACY,'readwrite',s=>s.clear());
+async function getSetting(k){const d=await db();return new Promise((res,rej)=>{
+  const r=d.transaction(SET).objectStore(SET).get(k);r.onsuccess=()=>res(r.result?r.result.value:undefined);r.onerror=()=>rej(r.error);});}
+const setSetting=(k,value)=>tx(SET,'readwrite',s=>s.put({k,value}));
+const newId=()=>'l_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+/* ---------- state ---------- */
+let CATALOG=[], WL=new Map(), VIEW='browse', PAGE=48;
+let LISTS=[], CURRENT=null, MEMBER=new Map(), ADD_CARD=null;
+const F={q:'',colors:new Set(),rarity:new Set(),set:new Set(),type:new Set(),variant:new Set(),min:null,max:null,sort:'price-asc'};
+const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
+
+/* ---------- boot ---------- */
+(async function init(){
+  try{
+    const res=await fetch('./catalog.json',{cache:'no-cache'});
+    if(!res.ok) throw 0;
+    CATALOG=await res.json();
+  }catch(e){ /* offline first-load or file:// — SW cache or manual load */ 
+    try{const r2=await fetch('./catalog.json');CATALOG=await r2.json();}catch(_){CATALOG=null;}
+  }
+  // ----- wishlists (multiple) -----
+  LISTS = (await getSetting('lists')) || [];
+  CURRENT = (await getSetting('current')) || null;
+  // one-time migration of the old single wishlist into a default list
+  const legacy = await legacyAll();
+  if(legacy && legacy.length && !LISTS.length){
+    const id=newId(); LISTS=[{id,name:'My Wishlist'}]; CURRENT=id;
+    for(const it of legacy){
+      await itemPut({key:`${id}::${it.id}`,listId:id,id:it.id,card:it.card,
+        priority:it.priority||'medium',note:it.note||'',addedAt:it.addedAt||Date.now()});
+    }
+    await legacyClear(); await persistLists(); await setSetting('current',CURRENT);
+  }
+  if(!LISTS.length){ const id=newId(); LISTS=[{id,name:'My Wishlist'}]; CURRENT=id; await persistLists(); await setSetting('current',CURRENT); }
+  if(!CURRENT || !LISTS.some(l=>l.id===CURRENT)){ CURRENT=LISTS[0].id; await setSetting('current',CURRENT); }
+  RATE = (await getSetting('rate')) ?? 0.025;
+  BROWSE_CUR = (await getSetting('cur')) || 'jpy';
+  await buildMember();
+  await loadCurrentList();
+
+  buildChips(); render(); updateBadge();
+  if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{});}
+  window.addEventListener('online',netStatus); window.addEventListener('offline',netStatus); netStatus();
+})();
+
+function netStatus(){const d=document.getElementById('netdot');const on=navigator.onLine;
+  d.classList.toggle('off',!on); document.getElementById('netlabel').textContent=on?'online':'offline';}
+
+/* ---------- facets ---------- */
+function facet(key){return [...new Set(CATALOG.flatMap(c=>Array.isArray(c[key])?c[key]:[c[key]]).filter(Boolean))];}
+const SETS = ()=>facet('set').sort();
+const RARITIES = ()=>['SEC','L','SR','UC','R','C','SPカード'].filter(r=>facet('rarity').includes(r)).concat(facet('rarity').filter(r=>!['SEC','L','SR','UC','R','C','SPカード'].includes(r)));
+const TYPES = ()=>facet('type');
+
+/* ---------- filter chips ---------- */
+function buildChips(){
+  const wrap=document.getElementById('chips'); wrap.innerHTML='';
+  const mk=(label,key,kind)=>{
+    const active=(F[key]&&F[key].size)|| (key==='price'&&(F.min!=null||F.max!=null));
+    const b=document.createElement('button'); b.className='chip'+(active?' has-active':'');
+    b.innerHTML=`${label}${kind!=='sort'?' <span class="caret">▾</span>':''}`;
+    b.onclick=()=>openFilter(label,key,kind); wrap.appendChild(b);
+  };
+  // sort chip first
+  const sortChip=document.createElement('button'); sortChip.className='chip';
+  sortChip.innerHTML='Sort: '+sortLabel(F.sort)+' <span class="caret">▾</span>';
+  sortChip.onclick=openSort; wrap.appendChild(sortChip);
+  mk('Color','colors','color'); mk('Rarity','rarity','list');
+  mk('Set','set','list'); mk('Variant','variant','list'); mk('Type','type','list'); mk('Price','price','price');
+}
+function sortLabel(s){return {'price-asc':'Price ↑','price-desc':'Price ↓','name':'Name','set':'Set'}[s]||s;}
+
+/* ---------- filter modal ---------- */
+let fmCtx=null;
+function openFilter(title,key,kind,state){
+  state=state||F;
+  fmCtx={key,kind,state}; document.getElementById('fmTitle').textContent=title;
+  const body=document.getElementById('fmBody'); body.innerHTML='';
+  if(kind==='price'){
+    body.innerHTML=`<p style="color:var(--muted);font-size:13px;margin:4px 0 0">Set a price window in yen. Leave a side blank for no limit.</p>
+      <div class="priceinputs"><input id="fmin" type="number" inputmode="numeric" placeholder="min" value="${F.min??''}">
+      <span style="color:var(--muted)">–</span><input id="fmax" type="number" inputmode="numeric" placeholder="max" value="${F.max??''}"></div>`;
+  } else {
+    const list=document.createElement('div'); list.className='filter-list';
+    const VARIANT_ORDER=['Parallel','Super Parallel','Foil / Stamped','Errata','Normal'];
+    const opts = kind==='color'?Object.keys(COLORS):(key==='set'?SETS():key==='rarity'?RARITIES():
+      key==='variant'?VARIANT_ORDER.filter(v=>facet('variant').includes(v)):TYPES());
+    opts.forEach(o=>{
+      const b=document.createElement('button'); const on=state[key].has(o); if(on)b.classList.add('active');
+      b.innerHTML = kind==='color'?`<span class="dot" style="width:13px;height:13px;border-radius:50%;background:${COLORS[o]}"></span>${o}`:o;
+      b.onclick=()=>{state[key].has(o)?state[key].delete(o):state[key].add(o);b.classList.toggle('active');};
+      list.appendChild(b);
+    });
+    body.appendChild(list);
+  }
+  document.getElementById('filterModal').classList.add('open');
+}
+function afterFilter(){closeFilter(); if(fmCtx&&fmCtx.state===WF){renderWishlist();}else{buildChips();render();}}
+document.getElementById('fmApply').onclick=()=>{
+  if(fmCtx&&fmCtx.kind==='price'){
+    const mn=document.getElementById('fmin').value, mx=document.getElementById('fmax').value;
+    F.min=mn===''?null:+mn; F.max=mx===''?null:+mx;
+  }
+  afterFilter();
+};
+document.getElementById('fmClear').onclick=()=>{
+  if(!fmCtx)return;
+  if(fmCtx.kind==='price'){F.min=F.max=null;} else {fmCtx.state[fmCtx.key].clear();}
+  afterFilter();
+};
+function closeFilter(){document.getElementById('filterModal').classList.remove('open');}
+document.getElementById('filterModal').onclick=e=>{if(e.target.id==='filterModal')closeFilter();};
+
+function openSort(){
+  fmCtx={kind:'sortpick'}; document.getElementById('fmTitle').textContent='Sort by';
+  const body=document.getElementById('fmBody'); body.innerHTML='';
+  const list=document.createElement('div'); list.className='filter-list';
+  [['price-asc','Price ↑ (cheapest first)'],['price-desc','Price ↓ (priciest first)'],['name','Name'],['set','Set']].forEach(([v,lbl])=>{
+    const b=document.createElement('button'); if(F.sort===v)b.classList.add('active'); b.textContent=lbl;
+    b.onclick=()=>{F.sort=v;closeFilter();buildChips();render();}; list.appendChild(b);
+  });
+  body.appendChild(list); document.getElementById('filterModal').classList.add('open');
+}
+
+/* ---------- search ---------- */
+let qt; document.getElementById('q').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{F.q=e.target.value.trim().toLowerCase();PAGE=48;render();},160);});
+
+/* ---------- filtering + sort ---------- */
+function applyFilters(list){
+  let r=list;
+  if(F.q){const q=F.q;r=r.filter(c=>c.name.toLowerCase().includes(q)||c.code.toLowerCase().includes(q)||c.set.toLowerCase().includes(q));}
+  if(F.colors.size)r=r.filter(c=>c.colors.some(x=>F.colors.has(x)));
+  if(F.rarity.size)r=r.filter(c=>F.rarity.has(c.rarity));
+  if(F.set.size)r=r.filter(c=>F.set.has(c.set));
+  if(F.type.size)r=r.filter(c=>F.type.has(c.type));
+  if(F.variant.size)r=r.filter(c=>F.variant.has(c.variant));
+  if(F.min!=null)r=r.filter(c=>c.price!=null&&c.price>=F.min);
+  if(F.max!=null)r=r.filter(c=>c.price!=null&&c.price<=F.max);
+  return sortList(r,F.sort);
+}
+function sortList(r,s){
+  const a=[...r];
+  if(s==='price-asc')a.sort((x,y)=>(x.price??Infinity)-(y.price??Infinity));
+  else if(s==='price-desc')a.sort((x,y)=>(y.price??-1)-(x.price??-1));
+  else if(s==='name')a.sort((x,y)=>x.name.localeCompare(y.name,'ja'));
+  else if(s==='set')a.sort((x,y)=>x.set.localeCompare(y.set)||x.code.localeCompare(y.code));
+  return a;
+}
+
+/* ---------- render router ---------- */
+function render(){VIEW==='browse'?renderBrowse():renderWishlist();}
+
+function colorDots(cs){return `<div class="colors">${cs.map(c=>`<span class="d" style="background:${COLORS[c]||'#999'}"></span>`).join('')}</div>`;}
+
+function cardCell(c){
+  const inWL=inAnyList(c.id);
+  return `<div class="card" data-id="${c.id}">
+    <button class="imgwrap" data-open="${c.id}" aria-label="Details for ${c.code}">
+      <img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)">
+      <span class="badge">${c.rarity}</span>${colorDots(c.colors)}
+      ${c.soldOut?'<span class="sold">SOLD OUT</span>':''}
+    </button>
+    <div class="body">
+      <div class="code">${c.set} · ${c.code}</div>
+      <div class="nm">${esc(c.name)}</div>
+      ${c.variant&&c.variant!=='Normal'?`<div class="vr">${c.variant}</div>`:''}
+      <div class="price tnum">${priceMain(c.price)}</div>
+    </div>
+    <button class="addbtn ${inWL?'in':''}" data-add="${c.id}" aria-label="${inWL?'In a wishlist':'Add to wishlist'}">${inWL?'✓':'+'}</button>
+  </div>`;
+}
+
+function renderBrowse(){
+  document.getElementById('browseControls').style.display='';
+  const v=document.getElementById('view');
+  if(CATALOG===null){
+    v.innerHTML=emptyState('catalog'); wireCatalogPicker(); return;
+  }
+  const all=applyFilters(CATALOG);
+  const shown=all.slice(0,PAGE);
+  v.innerHTML=`<div class="meta-row"><span class="count">${all.length.toLocaleString()} cards</span>
+    <span class="curtoggle"><button data-cur="jpy" class="${BROWSE_CUR==='jpy'?'on':''}">¥ JPY</button><button data-cur="myr" class="${BROWSE_CUR==='myr'?'on':''}">RM MYR</button></span></div>
+    <div class="grid">${shown.map(cardCell).join('')}</div>
+    ${all.length>PAGE?`<button class="loadmore" id="more">Load ${Math.min(PAGE,all.length-PAGE)} more</button>`:''}`;
+  v.querySelectorAll('.curtoggle button').forEach(b=>b.onclick=async()=>{
+    BROWSE_CUR=b.dataset.cur; await setSetting('cur',BROWSE_CUR); renderBrowse();
+  });
+  const more=document.getElementById('more'); if(more)more.onclick=()=>{PAGE+=48;renderBrowse();};
+  wireGrid(v);
+}
+
+/* ---------- wishlists (multiple) ---------- */
+async function persistLists(){ await setSetting('lists',LISTS); }
+async function loadCurrentList(){
+  const all=await itemsAll();
+  WL=new Map();
+  const catMap=Array.isArray(CATALOG)?new Map(CATALOG.map(c=>[c.id,c])):null;
+  for(const it of all){
+    if(it.listId!==CURRENT) continue;
+    if(catMap&&catMap.has(it.id)){ it.card=Object.assign({},catMap.get(it.id)); await itemPut(it); }
+    WL.set(it.id,it);
+  }
+}
+async function switchList(id){ CURRENT=id; await setSetting('current',id); await loadCurrentList(); updateBadge(); renderWishlist(); }
+async function createList(name){ const id=newId(); LISTS.push({id,name:(name||'').trim()||('List '+(LISTS.length+1))}); await persistLists(); await switchList(id); }
+async function renameList(id,name){ const l=LISTS.find(x=>x.id===id); if(l){ l.name=name.trim()||l.name; await persistLists(); } }
+async function deleteList(id){
+  const all=await itemsAll();
+  for(const it of all){ if(it.listId===id) await itemDel(it.key); }
+  LISTS=LISTS.filter(l=>l.id!==id);
+  if(!LISTS.length){ LISTS=[{id:newId(),name:'My Wishlist'}]; }
+  await persistLists();
+  if(CURRENT===id){ CURRENT=LISTS[0].id; await setSetting('current',CURRENT); await loadCurrentList(); }
+  await buildMember(); updateBadge(); renderWishlist();
+}
+
+function sortItems(arr,s){
+  const a=[...arr];
+  if(s==='price-asc')a.sort((x,y)=>(x.card.price??Infinity)-(y.card.price??Infinity));
+  else if(s==='price-desc')a.sort((x,y)=>(y.card.price??-1)-(x.card.price??-1));
+  else if(s==='name')a.sort((x,y)=>x.card.name.localeCompare(y.card.name,'ja'));
+  else if(s==='set')a.sort((x,y)=>x.card.set.localeCompare(y.card.set)||x.card.code.localeCompare(y.card.code));
+  return a;
+}
+
+function renderWishlist(){
+  document.getElementById('browseControls').style.display='none';
+  const v=document.getElementById('view');
+  const catMap=Array.isArray(CATALOG)?new Map(CATALOG.map(c=>[c.id,c])):null;
+  let items=[...WL.values()];
+  if(catMap)items=items.map(i=>catMap.has(i.id)?{...i,card:catMap.get(i.id)}:i);
+  // wishlist filters
+  let list=items;
+  if(WF.priority.size)list=list.filter(i=>WF.priority.has(i.priority));
+  if(WF.colors.size)list=list.filter(i=>i.card.colors.some(x=>WF.colors.has(x)));
+  if(WF.set.size)list=list.filter(i=>WF.set.has(i.card.set));
+  const total=list.reduce((s,i)=>s+(i.card.price||0),0);
+  const curName=(LISTS.find(l=>l.id===CURRENT)||{}).name||'Wishlist';
+
+  const listbar=`<div class="lists">
+    ${LISTS.map(l=>`<button class="lchip ${l.id===CURRENT?'active':''}" data-list="${l.id}">${esc(l.name)}</button>`).join('')}
+    <button class="lchip add" id="newListChip">+ New</button>
+    <button class="lchip edit" id="editListsChip" aria-label="Manage lists">✎</button>
+  </div>`;
+
+  const head=`${listbar}
+    <div class="summary"><div><div class="n tnum">${list.length}</div><div class="lbl">in ${esc(curName)}</div></div>
+      <div class="total"><div class="lbl">est. total</div><div class="v tnum">${yen(total)}</div><div class="lbl" style="color:var(--brass);margin-top:2px">≈ ${myr(total)}</div></div></div>
+    <div class="toolbar">
+      <button class="tool primary" id="saveOffline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg><span>Save offline</span></button>
+      <button class="tool" id="shareList"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share</button>
+      <button class="tool" id="expCsv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>CSV</button>
+      <button class="tool" id="impBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0l-4 4m4-4l4 4M4 7V5a2 2 0 012-2h12a2 2 0 012 2v2"/></svg>Import</button>
+      <button class="tool" id="rateBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>RM rate</button>
+      <button class="tool" id="wlSort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>${wlSortLabel()}</button>
+    </div>
+    <div class="chips" id="wlChips"></div>`;
+
+  let bodyHtml='';
+  if(!items.length){
+    bodyHtml=`<div class="empty" style="padding:48px 24px">
+      <div class="em-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#6E7785" stroke-width="1.3"><path d="M12 6.6l1.9 3.9 4.3.6-3.1 3 .8 4.3L12 16.4 8.1 18.4l.8-4.3-3.1-3 4.3-.6z"/></svg></div>
+      <h2>“${esc(curName)}” is empty</h2>
+      <p>Add cards from Browse, or tap <b>Import</b> above to load a wishlist someone shared with you.</p></div>`;
+  } else if(!list.length){
+    bodyHtml=`<div class="empty" style="padding:36px 24px"><p>No cards in this list match the current filters.</p></div>`;
+  } else if(WF.sort==='priority'){
+    PRIORITIES.forEach(p=>{
+      const grp=sortItems(list.filter(i=>i.priority===p),'price-desc');
+      if(!grp.length)return;
+      bodyHtml+=`<div class="ptier ${p}"><span class="bar"></span><span class="t">${p}</span><span class="c">${grp.length} · ${yen(grp.reduce((s,i)=>s+(i.card.price||0),0))}</span></div>`;
+      bodyHtml+=grp.map(wlRow).join('');
+    });
+  } else {
+    bodyHtml=sortItems(list,WF.sort).map(wlRow).join('');
+  }
+  v.innerHTML=head+bodyHtml;
+  buildWlChips(); wireWishlist(v);
+}
+function wlSortLabel(){return {'priority':'By priority','price-asc':'Price ↑','price-desc':'Price ↓','name':'Name','set':'Set'}[WF.sort];}
+function buildWlChips(){
+  const w=document.getElementById('wlChips'); if(!w)return; w.innerHTML='';
+  const filt=(label,key,kind)=>{const active=WF[key]&&WF[key].size;const b=document.createElement('button');
+    b.className='chip'+(active?' has-active':'');b.innerHTML=`${label} <span class="caret">▾</span>`;
+    b.onclick=()=>openFilter(label,key,kind,WF);w.appendChild(b);};
+  filt('Color','colors','color'); filt('Set','set','list');
+  PRIORITIES.forEach(p=>{const b=document.createElement('button');b.className='chip';
+    b.setAttribute('aria-pressed',WF.priority.has(p));
+    b.innerHTML=`<span class="dot" style="background:var(--${p==='high'?'hi':p==='medium'?'md':'lo'})"></span>${p}`;
+    b.onclick=()=>{WF.priority.has(p)?WF.priority.delete(p):WF.priority.add(p);renderWishlist();};w.appendChild(b);});
+}
+function wlRow(i){const c=i.card;
+  return `<div class="wl-item" data-id="${c.id}">
+    <button class="th" data-open="${c.id}"><img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></button>
+    <div class="info">
+      <div class="code">${c.set} · ${c.code} · ${c.rarity}${c.variant&&c.variant!=='Normal'?' · '+c.variant:''}</div>
+      <div class="nm">${esc(c.name)}</div>
+      <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
+      <div class="seg" data-id="${c.id}">
+        ${PRIORITIES.map(p=>`<button data-on="${p}" class="${i.priority===p?'active':''}" data-pri="${p}">${p[0].toUpperCase()}</button>`).join('')}
       </div>
-      <div class="pure-u-1-2">
-        <div class="pure-u-1-2">
-          <div id="vis7" class="vis-container" style="margin-left: 0px"></div>
-        </div>
-        <div class="pure-u-1-3">
-          <div id="vis8" class="vis-container" style="margin-left: 70px;"></div>
-        </div>
-          <div id="vis9" class="vis-container" style="margin-top: 30px;margin-left: 100px;"></div>
-      </div>
+      <textarea class="note" rows="1" placeholder="Add a note — shop, condition, max price…" data-note="${c.id}">${esc(i.note||'')}</textarea>
     </div>
+    <button class="rm" data-rm="${c.id}" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m1 0v12a1 1 0 01-1 1H8a1 1 0 01-1-1V7"/></svg></button>
+  </div>`;
+}
+
+/* ---------- detail sheet ---------- */
+function openDetail(id){
+  const c=CATALOG?CATALOG.find(x=>x.id===id):(WL.get(id)&&WL.get(id).card);
+  if(!c)return;
+  const inWL=inAnyList(id);
+  const sheet=document.getElementById('sheet');
+  sheet.innerHTML=`<div class="grip"></div>
+    <div class="detail-img"><img src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></div>
+    <div class="dcode">${c.set} · ${c.code} · ${c.rarity}</div>
+    <h2>${esc(c.name)}</h2>
+    <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small>${c.soldOut?' <span style="font-size:13px;color:var(--hi)">· sold out at source</span>':''}</div>
+    <div class="kv">
+      ${c.colors.map(col=>`<span class="k"><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px;background:${COLORS[col]||'#999'}"></span>${col}</span>`).join('')}
+      ${c.type?`<span class="k"><b>Type</b> ${c.type}</span>`:''}
+      ${c.power&&c.power!=='-'?`<span class="k"><b>Power</b> ${c.power}</span>`:''}
+      ${c.variant&&c.variant!=='Normal'?`<span class="k"><b>Variant</b> ${c.variant}</span>`:''}
     </div>
+    ${c.effect?`<div class="effect">${esc(c.effect)}</div>`:''}
+    <div class="actions">
+      <button class="btn-lg btn-add ${inWL?'in':''}" id="dAdd">${inWL?'✓ In your wishlists — edit' : '+ Add to a wishlist'}</button>
+      ${c.url?`<a class="btn-lg btn-ghost" href="${c.url}" target="_blank" rel="noopener" aria-label="Open on Yuyutei"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 01-1 1H6a1 1 0 01-1-1V7a1 1 0 011-1h6"/></svg></a>`:''}
+    </div>`;
+  document.getElementById('dAdd').onclick=()=>{closeSheet();openAddPicker(id);};
+  openSheet();
+}
+function openSheet(){document.getElementById('scrim').classList.add('open');document.getElementById('sheet').classList.add('open');}
+function closeSheet(){document.getElementById('scrim').classList.remove('open');document.getElementById('sheet').classList.remove('open');}
+document.getElementById('scrim').onclick=closeSheet;
 
-<script type="text/javascript">
+/* ---------- wishlist membership (a card can live in several lists) ---------- */
+async function buildMember(){
+  MEMBER=new Map();
+  const all=await itemsAll();
+  for(const it of all){ let s=MEMBER.get(it.id); if(!s){s=new Set();MEMBER.set(it.id,s);} s.add(it.listId); }
+}
+function inAnyList(id){return (MEMBER.get(id)||EMPTY).size>0;}
+const EMPTY=new Set();
+async function toggleInList(cardId,listId){
+  const c=CATALOG.find(x=>x.id===cardId); if(!c)return;
+  let set=MEMBER.get(cardId)||new Set();
+  const key=`${listId}::${cardId}`;
+  if(set.has(listId)){
+    await itemDel(key); set.delete(listId);
+    if(listId===CURRENT) WL.delete(cardId);
+    toast('Removed');
+  }else{
+    const item={key,listId,id:cardId,priority:'medium',note:'',addedAt:Date.now(),card:c};
+    await itemPut(item); set.add(listId);
+    if(listId===CURRENT) WL.set(cardId,item);
+    toast('Added');
+  }
+  if(set.size) MEMBER.set(cardId,set); else MEMBER.delete(cardId);
+  updateBadge(); refreshCellState(cardId);
+  if(VIEW==='wishlist') renderWishlist();
+}
+function refreshCellState(id){
+  const on=inAnyList(id);
+  document.querySelectorAll(`[data-add="${id}"]`).forEach(b=>{b.classList.toggle('in',on);b.textContent=on?'✓':'+';});
+}
 
-  var spec1 = "js/choropleth.vg.json";
-  var spec2 = "js/radar.vg.json";
-  var spec3 = "js/pm.vg.json"
-  var spec4 = "js/sbc.vg.json"
-  var spec5 = "js/pie.vg.json"
-  var spec6 = "js/lc.vg.json"
-  var spec7 = "js/histogram.vg.json"
-  var spec8 = "js/scatter.vg.json"
-  var spec9 = "js/bar.vg.json"
+/* ---------- add-to-list picker (from the Cards tab) ---------- */
+function openAddPicker(id){
+  const c=CATALOG.find(x=>x.id===id); if(!c)return;
+  ADD_CARD=id;
+  document.getElementById('addCard').textContent=`${c.set} · ${c.code} · ${c.name}`;
+  renderAddLists();
+  document.getElementById('addModal').classList.add('open');
+}
+function renderAddLists(){
+  const wrap=document.getElementById('addLists'); wrap.innerHTML='';
+  const inSet=MEMBER.get(ADD_CARD)||EMPTY;
+  LISTS.forEach(l=>{
+    const on=inSet.has(l.id);
+    const b=document.createElement('button'); b.className='pickrow'+(on?' on':'');
+    b.innerHTML=`<span class="pk-check">${on?'✓':''}</span><span class="pk-name">${esc(l.name)}</span>`;
+    b.onclick=async()=>{ await toggleInList(ADD_CARD,l.id); renderAddLists(); };
+    wrap.appendChild(b);
+  });
+}
+async function addToNewList(){
+  const inp=document.getElementById('addNewName'); const name=inp.value.trim(); if(!name)return;
+  inp.value='';
+  const id=newId(); LISTS.push({id,name}); await persistLists();
+  await toggleInList(ADD_CARD,id);     // add the card to the freshly made list
+  renderAddLists();
+  toast(`Added to new list “${name}”`);
+}
+document.getElementById('addNewBtn').onclick=addToNewList;
+document.getElementById('addNewName').addEventListener('keydown',e=>{if(e.key==='Enter')addToNewList();});
+document.getElementById('addDone').onclick=()=>document.getElementById('addModal').classList.remove('open');
+document.getElementById('addModal').onclick=e=>{if(e.target.id==='addModal')e.currentTarget.classList.remove('open');};
 
-  vegaEmbed('#vis1', spec1, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis2', spec3, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis3', spec6, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis4', spec5, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis5', spec4, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis6', spec2, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis7', spec9, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis8', spec7, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  vegaEmbed('#vis9', spec8, { "actions": false }).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
+/* ---------- MYR conversion rate ---------- */
+function openRateModal(){
+  document.getElementById('rateInput').value=RATE;
+  document.getElementById('rateModal').classList.add('open');
+  setTimeout(()=>document.getElementById('rateInput').select(),50);
+}
+document.getElementById('rateSave').onclick=async()=>{
+  const v=parseFloat(document.getElementById('rateInput').value);
+  if(isFinite(v)&&v>0){ RATE=v; await setSetting('rate',RATE); }
+  document.getElementById('rateModal').classList.remove('open');
+  if(VIEW==='wishlist')renderWishlist(); else renderBrowse();
+  toast(`Rate set · ¥1 = RM${RATE}`);
+};
+document.getElementById('rateInput').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('rateSave').click();});
+document.getElementById('rateModal').onclick=e=>{if(e.target.id==='rateModal')e.currentTarget.classList.remove('open');};
+
+/* ---------- wishlist item mutations ---------- */
+async function setPriority(id,p){const i=WL.get(id);if(!i)return;i.priority=p;await itemPut(i);renderWishlist();}
+async function setNote(id,t){const i=WL.get(id);if(!i)return;i.note=t;await itemPut(i);}
+function updateBadge(){const b=document.getElementById('wlBadge');const n=WL.size;b.style.display=n?'grid':'none';b.textContent=n>99?'99+':n;}
+
+/* ---------- event wiring ---------- */
+function wireGrid(root){
+  root.querySelectorAll('[data-add]').forEach(b=>b.onclick=e=>{e.stopPropagation();openAddPicker(b.dataset.add);});
+  root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
+}
+function wireWishlist(root){
+  root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
+  root.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>toggleInList(b.dataset.rm,CURRENT));
+  root.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>setPriority(b.parentElement.dataset.id,b.dataset.pri));
+  root.querySelectorAll('[data-note]').forEach(t=>{
+    const grow=()=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';};grow();
+    t.addEventListener('input',grow);
+    t.addEventListener('change',()=>setNote(t.dataset.note,t.value));
+  });
+  root.querySelectorAll('[data-list]').forEach(b=>b.onclick=()=>{ if(b.dataset.list!==CURRENT) switchList(b.dataset.list); });
+  const nl=document.getElementById('newListChip'); if(nl)nl.onclick=()=>openListModal(true);
+  const el=document.getElementById('editListsChip'); if(el)el.onclick=()=>openListModal(false);
+  const so=document.getElementById('saveOffline'); if(so)so.onclick=saveOffline;
+  const sh=document.getElementById('shareList'); if(sh)sh.onclick=shareList;
+  const ec=document.getElementById('expCsv'); if(ec)ec.onclick=exportCsv;
+  const ib=document.getElementById('impBtn'); if(ib)ib.onclick=pickImport;
+  const rb=document.getElementById('rateBtn'); if(rb)rb.onclick=openRateModal;
+  const ws=document.getElementById('wlSort'); if(ws)ws.onclick=cycleWlSort;
+}
+function cycleWlSort(){const order=['priority','price-asc','price-desc','name','set'];
+  WF.sort=order[(order.indexOf(WF.sort)+1)%order.length];renderWishlist();}
+
+/* ---------- list manager modal ---------- */
+function openListModal(focusNew){
+  const mgr=document.getElementById('listMgr'); mgr.innerHTML='';
+  LISTS.forEach(l=>{
+    const row=document.createElement('div'); row.className='lmrow';
+    const inp=document.createElement('input'); inp.className='lmname'; inp.value=l.name; inp.maxLength=40;
+    inp.onchange=()=>{renameList(l.id,inp.value); if(VIEW==='wishlist')renderWishlist();};
+    const del=document.createElement('button'); del.className='lmdel'; del.textContent='🗑'; del.disabled=LISTS.length<=1;
+    del.onclick=async()=>{ if(confirm(`Delete “${l.name}” and its cards?`)){ await deleteList(l.id); openListModal(false); } };
+    row.appendChild(inp); row.appendChild(del); mgr.appendChild(row);
+  });
+  document.getElementById('listModal').classList.add('open');
+  if(focusNew) setTimeout(()=>document.getElementById('newListName').focus(),50);
+}
+document.getElementById('addListBtn').onclick=async()=>{
+  const inp=document.getElementById('newListName'); const name=inp.value.trim(); if(!name)return;
+  inp.value=''; document.getElementById('listModal').classList.remove('open');
+  await createList(name);
+};
+document.getElementById('newListName').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('addListBtn').click();});
+document.getElementById('listDone').onclick=()=>document.getElementById('listModal').classList.remove('open');
+document.getElementById('listModal').onclick=e=>{if(e.target.id==='listModal')e.currentTarget.classList.remove('open');};
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('nav.tabbar button').forEach(b=>b.onclick=()=>{
+  VIEW=b.dataset.view; PAGE=48;
+  document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active',x===b));
+  window.scrollTo(0,0); render();
+});
+
+/* ---------- offline image caching ---------- */
+async function saveOffline(){
+  const items=[...WL.values()]; const btn=document.getElementById('saveOffline');
+  if(!items.length){toast('This list is empty');return;}
+  let done=0; const total=items.length;
+  const label=btn?btn.querySelector('span'):null;
+  if(btn)btn.disabled=true;
+  const upd=()=>{ if(label)label.textContent=`Saving ${done}/${total}…`; };
+  upd();
+  await Promise.all(items.map(i=>new Promise(r=>{
+    const img=new Image(); img.onload=img.onerror=()=>{done++;upd();r();}; img.src=i.card.img;
+  })));
+  if(label)label.textContent='Saved offline ✓';
+  if(btn)btn.disabled=false;
+  toast('Card images cached — this list now shows without internet ✓');
+  setTimeout(()=>{ if(VIEW==='wishlist')renderWishlist(); },1800);
+}
+
+/* ---------- share / export / import ---------- */
+function download(name,text,type){
+  const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=name;a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function stamp(){const d=new Date();return d.toISOString().slice(0,10);}
+function currentListExport(){
+  const l=LISTS.find(x=>x.id===CURRENT)||{name:'Wishlist'};
+  const items=[...WL.values()].map(({key,listId,...rest})=>rest);  // strip storage keys
+  return {l, data:{app:'most-wanted',type:'list',name:l.name,exportedAt:new Date().toISOString(),items}};
+}
+async function shareList(){
+  const {l,data}=currentListExport();
+  if(!data.items.length){toast('This list is empty');return;}
+  const json=JSON.stringify(data,null,2);
+  const fname=`${(l.name||'wishlist').replace(/[^\w\- ]+/g,'').trim()||'wishlist'}.mostwanted.json`;
+  try{
+    const file=new File([json],fname,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:l.name,text:`My “${l.name}” card wishlist`}); return;
+    }
+  }catch(e){ if(e&&e.name==='AbortError')return; }
+  download(fname,json,'application/json'); toast('List exported as a file');
+}
+function exportCsv(){
+  const rows=[['set','code','name','rarity','variant','priority','price_jpy','note','url']];
+  [...WL.values()].forEach(i=>{const c=i.card;
+    rows.push([c.set,c.code,c.name,c.rarity,c.variant||'',i.priority,c.price??'',(i.note||'').replace(/\n/g,' '),c.url||'']);});
+  const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const name=((LISTS.find(l=>l.id===CURRENT)||{}).name||'wishlist').replace(/[^\w\- ]+/g,'').trim()||'wishlist';
+  download(`${name}-${stamp()}.csv`,'\ufeff'+csv,'text/csv');
+  toast('CSV saved');
+}
+function pickImport(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';
+  inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();
+    rd.onload=async()=>{try{
+      const d=JSON.parse(rd.result);
+      const items=Array.isArray(d)?d:d.items;
+      if(!Array.isArray(items))throw 0;
+      const name=(d&&d.name)?d.name:(f.name.replace(/\.[^.]*$/,'').replace(/\.mostwanted$/,'')||'Imported list');
+      const id=newId(); LISTS.push({id,name}); await persistLists();
+      let n=0;
+      for(const it of items){ if(it&&it.id&&it.card){
+        await itemPut({key:`${id}::${it.id}`,listId:id,id:it.id,card:it.card,
+          priority:it.priority||'medium',note:it.note||'',addedAt:it.addedAt||Date.now()}); n++; }
+      }
+      await buildMember(); await switchList(id);
+      toast(`Imported “${name}” · ${n} cards`);
+    }catch(e){toast('That file isn’t a Most Wanted list');}};
+    rd.readAsText(f);};
+  inp.click();
+}
+
+/* ---------- catalog manual load (file:// fallback) ---------- */
+function wireCatalogPicker(){
+  const inp=document.getElementById('catPick'); if(!inp)return;
+  inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();
+    rd.onload=()=>{try{CATALOG=JSON.parse(rd.result);buildChips();render();toast('Catalog loaded');}catch(e){toast('Could not read catalog.json');}};
+    rd.readAsText(f);};
+}
+
+/* ---------- empty states ---------- */
+function emptyState(kind){
+  if(kind==='catalog')return `<div class="empty">
+    <div class="em-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#6E7785" stroke-width="1.4"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+    <h2>No catalog loaded</h2>
+    <p>Place <b>catalog.json</b> next to this app, or load it manually if you opened the file directly.</p>
+    <div class="filepick"><label class="tool" style="display:inline-flex"><input id="catPick" type="file" accept=".json" style="display:none">Choose catalog.json</label></div></div>`;
+  return `<div class="empty">
+    <div class="em-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#6E7785" stroke-width="1.3"><path d="M12 6.6l1.9 3.9 4.3.6-3.1 3 .8 4.3L12 16.4 8.1 18.4l.8-4.3-3.1-3 4.3-.6z"/></svg></div>
+    <h2>Your hunt list is empty</h2>
+    <p>Find cards in Browse and tap the <b>+</b> to add them. Set a priority for each, then hit Save offline before you head to the shops.</p></div>`;
+}
+
+/* ---------- utils ---------- */
+function imgFallback(el){ // local missing -> official CDN -> Yuyutei thumb -> dim
+  const chain=[el.dataset.alt,el.dataset.alt2].filter(Boolean);
+  const step=+(el.dataset.f||0);
+  if(step<chain.length){ el.dataset.f=step+1; el.src=chain[step]; }
+  else { el.style.opacity=.15; }
+}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+let tt; function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2200);}
 </script>
 </body>
 </html>

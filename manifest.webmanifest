@@ -1,0 +1,16 @@
+{
+  "name": "Most Wanted — OPTCG hunt list",
+  "short_name": "Most Wanted",
+  "description": "Wishlist and price tracker for One Piece Card Game cards on the Japanese market. Works offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1B2A",
+  "theme_color": "#0E1B2A",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "./icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
