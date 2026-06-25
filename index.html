@@ -125,6 +125,8 @@
   .newlist input{flex:1;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff;color:var(--text)}
   .newlist input:focus{border-color:var(--brass);outline:none}
   .newlist button{flex:none;padding:0 18px;border-radius:12px;background:var(--brass);color:var(--ink);font-weight:800}
+  .nm-en{font-size:11.5px;color:var(--muted);font-weight:600;line-height:1.2;margin-top:1px}
+  .h2-en{font-size:14px;color:var(--muted);font-weight:600;margin:-4px 0 2px}
   .curtoggle{display:inline-flex;border:1.5px solid var(--line);border-radius:9px;overflow:hidden}
   .curtoggle button{padding:5px 11px;font-size:12px;font-weight:800;color:var(--muted);background:#fff}
   .curtoggle button.on{background:var(--ink);color:var(--parch)}
@@ -135,6 +137,23 @@
     display:grid;place-items:center;color:var(--ink);font-weight:900;font-size:14px}
   .pickrow.on .pk-check{background:var(--brass);border-color:var(--brass)}
   .pickrow .pk-name{flex:1}
+  .pri-badge{display:inline-block;align-self:flex-start;margin-top:7px;font-size:10.5px;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;padding:3px 10px;border-radius:999px;color:#fff}
+  .pri-badge.high{background:var(--hi)} .pri-badge.medium{background:var(--md);color:var(--ink)} .pri-badge.low{background:var(--lo)}
+  .sharebtns{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+  .sharebtn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 14px;
+    border:1.5px solid var(--line);border-radius:14px;background:#fff;color:var(--text)}
+  .sharebtn.primary{border-color:var(--brass);background:#fffaf0}
+  .sharebtn svg{flex:none;width:22px;height:22px;color:var(--brass-deep)}
+  .sharebtn span{display:flex;flex-direction:column;line-height:1.25}
+  .sharebtn b{font-size:14.5px;font-weight:800}
+  .sharebtn small{font-size:12px;color:var(--muted)}
+  .sharebanner{display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--parch);
+    border-radius:var(--r);padding:14px 16px;margin-bottom:12px}
+  .sharebanner .sb-txt{flex:1;min-width:0}
+  .sharebanner .sb-eyebrow{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-ink)}
+  .sharebanner .sb-name{font-size:17px;font-weight:800;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sharebanner .sb-save{flex:none;background:var(--brass);color:var(--ink);font-weight:800;padding:9px 14px;border-radius:10px}
   .toolbar::-webkit-scrollbar{display:none}
   .tool{flex:none;height:38px;padding:0 14px;border-radius:var(--r);border:1.5px solid var(--line);
     background:#fff;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:7px;color:var(--text)}
@@ -230,7 +249,8 @@
   .filter-list button{padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:7px}
   .filter-list button.active{background:var(--ink);color:var(--parch);border-color:var(--ink)}
   .priceinputs{display:flex;gap:10px;align-items:center;margin-top:10px}
-  .priceinputs input{flex:1;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff;text-align:center}
+  .priceinputs input{flex:1;min-width:0;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 10px;background:#fff;text-align:center}
+  .priceinputs input:focus{border-color:var(--brass);outline:none}
 
   /* toast */
   #toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);
@@ -264,7 +284,7 @@
 <div class="controls" id="browseControls">
   <div class="search">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    <input id="q" type="search" inputmode="search" placeholder="Search name, code, or set…" autocomplete="off">
+    <input id="q" type="search" inputmode="search" placeholder="Search English or Japanese name, code, set…" autocomplete="off">
   </div>
   <div class="chips" id="chips"></div>
 </div>
@@ -342,6 +362,29 @@
     <div class="row" style="margin-top:16px">
       <button id="rateSave" style="background:var(--ink);color:var(--parch)">Save</button>
     </div>
+  </div>
+</div>
+
+<!-- share menu -->
+<div class="modal" id="shareModal">
+  <div class="box">
+    <h3>Share this list</h3>
+    <p>A public link opens a read-only view of this list in any browser — perfect for sending to a friend.</p>
+    <div class="sharebtns">
+      <button class="sharebtn primary" id="shCopy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17H7A5 5 0 017 7h2M15 7h2a5 5 0 010 10h-2M8 12h8"/></svg>
+        <span><b>Copy public link</b><small>View-only page of this list</small></span>
+      </button>
+      <button class="sharebtn" id="shFile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 001 1h4M5 3h9l5 5v11a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+        <span><b>Export file</b><small>Backup or import elsewhere</small></span>
+      </button>
+      <button class="sharebtn" id="shCsv">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>
+        <span><b>Export CSV</b><small>Open in a spreadsheet</small></span>
+      </button>
+    </div>
+    <div class="row" style="margin-top:14px"><button id="shClose" style="background:var(--ink);color:var(--parch)">Close</button></div>
   </div>
 </div>
 
@@ -426,7 +469,9 @@ const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
   await loadCurrentList();
   updateRateChip();
 
+  if(checkShareHash()) VIEW='shared';
   buildChips(); render(); updateBadge();
+  document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active', VIEW!=='shared' && x.dataset.view===VIEW));
   if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{});}
   window.addEventListener('online',netStatus); window.addEventListener('offline',netStatus); netStatus();
 })();
@@ -526,7 +571,7 @@ let qt; document.getElementById('q').addEventListener('input',e=>{clearTimeout(q
 /* ---------- filtering + sort ---------- */
 function applyFilters(list){
   let r=list;
-  if(F.q){const q=F.q;r=r.filter(c=>c.name.toLowerCase().includes(q)||c.code.toLowerCase().includes(q)||c.set.toLowerCase().includes(q));}
+  if(F.q){const q=F.q;r=r.filter(c=>c.name.toLowerCase().includes(q)||(c.nameEn&&c.nameEn.toLowerCase().includes(q))||c.code.toLowerCase().includes(q)||c.set.toLowerCase().includes(q));}
   if(F.colors.size)r=r.filter(c=>c.colors.some(x=>F.colors.has(x)));
   if(F.rarity.size)r=r.filter(c=>F.rarity.has(c.rarity));
   if(F.set.size)r=r.filter(c=>F.set.has(c.set));
@@ -546,7 +591,7 @@ function sortList(r,s){
 }
 
 /* ---------- render router ---------- */
-function render(){VIEW==='browse'?renderBrowse():renderWishlist();}
+function render(){ if(VIEW==='shared'&&SHARED){renderShared();} else if(VIEW==='browse'){renderBrowse();} else {renderWishlist();} }
 
 function colorDots(cs){return `<div class="colors">${cs.map(c=>`<span class="d" style="background:${COLORS[c]||'#999'}"></span>`).join('')}</div>`;}
 
@@ -561,6 +606,7 @@ function cardCell(c){
     <div class="body">
       <div class="code">${c.set} · ${c.code}</div>
       <div class="nm">${esc(c.name)}</div>
+      ${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
       ${c.variant&&c.variant!=='Normal'?`<div class="vr">${c.variant}</div>`:''}
       <div class="price tnum">${priceMain(c.price)}</div>
     </div>
@@ -647,7 +693,6 @@ function renderWishlist(){
     <div class="toolbar">
       <button class="tool primary" id="saveOffline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg><span>Save offline</span></button>
       <button class="tool" id="shareList"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share</button>
-      <button class="tool" id="expCsv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>CSV</button>
       <button class="tool" id="impBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0l-4 4m4-4l4 4M4 7V5a2 2 0 012-2h12a2 2 0 012 2v2"/></svg>Import</button>
       <button class="tool" id="wlSort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>${wlSortLabel()}</button>
     </div>
@@ -683,7 +728,7 @@ function buildWlChips(){
   filt('Color','colors','color'); filt('Set','set','list');
   PRIORITIES.forEach(p=>{const b=document.createElement('button');b.className='chip';
     b.setAttribute('aria-pressed',WF.priority.has(p));
-    b.innerHTML=`<span class="dot" style="background:var(--${p==='high'?'hi':p==='medium'?'md':'lo'})"></span>${p}`;
+    b.innerHTML=`<span class="dot" style="background:var(--${p==='high'?'hi':p==='medium'?'md':'lo'})"></span><span style="text-transform:capitalize">${p}</span>`;
     b.onclick=()=>{WF.priority.has(p)?WF.priority.delete(p):WF.priority.add(p);renderWishlist();};w.appendChild(b);});
 }
 function wlRow(i){const c=i.card;
@@ -692,6 +737,7 @@ function wlRow(i){const c=i.card;
     <div class="info">
       <div class="code">${c.set} · ${c.code} · ${c.rarity}${c.variant&&c.variant!=='Normal'?' · '+c.variant:''}</div>
       <div class="nm">${esc(c.name)}</div>
+      ${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
       <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
       <div class="seg" data-id="${c.id}">
         ${PRIORITIES.map(p=>`<button data-on="${p}" class="${i.priority===p?'active':''}" data-pri="${p}">${p[0].toUpperCase()}</button>`).join('')}
@@ -712,6 +758,7 @@ function openDetail(id){
     <div class="detail-img"><img src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></div>
     <div class="dcode">${c.set} · ${c.code} · ${c.rarity}</div>
     <h2>${esc(c.name)}</h2>
+    ${c.nameEn?`<div class="h2-en">${esc(c.nameEn)}</div>`:''}
     <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small>${c.soldOut?' <span style="font-size:13px;color:var(--hi)">· sold out at source</span>':''}</div>
     <div class="kv">
       ${c.colors.map(col=>`<span class="k"><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px;background:${COLORS[col]||'#999'}"></span>${col}</span>`).join('')}
@@ -836,7 +883,7 @@ function wireWishlist(root){
   const nl=document.getElementById('newListChip'); if(nl)nl.onclick=()=>openListModal(true);
   const el=document.getElementById('editListsChip'); if(el)el.onclick=()=>openListModal(false);
   const so=document.getElementById('saveOffline'); if(so)so.onclick=saveOffline;
-  const sh=document.getElementById('shareList'); if(sh)sh.onclick=shareList;
+  const sh=document.getElementById('shareList'); if(sh)sh.onclick=openShareModal;
   const ec=document.getElementById('expCsv'); if(ec)ec.onclick=exportCsv;
   const ib=document.getElementById('impBtn'); if(ib)ib.onclick=pickImport;
   const ws=document.getElementById('wlSort'); if(ws)ws.onclick=openWlSort;
@@ -866,6 +913,7 @@ document.getElementById('listModal').onclick=e=>{if(e.target.id==='listModal')e.
 
 /* ---------- tabs ---------- */
 document.querySelectorAll('nav.tabbar button').forEach(b=>b.onclick=()=>{
+  if(SHARED)exitShared();
   VIEW=b.dataset.view; PAGE=48;
   document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active',x===b));
   window.scrollTo(0,0); render();
@@ -901,18 +949,88 @@ function currentListExport(){
   const items=[...WL.values()].map(({key,listId,...rest})=>rest);  // strip storage keys
   return {l, data:{app:'most-wanted',type:'list',name:l.name,exportedAt:new Date().toISOString(),items}};
 }
-async function shareList(){
+
+/* ----- public share link (encodes id + priority in the URL hash) ----- */
+const PR={high:'h',medium:'m',low:'l'}, PR_BACK={h:'high',m:'medium',l:'low'};
+function b64urlEncode(str){return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function b64urlDecode(s){s=s.replace(/-/g,'+').replace(/_/g,'/');return decodeURIComponent(escape(atob(s)));}
+function buildShareUrl(){
+  const l=LISTS.find(x=>x.id===CURRENT)||{name:'Wishlist'};
+  const payload={n:l.name,i:[...WL.values()].map(it=>[it.id,PR[it.priority]||'m'])};
+  return location.origin+location.pathname+'#w='+b64urlEncode(JSON.stringify(payload));
+}
+async function copyShareLink(){
+  if(!WL.size){toast('This list is empty');return;}
+  const url=buildShareUrl();
+  closeShareModal();
+  try{
+    if(navigator.share){ await navigator.share({title:(LISTS.find(l=>l.id===CURRENT)||{}).name||'Wishlist', text:'My card wishlist', url}); return; }
+  }catch(e){ if(e&&e.name==='AbortError')return; }
+  try{ await navigator.clipboard.writeText(url); toast('Public link copied ✓'); }
+  catch(e){ prompt('Copy this link to share your list:', url); }
+}
+function openShareModal(){ if(!WL.size){toast('This list is empty');return;} document.getElementById('shareModal').classList.add('open'); }
+function closeShareModal(){ document.getElementById('shareModal').classList.remove('open'); }
+function shareExportFile(){
+  closeShareModal();
   const {l,data}=currentListExport();
-  if(!data.items.length){toast('This list is empty');return;}
   const json=JSON.stringify(data,null,2);
   const fname=`${(l.name||'wishlist').replace(/[^\w\- ]+/g,'').trim()||'wishlist'}.mostwanted.json`;
-  try{
-    const file=new File([json],fname,{type:'application/json'});
-    if(navigator.canShare&&navigator.canShare({files:[file]})){
-      await navigator.share({files:[file],title:l.name,text:`My “${l.name}” card wishlist`}); return;
-    }
-  }catch(e){ if(e&&e.name==='AbortError')return; }
   download(fname,json,'application/json'); toast('List exported as a file');
+}
+document.getElementById('shCopy').onclick=copyShareLink;
+document.getElementById('shFile').onclick=shareExportFile;
+document.getElementById('shCsv').onclick=()=>{closeShareModal();exportCsv();};
+document.getElementById('shClose').onclick=closeShareModal;
+document.getElementById('shareModal').onclick=e=>{if(e.target.id==='shareModal')closeShareModal();};
+
+/* ----- read-only shared list view (opened from a #w= link) ----- */
+let SHARED=null;
+function checkShareHash(){
+  const m=(location.hash||'').match(/[#&]w=([^&]+)/);
+  if(!m)return false;
+  try{ const d=JSON.parse(b64urlDecode(m[1])); if(d&&Array.isArray(d.i)){ SHARED=d; return true; } }catch(e){}
+  return false;
+}
+function exitShared(){ SHARED=null; if(location.hash){history.replaceState(null,'',location.pathname+location.search);} }
+function renderShared(){
+  document.getElementById('browseControls').style.display='none';
+  const v=document.getElementById('view');
+  const map=new Map(CATALOG.map(c=>[c.id,c]));
+  const rows=SHARED.i.map(([id,p])=>({c:map.get(id),p:PR_BACK[p]||'medium'})).filter(x=>x.c);
+  const total=rows.reduce((s,x)=>s+(x.c.price||0),0);
+  const head=`<div class="sharebanner">
+      <div class="sb-txt"><div class="sb-eyebrow">Shared wishlist</div>
+        <div class="sb-name">${esc(SHARED.n||'Wishlist')}</div></div>
+      <button class="sb-save" id="shImport">Save a copy</button></div>
+    <div class="summary"><div><div class="n tnum">${rows.length}</div><div class="lbl">cards</div></div>
+      <div class="total"><div class="lbl">est. total</div><div class="v tnum">${yen(total)}</div>
+      <div class="lbl" style="color:var(--brass);margin-top:2px">≈ ${myr(total)}</div></div></div>`;
+  const body = rows.length
+    ? rows.map(({c,p})=>`<div class="wl-item">
+        <button class="th" data-open="${c.id}"><img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></button>
+        <div class="info">
+          <div class="code">${c.set} · ${c.code} · ${c.rarity}${c.variant&&c.variant!=='Normal'?' · '+c.variant:''}</div>
+          <div class="nm">${esc(c.name)}</div>${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
+          <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
+          <span class="pri-badge ${p}">${p}</span>
+        </div></div>`).join('')
+    : `<div class="empty" style="padding:40px 24px"><p>This shared list is empty, or its cards aren’t in the catalog yet.</p></div>`;
+  v.innerHTML=head+body;
+  v.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
+  document.getElementById('shImport').onclick=saveSharedCopy;
+}
+async function saveSharedCopy(){
+  const name=(SHARED.n||'Shared list');
+  const id=newId(); LISTS.push({id,name}); await persistLists();
+  const map=new Map(CATALOG.map(c=>[c.id,c]));
+  let n=0;
+  for(const [cid,p] of SHARED.i){ const c=map.get(cid); if(c){
+    await itemPut({key:`${id}::${cid}`,listId:id,id:cid,priority:PR_BACK[p]||'medium',note:'',addedAt:Date.now(),card:c}); n++; }}
+  await buildMember(); exitShared(); VIEW='wishlist';
+  document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active',x.dataset.view==='wishlist'));
+  await switchList(id);
+  toast(`Saved “${name}” to your wishlists · ${n} cards`);
 }
 function exportCsv(){
   const rows=[['set','code','name','rarity','variant','priority','price_jpy','note','url']];

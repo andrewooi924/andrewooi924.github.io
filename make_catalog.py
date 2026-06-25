@@ -12,6 +12,13 @@ import json, re, os
 
 db = json.load(open('price_database.json', encoding='utf-8'))
 
+# Optional English names keyed by card code (e.g. {"OP01-001":"Roronoa Zoro"}).
+# Lets the app search in English. Safe to omit; cards just won't get nameEn.
+try:
+    NAMES_EN = json.load(open('names_en.json', encoding='utf-8'))
+except FileNotFoundError:
+    NAMES_EN = {}
+
 COLOR_JP = {'赤':'red','緑':'green','青':'blue','紫':'purple','黒':'black','黄':'yellow'}
 
 # Tidy display label for each Yuyutei set slug.
@@ -47,11 +54,15 @@ def bandai_remote(base_image):
 
 out = []
 for r in db:
+    # Skip "刻印あり" (stamped reprint) variants per request.
+    if any('刻印あり' in t for t in (r.get('variant') or [])):
+        continue
     rarity = r.get('yuyutei_rarity') or r.get('bandai_rarity') or '—'
     base = r.get('base_image')
     img = r.get('yuyutei_image') or yuyutei_img(r['set_code'], r['yuyutei_cid'])
     name = r.get('name_jp') or r.get('yuyutei_name') or r['card_code']
-    out.append({
+    en = NAMES_EN.get(r['card_code'])
+    row = {
         'id': f"{r['set_code']}_{r['yuyutei_cid']}",
         'set': SET_LABELS.get(r['set_code'], r['set_code'].upper()),
         'code': r['card_code'],
@@ -69,7 +80,10 @@ for r in db:
         'imgAlt2': '',
         'url': r.get('product_url'),
         'effect': r.get('effect') or '',
-    })
+    }
+    if en and en != name:
+        row['nameEn'] = en
+    out.append(row)
 
 json.dump(out, open('catalog.json','w'), ensure_ascii=False, separators=(',',':'))
 print("catalog rows:", len(out), "| size:", round(os.path.getsize('catalog.json')/1024), "KB")

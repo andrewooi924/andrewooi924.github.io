@@ -4,8 +4,8 @@
    - Network-first for navigation so updates land when online, cache when not.
    Bump CACHE when you ship a new catalog.json or app version. */
 
-const CACHE = 'most-wanted-v9';
-const IMG_CACHE = 'mw-images-v9';
+const CACHE = 'most-wanted-v11';
+const IMG_CACHE = 'mw-images-v11';
 const SHELL = [
   './',
   './index.html',
