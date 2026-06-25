@@ -46,7 +46,11 @@
   .brand .mark svg{width:18px;height:18px}
   .brand h1{margin:0;font-size:17px;font-weight:800;letter-spacing:.02em;line-height:1}
   .brand .sub{font-size:10.5px;color:var(--muted-ink);letter-spacing:.16em;text-transform:uppercase;margin-top:3px}
-  .offline-dot{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted-ink)}
+  .offline-dot{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted-ink)}
+  .hdr-right{margin-left:auto;display:flex;flex-direction:row;align-items:center;gap:10px}
+  .ratechip{background:rgba(214,162,62,.14);border:1.5px solid var(--brass);color:var(--parch);
+    font-size:12px;font-weight:800;padding:5px 11px;border-radius:999px;letter-spacing:.01em;white-space:nowrap}
+  .ratechip span{color:var(--brass)}
   .offline-dot i{width:7px;height:7px;border-radius:50%;background:#3ECf8e;box-shadow:0 0 0 3px rgba(62,207,142,.15)}
   .offline-dot.off i{background:var(--brass)}
 
@@ -249,7 +253,10 @@
       <h1>Most Wanted</h1>
       <div class="sub">OPTCG · JP market</div>
     </div>
-    <div class="offline-dot" id="netdot"><i></i><span id="netlabel">online</span></div>
+    <div class="hdr-right">
+      <button class="ratechip" id="rateChip" aria-label="Set yen to ringgit rate">¥1=RM<span id="rateVal">0.025</span></button>
+      <div class="offline-dot" id="netdot"><i></i><span id="netlabel">online</span></div>
+    </div>
   </div>
 </header>
 
@@ -417,6 +424,7 @@ const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
   BROWSE_CUR = (await getSetting('cur')) || 'jpy';
   await buildMember();
   await loadCurrentList();
+  updateRateChip();
 
   buildChips(); render(); updateBadge();
   if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{});}
@@ -484,8 +492,8 @@ document.getElementById('fmApply').onclick=()=>{
   afterFilter();
 };
 document.getElementById('fmClear').onclick=()=>{
-  if(!fmCtx)return;
-  if(fmCtx.kind==='price'){F.min=F.max=null;} else {fmCtx.state[fmCtx.key].clear();}
+  if(!fmCtx||fmCtx.kind==='sortpick'){closeFilter();return;}
+  if(fmCtx.kind==='price'){F.min=F.max=null;} else if(fmCtx.state&&fmCtx.key){fmCtx.state[fmCtx.key].clear();}
   afterFilter();
 };
 function closeFilter(){document.getElementById('filterModal').classList.remove('open');}
@@ -498,6 +506,16 @@ function openSort(){
   [['price-asc','Price ↑ (cheapest first)'],['price-desc','Price ↓ (priciest first)'],['name','Name'],['set','Set']].forEach(([v,lbl])=>{
     const b=document.createElement('button'); if(F.sort===v)b.classList.add('active'); b.textContent=lbl;
     b.onclick=()=>{F.sort=v;closeFilter();buildChips();render();}; list.appendChild(b);
+  });
+  body.appendChild(list); document.getElementById('filterModal').classList.add('open');
+}
+function openWlSort(){
+  fmCtx={kind:'sortpick'}; document.getElementById('fmTitle').textContent='Sort wishlist';
+  const body=document.getElementById('fmBody'); body.innerHTML='';
+  const list=document.createElement('div'); list.className='filter-list';
+  [['priority','By priority'],['price-asc','Price ↑ (cheapest first)'],['price-desc','Price ↓ (priciest first)'],['name','Name'],['set','Set']].forEach(([v,lbl])=>{
+    const b=document.createElement('button'); if(WF.sort===v)b.classList.add('active'); b.textContent=lbl;
+    b.onclick=()=>{WF.sort=v;closeFilter();renderWishlist();}; list.appendChild(b);
   });
   body.appendChild(list); document.getElementById('filterModal').classList.add('open');
 }
@@ -631,7 +649,6 @@ function renderWishlist(){
       <button class="tool" id="shareList"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share</button>
       <button class="tool" id="expCsv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>CSV</button>
       <button class="tool" id="impBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0l-4 4m4-4l4 4M4 7V5a2 2 0 012-2h12a2 2 0 012 2v2"/></svg>Import</button>
-      <button class="tool" id="rateBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>RM rate</button>
       <button class="tool" id="wlSort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>${wlSortLabel()}</button>
     </div>
     <div class="chips" id="wlChips"></div>`;
@@ -783,10 +800,13 @@ function openRateModal(){
   document.getElementById('rateModal').classList.add('open');
   setTimeout(()=>document.getElementById('rateInput').select(),50);
 }
+function updateRateChip(){const e=document.getElementById('rateVal'); if(e)e.textContent=RATE;}
+document.getElementById('rateChip').onclick=openRateModal;
 document.getElementById('rateSave').onclick=async()=>{
   const v=parseFloat(document.getElementById('rateInput').value);
   if(isFinite(v)&&v>0){ RATE=v; await setSetting('rate',RATE); }
   document.getElementById('rateModal').classList.remove('open');
+  updateRateChip();
   if(VIEW==='wishlist')renderWishlist(); else renderBrowse();
   toast(`Rate set · ¥1 = RM${RATE}`);
 };
@@ -819,12 +839,8 @@ function wireWishlist(root){
   const sh=document.getElementById('shareList'); if(sh)sh.onclick=shareList;
   const ec=document.getElementById('expCsv'); if(ec)ec.onclick=exportCsv;
   const ib=document.getElementById('impBtn'); if(ib)ib.onclick=pickImport;
-  const rb=document.getElementById('rateBtn'); if(rb)rb.onclick=openRateModal;
-  const ws=document.getElementById('wlSort'); if(ws)ws.onclick=cycleWlSort;
+  const ws=document.getElementById('wlSort'); if(ws)ws.onclick=openWlSort;
 }
-function cycleWlSort(){const order=['priority','price-asc','price-desc','name','set'];
-  WF.sort=order[(order.indexOf(WF.sort)+1)%order.length];renderWishlist();}
-
 /* ---------- list manager modal ---------- */
 function openListModal(focusNew){
   const mgr=document.getElementById('listMgr'); mgr.innerHTML='';

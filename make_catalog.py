@@ -1,20 +1,23 @@
 """Turn price_database.json into a compact, app-ready catalog.json.
 
-Images: use the OFFICIAL Bandai high-res card art
-(https://www.onepiece-cardgame.com/images/cardlist/card/<CODE>.png),
-keyed by card_code base image. Falls back to the Yuyutei thumbnail only if a
-card has no Bandai base image.
+Images: each Yuyutei listing's own image (the cid is per-variant, so it is always
+the correct art). Uses the real image URL captured by the scraper when present,
+otherwise reconstructs it from set + cid.
 
-NOTE on variants: Bandai's per-art image files (_p1, _p2, ...) can't be reliably
-mapped to a specific Yuyutei variant listing, so every variant of a card shows
-that card's BASE art. It's sharp and clearly identifies the card; it just won't
-render the alternate-art version of a parallel.
+DON & promos: DON cards (Bandai card_type "-", or the 'don' set page) are typed
+as "DON". Promo set pages get tidy labels (P-100, P-OP10, ...). These flow into
+the Type and Set filters automatically.
 """
-import json, re
+import json, re, os
 
 db = json.load(open('price_database.json', encoding='utf-8'))
 
 COLOR_JP = {'赤':'red','緑':'green','青':'blue','紫':'purple','黒':'black','黄':'yellow'}
+
+# Tidy display label for each Yuyutei set slug.
+SET_LABELS = {'don':'DON','promo-100':'P-100','promo-200':'P-200',
+              'promo-op10':'P-OP10','promo-op20':'P-OP20',
+              'promo-st10':'P-ST10','promo-eb10':'P-EB10'}
 
 def colors(c):
     if not c: return []
@@ -28,45 +31,47 @@ def variant_label(tags):
     if any('修正' in x for x in t): return 'Errata'
     return 'Normal'
 
-# Yuyutei serves one image per listing (cid), so it is ALWAYS the correct variant
-# for that listing -- no matching needed. SIZE is the CDN size folder. 100_140 is
-# the only size we have confirmed works; if you find Yuyutei serves a larger size
-# (open e.g. https://card.yuyu-tei.jp/opc/300_420/op01/10151.jpg in a browser),
-# change SIZE here and rebuild for sharper images.
-SIZE = "100_140"
+def card_type(r, name):
+    ct = (r.get('card_type') or '').strip()
+    # DON!! cards: Bandai type "-", the dedicated DON page, or named "ドン!!…".
+    # The name check catches booster DON cards, which carry no Bandai metadata.
+    if ct == '-' or r['set_code'] == 'don' or 'ドン!!' in (name or ''):
+        return 'DON'
+    return ct.title()
 
+SIZE = "100_140"   # change to a larger Yuyutei size here if one exists
 def yuyutei_img(set_code, cid):
     return f"https://card.yuyu-tei.jp/opc/{SIZE}/{set_code}/{cid}.jpg"
-
-def bandai_remote(base_image):  # last-resort fallback only (base art)
+def bandai_remote(base_image):
     return f"https://www.onepiece-cardgame.com/images/cardlist/card/{base_image}" if base_image else None
 
 out = []
 for r in db:
     rarity = r.get('yuyutei_rarity') or r.get('bandai_rarity') or '—'
     base = r.get('base_image')
-    yt = yuyutei_img(r['set_code'], r['yuyutei_cid'])
+    img = r.get('yuyutei_image') or yuyutei_img(r['set_code'], r['yuyutei_cid'])
+    name = r.get('name_jp') or r.get('yuyutei_name') or r['card_code']
     out.append({
         'id': f"{r['set_code']}_{r['yuyutei_cid']}",
-        'set': r['set_code'].upper(),
+        'set': SET_LABELS.get(r['set_code'], r['set_code'].upper()),
         'code': r['card_code'],
-        'name': r.get('name_jp') or r.get('yuyutei_name') or r['card_code'],
+        'name': name,
         'colors': colors(r.get('color')),
         'rarity': rarity,
         'variant': variant_label(r.get('variant')),
         'tags': r.get('variant') or [],
-        'type': (r.get('card_type') or '').title(),
+        'type': card_type(r, name),
         'power': r.get('power'),
         'price': r.get('price'),
         'soldOut': bool(r.get('sold_out')),
-        'img': yt,                                 # Yuyutei image = correct variant
-        'imgAlt': bandai_remote(base),             # last resort (base art) if thumb missing
+        'img': img,                                # Yuyutei image = correct variant
+        'imgAlt': bandai_remote(base),             # fallback: official base art
         'imgAlt2': '',
         'url': r.get('product_url'),
         'effect': r.get('effect') or '',
     })
 
 json.dump(out, open('catalog.json','w'), ensure_ascii=False, separators=(',',':'))
-import os
 print("catalog rows:", len(out), "| size:", round(os.path.getsize('catalog.json')/1024), "KB")
-print("sample img:", out[0]['img'])
+from collections import Counter
+print("types:", Counter(c['type'] for c in out).most_common())
