@@ -1,11 +1,12 @@
 /* Most Wanted service worker.
-   - Precache the app shell + catalog so the app opens offline.
-   - Runtime cache-first for Yuyutei card images so wishlist art survives offline.
-   - Network-first for navigation so updates land when online, cache when not.
-   Bump CACHE when you ship a new catalog.json or app version. */
+   - Precache the app shell so the app opens offline (fetched fresh, bypassing HTTP cache).
+   - catalog.json + navigations: NETWORK-FIRST so a new deploy shows immediately when online,
+     falling back to cache when offline. (Fixes stale catalog / English-name search after deploy.)
+   - Card images: cache-first so wishlist art survives offline.
+   Bump CACHE when you ship a new app version. */
 
-const CACHE = 'most-wanted-v11';
-const IMG_CACHE = 'mw-images-v11';
+const CACHE = 'most-wanted-v12';
+const IMG_CACHE = 'mw-images-v12';
 const SHELL = [
   './',
   './index.html',
@@ -17,7 +18,13 @@ const SHELL = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  e.waitUntil(
+    caches.open(CACHE).then(c =>
+      // {cache:'reload'} forces a fresh network copy, never the browser HTTP cache.
+      Promise.all(SHELL.map(u => fetch(u, { cache: 'reload' })
+        .then(res => c.put(u, res)).catch(() => {})))
+    ).then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', e => {
@@ -28,12 +35,14 @@ self.addEventListener('activate', e => {
   );
 });
 
+self.addEventListener('message', e => { if (e.data === 'skip-waiting') self.skipWaiting(); });
+
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // Card images (official Bandai CDN + Yuyutei) — cache-first, store opaque too.
+  // Card images (Bandai CDN + Yuyutei) — cache-first, keep opaque responses too.
   const isCardImg = (url.hostname.endsWith('onepiece-cardgame.com') || url.hostname.endsWith('yuyu-tei.jp'))
     && /\.(jpg|jpeg|png|webp)$/.test(url.pathname);
   if (isCardImg) {
@@ -53,13 +62,20 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Same-origin navigations — network-first, fall back to cached shell.
-  if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).catch(() => caches.match('./index.html')));
+  // The catalog + navigations — NETWORK-FIRST: newest data when online, cache when offline.
+  const isCatalog = url.origin === self.location.origin && url.pathname.endsWith('/catalog.json');
+  if (req.mode === 'navigate' || isCatalog) {
+    e.respondWith(
+      fetch(req).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put(isCatalog ? req : './index.html', copy));
+        return res;
+      }).catch(() => caches.match(isCatalog ? req : './index.html').then(h => h || caches.match('./index.html')))
+    );
     return;
   }
 
-  // Same-origin assets (incl. catalog.json) — cache-first, refresh in background.
+  // Other same-origin assets (icons, manifest) — cache-first, refresh in background.
   if (url.origin === self.location.origin) {
     e.respondWith(
       caches.match(req).then(hit => {
