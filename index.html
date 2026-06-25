@@ -70,6 +70,12 @@
   .chip .dot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.18)}
   .chip .caret{font-size:10px;opacity:.6}
   .chip.has-active{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
+  .activefilters{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+  .activefilters:empty{display:none}
+  .afilter{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:999px;
+    background:var(--ink);color:var(--parch);font-size:12.5px;font-weight:700;border:none}
+  .afilter .x{opacity:.65;font-size:11px;font-weight:800}
+  .afilter.clearall{background:transparent;color:var(--hi);border:1.5px solid var(--hi)}
 
   /* ---------- card grid ---------- */
   main{padding:12px}
@@ -149,6 +155,10 @@
   .sharebtn span{display:flex;flex-direction:column;line-height:1.25}
   .sharebtn b{font-size:14.5px;font-weight:800}
   .sharebtn small{font-size:12px;color:var(--muted)}
+  .linkbox{display:flex;gap:8px;margin-top:12px}
+  .linkbox input{flex:1;min-width:0;height:44px;border:1.5px solid var(--brass);border-radius:11px;padding:0 12px;
+    background:#fff;color:var(--text);font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .linkbox button{flex:none;padding:0 16px;border-radius:11px;background:var(--brass);color:var(--ink);font-weight:800}
   .sharebanner{display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--parch);
     border-radius:var(--r);padding:14px 16px;margin-bottom:12px}
   .sharebanner .sb-txt{flex:1;min-width:0}
@@ -288,6 +298,7 @@
     <input id="q" type="search" inputmode="search" placeholder="Search English or Japanese name, code, set…" autocomplete="off">
   </div>
   <div class="chips" id="chips"></div>
+  <div class="activefilters" id="activeFilters"></div>
 </div>
 
 <main id="view"></main>
@@ -384,6 +395,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>
         <span><b>Export CSV</b><small>Open in a spreadsheet</small></span>
       </button>
+    </div>
+    <div class="linkbox" id="linkBox" style="display:none">
+      <input id="linkInput" type="text" readonly aria-label="Shareable link" onfocus="this.select()">
+      <button id="linkCopy">Copy</button>
     </div>
     <div class="row" style="margin-top:14px"><button id="shClose" style="background:var(--ink);color:var(--parch)">Close</button></div>
   </div>
@@ -490,19 +505,49 @@ const TYPES = ()=>facet('type');
 function buildChips(){
   const wrap=document.getElementById('chips'); wrap.innerHTML='';
   const mk=(label,key,kind)=>{
-    const active=(F[key]&&F[key].size)|| (key==='price'&&(F.min!=null||F.max!=null));
+    const count=(F[key]&&F[key].size)||0;
+    const priceOn=(key==='price'&&(F.min!=null||F.max!=null));
+    const active=count||priceOn;
     const b=document.createElement('button'); b.className='chip'+(active?' has-active':'');
-    b.innerHTML=`${label}${kind!=='sort'?' <span class="caret">▾</span>':''}`;
+    const tag=count?` · ${count}`:'';
+    b.innerHTML=`${label}${tag}${kind!=='sort'?' <span class="caret">▾</span>':''}`;
     b.onclick=()=>openFilter(label,key,kind); wrap.appendChild(b);
   };
-  // sort chip first
   const sortChip=document.createElement('button'); sortChip.className='chip';
   sortChip.innerHTML='Sort: '+sortLabel(F.sort)+' <span class="caret">▾</span>';
   sortChip.onclick=openSort; wrap.appendChild(sortChip);
   mk('Color','colors','color'); mk('Rarity','rarity','list');
   mk('Set','set','list'); mk('Variant','variant','list'); mk('Type','type','list'); mk('Price','price','price');
+  buildActiveFilters(F,'activeFilters',()=>{buildChips();renderBrowse();});
 }
 function sortLabel(s){return {'price-asc':'Price ↑','price-desc':'Price ↓','name':'Name','set':'Set'}[s]||s;}
+
+/* active-filter indicators + clear all (shared by browse F and wishlist WF) */
+const capFirst=s=>s.charAt(0).toUpperCase()+s.slice(1);
+function filterTokens(s){
+  const t=[];
+  if(s.colors)  s.colors.forEach(v=>t.push({l:capFirst(v),c:()=>s.colors.delete(v)}));
+  if(s.rarity)  s.rarity.forEach(v=>t.push({l:v,c:()=>s.rarity.delete(v)}));
+  if(s.set)     s.set.forEach(v=>t.push({l:v,c:()=>s.set.delete(v)}));
+  if(s.variant) s.variant.forEach(v=>t.push({l:v,c:()=>s.variant.delete(v)}));
+  if(s.type)    s.type.forEach(v=>t.push({l:v,c:()=>s.type.delete(v)}));
+  if(s.priority)s.priority.forEach(v=>t.push({l:capFirst(v),c:()=>s.priority.delete(v)}));
+  if(s.min!=null||s.max!=null) t.push({l:`¥${s.min??0}–${s.max??'∞'}`,c:()=>{s.min=s.max=null;}});
+  return t;
+}
+function clearFilters(s){['colors','rarity','set','variant','type','priority'].forEach(k=>{if(s[k])s[k].clear();}); s.min=null; s.max=null;}
+function buildActiveFilters(s,containerId,rerender){
+  const wrap=document.getElementById(containerId); if(!wrap)return;
+  const toks=filterTokens(s); wrap.innerHTML='';
+  if(!toks.length)return;
+  toks.forEach(t=>{const b=document.createElement('button');b.className='afilter';
+    b.innerHTML=`${esc(String(t.l))} <span class="x">✕</span>`;
+    b.onclick=()=>{t.c();rerender();};wrap.appendChild(b);});
+  const clr=document.createElement('button');clr.className='afilter clearall';
+  clr.textContent=`Clear all (${toks.length})`;
+  clr.onclick=()=>{clearFilters(s);rerender();};
+  wrap.appendChild(clr);
+}
 
 /* ---------- filter modal ---------- */
 let fmCtx=null;
@@ -697,7 +742,8 @@ function renderWishlist(){
       <button class="tool" id="impBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9m0 0l-4 4m4-4l4 4M4 7V5a2 2 0 012-2h12a2 2 0 012 2v2"/></svg>Import</button>
       <button class="tool" id="wlSort"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>${wlSortLabel()}</button>
     </div>
-    <div class="chips" id="wlChips"></div>`;
+    <div class="chips" id="wlChips"></div>
+    <div class="activefilters" id="wlActive"></div>`;
 
   let bodyHtml='';
   if(!items.length){
@@ -723,14 +769,15 @@ function renderWishlist(){
 function wlSortLabel(){return {'priority':'By priority','price-asc':'Price ↑','price-desc':'Price ↓','name':'Name','set':'Set'}[WF.sort];}
 function buildWlChips(){
   const w=document.getElementById('wlChips'); if(!w)return; w.innerHTML='';
-  const filt=(label,key,kind)=>{const active=WF[key]&&WF[key].size;const b=document.createElement('button');
-    b.className='chip'+(active?' has-active':'');b.innerHTML=`${label} <span class="caret">▾</span>`;
+  const filt=(label,key,kind)=>{const n=(WF[key]&&WF[key].size)||0;const b=document.createElement('button');
+    b.className='chip'+(n?' has-active':'');b.innerHTML=`${label}${n?` · ${n}`:''} <span class="caret">▾</span>`;
     b.onclick=()=>openFilter(label,key,kind,WF);w.appendChild(b);};
   filt('Color','colors','color'); filt('Set','set','list');
-  PRIORITIES.forEach(p=>{const b=document.createElement('button');b.className='chip';
+  PRIORITIES.forEach(p=>{const b=document.createElement('button');b.className='chip'+(WF.priority.has(p)?' has-active':'');
     b.setAttribute('aria-pressed',WF.priority.has(p));
     b.innerHTML=`<span class="dot" style="background:var(--${p==='high'?'hi':p==='medium'?'md':'lo'})"></span><span style="text-transform:capitalize">${p}</span>`;
     b.onclick=()=>{WF.priority.has(p)?WF.priority.delete(p):WF.priority.add(p);renderWishlist();};w.appendChild(b);});
+  buildActiveFilters(WF,'wlActive',renderWishlist);
 }
 function wlRow(i){const c=i.card;
   return `<div class="wl-item" data-id="${c.id}">
@@ -955,22 +1002,47 @@ function currentListExport(){
 const PR={high:'h',medium:'m',low:'l'}, PR_BACK={h:'high',m:'medium',l:'low'};
 function b64urlEncode(str){return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
 function b64urlDecode(s){s=s.replace(/-/g,'+').replace(/_/g,'/');return decodeURIComponent(escape(atob(s)));}
+// Compact payload: "name\n<id>[h|l] <id> …"  (medium priority = no suffix; ids end in a digit, so a trailing letter is unambiguous).
 function buildShareUrl(){
   const l=LISTS.find(x=>x.id===CURRENT)||{name:'Wishlist'};
-  const payload={n:l.name,i:[...WL.values()].map(it=>[it.id,PR[it.priority]||'m'])};
-  return location.origin+location.pathname+'#w='+b64urlEncode(JSON.stringify(payload));
+  const items=[...WL.values()].map(it=>it.id+(it.priority==='high'?'h':it.priority==='low'?'l':''));
+  const payload=(l.name||'Wishlist').replace(/[\r\n]+/g,' ')+'\n'+items.join(' ');
+  return location.origin+location.pathname+'#w='+b64urlEncode(payload);
 }
-async function copyShareLink(){
+function decodeShare(enc){
+  const txt=b64urlDecode(enc);
+  if(txt[0]==='{'){ const d=JSON.parse(txt); return {n:d.n||'Wishlist', i:d.i||[]}; } // legacy JSON links
+  const nl=txt.indexOf('\n');
+  const n=nl>=0?txt.slice(0,nl):'Wishlist';
+  const body=nl>=0?txt.slice(nl+1):'';
+  const i=body.split(/\s+/).filter(Boolean).map(tok=>{
+    const last=tok[tok.length-1];
+    if(last==='h')return [tok.slice(0,-1),'h'];
+    if(last==='l')return [tok.slice(0,-1),'l'];
+    return [tok,'m'];
+  });
+  return {n,i};
+}
+function copyText(t){
+  const inp=document.getElementById('linkInput'); if(inp){inp.focus();inp.select();inp.setSelectionRange(0,t.length);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(()=>toast('Link copied ✓')).catch(()=>fallbackCopy());
+  } else fallbackCopy();
+  function fallbackCopy(){ try{ if(document.execCommand('copy')){toast('Link copied ✓');return;} }catch(_){} toast('Select the link above and copy it'); }
+}
+function showShareLink(){
   if(!WL.size){toast('This list is empty');return;}
   const url=buildShareUrl();
-  closeShareModal();
-  try{
-    if(navigator.share){ await navigator.share({title:(LISTS.find(l=>l.id===CURRENT)||{}).name||'Wishlist', text:'My card wishlist', url}); return; }
-  }catch(e){ if(e&&e.name==='AbortError')return; }
-  try{ await navigator.clipboard.writeText(url); toast('Public link copied ✓'); }
-  catch(e){ prompt('Copy this link to share your list:', url); }
+  document.getElementById('linkInput').value=url;
+  document.getElementById('linkBox').style.display='';
+  copyText(url);
 }
-function openShareModal(){ if(!WL.size){toast('This list is empty');return;} document.getElementById('shareModal').classList.add('open'); }
+function openShareModal(){
+  if(!WL.size){toast('This list is empty');return;}
+  document.getElementById('linkBox').style.display='none';
+  document.getElementById('linkInput').value='';
+  document.getElementById('shareModal').classList.add('open');
+}
 function closeShareModal(){ document.getElementById('shareModal').classList.remove('open'); }
 function shareExportFile(){
   closeShareModal();
@@ -979,7 +1051,8 @@ function shareExportFile(){
   const fname=`${(l.name||'wishlist').replace(/[^\w\- ]+/g,'').trim()||'wishlist'}.mostwanted.json`;
   download(fname,json,'application/json'); toast('List exported as a file');
 }
-document.getElementById('shCopy').onclick=copyShareLink;
+document.getElementById('shCopy').onclick=showShareLink;
+document.getElementById('linkCopy').onclick=()=>copyText(document.getElementById('linkInput').value);
 document.getElementById('shFile').onclick=shareExportFile;
 document.getElementById('shCsv').onclick=()=>{closeShareModal();exportCsv();};
 document.getElementById('shClose').onclick=closeShareModal;
@@ -990,7 +1063,7 @@ let SHARED=null;
 function checkShareHash(){
   const m=(location.hash||'').match(/[#&]w=([^&]+)/);
   if(!m)return false;
-  try{ const d=JSON.parse(b64urlDecode(m[1])); if(d&&Array.isArray(d.i)){ SHARED=d; return true; } }catch(e){}
+  try{ const d=decodeShare(m[1]); if(d&&Array.isArray(d.i)){ SHARED=d; return true; } }catch(e){}
   return false;
 }
 function exitShared(){ SHARED=null; if(location.hash){history.replaceState(null,'',location.pathname+location.search);} }

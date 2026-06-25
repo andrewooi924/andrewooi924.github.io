@@ -5,8 +5,8 @@
    - Card images: cache-first so wishlist art survives offline.
    Bump CACHE when you ship a new app version. */
 
-const CACHE = 'most-wanted-v12';
-const IMG_CACHE = 'mw-images-v12';
+const CACHE = 'most-wanted-v14';
+const IMG_CACHE = 'mw-images-v14';
 const SHELL = [
   './',
   './index.html',

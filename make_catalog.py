@@ -21,10 +21,12 @@ except FileNotFoundError:
 
 COLOR_JP = {'赤':'red','緑':'green','青':'blue','紫':'purple','黒':'black','黄':'yellow'}
 
-# Tidy display label for each Yuyutei set slug.
-SET_LABELS = {'don':'DON','promo-100':'P-100','promo-200':'P-200',
-              'promo-op10':'P-OP10','promo-op20':'P-OP20',
-              'promo-st10':'P-ST10','promo-eb10':'P-EB10'}
+# Set display label. All promotional set pages collapse to one "PROMO" set.
+def set_label(sc):
+    sc = (sc or '').lower()
+    if sc == 'don': return 'DON'
+    if sc.startswith('promo') or sc == 'p' or sc.startswith('p-'): return 'PROMO'
+    return sc.upper()
 
 def colors(c):
     if not c: return []
@@ -35,13 +37,23 @@ def variant_label(tags):
     if 'スーパーパラレル' in t: return 'Super Parallel'
     if any(x in t for x in ('ラメフォイル','海賊旗フォイル','箔押し','パラレル/箔押し')): return 'Foil / Stamped'
     if 'パラレル' in t: return 'Parallel'
-    if any('修正' in x for x in t): return 'Errata'
-    return 'Normal'
+    return 'Normal'   # "Errata" folded into Normal per request
+
+def normalize_rarity(rarity, set_code):
+    """Tidy rarity outliers:
+       - dash/blank tokens ("—", "-", "") -> P
+       - "SP P" group: keep SP only for the OP15 card, others -> P
+       - lone "SPカード" token -> SP
+    """
+    r = (rarity or '').strip()
+    if r in ('—','-','−','–',''): return 'P'
+    if r in ('SP P','SP-P','SP/P'): return 'SP' if (set_code or '').lower() == 'op15' else 'P'
+    if r in ('SPカード',): return 'SP'
+    return r
 
 def card_type(r, name):
     ct = (r.get('card_type') or '').strip()
     # DON!! cards: Bandai type "-", the dedicated DON page, or named "ドン!!…".
-    # The name check catches booster DON cards, which carry no Bandai metadata.
     if ct == '-' or r['set_code'] == 'don' or 'ドン!!' in (name or ''):
         return 'DON'
     return ct.title()
@@ -57,14 +69,14 @@ for r in db:
     # Skip "刻印あり" (stamped reprint) variants per request.
     if any('刻印あり' in t for t in (r.get('variant') or [])):
         continue
-    rarity = r.get('yuyutei_rarity') or r.get('bandai_rarity') or '—'
+    rarity = normalize_rarity(r.get('yuyutei_rarity') or r.get('bandai_rarity') or '—', r['set_code'])
     base = r.get('base_image')
     img = r.get('yuyutei_image') or yuyutei_img(r['set_code'], r['yuyutei_cid'])
     name = r.get('name_jp') or r.get('yuyutei_name') or r['card_code']
     en = NAMES_EN.get(r['card_code'])
     row = {
         'id': f"{r['set_code']}_{r['yuyutei_cid']}",
-        'set': SET_LABELS.get(r['set_code'], r['set_code'].upper()),
+        'set': set_label(r['set_code']),
         'code': r['card_code'],
         'name': name,
         'colors': colors(r.get('color')),
