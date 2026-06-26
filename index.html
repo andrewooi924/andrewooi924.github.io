@@ -72,6 +72,11 @@
   .chip.has-active{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
   .activefilters{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
   .activefilters:empty{display:none}
+  .quickbar{display:flex;align-items:center;gap:8px;width:100%;margin-top:9px;padding:9px 12px;text-align:left;
+    border:1.5px dashed var(--brass);border-radius:12px;background:rgba(214,162,62,.08);color:var(--text);font-size:13px;font-weight:600}
+  .quickbar svg{flex:none;width:17px;height:17px;color:var(--brass-deep)}
+  .quickbar b{font-weight:800}
+  .quickbar .qb-caret{margin-left:auto;color:var(--muted);font-size:12px}
   .afilter{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:999px;
     background:var(--ink);color:var(--parch);font-size:12.5px;font-weight:700;border:none}
   .afilter .x{opacity:.65;font-size:11px;font-weight:800}
@@ -85,14 +90,12 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
   .card{background:#fff;border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden;
     box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;text-align:left}
-  .card .imgwrap{position:relative;aspect-ratio:100/140;background:linear-gradient(160deg,#eef2f6,#e3e9ef)}
-  .card .imgwrap img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .imgwrap{position:relative;aspect-ratio:100/140;background:linear-gradient(160deg,#eef2f6,#e3e9ef);padding:0 6px}
+  .card .imgwrap img{width:100%;height:100%;object-fit:contain;display:block}
   .card .badge{position:absolute;top:7px;left:7px;background:rgba(14,27,42,.86);color:var(--parch);
     font-size:10px;font-weight:800;letter-spacing:.05em;padding:3px 7px;border-radius:6px}
   .card .colors{position:absolute;top:7px;right:7px;display:flex;gap:3px}
   .card .colors .d{width:12px;height:12px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 2px rgba(0,0,0,.3)}
-  .card .sold{position:absolute;inset:0;background:rgba(14,27,42,.45);display:grid;place-items:center;
-    color:#fff;font-weight:800;font-size:12px;letter-spacing:.1em}
   .card .body{padding:9px 10px 11px;display:flex;flex-direction:column;gap:3px;flex:1}
   .card .code{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.04em}
   .card .nm{font-size:13px;font-weight:700;line-height:1.25;
@@ -237,7 +240,7 @@
   .sheet.open{transform:translateY(0)}
   .grip{width:38px;height:4px;border-radius:2px;background:var(--line);margin:8px auto 14px}
   .detail-img{width:140px;aspect-ratio:100/140;border-radius:12px;overflow:hidden;float:left;margin:0 16px 8px 0;background:#e7edf2;box-shadow:var(--shadow)}
-  .detail-img img{width:100%;height:100%;object-fit:cover}
+  .detail-img img{width:100%;height:100%;object-fit:contain}
   .sheet h2{font-size:19px;margin:2px 0 2px}
   .sheet .dcode{font-size:12px;font-weight:700;color:var(--muted)}
   .sheet .dprice{font-size:24px;font-weight:800;margin:8px 0}
@@ -299,6 +302,7 @@
   </div>
   <div class="chips" id="chips"></div>
   <div class="activefilters" id="activeFilters"></div>
+  <button class="quickbar" id="quickbar"></button>
 </div>
 
 <main id="view"></main>
@@ -329,6 +333,16 @@
       <button class="btn-ghost" id="fmClear" style="width:auto;flex:1;background:#fff;border:1.5px solid var(--line)">Clear</button>
       <button id="fmApply" style="background:var(--ink);color:var(--parch)">Done</button>
     </div>
+  </div>
+</div>
+
+<!-- quick-add target picker -->
+<div class="modal" id="targetModal">
+  <div class="box">
+    <h3>Quick add</h3>
+    <p>Choose where the <b>+</b> button on each card adds to. Pick a list for one-tap adding, or choose lists each time.</p>
+    <div id="targetLists"></div>
+    <div class="row" style="margin-top:14px"><button id="targetDone" style="background:var(--ink);color:var(--parch)">Done</button></div>
   </div>
 </div>
 
@@ -418,7 +432,7 @@ const PRIORITIES = ['high','medium','low'];
 let RATE=0.025, BROWSE_CUR='jpy';   // MYR per yen; browse-tab display currency
 /* Short-link service (Cloudflare Worker). Leave '' to keep self-contained inline links.
    Set to your deployed worker, e.g. 'https://most-wanted-links.you.workers.dev' */
-const SHARE_API='https://most-wanted-links.optcg-wanted.workers.dev';
+const SHARE_API='';
 let AUTH_TOKEN=null;   // set after Google sign-in (only needed if your worker REQUIRE_AUTH=1)
 const yen = n => (n==null ? '—' : '¥'+n.toLocaleString('en-US'));
 const myr = n => (n==null ? '—' : 'RM'+(n*RATE).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}));
@@ -455,7 +469,7 @@ const newId=()=>'l_'+Date.now().toString(36)+Math.random().toString(36).slice(2,
 
 /* ---------- state ---------- */
 let CATALOG=[], WL=new Map(), VIEW='browse', PAGE=48;
-let LISTS=[], CURRENT=null, MEMBER=new Map(), ADD_CARD=null;
+let LISTS=[], CURRENT=null, MEMBER=new Map(), ADD_CARD=null, QUICK_ADD=true;
 const F={q:'',colors:new Set(),rarity:new Set(),set:new Set(),type:new Set(),variant:new Set(),min:null,max:null,sort:'price-asc'};
 const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
 
@@ -467,6 +481,16 @@ const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
     CATALOG=await res.json();
   }catch(e){ /* offline first-load or file:// — SW cache or manual load */ 
     try{const r2=await fetch('./catalog.json');CATALOG=await r2.json();}catch(_){CATALOG=null;}
+  }
+  // Overlay your own HD images (images/<SET>/…) via image_map.json, if present.
+  // Mapped cards use the local HD file; the original Yuyutei image becomes the fallback.
+  if(Array.isArray(CATALOG)){
+    try{
+      const r=await fetch('./image_map.json',{cache:'no-cache'});
+      if(r.ok){ const m=await r.json();
+        for(const c of CATALOG){ const p=m[c.id]; if(p){ c.imgAlt=c.img; c.img=p; } }
+      }
+    }catch(_){}
   }
   // ----- wishlists (multiple) -----
   LISTS = (await getSetting('lists')) || [];
@@ -485,6 +509,7 @@ const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
   if(!CURRENT || !LISTS.some(l=>l.id===CURRENT)){ CURRENT=LISTS[0].id; await setSetting('current',CURRENT); }
   RATE = (await getSetting('rate')) ?? 0.025;
   BROWSE_CUR = (await getSetting('cur')) || 'jpy';
+  QUICK_ADD = (await getSetting('quickadd')) !== 0;   // default on
   await buildMember();
   await loadCurrentList();
   updateRateChip();
@@ -645,13 +670,13 @@ function render(){ if(VIEW==='shared'&&SHARED){renderShared();} else if(VIEW==='
 
 function colorDots(cs){return `<div class="colors">${cs.map(c=>`<span class="d" style="background:${COLORS[c]||'#999'}"></span>`).join('')}</div>`;}
 
+function cellIn(id){ return QUICK_ADD ? (MEMBER.get(id)||EMPTY).has(CURRENT) : inAnyList(id); }
 function cardCell(c){
-  const inWL=inAnyList(c.id);
+  const inWL=cellIn(c.id);
   return `<div class="card" data-id="${c.id}">
     <button class="imgwrap" data-open="${c.id}" aria-label="Details for ${c.code}">
       <img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)">
       <span class="badge">${c.rarity}</span>${colorDots(c.colors)}
-      ${c.soldOut?'<span class="sold">SOLD OUT</span>':''}
     </button>
     <div class="body">
       <div class="code">${c.set} · ${c.code}</div>
@@ -681,6 +706,7 @@ function renderBrowse(){
   });
   const more=document.getElementById('more'); if(more)more.onclick=()=>{PAGE+=48;renderBrowse();};
   wireGrid(v);
+  buildQuickbar();
 }
 
 /* ---------- wishlists (multiple) ---------- */
@@ -811,7 +837,7 @@ function openDetail(id){
     <div class="dcode">${c.set} · ${c.code} · ${c.rarity}</div>
     <h2>${esc(c.name)}</h2>
     ${c.nameEn?`<div class="h2-en">${esc(c.nameEn)}</div>`:''}
-    <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small>${c.soldOut?' <span style="font-size:13px;color:var(--hi)">· sold out at source</span>':''}</div>
+    <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small></div>
     <div class="kv">
       ${c.colors.map(col=>`<span class="k"><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px;background:${COLORS[col]||'#999'}"></span>${col}</span>`).join('')}
       ${c.type?`<span class="k"><b>Type</b> ${c.type}</span>`:''}
@@ -842,24 +868,61 @@ async function toggleInList(cardId,listId){
   const c=CATALOG.find(x=>x.id===cardId); if(!c)return;
   let set=MEMBER.get(cardId)||new Set();
   const key=`${listId}::${cardId}`;
+  const lname=(LISTS.find(l=>l.id===listId)||{}).name||'list';
   if(set.has(listId)){
     await itemDel(key); set.delete(listId);
     if(listId===CURRENT) WL.delete(cardId);
-    toast('Removed');
+    toast('Removed from '+lname);
   }else{
     const item={key,listId,id:cardId,priority:'medium',note:'',addedAt:Date.now(),card:c};
     await itemPut(item); set.add(listId);
     if(listId===CURRENT) WL.set(cardId,item);
-    toast('Added');
+    toast('Added to '+lname);
   }
   if(set.size) MEMBER.set(cardId,set); else MEMBER.delete(cardId);
   updateBadge(); refreshCellState(cardId);
   if(VIEW==='wishlist') renderWishlist();
 }
 function refreshCellState(id){
-  const on=inAnyList(id);
+  const on=cellIn(id);
   document.querySelectorAll(`[data-add="${id}"]`).forEach(b=>{b.classList.toggle('in',on);b.textContent=on?'✓':'+';});
 }
+
+/* ---------- quick-add bar (Cards tab) ---------- */
+function buildQuickbar(){
+  const q=document.getElementById('quickbar'); if(!q)return;
+  const name=(LISTS.find(l=>l.id===CURRENT)||{}).name||'a list';
+  const ico='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>';
+  q.innerHTML = QUICK_ADD
+    ? `${ico}<span>Tap + adds to <b>${esc(name)}</b></span><span class="qb-caret">change ▾</span>`
+    : `${ico}<span>Tap + lets you <b>choose lists</b></span><span class="qb-caret">change ▾</span>`;
+  q.onclick=openTargetMenu;
+}
+function openTargetMenu(){
+  const wrap=document.getElementById('targetLists'); wrap.innerHTML='';
+  LISTS.forEach(l=>{
+    const on=QUICK_ADD && l.id===CURRENT;
+    const b=document.createElement('button'); b.className='pickrow'+(on?' on':'');
+    b.innerHTML=`<span class="pk-check">${on?'✓':''}</span><span class="pk-name">${esc(l.name)}</span>`;
+    b.onclick=()=>chooseTarget(l.id);
+    wrap.appendChild(b);
+  });
+  const ask=document.createElement('button');
+  const onAsk=!QUICK_ADD;
+  ask.className='pickrow'+(onAsk?' on':''); ask.style.marginTop='4px';
+  ask.innerHTML=`<span class="pk-check">${onAsk?'✓':''}</span><span class="pk-name">Choose lists each time <small style="color:var(--muted);font-weight:600">(multi-add)</small></span>`;
+  ask.onclick=async()=>{ QUICK_ADD=false; await setSetting('quickadd',0); closeTargetMenu(); renderBrowse(); };
+  wrap.appendChild(ask);
+  document.getElementById('targetModal').classList.add('open');
+}
+function closeTargetMenu(){ document.getElementById('targetModal').classList.remove('open'); }
+async function chooseTarget(id){
+  QUICK_ADD=true; await setSetting('quickadd',1);
+  CURRENT=id; await setSetting('current',id); await loadCurrentList(); updateBadge();
+  closeTargetMenu(); renderBrowse();
+}
+document.getElementById('targetDone').onclick=closeTargetMenu;
+document.getElementById('targetModal').onclick=e=>{if(e.target.id==='targetModal')closeTargetMenu();};
 
 /* ---------- add-to-list picker (from the Cards tab) ---------- */
 function openAddPicker(id){
@@ -919,7 +982,11 @@ function updateBadge(){const b=document.getElementById('wlBadge');const n=WL.siz
 
 /* ---------- event wiring ---------- */
 function wireGrid(root){
-  root.querySelectorAll('[data-add]').forEach(b=>b.onclick=e=>{e.stopPropagation();openAddPicker(b.dataset.add);});
+  root.querySelectorAll('[data-add]').forEach(b=>b.onclick=e=>{
+    e.stopPropagation();
+    if(QUICK_ADD) toggleInList(b.dataset.add, CURRENT);
+    else openAddPicker(b.dataset.add);
+  });
   root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
 }
 function wireWishlist(root){
