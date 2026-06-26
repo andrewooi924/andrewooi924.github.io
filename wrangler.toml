@@ -1,0 +1,14 @@
+name = "most-wanted-links"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Paste the id printed by `wrangler kv namespace create WISHLISTS`
+kv_namespaces = [
+  { binding = "WISHLISTS", id = "a3a7aff1f6f34169b81687d3d168a0b4" }
+]
+
+[vars]
+APP_URL = "https://andrewooi924.github.io"   # your GitHub Pages app URL (no trailing #)
+ALLOW_ORIGIN = "https://andrewooi924.github.io"           # CORS: your app's origin (or "*")
+REQUIRE_AUTH = "0"                                        # set "1" to require Google sign-in to create links
+# GOOGLE_CLIENT_ID = "1234567890-abc.apps.googleusercontent.com"   # only needed if REQUIRE_AUTH = "1"

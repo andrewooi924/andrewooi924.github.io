@@ -416,6 +416,10 @@
 const COLORS = {red:'#C8102E',green:'#2E8B57',blue:'#2477B3',purple:'#6B4C9A',black:'#34373C',yellow:'#E3B23C'};
 const PRIORITIES = ['high','medium','low'];
 let RATE=0.025, BROWSE_CUR='jpy';   // MYR per yen; browse-tab display currency
+/* Short-link service (Cloudflare Worker). Leave '' to keep self-contained inline links.
+   Set to your deployed worker, e.g. 'https://most-wanted-links.you.workers.dev' */
+const SHARE_API='https://most-wanted-links.optcg-wanted.workers.dev';
+let AUTH_TOKEN=null;   // set after Google sign-in (only needed if your worker REQUIRE_AUTH=1)
 const yen = n => (n==null ? '—' : '¥'+n.toLocaleString('en-US'));
 const myr = n => (n==null ? '—' : 'RM'+(n*RATE).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}));
 const priceMain = n => BROWSE_CUR==='myr' ? myr(n) : yen(n);
@@ -485,7 +489,7 @@ const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
   await loadCurrentList();
   updateRateChip();
 
-  if(checkShareHash()) VIEW='shared';
+  if(await resolveShareHash()) VIEW='shared';
   buildChips(); render(); updateBadge();
   document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active', VIEW!=='shared' && x.dataset.view===VIEW));
   if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{});}
@@ -1030,12 +1034,28 @@ function copyText(t){
   } else fallbackCopy();
   function fallbackCopy(){ try{ if(document.execCommand('copy')){toast('Link copied ✓');return;} }catch(_){} toast('Select the link above and copy it'); }
 }
-function showShareLink(){
+async function showShareLink(){
   if(!WL.size){toast('This list is empty');return;}
-  const url=buildShareUrl();
-  document.getElementById('linkInput').value=url;
-  document.getElementById('linkBox').style.display='';
-  copyText(url);
+  const box=document.getElementById('linkBox'), inp=document.getElementById('linkInput');
+  box.style.display='';
+  if(!SHARE_API){ const url=buildShareUrl(); inp.value=url; copyText(url); return; }
+  // Worker short link
+  inp.value='Creating short link…';
+  try{
+    const l=LISTS.find(x=>x.id===CURRENT)||{name:'Wishlist'};
+    const items=[...WL.values()].map(it=>[it.id, PR[it.priority]||'m']);
+    const headers={'Content-Type':'application/json'};
+    if(AUTH_TOKEN) headers['Authorization']='Bearer '+AUTH_TOKEN;
+    const r=await fetch(SHARE_API+'/api/lists',{method:'POST',headers,body:JSON.stringify({name:l.name,items})});
+    if(r.status===401){ toast('Sign in to create a short link'); const url=buildShareUrl(); inp.value=url; copyText(url); return; }
+    if(!r.ok) throw 0;
+    const d=await r.json();
+    const url=SHARE_API+'/s/'+d.id;
+    inp.value=url; copyText(url);
+  }catch(e){
+    const url=buildShareUrl(); inp.value=url; copyText(url);
+    toast('Short-link service unavailable — copied the full link');
+  }
 }
 function openShareModal(){
   if(!WL.size){toast('This list is empty');return;}
@@ -1058,13 +1078,24 @@ document.getElementById('shCsv').onclick=()=>{closeShareModal();exportCsv();};
 document.getElementById('shClose').onclick=closeShareModal;
 document.getElementById('shareModal').onclick=e=>{if(e.target.id==='shareModal')closeShareModal();};
 
-/* ----- read-only shared list view (opened from a #w= link) ----- */
+/* ----- read-only shared list view (opened from a #w= or #s= link) ----- */
 let SHARED=null;
-function checkShareHash(){
+function checkShareHash(){   // inline links only (#w=), resolved synchronously
   const m=(location.hash||'').match(/[#&]w=([^&]+)/);
   if(!m)return false;
   try{ const d=decodeShare(m[1]); if(d&&Array.isArray(d.i)){ SHARED=d; return true; } }catch(e){}
   return false;
+}
+async function resolveShareHash(){   // handles inline (#w=) and worker short links (#s=)
+  if(checkShareHash()) return true;
+  const ms=(location.hash||'').match(/[#&]s=([^&]+)/);
+  if(!ms) return false;
+  if(!SHARE_API){ SHARED={n:'Shared list',i:[],error:'no-service'}; return true; }
+  try{
+    const r=await fetch(SHARE_API+'/api/lists/'+encodeURIComponent(ms[1]));
+    if(r.ok){ const d=await r.json(); SHARED={n:d.n||'Wishlist', i:d.i||[], by:d.by}; return true; }
+  }catch(e){}
+  SHARED={n:'Shared list',i:[],error:'load'}; return true;
 }
 function exitShared(){ SHARED=null; if(location.hash){history.replaceState(null,'',location.pathname+location.search);} }
 function renderShared(){
@@ -1074,12 +1105,15 @@ function renderShared(){
   const rows=SHARED.i.map(([id,p])=>({c:map.get(id),p:PR_BACK[p]||'medium'})).filter(x=>x.c);
   const total=rows.reduce((s,x)=>s+(x.c.price||0),0);
   const head=`<div class="sharebanner">
-      <div class="sb-txt"><div class="sb-eyebrow">Shared wishlist</div>
+      <div class="sb-txt"><div class="sb-eyebrow">Shared wishlist${SHARED.by?' · from '+esc(SHARED.by):''}</div>
         <div class="sb-name">${esc(SHARED.n||'Wishlist')}</div></div>
-      <button class="sb-save" id="shImport">Save a copy</button></div>
+      ${rows.length?'<button class="sb-save" id="shImport">Save a copy</button>':''}</div>
     <div class="summary"><div><div class="n tnum">${rows.length}</div><div class="lbl">cards</div></div>
       <div class="total"><div class="lbl">est. total</div><div class="v tnum">${yen(total)}</div>
       <div class="lbl" style="color:var(--brass);margin-top:2px">≈ ${myr(total)}</div></div></div>`;
+  const emptyMsg = SHARED.error
+    ? `<div class="empty" style="padding:40px 24px"><p>Couldn’t load this shared list. The link may be invalid or the sharing service is unavailable.</p></div>`
+    : `<div class="empty" style="padding:40px 24px"><p>This shared list is empty, or its cards aren’t in the catalog yet.</p></div>`;
   const body = rows.length
     ? rows.map(({c,p})=>`<div class="wl-item">
         <button class="th" data-open="${c.id}"><img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></button>
@@ -1089,10 +1123,10 @@ function renderShared(){
           <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
           <span class="pri-badge ${p}">${p}</span>
         </div></div>`).join('')
-    : `<div class="empty" style="padding:40px 24px"><p>This shared list is empty, or its cards aren’t in the catalog yet.</p></div>`;
+    : emptyMsg;
   v.innerHTML=head+body;
   v.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
-  document.getElementById('shImport').onclick=saveSharedCopy;
+  const imp=document.getElementById('shImport'); if(imp)imp.onclick=saveSharedCopy;
 }
 async function saveSharedCopy(){
   const name=(SHARED.n||'Shared list');
