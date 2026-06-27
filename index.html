@@ -75,6 +75,10 @@
   .quickbar{display:flex;align-items:center;gap:8px;width:100%;margin-top:9px;padding:9px 12px;text-align:left;
     border:1.5px dashed var(--brass);border-radius:12px;background:rgba(214,162,62,.08);color:var(--text);font-size:13px;font-weight:600}
   .quickbar svg{flex:none;width:17px;height:17px;color:var(--brass-deep)}
+  .quickbar.col{border-color:var(--blue);background:rgba(36,119,179,.08)}
+  .quickbar.col svg{color:var(--blue)}
+  .pk-section{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:12px 2px 6px}
+  .pk-section:first-child{margin-top:0}
   .quickbar b{font-weight:800}
   .quickbar .qb-caret{margin-left:auto;color:var(--muted);font-size:12px}
   .afilter{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:999px;
@@ -106,6 +110,8 @@
   .addbtn{position:absolute;bottom:9px;right:9px;width:34px;height:34px;border-radius:50%;
     background:var(--brass);color:var(--ink);display:grid;place-items:center;box-shadow:0 2px 8px rgba(181,134,44,.5);font-size:20px;font-weight:700;line-height:0}
   .addbtn.in{background:var(--ink);color:var(--brass)}
+  .addbtn.col{background:rgba(36,119,179,.16);color:var(--blue);box-shadow:inset 0 0 0 1.5px rgba(36,119,179,.55)}
+  .addbtn.col.in{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(36,119,179,.5)}
   .loadmore{display:block;margin:18px auto;height:var(--tap);padding:0 22px;border-radius:var(--r);
     background:#fff;border:1.5px solid var(--line);font-weight:700;color:var(--text)}
 
@@ -251,6 +257,8 @@
   .sheet .actions{display:flex;gap:10px;margin-top:8px}
   .btn-lg{flex:1;height:50px;border-radius:var(--r);font-weight:800;font-size:15px;display:grid;place-items:center}
   .btn-add{background:var(--brass);color:var(--ink)} .btn-add.in{background:var(--ink);color:var(--brass)}
+  .btn-collect{width:100%;margin-top:9px;display:flex;align-items:center;justify-content:center;gap:8px;
+    background:#fff;border:1.5px solid var(--brass);color:var(--brass-deep);font-weight:800}
   .btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--text);flex:none;width:54px}
   .modal{position:fixed;inset:0;z-index:60;display:none;place-items:center;padding:24px;background:rgba(14,27,42,.55)}
   .modal.open{display:grid}
@@ -274,6 +282,72 @@
 
   :focus-visible{outline:3px solid var(--brass);outline-offset:2px;border-radius:6px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  /* ---- collections / budget / purchase ---- */
+  .sessionbar{width:100%;display:flex;align-items:center;gap:10px;
+    padding:8px 16px;background:rgba(0,0,0,.18);color:var(--parch);text-align:left;font-size:12.5px;font-weight:700;border-top:1px solid rgba(255,255,255,.12)}
+  .sessionbar .sb-track{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+  .sessionbar .sb-fill{display:block;height:100%;background:var(--brass)}
+  .sessionbar .sb-fill.over{background:var(--hi)}
+  .sessionbar .sb-rem{white-space:nowrap;font-weight:800}
+  .sessionbar .sb-rem.over{color:#ffb4b4}
+  .fld{display:block;margin-bottom:11px}
+  .fld>span{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:5px}
+  .fld input,.fld textarea{width:100%;height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff;color:var(--text);font-size:15px}
+  .fld input:focus{border-color:var(--brass);outline:none}
+  .yenfield{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+  .yenfield:focus-within{border-color:var(--brass)}
+  .yenfield>span{padding:0 10px;color:var(--muted);font-weight:800}
+  .yenfield input{flex:1;height:44px;border:none;outline:none;padding:0;font-size:16px;background:transparent;min-width:0}
+  .chkrow{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);margin-top:2px}
+  .chkrow input{width:18px;height:18px;accent-color:var(--brass-deep)}
+  .row.two{display:flex;gap:10px}.row.two button{flex:1;height:48px;border-radius:13px}
+  .ghostbtn{background:#fff;border:1.5px solid var(--line);color:var(--text);font-weight:700}
+  .pickflow{display:flex;flex-wrap:wrap;gap:7px}
+  .pickflow .pf{padding:8px 13px;border-radius:11px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:13px}
+  .pickflow .pf.on{border-color:var(--brass);background:rgba(214,162,62,.12);color:var(--ink)}
+  .summary .total .v.pos{color:#1c7a4a}.summary .total .v.neg{color:var(--hi)}
+  .wl-item .got{align-self:flex-start;margin-top:4px;display:inline-flex;align-items:center;gap:5px;
+    padding:5px 10px;border-radius:9px;background:var(--ink);color:var(--parch);font-size:12px;font-weight:800}
+  .wl-item .got svg{width:14px;height:14px}
+  .paidfield{display:flex;align-items:center;gap:6px;margin-top:2px;font-size:12.5px;color:var(--muted);font-weight:700}
+  .paidfield input{width:96px;height:34px;border:1.5px solid var(--line);border-radius:9px;padding:0 8px;background:#fff;color:var(--text);font-size:14px;font-weight:700}
+  .paidfield input:focus{border-color:var(--brass);outline:none}
+  .delta{font-size:12px;font-weight:800}.delta.pos{color:#1c7a4a}.delta.neg{color:var(--hi)}
+  .bsection{background:#fff;border:1px solid var(--line-soft);border-radius:16px;padding:16px;margin:12px 14px;box-shadow:var(--shadow)}
+  .bsection.dark{background:var(--ink);color:var(--parch);border-color:transparent}
+  .bsection.dark .lbl{color:var(--muted-ink)}
+  .bsection.dark .rem{color:var(--parch)}
+  .bsection.dark .btrack{background:rgba(255,255,255,.16)}
+  .bsection.accent{background:linear-gradient(150deg,#fbf2dd,#f6e9c8);border-color:rgba(214,162,62,.4)}
+  .bbig{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px}
+  .bbig .rem{font-size:30px;font-weight:800;letter-spacing:-.02em}
+  .bbig .rem.over{color:var(--hi)}
+  .btrack{height:10px;border-radius:99px;background:var(--line-soft);overflow:hidden;margin:8px 0}
+  .btrack .fill{display:block;height:100%;background:var(--brass)}.btrack .fill.over{background:var(--hi)}
+  /* filter dropdown popovers */
+  .pop-scrim{position:fixed;inset:0;z-index:54;display:none}
+  .pop-scrim.open{display:block}
+  .filterpop{position:fixed;z-index:55;display:none;background:#fff;border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 12px 34px rgba(14,27,42,.20);padding:10px 11px;overflow:auto;-webkit-overflow-scrolling:touch}
+  .filterpop.open{display:block}
+  .pop-head{display:flex;align-items:center;justify-content:space-between;margin:1px 1px 8px;font-weight:800;font-size:14px;color:var(--ink)}
+  .pop-clear{color:var(--hi);font-weight:800;font-size:12.5px;padding:4px 4px}
+  .pop-group{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:11px 1px 6px}
+  .pop-group:first-of-type{margin-top:2px}
+  .pop-grid{display:flex;flex-wrap:wrap;gap:6px}
+  .pop-opt{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1.5px solid var(--line);border-radius:10px;
+    background:#fff;font-weight:700;font-size:13px;color:var(--text)}
+  .pop-opt .ck{display:none;color:var(--brass-deep);font-weight:900;margin-left:1px}
+  .pop-opt.on{border-color:var(--brass);background:rgba(214,162,62,.12);color:var(--ink)}
+  .pop-opt.on .ck{display:inline}
+  .pop-opt.full{display:flex;width:100%;justify-content:space-between;margin-bottom:5px}
+  .pop-price{display:flex;align-items:center;gap:8px;margin:2px 1px}
+  .pop-price input{flex:1;min-width:0;height:42px;border:1.5px solid var(--line);border-radius:10px;padding:0 10px;background:#fff;font-size:15px;color:var(--text)}
+  .pop-apply{margin-top:10px;width:100%;height:44px;border-radius:11px;background:var(--brass);color:var(--ink);font-weight:800}
+  .spendrow{display:flex;justify-content:space-between;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line-soft);font-size:14px}
+  .spendrow .sx{color:var(--muted);font-weight:700}
+  .spendrow button.del{color:var(--muted);padding:4px}
+  .bigbtn{display:block;width:calc(100% - 28px);margin:12px 14px;height:50px;border-radius:14px;background:var(--brass);color:var(--ink);font-weight:800}
 </style>
 </head>
 <body>
@@ -292,6 +366,7 @@
       <div class="offline-dot" id="netdot"><i></i><span id="netlabel">online</span></div>
     </div>
   </div>
+  <button class="sessionbar" id="sessionBar" style="display:none" aria-label="Open budget session"></button>
 </header>
 
 <!-- BROWSE controls -->
@@ -318,6 +393,16 @@
     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 6.6l1.9 3.9 4.3.6-3.1 3 .8 4.3L12 16.4 8.1 18.4l.8-4.3-3.1-3 4.3-.6z"/></svg>
     <span>Wishlist</span>
   </button>
+  <button id="tabCollection" data-view="collection">
+    <span class="tabbadge" id="colBadge" style="display:none">0</span>
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M4 9h16M9 5v4"/></svg>
+    <span>Collection</span>
+  </button>
+  <button id="tabBudget" data-view="budget">
+    <span class="tabbadge" id="budBadge" style="display:none">0</span>
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M3 7l2.5-3h13L21 7M16 13h2"/></svg>
+    <span>Budget</span>
+  </button>
 </nav>
 </div>
 
@@ -332,6 +417,69 @@
     <div class="row" style="margin-top:18px">
       <button class="btn-ghost" id="fmClear" style="width:auto;flex:1;background:#fff;border:1.5px solid var(--line)">Clear</button>
       <button id="fmApply" style="background:var(--ink);color:var(--parch)">Done</button>
+    </div>
+  </div>
+</div>
+<div class="pop-scrim" id="popScrim"></div>
+<div class="filterpop" id="filterPop" role="dialog"></div>
+
+<!-- collection manager modal -->
+<div class="modal" id="colMgrModal">
+  <div class="box">
+    <h3>Your collections</h3>
+    <div id="colMgr"></div>
+    <div class="newlist">
+      <input id="newColName" type="text" placeholder="New collection name…" maxlength="40">
+      <button id="addColBtn" class="addsq" aria-label="Create collection">+</button>
+    </div>
+    <div class="row" style="margin-top:16px"><button id="colMgrDone" style="background:var(--ink);color:var(--parch)">Done</button></div>
+  </div>
+</div>
+
+<!-- mark-as-obtained (purchase) modal -->
+<div class="modal" id="obtainedModal">
+  <div class="box">
+    <h3 id="obtainedTitle">Mark as obtained</h3>
+    <p id="obtainedSub" style="margin-bottom:10px"></p>
+    <label class="fld"><span>Price paid <small style="color:var(--muted)">(optional)</small></span>
+      <div class="yenfield"><span>¥</span><input id="obtainedPrice" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    </label>
+    <div class="fld"><span>Add to collection</span><div id="obtainedCols" class="pickflow"></div></div>
+    <label class="chkrow"><input type="checkbox" id="obtainedCount" checked> Count toward current budget session</label>
+    <div class="row two" style="margin-top:14px">
+      <button id="obtainedCancel" class="ghostbtn">Cancel</button>
+      <button id="obtainedSave" style="background:var(--brass);color:var(--ink);font-weight:800">Add to collection</button>
+    </div>
+  </div>
+</div>
+
+<!-- start/edit budget session modal -->
+<div class="modal" id="sessionModal">
+  <div class="box">
+    <h3 id="sessionTitle">Start a hunting session</h3>
+    <p style="margin-bottom:10px">Set a budget and track what you spend while you shop.</p>
+    <label class="fld"><span>Session name</span>
+      <input id="sessionName" type="text" maxlength="40" placeholder="e.g. Sunday meetup"></label>
+    <label class="fld"><span>Budget</span>
+      <div class="yenfield"><span>¥</span><input id="sessionBudget" type="number" inputmode="numeric" min="0" placeholder="10000"></div></label>
+    <div class="fld"><span>Shopping for <small style="color:var(--muted)">(optional — ties to a wishlist)</small></span>
+      <div id="sessionLists" class="pickflow"></div></div>
+    <div class="row two" style="margin-top:14px">
+      <button id="sessionCancel" class="ghostbtn">Cancel</button>
+      <button id="sessionStart" style="background:var(--brass);color:var(--ink);font-weight:800">Start session</button>
+    </div>
+  </div>
+</div>
+
+<!-- add manual spend modal -->
+<div class="modal" id="spendModal">
+  <div class="box">
+    <h3>Add a spend</h3>
+    <label class="fld"><span>What for</span><input id="spendName" type="text" maxlength="50" placeholder="e.g. sleeves, sealed pack"></label>
+    <label class="fld"><span>Amount</span><div class="yenfield"><span>¥</span><input id="spendAmount" type="number" inputmode="numeric" min="0" placeholder="0"></div></label>
+    <div class="row two" style="margin-top:14px">
+      <button id="spendCancel" class="ghostbtn">Cancel</button>
+      <button id="spendSave" style="background:var(--brass);color:var(--ink);font-weight:800">Add spend</button>
     </div>
   </div>
 </div>
@@ -439,16 +587,17 @@ const myr = n => (n==null ? '—' : 'RM'+(n*RATE).toLocaleString('en-MY',{minimu
 const priceMain = n => BROWSE_CUR==='myr' ? myr(n) : yen(n);
 
 /* ---------- tiny IndexedDB wrapper ---------- */
-const DB='mostwanted', ITEMS='items', SET='settings', LEGACY='wishlist';
+const DB='mostwanted', ITEMS='items', SET='settings', LEGACY='wishlist', COLI='colitems';
 let _db;
 function db(){
   if(_db) return Promise.resolve(_db);
   return new Promise((res,rej)=>{
-    const r=indexedDB.open(DB,2);
+    const r=indexedDB.open(DB,3);
     r.onupgradeneeded=(e)=>{const d=r.result;
       if(!d.objectStoreNames.contains(LEGACY)) d.createObjectStore(LEGACY,{keyPath:'id'});
       if(!d.objectStoreNames.contains(SET)) d.createObjectStore(SET,{keyPath:'k'});
       if(!d.objectStoreNames.contains(ITEMS)){const s=d.createObjectStore(ITEMS,{keyPath:'key'});s.createIndex('listId','listId',{unique:false});}
+      if(!d.objectStoreNames.contains(COLI)){const s=d.createObjectStore(COLI,{keyPath:'key'});s.createIndex('colId','colId',{unique:false});}
     };
     r.onsuccess=()=>{_db=r.result;res(_db)};
     r.onerror=()=>rej(r.error);
@@ -460,6 +609,9 @@ async function tx(store,mode,fn){const d=await db();return new Promise((res,rej)
 const itemsAll=()=>tx(ITEMS,'readonly',s=>s.getAll());
 const itemPut=v=>tx(ITEMS,'readwrite',s=>s.put(v));
 const itemDel=key=>tx(ITEMS,'readwrite',s=>s.delete(key));
+const colAll=()=>tx(COLI,'readonly',s=>s.getAll());
+const colPut=v=>tx(COLI,'readwrite',s=>s.put(v));
+const colDel=key=>tx(COLI,'readwrite',s=>s.delete(key));
 const legacyAll=()=>tx(LEGACY,'readonly',s=>s.getAll());
 const legacyClear=()=>tx(LEGACY,'readwrite',s=>s.clear());
 async function getSetting(k){const d=await db();return new Promise((res,rej)=>{
@@ -469,9 +621,13 @@ const newId=()=>'l_'+Date.now().toString(36)+Math.random().toString(36).slice(2,
 
 /* ---------- state ---------- */
 let CATALOG=[], WL=new Map(), VIEW='browse', PAGE=48;
-let LISTS=[], CURRENT=null, MEMBER=new Map(), ADD_CARD=null, QUICK_ADD=true;
+let LISTS=[], CURRENT=null, MEMBER=new Map(), ADD_CARD=null, QUICK_ADD=true, QUICK_KIND='wishlist';
 const F={q:'',colors:new Set(),rarity:new Set(),set:new Set(),type:new Set(),variant:new Set(),min:null,max:null,sort:'price-asc'};
 const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
+/* collections (owned cards) + budget sessions */
+let COLLECTIONS=[], CUR_COL=null, COL=new Map(), CMEMBER=new Map();
+const CF={q:'',colors:new Set(),rarity:new Set(),set:new Set(),variant:new Set(),min:null,max:null,sort:'value-desc'};
+let SESSION=null;   // {name, budget, spent, spends:[{id,name,amount,at}], startedAt}
 
 /* ---------- boot ---------- */
 (async function init(){
@@ -510,12 +666,21 @@ const WF={priority:new Set(),colors:new Set(),set:new Set(),sort:'priority'};
   RATE = (await getSetting('rate')) ?? 0.025;
   BROWSE_CUR = (await getSetting('cur')) || 'jpy';
   QUICK_ADD = (await getSetting('quickadd')) !== 0;   // default on
+  QUICK_KIND = (await getSetting('quickkind')) || 'wishlist';
   await buildMember();
   await loadCurrentList();
+  // ----- collections + budget session -----
+  COLLECTIONS = (await getSetting('collections')) || [];
+  if(!COLLECTIONS.length){ COLLECTIONS=[{id:newId(),name:'My Collection'}]; await persistCols(); }
+  CUR_COL = (await getSetting('curcol')) || COLLECTIONS[0].id;
+  if(!COLLECTIONS.some(c=>c.id===CUR_COL)){ CUR_COL=COLLECTIONS[0].id; await setSetting('curcol',CUR_COL); }
+  await buildCMember();
+  await loadCurrentCol();
+  SESSION = (await getSetting('session')) || null;
   updateRateChip();
 
   if(await resolveShareHash()) VIEW='shared';
-  buildChips(); render(); updateBadge();
+  buildChips(); render(); updateBadge(); updateColBadge(); updateSessionBar();
   document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active', VIEW!=='shared' && x.dataset.view===VIEW));
   if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{});}
   window.addEventListener('online',netStatus); window.addEventListener('offline',netStatus); netStatus();
@@ -540,11 +705,11 @@ function buildChips(){
     const b=document.createElement('button'); b.className='chip'+(active?' has-active':'');
     const tag=count?` · ${count}`:'';
     b.innerHTML=`${label}${tag}${kind!=='sort'?' <span class="caret">▾</span>':''}`;
-    b.onclick=()=>openFilter(label,key,kind); wrap.appendChild(b);
+    b.onclick=()=>openFilter(label,key,kind,F,b); wrap.appendChild(b);
   };
   const sortChip=document.createElement('button'); sortChip.className='chip';
   sortChip.innerHTML='Sort: '+sortLabel(F.sort)+' <span class="caret">▾</span>';
-  sortChip.onclick=openSort; wrap.appendChild(sortChip);
+  sortChip.onclick=()=>openSort(sortChip); wrap.appendChild(sortChip);
   mk('Color','colors','color'); mk('Rarity','rarity','list');
   mk('Set','set','list'); mk('Variant','variant','list'); mk('Type','type','list'); mk('Price','price','price');
   buildActiveFilters(F,'activeFilters',()=>{buildChips();renderBrowse();});
@@ -579,66 +744,82 @@ function buildActiveFilters(s,containerId,rerender){
 }
 
 /* ---------- filter modal ---------- */
-let fmCtx=null;
-function openFilter(title,key,kind,state){
-  state=state||F;
-  fmCtx={key,kind,state}; document.getElementById('fmTitle').textContent=title;
-  const body=document.getElementById('fmBody'); body.innerHTML='';
-  if(kind==='price'){
-    body.innerHTML=`<p style="color:var(--muted);font-size:13px;margin:4px 0 0">Set a price window in yen. Leave a side blank for no limit.</p>
-      <div class="priceinputs"><input id="fmin" type="number" inputmode="numeric" placeholder="min" value="${F.min??''}">
-      <span style="color:var(--muted)">–</span><input id="fmax" type="number" inputmode="numeric" placeholder="max" value="${F.max??''}"></div>`;
-  } else {
-    const list=document.createElement('div'); list.className='filter-list';
-    const VARIANT_ORDER=['Parallel','Super Parallel','Foil / Stamped','Errata','Normal'];
-    const opts = kind==='color'?Object.keys(COLORS):(key==='set'?SETS():key==='rarity'?RARITIES():
-      key==='variant'?VARIANT_ORDER.filter(v=>facet('variant').includes(v)):TYPES());
-    opts.forEach(o=>{
-      const b=document.createElement('button'); const on=state[key].has(o); if(on)b.classList.add('active');
-      b.innerHTML = kind==='color'?`<span class="dot" style="width:13px;height:13px;border-radius:50%;background:${COLORS[o]}"></span>${o}`:o;
-      b.onclick=()=>{state[key].has(o)?state[key].delete(o):state[key].add(o);b.classList.toggle('active');};
-      list.appendChild(b);
-    });
-    body.appendChild(list);
-  }
-  document.getElementById('filterModal').classList.add('open');
+/* ---------- filter dropdowns (anchored popovers) ---------- */
+function rerenderFor(state){ if(state===WF)renderWishlist(); else if(state===CF)renderCollection(); else {buildChips();renderBrowse();} }
+function closePop(){ document.getElementById('filterPop').classList.remove('open'); document.getElementById('popScrim').classList.remove('open'); }
+document.getElementById('popScrim').onclick=closePop;
+window.addEventListener('resize',closePop);
+function openPop(anchor,build){
+  const pop=document.getElementById('filterPop'); pop.innerHTML=''; build(pop);
+  document.getElementById('popScrim').classList.add('open'); pop.classList.add('open');
+  pop.style.visibility='hidden';
+  requestAnimationFrame(()=>{
+    const r=anchor.getBoundingClientRect(), vw=innerWidth, vh=innerHeight;
+    const pw=Math.min(300, vw-16); pop.style.width=pw+'px';
+    pop.style.left=Math.min(Math.max(8,r.left), vw-pw-8)+'px';
+    const top=r.bottom+6; pop.style.top=top+'px';
+    pop.style.maxHeight=Math.max(200, vh-top-12)+'px';
+    pop.style.visibility='visible';
+  });
 }
-function afterFilter(){closeFilter(); if(fmCtx&&fmCtx.state===WF){renderWishlist();}else{buildChips();render();}}
-document.getElementById('fmApply').onclick=()=>{
-  if(fmCtx&&fmCtx.kind==='price'){
-    const mn=document.getElementById('fmin').value, mx=document.getElementById('fmax').value;
-    F.min=mn===''?null:+mn; F.max=mx===''?null:+mx;
-  }
-  afterFilter();
-};
-document.getElementById('fmClear').onclick=()=>{
-  if(!fmCtx||fmCtx.kind==='sortpick'){closeFilter();return;}
-  if(fmCtx.kind==='price'){F.min=F.max=null;} else if(fmCtx.state&&fmCtx.key){fmCtx.state[fmCtx.key].clear();}
-  afterFilter();
-};
-function closeFilter(){document.getElementById('filterModal').classList.remove('open');}
-document.getElementById('filterModal').onclick=e=>{if(e.target.id==='filterModal')closeFilter();};
+const RAR_FULL={'L':'Leader','SEC':'Secret','SR':'Super Rare','R':'Rare','UC':'Uncommon','C':'Common','SP':'Special','SPカード':'Special','P':'Promo'};
+const RAR_ORDER=['L','SEC','SR','SP','SPカード','R','UC','C','P'];
+function orderedRarities(){const have=facet('rarity');return RAR_ORDER.filter(r=>have.includes(r)).concat(have.filter(r=>!RAR_ORDER.includes(r)));}
+const SET_GROUPS=[['Booster sets',s=>/^OP\d/.test(s)],['Starter decks',s=>/^ST\d/.test(s)],['Extra boosters',s=>/^EB\d/.test(s)],['Premium',s=>/^PRB\d/.test(s)],['Promos & DON',s=>s==='PROMO'||s==='DON']];
+function groupedSets(){const all=SETS();const used=new Set();const out=[];
+  for(const [n,t] of SET_GROUPS){const m=all.filter(s=>t(s)&&!used.has(s));m.forEach(s=>used.add(s));if(m.length)out.push([n,m]);}
+  const rest=all.filter(s=>!used.has(s));if(rest.length)out.push(['Other',rest]);return out;}
 
-function openSort(){
-  fmCtx={kind:'sortpick'}; document.getElementById('fmTitle').textContent='Sort by';
-  const body=document.getElementById('fmBody'); body.innerHTML='';
-  const list=document.createElement('div'); list.className='filter-list';
-  [['price-asc','Price ↑ (cheapest first)'],['price-desc','Price ↓ (priciest first)'],['name','Name'],['set','Set']].forEach(([v,lbl])=>{
-    const b=document.createElement('button'); if(F.sort===v)b.classList.add('active'); b.textContent=lbl;
-    b.onclick=()=>{F.sort=v;closeFilter();buildChips();render();}; list.appendChild(b);
+function openFilter(title,key,kind,state,anchor){
+  state=state||F;
+  openPop(anchor,(pop)=>{
+    const head=document.createElement('div'); head.className='pop-head'; head.innerHTML=`<span>${esc(title)}</span>`;
+    const clr=document.createElement('button'); clr.className='pop-clear'; clr.textContent='Clear';
+    clr.onclick=()=>{ if(kind==='price'){state.min=null;state.max=null;}else{state[key].clear();} rerenderFor(state); closePop(); };
+    head.appendChild(clr); pop.appendChild(head);
+    if(kind==='price'){
+      const box=document.createElement('div'); box.className='pop-price';
+      box.innerHTML=`<input id="pmin" type="number" inputmode="numeric" placeholder="min ¥" value="${state.min??''}"><span>–</span><input id="pmax" type="number" inputmode="numeric" placeholder="max ¥" value="${state.max??''}">`;
+      pop.appendChild(box);
+      const ap=document.createElement('button'); ap.className='pop-apply'; ap.textContent='Apply';
+      ap.onclick=()=>{const mn=box.querySelector('#pmin').value,mx=box.querySelector('#pmax').value;state.min=mn===''?null:+mn;state.max=mx===''?null:+mx;rerenderFor(state);closePop();};
+      pop.appendChild(ap); return;
+    }
+    const mkOpt=(o,label,dot)=>{   // compact chip (used inside Set groups)
+      const b=document.createElement('button'); b.className='pop-opt'+(state[key].has(o)?' on':'');
+      b.innerHTML=(dot?`<span class="dot" style="width:12px;height:12px;border-radius:50%;background:${dot}"></span>`:'')+`<span>${esc(label)}</span><span class="ck">✓</span>`;
+      b.onclick=()=>{state[key].has(o)?state[key].delete(o):state[key].add(o);b.classList.toggle('on');rerenderFor(state);};
+      return b;
+    };
+    const mkRow=(o,label,dot)=>{   // full-width row (Sort-style)
+      const b=document.createElement('button'); b.className='pop-opt full'+(state[key].has(o)?' on':'');
+      b.innerHTML=`<span style="display:flex;align-items:center;gap:9px">${dot?`<span class="dot" style="width:14px;height:14px;border-radius:50%;background:${dot}"></span>`:''}${esc(label)}</span><span class="ck">✓</span>`;
+      b.onclick=()=>{state[key].has(o)?state[key].delete(o):state[key].add(o);b.classList.toggle('on');rerenderFor(state);};
+      return b;
+    };
+    if(kind==='color'){
+      Object.keys(COLORS).forEach(o=>pop.appendChild(mkRow(o,o.charAt(0).toUpperCase()+o.slice(1),COLORS[o])));
+    } else if(key==='set'){
+      groupedSets().forEach(([gn,sets])=>{const h=document.createElement('div');h.className='pop-group';h.textContent=gn;pop.appendChild(h);
+        const w=document.createElement('div');w.className='pop-grid';sets.forEach(s=>w.appendChild(mkOpt(s,s)));pop.appendChild(w);});
+    } else if(key==='rarity'){
+      orderedRarities().forEach(r=>pop.appendChild(mkRow(r,RAR_FULL[r]?`${r} · ${RAR_FULL[r]}`:r)));
+    } else {
+      const VO=['Parallel','Super Parallel','Foil / Stamped','Errata','Normal'];
+      const opts=key==='variant'?VO.filter(v=>facet('variant').includes(v)):TYPES();
+      opts.forEach(o=>pop.appendChild(mkRow(o,o)));
+    }
   });
-  body.appendChild(list); document.getElementById('filterModal').classList.add('open');
 }
-function openWlSort(){
-  fmCtx={kind:'sortpick'}; document.getElementById('fmTitle').textContent='Sort wishlist';
-  const body=document.getElementById('fmBody'); body.innerHTML='';
-  const list=document.createElement('div'); list.className='filter-list';
-  [['priority','By priority'],['price-asc','Price ↑ (cheapest first)'],['price-desc','Price ↓ (priciest first)'],['name','Name'],['set','Set']].forEach(([v,lbl])=>{
-    const b=document.createElement('button'); if(WF.sort===v)b.classList.add('active'); b.textContent=lbl;
-    b.onclick=()=>{WF.sort=v;closeFilter();renderWishlist();}; list.appendChild(b);
+function sortPop(anchor,current,options,apply){
+  openPop(anchor,(pop)=>{
+    const head=document.createElement('div'); head.className='pop-head'; head.innerHTML='<span>Sort by</span>'; pop.appendChild(head);
+    options.forEach(([v,lbl])=>{const b=document.createElement('button');b.className='pop-opt full'+(current===v?' on':'');
+      b.innerHTML=`<span>${lbl}</span><span class="ck">✓</span>`;b.onclick=()=>{apply(v);closePop();};pop.appendChild(b);});
   });
-  body.appendChild(list); document.getElementById('filterModal').classList.add('open');
 }
+function openSort(anchor){ sortPop(anchor,F.sort,[['price-asc','Price ↑ (cheapest)'],['price-desc','Price ↓ (priciest)'],['name','Name'],['set','Set']],v=>{F.sort=v;buildChips();renderBrowse();}); }
+function openWlSort(anchor){ sortPop(anchor,WF.sort,[['priority','By priority'],['price-asc','Price ↑'],['price-desc','Price ↓'],['name','Name'],['set','Set']],v=>{WF.sort=v;renderWishlist();}); }
 
 /* ---------- search ---------- */
 let qt; document.getElementById('q').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{F.q=e.target.value.trim().toLowerCase();PAGE=48;render();},160);});
@@ -666,13 +847,25 @@ function sortList(r,s){
 }
 
 /* ---------- render router ---------- */
-function render(){ if(VIEW==='shared'&&SHARED){renderShared();} else if(VIEW==='browse'){renderBrowse();} else {renderWishlist();} }
+function render(){
+  if(VIEW==='shared'&&SHARED){renderShared();}
+  else if(VIEW==='browse'){renderBrowse();}
+  else if(VIEW==='collection'){renderCollection();}
+  else if(VIEW==='budget'){renderBudget();}
+  else {renderWishlist();}
+  updateSessionBar();
+}
 
 function colorDots(cs){return `<div class="colors">${cs.map(c=>`<span class="d" style="background:${COLORS[c]||'#999'}"></span>`).join('')}</div>`;}
 
-function cellIn(id){ return QUICK_ADD ? (MEMBER.get(id)||EMPTY).has(CURRENT) : inAnyList(id); }
+const COLMODE=()=>QUICK_ADD&&QUICK_KIND==='collection';
+function cellIn(id){
+  if(!QUICK_ADD) return inAnyList(id);
+  if(QUICK_KIND==='collection') return (CMEMBER.get(id)||EMPTY).has(CUR_COL);
+  return (MEMBER.get(id)||EMPTY).has(CURRENT);
+}
 function cardCell(c){
-  const inWL=cellIn(c.id);
+  const inWL=cellIn(c.id); const col=COLMODE();
   return `<div class="card" data-id="${c.id}">
     <button class="imgwrap" data-open="${c.id}" aria-label="Details for ${c.code}">
       <img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)">
@@ -685,7 +878,7 @@ function cardCell(c){
       ${c.variant&&c.variant!=='Normal'?`<div class="vr">${c.variant}</div>`:''}
       <div class="price tnum">${priceMain(c.price)}</div>
     </div>
-    <button class="addbtn ${inWL?'in':''}" data-add="${c.id}" aria-label="${inWL?'In a wishlist':'Add to wishlist'}">${inWL?'✓':'+'}</button>
+    <button class="addbtn ${col?'col ':''}${inWL?'in':''}" data-add="${c.id}" aria-label="${col?(inWL?'In collection':'Add to collection'):(inWL?'In a wishlist':'Add to wishlist')}">${inWL?'✓':'+'}</button>
   </div>`;
 }
 
@@ -801,7 +994,7 @@ function buildWlChips(){
   const w=document.getElementById('wlChips'); if(!w)return; w.innerHTML='';
   const filt=(label,key,kind)=>{const n=(WF[key]&&WF[key].size)||0;const b=document.createElement('button');
     b.className='chip'+(n?' has-active':'');b.innerHTML=`${label}${n?` · ${n}`:''} <span class="caret">▾</span>`;
-    b.onclick=()=>openFilter(label,key,kind,WF);w.appendChild(b);};
+    b.onclick=()=>openFilter(label,key,kind,WF,b);w.appendChild(b);};
   filt('Color','colors','color'); filt('Set','set','list');
   PRIORITIES.forEach(p=>{const b=document.createElement('button');b.className='chip'+(WF.priority.has(p)?' has-active':'');
     b.setAttribute('aria-pressed',WF.priority.has(p));
@@ -821,6 +1014,7 @@ function wlRow(i){const c=i.card;
         ${PRIORITIES.map(p=>`<button data-on="${p}" class="${i.priority===p?'active':''}" data-pri="${p}">${p[0].toUpperCase()}</button>`).join('')}
       </div>
       <textarea class="note" rows="1" placeholder="Add a note — shop, condition, max price…" data-note="${c.id}">${esc(i.note||'')}</textarea>
+      <button class="got" data-got="${c.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Got it — add to collection</button>
     </div>
     <button class="rm" data-rm="${c.id}" aria-label="Remove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m1 0v12a1 1 0 01-1 1H8a1 1 0 01-1-1V7"/></svg></button>
   </div>`;
@@ -831,6 +1025,7 @@ function openDetail(id){
   const c=CATALOG?CATALOG.find(x=>x.id===id):(WL.get(id)&&WL.get(id).card);
   if(!c)return;
   const inWL=inAnyList(id);
+  const inCol=(CMEMBER.get(id)||EMPTY).size>0;
   const sheet=document.getElementById('sheet');
   sheet.innerHTML=`<div class="grip"></div>
     <div class="detail-img"><img src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></div>
@@ -848,8 +1043,10 @@ function openDetail(id){
     <div class="actions">
       <button class="btn-lg btn-add ${inWL?'in':''}" id="dAdd">${inWL?'✓ In your wishlists — edit' : '+ Add to a wishlist'}</button>
       ${c.url?`<a class="btn-lg btn-ghost" href="${c.url}" target="_blank" rel="noopener" aria-label="Open on Yuyutei"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 01-1 1H6a1 1 0 01-1-1V7a1 1 0 011-1h6"/></svg></a>`:''}
-    </div>`;
+    </div>
+    <button class="btn-lg btn-collect" id="dCol"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M4 9h16M9 5v4"/></svg>${inCol?'In collection — add another / edit':'Add to a collection'}</button>`;
   document.getElementById('dAdd').onclick=()=>{closeSheet();openAddPicker(id);};
+  document.getElementById('dCol').onclick=()=>{closeSheet();openObtained(id);};
   openSheet();
 }
 function openSheet(){document.getElementById('scrim').classList.add('open');document.getElementById('sheet').classList.add('open');}
@@ -864,6 +1061,335 @@ async function buildMember(){
 }
 function inAnyList(id){return (MEMBER.get(id)||EMPTY).size>0;}
 const EMPTY=new Set();
+
+/* ================= COLLECTIONS (cards you own) ================= */
+async function persistCols(){ await setSetting('collections',COLLECTIONS); }
+async function buildCMember(){
+  CMEMBER=new Map();
+  const all=await colAll();
+  for(const it of all){ let s=CMEMBER.get(it.id); if(!s){s=new Set();CMEMBER.set(it.id,s);} s.add(it.colId); }
+}
+async function loadCurrentCol(){
+  const all=await colAll(); COL=new Map();
+  const catMap=Array.isArray(CATALOG)?new Map(CATALOG.map(c=>[c.id,c])):null;
+  for(const it of all){
+    if(it.colId!==CUR_COL) continue;
+    if(catMap&&catMap.has(it.id)){ it.card=Object.assign({},catMap.get(it.id)); }
+    COL.set(it.id,it);
+  }
+}
+async function switchCol(id){ CUR_COL=id; await setSetting('curcol',id); await loadCurrentCol(); updateColBadge(); renderCollection(); }
+async function createCol(name){ const id=newId(); COLLECTIONS.push({id,name:(name||'').trim()||('Collection '+(COLLECTIONS.length+1))}); await persistCols(); await switchCol(id); return id; }
+async function renameCol(id,name){ const c=COLLECTIONS.find(x=>x.id===id); if(c){ c.name=name.trim()||c.name; await persistCols(); } }
+async function deleteCol(id){
+  const all=await colAll();
+  for(const it of all){ if(it.colId===id) await colDel(it.key); }
+  COLLECTIONS=COLLECTIONS.filter(c=>c.id!==id);
+  if(!COLLECTIONS.length) COLLECTIONS=[{id:newId(),name:'My Collection'}];
+  await persistCols();
+  if(CUR_COL===id){ CUR_COL=COLLECTIONS[0].id; await setSetting('curcol',CUR_COL); await loadCurrentCol(); }
+  await buildCMember(); updateColBadge(); renderCollection();
+}
+function updateColBadge(){const b=document.getElementById('colBadge');if(!b)return;const n=COL.size;b.style.display=n?'grid':'none';b.textContent=n>99?'99+':n;}
+
+async function addToCollection(cardId,colId,pricePaid){
+  const c=CATALOG.find(x=>x.id===cardId); if(!c)return;
+  const key=`${colId}::${cardId}`;
+  const item={key,colId,id:cardId,pricePaid:(pricePaid==null?null:+pricePaid),obtainedAt:Date.now(),note:'',card:c};
+  await colPut(item);
+  let s=CMEMBER.get(cardId)||new Set(); s.add(colId); CMEMBER.set(cardId,s);
+  if(colId===CUR_COL) COL.set(cardId,item);
+}
+async function removeFromCollection(cardId,colId){
+  await colDel(`${colId}::${cardId}`);
+  const s=CMEMBER.get(cardId); if(s){s.delete(colId); if(!s.size)CMEMBER.delete(cardId);}
+  if(colId===CUR_COL) COL.delete(cardId);
+}
+async function setPaid(cardId,val){
+  const it=COL.get(cardId); if(!it)return;
+  it.pricePaid=(val===''||val==null)?null:+val; await colPut(it);
+}
+
+function colMarket(items){return items.reduce((s,i)=>s+(i.card.price||0),0);}
+function colPaid(items){return items.reduce((s,i)=>s+(i.pricePaid||0),0);}
+function colSortItems(arr,s){
+  const a=[...arr];
+  if(s==='value-desc')a.sort((x,y)=>(y.card.price??-1)-(x.card.price??-1));
+  else if(s==='value-asc')a.sort((x,y)=>(x.card.price??Infinity)-(y.card.price??Infinity));
+  else if(s==='paid-desc')a.sort((x,y)=>(y.pricePaid??-1)-(x.pricePaid??-1));
+  else if(s==='name')a.sort((x,y)=>x.card.name.localeCompare(y.card.name,'ja'));
+  else if(s==='set')a.sort((x,y)=>x.card.set.localeCompare(y.card.set)||x.card.code.localeCompare(y.card.code));
+  else if(s==='recent')a.sort((x,y)=>(y.obtainedAt||0)-(x.obtainedAt||0));
+  return a;
+}
+function colSortLabel(){return {'value-desc':'Value ↓','value-asc':'Value ↑','paid-desc':'Paid ↓','name':'Name','set':'Set','recent':'Recent'}[CF.sort];}
+function colFiltered(){
+  const catMap=Array.isArray(CATALOG)?new Map(CATALOG.map(c=>[c.id,c])):null;
+  let items=[...COL.values()].map(i=>catMap&&catMap.has(i.id)?{...i,card:catMap.get(i.id)}:i);
+  let list=items;
+  if(CF.q){const q=CF.q;list=list.filter(i=>{const c=i.card;return c.name.toLowerCase().includes(q)||(c.nameEn&&c.nameEn.toLowerCase().includes(q))||c.code.toLowerCase().includes(q)||c.set.toLowerCase().includes(q);});}
+  if(CF.colors.size)list=list.filter(i=>i.card.colors.some(x=>CF.colors.has(x)));
+  if(CF.rarity.size)list=list.filter(i=>CF.rarity.has(i.card.rarity));
+  if(CF.set.size)list=list.filter(i=>CF.set.has(i.card.set));
+  if(CF.variant.size)list=list.filter(i=>CF.variant.has(i.card.variant));
+  return {items,list};
+}
+function renderCollection(){
+  document.getElementById('browseControls').style.display='none';
+  const v=document.getElementById('view');
+  const curName=(COLLECTIONS.find(c=>c.id===CUR_COL)||{}).name||'Collection';
+  const switcher=`<div class="lists">
+    ${COLLECTIONS.map(c=>`<button class="lchip ${c.id===CUR_COL?'active':''}" data-col="${c.id}">${esc(c.name)}</button>`).join('')}
+    <button class="lchip add" id="newColChip">+ New</button>
+    <button class="lchip edit" id="editColsChip" aria-label="Manage collections">✎</button>
+  </div>`;
+  const search=`<div class="search" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="colq" type="search" placeholder="Search this collection…" value="${esc(CF.q)}" autocomplete="off"></div>`;
+  const toolbar=`<div class="toolbar">
+      <button class="tool" id="colSortBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>${colSortLabel()}</button>
+    </div>
+    <div class="chips" id="colChips"></div>
+    <div class="activefilters" id="colActive"></div>`;
+  v.innerHTML=switcher+search+`<div id="colSummary"></div>`+toolbar+`<div id="colBody"></div>`;
+  buildColChips();
+  v.querySelectorAll('[data-col]').forEach(b=>b.onclick=()=>switchCol(b.dataset.col));
+  document.getElementById('newColChip').onclick=()=>createCol('');
+  document.getElementById('editColsChip').onclick=openColMgr;
+  document.getElementById('colSortBtn').onclick=()=>openColSort(document.getElementById('colSortBtn'));
+  const qi=document.getElementById('colq');
+  qi.addEventListener('input',e=>{clearTimeout(window.cqt);window.cqt=setTimeout(()=>{CF.q=e.target.value.trim().toLowerCase();refreshCol();},150);});
+  refreshCol();
+}
+function refreshCol(){
+  const {items,list}=colFiltered();
+  const mv=colMarket(list), paid=colPaid(list), delta=mv-paid;
+  const sm=document.getElementById('colSummary');
+  if(sm) sm.innerHTML=`<div class="summary" style="margin-top:14px">
+      <div><div class="n tnum">${list.length}</div><div class="lbl">cards owned</div></div>
+      <div class="total"><div class="lbl">market value</div><div class="v tnum">${yen(mv)}</div>
+        <div class="lbl" style="color:var(--brass);margin-top:2px">≈ ${myr(mv)}</div>
+        ${paid>0?`<div class="lbl" style="margin-top:4px">paid ${yen(paid)} · <span class="delta ${delta>=0?'pos':'neg'}">${delta>=0?'+':'−'}${yen(Math.abs(delta))}</span></div>`:''}
+      </div></div>`;
+  const body=document.getElementById('colBody'); if(!body)return;
+  if(!items.length){
+    body.innerHTML=`<div class="empty" style="padding:48px 24px">
+      <div class="em-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#6E7785" stroke-width="1.3"><path d="M4 7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M4 9h16"/></svg></div>
+      <h2>“${esc((COLLECTIONS.find(c=>c.id===CUR_COL)||{}).name||'Collection')}” is empty</h2>
+      <p>Mark cards as obtained from your wishlist, or add them from a card's detail view.</p></div>`;
+  } else if(!list.length){
+    body.innerHTML=`<div class="empty" style="padding:36px 24px"><p>No owned cards match the current search/filters.</p></div>`;
+  } else {
+    body.innerHTML=colSortItems(list,CF.sort).map(colRow).join('');
+  }
+  wireCollection();
+  updateColBadge();
+}
+function colRow(i){const c=i.card;
+  return `<div class="wl-item" data-id="${c.id}">
+    <button class="th" data-open="${c.id}"><img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></button>
+    <div class="info">
+      <div class="code">${c.set} · ${c.code} · ${c.rarity}${c.variant&&c.variant!=='Normal'?' · '+c.variant:''}</div>
+      <div class="nm">${esc(c.name)}</div>${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
+      <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
+      <div class="paidfield">Paid <span>¥</span><input type="number" inputmode="numeric" min="0" placeholder="—" value="${i.pricePaid??''}" data-paid="${c.id}"></div>
+      <textarea class="note" rows="1" placeholder="Add a note — grade, seller…" data-cnote="${c.id}">${esc(i.note||'')}</textarea>
+    </div>
+    <button class="rm" data-crm="${c.id}" aria-label="Remove from collection"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m1 0v12a1 1 0 01-1 1H8a1 1 0 01-1-1V7"/></svg></button>
+  </div>`;
+}
+function wireCollection(){
+  const root=document.getElementById('colBody'); if(!root)return;
+  root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
+  root.querySelectorAll('[data-paid]').forEach(inp=>inp.onchange=async()=>{await setPaid(inp.dataset.paid,inp.value);refreshCol();});
+  root.querySelectorAll('[data-cnote]').forEach(t=>t.onchange=async()=>{const it=COL.get(t.dataset.cnote);if(it){it.note=t.value;await colPut(it);}});
+  root.querySelectorAll('[data-crm]').forEach(b=>b.onclick=async()=>{await removeFromCollection(b.dataset.crm,CUR_COL);toast('Removed from collection');refreshCol();});
+}
+function buildColChips(){
+  const w=document.getElementById('colChips'); if(!w)return; w.innerHTML='';
+  const mk=(label,key,kind)=>{const n=(CF[key]&&CF[key].size)||0;const b=document.createElement('button');
+    b.className='chip'+(n?' has-active':'');b.innerHTML=`${label}${n?` · ${n}`:''} <span class="caret">▾</span>`;
+    b.onclick=()=>openFilter(label,key,kind,CF,b);w.appendChild(b);};
+  mk('Color','colors','color'); mk('Rarity','rarity','list'); mk('Set','set','list'); mk('Variant','variant','list');
+  buildActiveFilters(CF,'colActive',renderCollection);
+}
+function openColSort(anchor){ sortPop(anchor,CF.sort,[['value-desc','Value ↓ (priciest)'],['value-asc','Value ↑'],['paid-desc','Paid ↓'],['recent','Recently added'],['name','Name'],['set','Set']],v=>{CF.sort=v;renderCollection();}); }
+
+/* collection manager modal */
+function openColMgr(){
+  const mgr=document.getElementById('colMgr'); mgr.innerHTML='';
+  COLLECTIONS.forEach(c=>{
+    const row=document.createElement('div'); row.className='lmrow';
+    const inp=document.createElement('input'); inp.className='lmname'; inp.value=c.name; inp.maxLength=40;
+    inp.onchange=()=>{renameCol(c.id,inp.value); if(VIEW==='collection')renderCollection();};
+    const del=document.createElement('button'); del.className='lmdel'; del.textContent='🗑'; del.disabled=COLLECTIONS.length<=1;
+    del.onclick=async()=>{ if(confirm(`Delete collection “${c.name}” and its cards?`)){ await deleteCol(c.id); openColMgr(); } };
+    row.appendChild(inp); row.appendChild(del); mgr.appendChild(row);
+  });
+  document.getElementById('colMgrModal').classList.add('open');
+}
+
+/* ================= PURCHASE FLOW (wishlist -> collection) ================= */
+let OBTAIN_CARD=null, OBTAIN_COL=null;
+function openObtained(cardId){
+  const c=CATALOG.find(x=>x.id===cardId); if(!c)return;
+  OBTAIN_CARD=cardId; OBTAIN_COL=CUR_COL||(COLLECTIONS[0]&&COLLECTIONS[0].id);
+  document.getElementById('obtainedTitle').textContent = inAnyList(cardId) ? 'Mark as obtained' : 'Add to a collection';
+  document.getElementById('obtainedSub').innerHTML=`<b>${esc(c.name)}</b> · ${c.set} ${c.code}`;
+  document.getElementById('obtainedPrice').value='';
+  const cnt=document.getElementById('obtainedCount'); cnt.parentElement.style.display=SESSION?'flex':'none'; cnt.checked=!!SESSION;
+  renderObtainCols();
+  document.getElementById('obtainedModal').classList.add('open');
+}
+function renderObtainCols(){
+  const wrap=document.getElementById('obtainedCols'); wrap.innerHTML='';
+  COLLECTIONS.forEach(c=>{
+    const b=document.createElement('button'); b.className='pf'+(c.id===OBTAIN_COL?' on':'');
+    b.textContent=c.name; b.onclick=()=>{OBTAIN_COL=c.id;renderObtainCols();}; wrap.appendChild(b);
+  });
+  const nb=document.createElement('button'); nb.className='pf'; nb.textContent='+ New';
+  nb.onclick=async()=>{ const id=await createCol(''); OBTAIN_COL=id; renderObtainCols(); }; wrap.appendChild(nb);
+}
+async function confirmObtained(){
+  if(!OBTAIN_CARD)return;
+  const c=CATALOG.find(x=>x.id===OBTAIN_CARD);
+  const pv=document.getElementById('obtainedPrice').value;
+  const price=pv===''?null:+pv;
+  await addToCollection(OBTAIN_CARD,OBTAIN_COL,price);
+  // remove from EVERY wishlist it was in (it's obtained now)
+  const inLists=[...(MEMBER.get(OBTAIN_CARD)||[])];
+  for(const lid of inLists){ await itemDel(`${lid}::${OBTAIN_CARD}`); }
+  MEMBER.delete(OBTAIN_CARD); WL.delete(OBTAIN_CARD);
+  // budget
+  if(SESSION && document.getElementById('obtainedCount').checked && price!=null){
+    await addSpend(price, c?c.name:'Card', OBTAIN_CARD);
+  }
+  document.getElementById('obtainedModal').classList.remove('open');
+  const colName=(COLLECTIONS.find(x=>x.id===OBTAIN_COL)||{}).name||'collection';
+  toast(`Added to ${colName} ✓`);
+  updateBadge(); updateColBadge(); updateSessionBar();
+  if(VIEW==='wishlist')renderWishlist(); else if(VIEW==='collection')renderCollection();
+  OBTAIN_CARD=null;
+}
+
+/* ================= BUDGET SESSIONS ================= */
+async function saveSession(){ await setSetting('session',SESSION); }
+async function listRemaining(listId){
+  const all=await itemsAll(); const catMap=new Map((CATALOG||[]).map(c=>[c.id,c]));
+  let count=0,total=0;
+  for(const it of all){ if(it.listId!==listId)continue; const c=catMap.get(it.id)||it.card; count++; total+=(c&&c.price)||0; }
+  return {count,total};
+}
+let SESS_LIST=null;
+function renderSessLists(){
+  const wrap=document.getElementById('sessionLists'); if(!wrap)return; wrap.innerHTML='';
+  const none=document.createElement('button'); none.className='pf'+(SESS_LIST==null?' on':''); none.textContent='No list';
+  none.onclick=()=>{SESS_LIST=null;renderSessLists();}; wrap.appendChild(none);
+  LISTS.forEach(l=>{
+    const b=document.createElement('button'); b.className='pf'+(SESS_LIST===l.id?' on':''); b.textContent=l.name;
+    b.onclick=async()=>{ SESS_LIST=l.id; renderSessLists();
+      const bi=document.getElementById('sessionBudget');
+      if(!bi.value){ const {total}=await listRemaining(l.id); if(total)bi.value=total; } // suggest the list's total
+    };
+    wrap.appendChild(b);
+  });
+}
+async function startSession(name,budget,listId){
+  SESSION={name:(name||'').trim()||'Session',budget:+budget||0,spent:0,spends:[],startedAt:Date.now(),listId:listId||null};
+  await saveSession(); updateSessionBar(); if(VIEW==='budget')renderBudget();
+}
+async function endSession(){
+  if(!SESSION)return;
+  const hist=(await getSetting('sessions'))||[];
+  hist.unshift({...SESSION,endedAt:Date.now()});
+  await setSetting('sessions',hist.slice(0,30));
+  SESSION=null; await saveSession(); updateSessionBar(); if(VIEW==='budget')renderBudget();
+}
+async function addSpend(amount,name,cardId){
+  if(!SESSION)return;
+  SESSION.spends.unshift({id:cardId||null,name:name||'Spend',amount:+amount||0,at:Date.now()});
+  SESSION.spent=SESSION.spends.reduce((s,x)=>s+(x.amount||0),0);
+  await saveSession(); updateSessionBar(); if(VIEW==='budget')renderBudget();
+}
+async function delSpend(idx){
+  if(!SESSION)return; SESSION.spends.splice(idx,1);
+  SESSION.spent=SESSION.spends.reduce((s,x)=>s+(x.amount||0),0);
+  await saveSession(); updateSessionBar(); renderBudget();
+}
+function updateSessionBar(){
+  const bar=document.getElementById('sessionBar'); if(!bar)return;
+  if(!SESSION){ bar.style.display='none'; return; }
+  const rem=SESSION.budget-SESSION.spent; const over=rem<0;
+  const pct=SESSION.budget>0?(SESSION.spent>0?Math.max(3,Math.min(100,Math.round(SESSION.spent/SESSION.budget*100))):0):0;
+  bar.style.display='flex';
+  bar.innerHTML=`<span>${esc(SESSION.name)}</span>
+    <span class="sb-track"><span class="sb-fill ${over?'over':''}" style="width:${pct}%"></span></span>
+    <span class="sb-rem ${over?'over':''}">${over?'−':''}${yen(Math.abs(rem))} left</span>`;
+  bar.onclick=()=>{ if(SHARED)exitShared(); VIEW='budget'; document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active',x.dataset.view==='budget')); window.scrollTo(0,0); render(); };
+}
+function renderBudget(){
+  document.getElementById('browseControls').style.display='none';
+  const v=document.getElementById('view');
+  if(!SESSION){
+    getSetting('sessions').then(hist=>{
+      v.innerHTML=`<div class="empty" style="padding:40px 24px 8px">
+          <div class="em-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#6E7785" stroke-width="1.3"><path d="M3 7h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M3 7l2.5-3h13L21 7"/></svg></div>
+          <h2>No active session</h2><p>Start a hunting session to set a budget and track what you spend as you buy.</p></div>
+        <button class="bigbtn" id="startSessionBtn">＋ Start a session</button>
+        ${(hist&&hist.length)?`<div class="bsection"><div class="lbl" style="margin-bottom:6px">Past sessions</div>${hist.map(h=>{
+          const d=h.budget-h.spent; return `<div class="spendrow"><span>${esc(h.name)}<br><span class="sx">${new Date(h.endedAt||h.startedAt).toLocaleDateString()}</span></span><span>${yen(h.spent)} <span class="sx">/ ${yen(h.budget)}</span></span></div>`;
+        }).join('')}</div>`:''}`;
+      document.getElementById('startSessionBtn').onclick=openSessionModal;
+    });
+    return;
+  }
+  const rem=SESSION.budget-SESSION.spent, over=rem<0;
+  const pct=SESSION.budget>0?(SESSION.spent>0?Math.max(3,Math.min(100,Math.round(SESSION.spent/SESSION.budget*100))):0):0;
+  v.innerHTML=`<div class="bsection dark">
+      <div class="lbl">${esc(SESSION.name)} · budget ${yen(SESSION.budget)}</div>
+      <div class="bbig"><div class="rem ${over?'over':''}">${over?'−':''}${yen(Math.abs(rem))}</div><div class="lbl">${over?'over budget':'remaining'}</div></div>
+      <div class="btrack"><span class="fill ${over?'over':''}" style="width:${pct}%"></span></div>
+      <div class="lbl">spent ${yen(SESSION.spent)} · ${myr(SESSION.spent)}</div>
+    </div>
+    ${SESSION.listId?`<div class="bsection accent" id="tieSection"><div class="lbl">Loading wishlist…</div></div>`:''}
+    <button class="bigbtn" id="addSpendBtn">＋ Add a spend</button>
+    <div class="bsection">
+      <div class="lbl" style="margin-bottom:4px">Spends (${SESSION.spends.length})</div>
+      ${SESSION.spends.length?SESSION.spends.map((s,idx)=>`<div class="spendrow">
+          <span>${esc(s.name)}<br><span class="sx">${new Date(s.at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span></span>
+          <span>${yen(s.amount)} <button class="del" data-sp="${idx}" aria-label="Delete">✕</button></span></div>`).join(''):`<p class="sx" style="padding:8px 0">No spends yet. Mark a wishlist card as obtained with a price, or add one above.</p>`}
+    </div>
+    <button class="bigbtn" id="endSessionBtn" style="background:#fff;border:1.5px solid var(--line);color:var(--hi)">End session</button>`;
+  document.getElementById('addSpendBtn').onclick=openSpendModal;
+  document.getElementById('endSessionBtn').onclick=async()=>{ if(confirm('End this session? It will be saved to your history.')) await endSession(); };
+  v.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>delSpend(+b.dataset.sp));
+  if(SESSION.listId){
+    const name=(LISTS.find(l=>l.id===SESSION.listId)||{}).name||'wishlist';
+    listRemaining(SESSION.listId).then(({count,total})=>{
+      const el=document.getElementById('tieSection'); if(!el)return;
+      const covers=SESSION.budget>=total;
+      const cov=total>0?Math.round(SESSION.budget/total*100):100;
+      el.innerHTML=`<div class="lbl">Shopping for “${esc(name)}”</div>
+        <div class="bbig"><div class="rem" style="font-size:24px">${yen(total)}</div><div class="lbl">${count} card${count===1?'':'s'} left · ≈ ${myr(total)}</div></div>
+        <div class="lbl">${count===0?'Whole wishlist obtained 🎉':covers?'Your budget covers this wishlist ✓':`Budget covers about ${cov}% of it`}</div>`;
+    });
+  }
+}
+function openSessionModal(){ SESS_LIST=null; document.getElementById('sessionName').value=''; document.getElementById('sessionBudget').value=''; renderSessLists(); document.getElementById('sessionModal').classList.add('open'); }
+function openSpendModal(){ document.getElementById('spendName').value=''; document.getElementById('spendAmount').value=''; document.getElementById('spendModal').classList.add('open'); }
+
+/* modal wiring */
+document.getElementById('obtainedCancel').onclick=()=>document.getElementById('obtainedModal').classList.remove('open');
+document.getElementById('obtainedModal').onclick=e=>{if(e.target.id==='obtainedModal')e.currentTarget.classList.remove('open');};
+document.getElementById('obtainedSave').onclick=confirmObtained;
+document.getElementById('sessionCancel').onclick=()=>document.getElementById('sessionModal').classList.remove('open');
+document.getElementById('sessionModal').onclick=e=>{if(e.target.id==='sessionModal')e.currentTarget.classList.remove('open');};
+document.getElementById('sessionStart').onclick=async()=>{ await startSession(document.getElementById('sessionName').value,document.getElementById('sessionBudget').value,SESS_LIST); document.getElementById('sessionModal').classList.remove('open'); };
+document.getElementById('spendCancel').onclick=()=>document.getElementById('spendModal').classList.remove('open');
+document.getElementById('spendModal').onclick=e=>{if(e.target.id==='spendModal')e.currentTarget.classList.remove('open');};
+document.getElementById('spendSave').onclick=async()=>{ await addSpend(document.getElementById('spendAmount').value,document.getElementById('spendName').value,null); document.getElementById('spendModal').classList.remove('open'); };
+document.getElementById('addColBtn').onclick=async()=>{ const i=document.getElementById('newColName'); await createCol(i.value); i.value=''; openColMgr(); };
+document.getElementById('colMgrDone').onclick=()=>document.getElementById('colMgrModal').classList.remove('open');
+document.getElementById('colMgrModal').onclick=e=>{if(e.target.id==='colMgrModal')e.currentTarget.classList.remove('open');};
 async function toggleInList(cardId,listId){
   const c=CATALOG.find(x=>x.id===cardId); if(!c)return;
   let set=MEMBER.get(cardId)||new Set();
@@ -889,27 +1415,36 @@ function refreshCellState(id){
 }
 
 /* ---------- quick-add bar (Cards tab) ---------- */
+const colName=id=>(COLLECTIONS.find(c=>c.id===id)||{}).name||'collection';
+async function toggleInCollection(cardId,colId){
+  if((CMEMBER.get(cardId)||EMPTY).has(colId)){ await removeFromCollection(cardId,colId); toast('Removed from '+colName(colId)); }
+  else { await addToCollection(cardId,colId,null); toast('Added to '+colName(colId)); }
+  updateColBadge(); refreshCellState(cardId);
+  if(VIEW==='collection') renderCollection();
+}
 function buildQuickbar(){
   const q=document.getElementById('quickbar'); if(!q)return;
-  const name=(LISTS.find(l=>l.id===CURRENT)||{}).name||'a list';
+  const col=COLMODE();
+  q.classList.toggle('col',col);
   const ico='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>';
-  q.innerHTML = QUICK_ADD
-    ? `${ico}<span>Tap + adds to <b>${esc(name)}</b></span><span class="qb-caret">change ▾</span>`
-    : `${ico}<span>Tap + lets you <b>choose lists</b></span><span class="qb-caret">change ▾</span>`;
+  q.innerHTML = !QUICK_ADD
+    ? `${ico}<span>Tap + lets you <b>choose lists</b></span><span class="qb-caret">change ▾</span>`
+    : col
+      ? `${ico}<span>Tap + adds to <b>${esc(colName(CUR_COL))}</b> <small style="opacity:.7">collection</small></span><span class="qb-caret">change ▾</span>`
+      : `${ico}<span>Tap + adds to <b>${esc((LISTS.find(l=>l.id===CURRENT)||{}).name||'a list')}</b></span><span class="qb-caret">change ▾</span>`;
   q.onclick=openTargetMenu;
 }
 function openTargetMenu(){
   const wrap=document.getElementById('targetLists'); wrap.innerHTML='';
-  LISTS.forEach(l=>{
-    const on=QUICK_ADD && l.id===CURRENT;
-    const b=document.createElement('button'); b.className='pickrow'+(on?' on':'');
-    b.innerHTML=`<span class="pk-check">${on?'✓':''}</span><span class="pk-name">${esc(l.name)}</span>`;
-    b.onclick=()=>chooseTarget(l.id);
-    wrap.appendChild(b);
-  });
-  const ask=document.createElement('button');
-  const onAsk=!QUICK_ADD;
-  ask.className='pickrow'+(onAsk?' on':''); ask.style.marginTop='4px';
+  const section=t=>{const h=document.createElement('div');h.className='pk-section';h.textContent=t;wrap.appendChild(h);};
+  const row=(name,on,onclick)=>{const b=document.createElement('button');b.className='pickrow'+(on?' on':'');
+    b.innerHTML=`<span class="pk-check">${on?'✓':''}</span><span class="pk-name">${esc(name)}</span>`;b.onclick=onclick;wrap.appendChild(b);};
+  section('Wishlists');
+  LISTS.forEach(l=>row(l.name, QUICK_ADD&&QUICK_KIND==='wishlist'&&l.id===CURRENT, ()=>chooseTarget(l.id)));
+  section('Collections');
+  COLLECTIONS.forEach(c=>row(c.name, QUICK_ADD&&QUICK_KIND==='collection'&&c.id===CUR_COL, ()=>chooseTargetCol(c.id)));
+  const ask=document.createElement('button'); const onAsk=!QUICK_ADD;
+  ask.className='pickrow'+(onAsk?' on':''); ask.style.marginTop='8px';
   ask.innerHTML=`<span class="pk-check">${onAsk?'✓':''}</span><span class="pk-name">Choose lists each time <small style="color:var(--muted);font-weight:600">(multi-add)</small></span>`;
   ask.onclick=async()=>{ QUICK_ADD=false; await setSetting('quickadd',0); closeTargetMenu(); renderBrowse(); };
   wrap.appendChild(ask);
@@ -917,8 +1452,13 @@ function openTargetMenu(){
 }
 function closeTargetMenu(){ document.getElementById('targetModal').classList.remove('open'); }
 async function chooseTarget(id){
-  QUICK_ADD=true; await setSetting('quickadd',1);
+  QUICK_ADD=true; QUICK_KIND='wishlist'; await setSetting('quickadd',1); await setSetting('quickkind','wishlist');
   CURRENT=id; await setSetting('current',id); await loadCurrentList(); updateBadge();
+  closeTargetMenu(); renderBrowse();
+}
+async function chooseTargetCol(id){
+  QUICK_ADD=true; QUICK_KIND='collection'; await setSetting('quickadd',1); await setSetting('quickkind','collection');
+  CUR_COL=id; await setSetting('curcol',id); await loadCurrentCol(); updateColBadge();
   closeTargetMenu(); renderBrowse();
 }
 document.getElementById('targetDone').onclick=closeTargetMenu;
@@ -984,8 +1524,9 @@ function updateBadge(){const b=document.getElementById('wlBadge');const n=WL.siz
 function wireGrid(root){
   root.querySelectorAll('[data-add]').forEach(b=>b.onclick=e=>{
     e.stopPropagation();
-    if(QUICK_ADD) toggleInList(b.dataset.add, CURRENT);
-    else openAddPicker(b.dataset.add);
+    if(!QUICK_ADD){ openAddPicker(b.dataset.add); return; }
+    if(QUICK_KIND==='collection') toggleInCollection(b.dataset.add, CUR_COL);
+    else toggleInList(b.dataset.add, CURRENT);
   });
   root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
 }
@@ -1005,7 +1546,8 @@ function wireWishlist(root){
   const sh=document.getElementById('shareList'); if(sh)sh.onclick=openShareModal;
   const ec=document.getElementById('expCsv'); if(ec)ec.onclick=exportCsv;
   const ib=document.getElementById('impBtn'); if(ib)ib.onclick=pickImport;
-  const ws=document.getElementById('wlSort'); if(ws)ws.onclick=openWlSort;
+  root.querySelectorAll('[data-got]').forEach(b=>b.onclick=()=>openObtained(b.dataset.got));
+  const ws=document.getElementById('wlSort'); if(ws)ws.onclick=()=>openWlSort(ws);
 }
 /* ---------- list manager modal ---------- */
 function openListModal(focusNew){
