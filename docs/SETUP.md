@@ -106,8 +106,13 @@ network destinations, bounds response sizes, and does not circumvent challenges.
 
 - Official list: discovers release options dynamically, with distinct printing IDs.
 - Yuyutei: discovers set links; existing exact listing IDs can refresh existing prices.
+  The hosted GitHub runner received HTTP 403 for `robots.txt` in the first dry run,
+  so this source currently contributes no scheduled observations. Do not bypass
+  the restriction; use a permitted feed or a source-approved access method.
 - Cardrush: currently the configured homepage sample, **not full-store coverage**.
   Add verified category URLs after checking parser fixtures and the request budget.
+  Its observed listings have unknown condition and variant mapping, so they are
+  retained for review rather than used in collection valuations.
 - Dorasuta: disabled after an initial HTTP 403; structured-data parser is provisional.
   Do not advertise this source as supported until permitted access and fixtures pass.
 
