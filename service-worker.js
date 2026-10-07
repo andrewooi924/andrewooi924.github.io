@@ -5,12 +5,15 @@
    - Card images: cache-first so wishlist art survives offline.
    Bump CACHE when you ship a new app version. */
 
-const CACHE = 'most-wanted-v22';
-const IMG_CACHE = 'mw-images-v22';
+const CACHE = 'most-wanted-v23';
+const IMG_CACHE = 'mw-images-v23';
 const SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
+  './cloud/bundle.js',
+  './cloud/style.css',
+  './app-config.js',
   './catalog.json',
   './icon-192.png',
   './icon-512.png',
@@ -30,7 +33,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE && k !== IMG_CACHE).map(k => caches.delete(k)))
+      Promise.all(keys.filter(k => k.startsWith('most-wanted-') && k !== CACHE || k.startsWith('mw-images-') && k !== IMG_CACHE).map(k => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });
@@ -41,6 +44,13 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  // Never cache account, token-sharing, auth, or API responses.
+  if(req.headers.has('authorization') || /\/(?:v1|auth|rest)\//.test(url.pathname)) return;
+
+  if(req.destination === 'image') {
+    e.respondWith(caches.open('mw-saved-images').then(async cache => (await cache.match(req)) || fetch(req)));
+    return;
+  }
 
   // Card images (Bandai CDN + Yuyutei) — cache-first, keep opaque responses too.
   const isCardImg = (url.hostname.endsWith('onepiece-cardgame.com') || url.hostname.endsWith('yuyu-tei.jp'))
@@ -76,7 +86,7 @@ self.addEventListener('fetch', e => {
   }
 
   // Other same-origin assets (icons, manifest) — cache-first, refresh in background.
-  if (url.origin === self.location.origin) {
+  if (url.origin === self.location.origin && /\.(?:js|css|png|jpg|jpeg|webp|json|webmanifest)$/.test(url.pathname)) {
     e.respondWith(
       caches.match(req).then(hit => {
         const net = fetch(req).then(res => {

@@ -1,0 +1,11 @@
+.cloud-dialog{border:1px solid var(--line);border-radius:18px;padding:24px;width:min(540px,calc(100% - 24px));max-height:85vh;background:var(--surface);color:var(--text)}
+.cloud-dialog::backdrop{background:rgba(14,27,42,.65)}
+.cloud-dialog h2{margin-top:0;font-size:21px}.cloud-dialog p{line-height:1.5}
+.cloud-action{border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin:4px;background:white;min-height:44px}
+.cloud-action:focus-visible{outline:3px solid var(--brass)}.cloud-action:disabled{opacity:.5}
+.cloud-list{padding:12px 0;border-top:1px solid var(--line)}.cloud-list strong,.cloud-list small{display:block;margin-bottom:5px}
+.cloud-hint,.cloud-list small{color:var(--muted);font-size:13px}
+.cloud-dialog input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}
+.cloud-dialog [role=status]{font-size:14px;color:var(--brass-deep)}
+.account-button{font-size:12px;border:1px solid var(--muted-ink);border-radius:20px;padding:7px 10px}
+@media(max-width:420px){.hdr-right{gap:5px}.ratechip{padding:5px 7px}.offline-dot{display:none}}

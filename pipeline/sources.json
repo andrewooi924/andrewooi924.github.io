@@ -1,0 +1,10 @@
+{
+  "max_requests": 180,
+  "delay_seconds": 1.5,
+  "sources": {
+    "bandai": {"enabled": true, "index": "https://www.onepiece-cardgame.com/cardlist/", "discover": true},
+    "yuyutei": {"enabled": true, "index": "https://yuyu-tei.jp/top/opc", "discover": true},
+    "cardrush": {"enabled": true, "urls": ["https://www.cardrush-op.jp/"]},
+    "dorasuta": {"enabled": false, "urls": ["https://dorasuta.jp/onepiece-cardgame"], "reason": "Initial probe returned HTTP 403; needs permitted access and representative fixtures before enabling."}
+  }
+}

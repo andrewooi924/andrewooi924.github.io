@@ -1,0 +1,25 @@
+{
+  "name": "most-wanted",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test api/test/*.test.ts",
+    "test:db": "bash scripts/test-db.sh",
+    "dev:api": "wrangler dev --config api/wrangler.jsonc",
+    "deploy:api": "wrangler deploy --config api/wrangler.jsonc",
+    "test:browser": "node scripts/browser-check.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.116.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "latest",
+    "@types/node": "latest",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "wrangler": "4.133.0",
+    "@playwright/test": "latest"
+  },
+  "type": "module"
+}

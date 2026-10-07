@@ -1,3 +1,19 @@
+# Most Wanted
+
+A personal One Piece TCG wishlist and collection app.
+
+The new budget-conscious cloud setup uses a Cloudflare Worker API, Supabase Free
+for private lists, and R2 for images and versioned price snapshots. The app still
+works locally without cloud configuration.
+
+- [Setup, limits, and deployment](docs/SETUP.md)
+- [API contract and privacy](docs/API.md)
+
+## Legacy short-link service
+
+The instructions below describe the existing optional KV short-link service.
+The new account-backed sharing flow uses `api/wrangler.jsonc` instead.
+
 # Most Wanted — short link service (Cloudflare Worker + KV)
 
 This turns a long `#w=…` wishlist link into a tiny one like

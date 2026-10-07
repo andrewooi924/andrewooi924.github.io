@@ -4,12 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Most Wanted — OPTCG hunt list</title>
+<meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0E1B2A">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Most Wanted">
+<link rel="stylesheet" href="./cloud/style.css">
+<script src="./app-config.js"></script>
+<script src="./cloud/bundle.js" defer></script>
 <style>
   :root{
     --ink:#0E1B2A; --ink-2:#16273a; --parch:#F3EAD8; --surface:#FBF7EE;
@@ -349,6 +353,7 @@
   .spendrow button.del{color:var(--muted);padding:4px}
   .bigbtn{display:block;width:calc(100% - 28px);margin:12px 14px;height:50px;border-radius:14px;background:var(--brass);color:var(--ink);font-weight:800}
 </style>
+<link rel="stylesheet" href="cloud/style.css">
 </head>
 <body>
 <header>
@@ -362,6 +367,7 @@
       <div class="sub">OPTCG · JP market</div>
     </div>
     <div class="hdr-right">
+      <button class="account-button" onclick="window.MWCloud?.open()">Account</button>
       <button class="ratechip" id="rateChip" aria-label="Set yen to ringgit rate">¥1=RM<span id="rateVal">0.025</span></button>
       <div class="offline-dot" id="netdot"><i></i><span id="netlabel">online</span></div>
     </div>
@@ -581,7 +587,7 @@ let RATE=0.025, BROWSE_CUR='jpy';   // MYR per yen; browse-tab display currency
 /* Short-link service (Cloudflare Worker). Leave '' to keep self-contained inline links.
    Set to your deployed worker, e.g. 'https://most-wanted-links.you.workers.dev' */
 const SHARE_API='';
-let AUTH_TOKEN=null;   // set after Google sign-in (only needed if your worker REQUIRE_AUTH=1)
+let AUTH_TOKEN=null; // Optional token for the legacy short-link Worker when SHARE_API is configured.
 const yen = n => (n==null ? '—' : '¥'+n.toLocaleString('en-US'));
 const myr = n => (n==null ? '—' : 'RM'+(n*RATE).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}));
 const priceMain = n => BROWSE_CUR==='myr' ? myr(n) : yen(n);
@@ -631,23 +637,29 @@ let SESSION=null;   // {name, budget, spent, spends:[{id,name,amount,at}], start
 
 /* ---------- boot ---------- */
 (async function init(){
+  if(document.readyState==='loading') await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
+  let remote=false;
+  try{ if(window.MWCloud?.enabled){ CATALOG=await window.MWCloud.catalog();remote=Array.isArray(CATALOG); } }catch(_){}
   try{
+    if(!remote){
     const res=await fetch('./catalog.json',{cache:'no-cache'});
     if(!res.ok) throw 0;
     CATALOG=await res.json();
+    }
   }catch(e){ /* offline first-load or file:// — SW cache or manual load */ 
     try{const r2=await fetch('./catalog.json');CATALOG=await r2.json();}catch(_){CATALOG=null;}
   }
   // Overlay your own HD images (images/<SET>/…) via image_map.json, if present.
   // Mapped cards use the local HD file; the original Yuyutei image becomes the fallback.
-  if(Array.isArray(CATALOG)){
+  if(Array.isArray(CATALOG)&&!remote){
     try{
       const r=await fetch('./image_map.json',{cache:'no-cache'});
       if(r.ok){ const m=await r.json();
-        for(const c of CATALOG){ const p=m[c.id]; if(p){ c.imgAlt=c.img; c.img=p; } }
+        for(const c of CATALOG){ const p=m[c.id]; if(p){ c.imgAlt2=c.imgAlt; c.imgAlt=c.img; c.img=p; } }
       }
     }catch(_){}
   }
+  CATALOG=normalizeCatalog(CATALOG);
   // ----- wishlists (multiple) -----
   LISTS = (await getSetting('lists')) || [];
   CURRENT = (await getSetting('current')) || null;
@@ -696,6 +708,7 @@ const RARITIES = ()=>['SEC','L','SR','UC','R','C','SPカード'].filter(r=>facet
 const TYPES = ()=>facet('type');
 
 /* ---------- filter chips ---------- */
+let advancedFilters=false;
 function buildChips(){
   const wrap=document.getElementById('chips'); wrap.innerHTML='';
   const mk=(label,key,kind)=>{
@@ -710,8 +723,12 @@ function buildChips(){
   const sortChip=document.createElement('button'); sortChip.className='chip';
   sortChip.innerHTML='Sort: '+sortLabel(F.sort)+' <span class="caret">▾</span>';
   sortChip.onclick=()=>openSort(sortChip); wrap.appendChild(sortChip);
-  mk('Color','colors','color'); mk('Rarity','rarity','list');
-  mk('Set','set','list'); mk('Variant','variant','list'); mk('Type','type','list'); mk('Price','price','price');
+  mk('Set','set','list'); mk('Color','colors','color'); mk('Price','price','price');
+  const advanced=document.createElement('button');advanced.className='chip';
+  const hiddenCount=F.rarity.size+F.variant.size+F.type.size;
+  advanced.textContent=(advancedFilters?'Fewer filters':'Advanced')+(hiddenCount?' · '+hiddenCount:'');
+  advanced.setAttribute('aria-expanded',String(advancedFilters));advanced.onclick=()=>{advancedFilters=!advancedFilters;buildChips();};wrap.appendChild(advanced);
+  if(advancedFilters){mk('Rarity','rarity','list');mk('Variant','variant','list');mk('Type','type','list');}
   buildActiveFilters(F,'activeFilters',()=>{buildChips();renderBrowse();});
 }
 function sortLabel(s){return {'price-asc':'Price ↑','price-desc':'Price ↓','name':'Name','set':'Set'}[s]||s;}
@@ -867,15 +884,15 @@ function cellIn(id){
 function cardCell(c){
   const inWL=cellIn(c.id); const col=COLMODE();
   return `<div class="card" data-id="${c.id}">
-    <button class="imgwrap" data-open="${c.id}" aria-label="Details for ${c.code}">
-      <img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)">
-      <span class="badge">${c.rarity}</span>${colorDots(c.colors)}
+    <button class="imgwrap" data-open="${c.id}" aria-label="Details for ${esc(c.code)}">
+      <img loading="lazy" src="${esc(c.img)}" data-alt="${esc(c.imgAlt||'')}" data-alt2="${esc(c.imgAlt2||'')}" alt="" onerror="imgFallback(this)">
+      <span class="badge">${esc(c.rarity)}</span>${colorDots(c.colors)}
     </button>
     <div class="body">
-      <div class="code">${c.set} · ${c.code}</div>
+      <div class="code">${esc(c.set)} · ${esc(c.code)}</div>
       <div class="nm">${esc(c.name)}</div>
       ${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
-      ${c.variant&&c.variant!=='Normal'?`<div class="vr">${c.variant}</div>`:''}
+      ${c.variant&&c.variant!=='Normal'?`<div class="vr">${esc(c.variant)}</div>`:''}
       <div class="price tnum">${priceMain(c.price)}</div>
     </div>
     <button class="addbtn ${col?'col ':''}${inWL?'in':''}" data-add="${c.id}" aria-label="${col?(inWL?'In collection':'Add to collection'):(inWL?'In a wishlist':'Add to wishlist')}">${inWL?'✓':'+'}</button>
@@ -1004,9 +1021,9 @@ function buildWlChips(){
 }
 function wlRow(i){const c=i.card;
   return `<div class="wl-item" data-id="${c.id}">
-    <button class="th" data-open="${c.id}"><img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></button>
+    <button class="th" data-open="${c.id}"><img loading="lazy" src="${esc(c.img)}" data-alt="${esc(c.imgAlt||'')}" data-alt2="${esc(c.imgAlt2||'')}" alt="" onerror="imgFallback(this)"></button>
     <div class="info">
-      <div class="code">${c.set} · ${c.code} · ${c.rarity}${c.variant&&c.variant!=='Normal'?' · '+c.variant:''}</div>
+      <div class="code">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}${c.variant&&c.variant!=='Normal'?' · '+esc(c.variant):''}</div>
       <div class="nm">${esc(c.name)}</div>
       ${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
       <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
@@ -1028,21 +1045,21 @@ function openDetail(id){
   const inCol=(CMEMBER.get(id)||EMPTY).size>0;
   const sheet=document.getElementById('sheet');
   sheet.innerHTML=`<div class="grip"></div>
-    <div class="detail-img"><img src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></div>
-    <div class="dcode">${c.set} · ${c.code} · ${c.rarity}</div>
+    <div class="detail-img"><img src="${esc(c.img)}" data-alt="${esc(c.imgAlt||'')}" data-alt2="${esc(c.imgAlt2||'')}" alt="" onerror="imgFallback(this)"></div>
+    <div class="dcode">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}</div>
     <h2>${esc(c.name)}</h2>
     ${c.nameEn?`<div class="h2-en">${esc(c.nameEn)}</div>`:''}
     <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small></div>
     <div class="kv">
       ${c.colors.map(col=>`<span class="k"><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px;background:${COLORS[col]||'#999'}"></span>${col}</span>`).join('')}
-      ${c.type?`<span class="k"><b>Type</b> ${c.type}</span>`:''}
-      ${c.power&&c.power!=='-'?`<span class="k"><b>Power</b> ${c.power}</span>`:''}
-      ${c.variant&&c.variant!=='Normal'?`<span class="k"><b>Variant</b> ${c.variant}</span>`:''}
+      ${c.type?`<span class="k"><b>Type</b> ${esc(c.type)}</span>`:''}
+      ${c.power&&c.power!=='-'?`<span class="k"><b>Power</b> ${esc(c.power)}</span>`:''}
+      ${c.variant&&c.variant!=='Normal'?`<span class="k"><b>Variant</b> ${esc(c.variant)}</span>`:''}
     </div>
     ${c.effect?`<div class="effect">${esc(c.effect)}</div>`:''}
     <div class="actions">
       <button class="btn-lg btn-add ${inWL?'in':''}" id="dAdd">${inWL?'✓ In your wishlists — edit' : '+ Add to a wishlist'}</button>
-      ${c.url?`<a class="btn-lg btn-ghost" href="${c.url}" target="_blank" rel="noopener" aria-label="Open on Yuyutei"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 01-1 1H6a1 1 0 01-1-1V7a1 1 0 011-1h6"/></svg></a>`:''}
+      ${c.url?`<a class="btn-lg btn-ghost" href="${esc(c.url)}" target="_blank" rel="noopener" aria-label="Open on Yuyutei"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 01-1 1H6a1 1 0 01-1-1V7a1 1 0 011-1h6"/></svg></a>`:''}
     </div>
     <button class="btn-lg btn-collect" id="dCol"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M4 9h16M9 5v4"/></svg>${inCol?'In collection — add another / edit':'Add to a collection'}</button>`;
   document.getElementById('dAdd').onclick=()=>{closeSheet();openAddPicker(id);};
@@ -1107,11 +1124,14 @@ async function removeFromCollection(cardId,colId){
 }
 async function setPaid(cardId,val){
   const it=COL.get(cardId); if(!it)return;
-  it.pricePaid=(val===''||val==null)?null:+val; await colPut(it);
+  const price=(val===''||val==null)?null:Number(val);
+  if(price!==null&&(!Number.isFinite(price)||price<0||price>1000000000)){toast('Enter a valid non-negative cost');return;}
+  it.pricePaid=price; await colPut(it);
 }
 
-function colMarket(items){return items.reduce((s,i)=>s+(i.card.price||0),0);}
-function colPaid(items){return items.reduce((s,i)=>s+(i.pricePaid||0),0);}
+function itemQuantity(i){return Number.isInteger(i.quantity)&&i.quantity>=1&&i.quantity<=999?i.quantity:1;}
+function colMarket(items){return items.reduce((s,i)=>s+(i.card.price||0)*itemQuantity(i),0);}
+function colPaid(items){return items.reduce((s,i)=>s+(i.pricePaid||0)*itemQuantity(i),0);}
 function colSortItems(arr,s){
   const a=[...arr];
   if(s==='value-desc')a.sort((x,y)=>(y.card.price??-1)-(x.card.price??-1));
@@ -1146,6 +1166,7 @@ function renderCollection(){
   const search=`<div class="search" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="colq" type="search" placeholder="Search this collection…" value="${esc(CF.q)}" autocomplete="off"></div>`;
   const toolbar=`<div class="toolbar">
+      <button class="tool" id="colCloud" onclick="window.MWCloud.open()">Save / share</button>
       <button class="tool" id="colSortBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M9 18h6"/></svg>${colSortLabel()}</button>
     </div>
     <div class="chips" id="colChips"></div>
@@ -1162,14 +1183,19 @@ function renderCollection(){
 }
 function refreshCol(){
   const {items,list}=colFiltered();
-  const mv=colMarket(list), paid=colPaid(list), delta=mv-paid;
+  const mv=colMarket(list), paid=colPaid(list);
+  const comparable=list.filter(i=>i.pricePaid!=null&&i.card.price!=null);
+  const delta=colMarket(comparable)-colPaid(comparable);
+  const missing=list.filter(i=>i.card.price==null).length;
   const sm=document.getElementById('colSummary');
   if(sm) sm.innerHTML=`<div class="summary" style="margin-top:14px">
-      <div><div class="n tnum">${list.length}</div><div class="lbl">cards owned</div></div>
-      <div class="total"><div class="lbl">market value</div><div class="v tnum">${yen(mv)}</div>
+      <div><div class="n tnum">${list.reduce((n,i)=>n+itemQuantity(i),0)}</div><div class="lbl">cards owned</div></div>
+      <div class="total"><div class="lbl">estimated retail value${missing?` · ${missing} unpriced`:""}</div><div class="v tnum">${yen(mv)}</div>
         <div class="lbl" style="color:var(--brass);margin-top:2px">≈ ${myr(mv)}</div>
-        ${paid>0?`<div class="lbl" style="margin-top:4px">paid ${yen(paid)} · <span class="delta ${delta>=0?'pos':'neg'}">${delta>=0?'+':'−'}${yen(Math.abs(delta))}</span></div>`:''}
-      </div></div>`;
+        ${comparable.length?`<div class="lbl" style="margin-top:4px">known cost ${yen(colPaid(comparable))} · <span class="delta ${delta>=0?'pos':'neg'}">${delta>=0?'+':'−'}${yen(Math.abs(delta))}</span> on ${comparable.length} priced entries with known cost</div>`:''}
+      </div></div><button class="tool" id="collectionHistory" style="margin:10px 0">Price history</button><div id="collectionHistoryChart" aria-live="polite"></div>`;
+  const historyButton=document.getElementById('collectionHistory');
+  if(historyButton)historyButton.onclick=()=>window.MWCloud.showHistory(document.getElementById('collectionHistoryChart'),[...COL.values()].map(i=>({id:i.id,quantity:itemQuantity(i)})));
   const body=document.getElementById('colBody'); if(!body)return;
   if(!items.length){
     body.innerHTML=`<div class="empty" style="padding:48px 24px">
@@ -1186,12 +1212,13 @@ function refreshCol(){
 }
 function colRow(i){const c=i.card;
   return `<div class="wl-item" data-id="${c.id}">
-    <button class="th" data-open="${c.id}"><img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></button>
+    <button class="th" data-open="${c.id}"><img loading="lazy" src="${esc(c.img)}" data-alt="${esc(c.imgAlt||'')}" data-alt2="${esc(c.imgAlt2||'')}" alt="" onerror="imgFallback(this)"></button>
     <div class="info">
-      <div class="code">${c.set} · ${c.code} · ${c.rarity}${c.variant&&c.variant!=='Normal'?' · '+c.variant:''}</div>
+      <div class="code">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}${c.variant&&c.variant!=='Normal'?' · '+esc(c.variant):''}</div>
       <div class="nm">${esc(c.name)}</div>${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
       <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
-      <div class="paidfield">Paid <span>¥</span><input type="number" inputmode="numeric" min="0" placeholder="—" value="${i.pricePaid??''}" data-paid="${c.id}"></div>
+      <div class="paidfield">Quantity <input type="number" min="1" max="999" step="1" value="${itemQuantity(i)}" data-quantity="${c.id}" aria-label="Quantity"></div>
+      <div class="paidfield">Paid per card <span>¥</span><input type="number" inputmode="numeric" min="0" placeholder="—" value="${esc(i.pricePaid??'')}" data-paid="${c.id}"></div>
       <textarea class="note" rows="1" placeholder="Add a note — grade, seller…" data-cnote="${c.id}">${esc(i.note||'')}</textarea>
     </div>
     <button class="rm" data-crm="${c.id}" aria-label="Remove from collection"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 7h12M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2m1 0v12a1 1 0 01-1 1H8a1 1 0 01-1-1V7"/></svg></button>
@@ -1200,6 +1227,7 @@ function colRow(i){const c=i.card;
 function wireCollection(){
   const root=document.getElementById('colBody'); if(!root)return;
   root.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
+  root.querySelectorAll('[data-quantity]').forEach(inp=>inp.onchange=async()=>{const quantity=Number(inp.value),it=COL.get(inp.dataset.quantity);if(it&&Number.isInteger(quantity)&&quantity>=1&&quantity<=999){it.quantity=quantity;await colPut(it);}else toast('Quantity must be 1–999');refreshCol();});
   root.querySelectorAll('[data-paid]').forEach(inp=>inp.onchange=async()=>{await setPaid(inp.dataset.paid,inp.value);refreshCol();});
   root.querySelectorAll('[data-cnote]').forEach(t=>t.onchange=async()=>{const it=COL.get(t.dataset.cnote);if(it){it.note=t.value;await colPut(it);}});
   root.querySelectorAll('[data-crm]').forEach(b=>b.onclick=async()=>{await removeFromCollection(b.dataset.crm,CUR_COL);toast('Removed from collection');refreshCol();});
@@ -1234,7 +1262,7 @@ function openObtained(cardId){
   const c=CATALOG.find(x=>x.id===cardId); if(!c)return;
   OBTAIN_CARD=cardId; OBTAIN_COL=CUR_COL||(COLLECTIONS[0]&&COLLECTIONS[0].id);
   document.getElementById('obtainedTitle').textContent = inAnyList(cardId) ? 'Mark as obtained' : 'Add to a collection';
-  document.getElementById('obtainedSub').innerHTML=`<b>${esc(c.name)}</b> · ${c.set} ${c.code}`;
+  document.getElementById('obtainedSub').innerHTML=`<b>${esc(c.name)}</b> · ${esc(c.set)} ${esc(c.code)}`;
   document.getElementById('obtainedPrice').value='';
   const cnt=document.getElementById('obtainedCount'); cnt.parentElement.style.display=SESSION?'flex':'none'; cnt.checked=!!SESSION;
   renderObtainCols();
@@ -1255,10 +1283,11 @@ async function confirmObtained(){
   const pv=document.getElementById('obtainedPrice').value;
   const price=pv===''?null:+pv;
   await addToCollection(OBTAIN_CARD,OBTAIN_COL,price);
-  // remove from EVERY wishlist it was in (it's obtained now)
-  const inLists=[...(MEMBER.get(OBTAIN_CARD)||[])];
-  for(const lid of inLists){ await itemDel(`${lid}::${OBTAIN_CARD}`); }
-  MEMBER.delete(OBTAIN_CARD); WL.delete(OBTAIN_CARD);
+  // Fulfil only the active wishlist; unrelated goals stay intact.
+  if((MEMBER.get(OBTAIN_CARD)||new Set()).has(CURRENT)){
+    await itemDel(`${CURRENT}::${OBTAIN_CARD}`); WL.delete(OBTAIN_CARD);
+    const remaining=MEMBER.get(OBTAIN_CARD);remaining.delete(CURRENT);if(!remaining.size)MEMBER.delete(OBTAIN_CARD);
+  }
   // budget
   if(SESSION && document.getElementById('obtainedCount').checked && price!=null){
     await addSpend(price, c?c.name:'Card', OBTAIN_CARD);
@@ -1468,7 +1497,7 @@ document.getElementById('targetModal').onclick=e=>{if(e.target.id==='targetModal
 function openAddPicker(id){
   const c=CATALOG.find(x=>x.id===id); if(!c)return;
   ADD_CARD=id;
-  document.getElementById('addCard').textContent=`${c.set} · ${c.code} · ${c.name}`;
+  document.getElementById('addCard').textContent=`${esc(c.set)} · ${esc(c.code)} · ${c.name}`;
   renderAddLists();
   document.getElementById('addModal').classList.add('open');
 }
@@ -1584,17 +1613,23 @@ document.querySelectorAll('nav.tabbar button').forEach(b=>b.onclick=()=>{
 async function saveOffline(){
   const items=[...WL.values()]; const btn=document.getElementById('saveOffline');
   if(!items.length){toast('This list is empty');return;}
-  let done=0; const total=items.length;
+  let done=0, saved=0; const total=items.length;
   const label=btn?btn.querySelector('span'):null;
   if(btn)btn.disabled=true;
-  const upd=()=>{ if(label)label.textContent=`Saving ${done}/${total}…`; };
-  upd();
-  await Promise.all(items.map(i=>new Promise(r=>{
-    const img=new Image(); img.onload=img.onerror=()=>{done++;upd();r();}; img.src=i.card.img;
-  })));
-  if(label)label.textContent='Saved offline ✓';
+  try{
+    const cache=await caches.open('mw-saved-images');
+    for(const i of items){
+      try{
+        const response=await fetch(i.card.img,{mode:'cors'});
+        if(!response.ok||!response.headers.get('content-type')?.startsWith('image/'))throw new Error('Image unavailable');
+        await cache.put(i.card.img,response);saved++;
+      }catch(_){}
+      done++;if(label)label.textContent=`Saving ${done}/${total}…`;
+    }
+    toast(`${saved}/${total} images saved offline${saved<total?' — some downloads failed':''}`);
+  }catch(_){toast('Offline image storage is unavailable in this browser');}
+  if(label)label.textContent=`Saved ${saved}/${total}`;
   if(btn)btn.disabled=false;
-  toast('Card images cached — this list now shows without internet ✓');
   setTimeout(()=>{ if(VIEW==='wishlist')renderWishlist(); },1800);
 }
 
@@ -1667,6 +1702,7 @@ async function showShareLink(){
   }
 }
 function openShareModal(){
+  if(window.MWCloud?.enabled){window.MWCloud.open();return;}
   if(!WL.size){toast('This list is empty');return;}
   document.getElementById('linkBox').style.display='none';
   document.getElementById('linkInput').value='';
@@ -1695,7 +1731,14 @@ function checkShareHash(){   // inline links only (#w=), resolved synchronously
   try{ const d=decodeShare(m[1]); if(d&&Array.isArray(d.i)){ SHARED=d; return true; } }catch(e){}
   return false;
 }
-async function resolveShareHash(){   // handles inline (#w=) and worker short links (#s=)
+async function resolveShareHash(){
+  const cloudToken=new URLSearchParams(location.hash.slice(1)).get('share');
+  if(cloudToken){
+    try{const d=await window.MWCloud.shared(cloudToken);SHARED={n:d.title,kind:d.kind,i:d.items.map(x=>[x.id,PR[x.priority]||'m',x.quantity||1])};}
+    catch(_){SHARED={n:'Shared list',i:[],error:'load'};}
+    return true;
+  }
+
   if(checkShareHash()) return true;
   const ms=(location.hash||'').match(/[#&]s=([^&]+)/);
   if(!ms) return false;
@@ -1711,10 +1754,10 @@ function renderShared(){
   document.getElementById('browseControls').style.display='none';
   const v=document.getElementById('view');
   const map=new Map(CATALOG.map(c=>[c.id,c]));
-  const rows=SHARED.i.map(([id,p])=>({c:map.get(id),p:PR_BACK[p]||'medium'})).filter(x=>x.c);
-  const total=rows.reduce((s,x)=>s+(x.c.price||0),0);
+  const rows=SHARED.i.map(([id,p,quantity])=>({c:map.get(id),p:PR_BACK[p]||'medium',quantity:quantity||1})).filter(x=>x.c);
+  const total=rows.reduce((s,x)=>s+(x.c.price||0)*x.quantity,0);
   const head=`<div class="sharebanner">
-      <div class="sb-txt"><div class="sb-eyebrow">Shared wishlist${SHARED.by?' · from '+esc(SHARED.by):''}</div>
+      <div class="sb-txt"><div class="sb-eyebrow">Shared ${SHARED.kind==='collection'?'collection':'wishlist'}${SHARED.by?' · from '+esc(SHARED.by):''}</div>
         <div class="sb-name">${esc(SHARED.n||'Wishlist')}</div></div>
       ${rows.length?'<button class="sb-save" id="shImport">Save a copy</button>':''}</div>
     <div class="summary"><div><div class="n tnum">${rows.length}</div><div class="lbl">cards</div></div>
@@ -1724,13 +1767,13 @@ function renderShared(){
     ? `<div class="empty" style="padding:40px 24px"><p>Couldn’t load this shared list. The link may be invalid or the sharing service is unavailable.</p></div>`
     : `<div class="empty" style="padding:40px 24px"><p>This shared list is empty, or its cards aren’t in the catalog yet.</p></div>`;
   const body = rows.length
-    ? rows.map(({c,p})=>`<div class="wl-item">
-        <button class="th" data-open="${c.id}"><img loading="lazy" src="${c.img}" data-alt="${c.imgAlt||''}" data-alt2="${c.imgAlt2||''}" alt="" onerror="imgFallback(this)"></button>
+    ? rows.map(({c,p,quantity})=>`<div class="wl-item">
+        <button class="th" data-open="${c.id}"><img loading="lazy" src="${esc(c.img)}" data-alt="${esc(c.imgAlt||'')}" data-alt2="${esc(c.imgAlt2||'')}" alt="" onerror="imgFallback(this)"></button>
         <div class="info">
-          <div class="code">${c.set} · ${c.code} · ${c.rarity}${c.variant&&c.variant!=='Normal'?' · '+c.variant:''}</div>
+          <div class="code">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}${c.variant&&c.variant!=='Normal'?' · '+esc(c.variant):''}</div>
           <div class="nm">${esc(c.name)}</div>${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
           <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
-          <span class="pri-badge ${p}">${p}</span>
+          <span class="pri-badge ${p}">${p} · ×${quantity}</span>
         </div></div>`).join('')
     : emptyMsg;
   v.innerHTML=head+body;
@@ -1738,6 +1781,9 @@ function renderShared(){
   const imp=document.getElementById('shImport'); if(imp)imp.onclick=saveSharedCopy;
 }
 async function saveSharedCopy(){
+  if(SHARED.kind==='collection'){
+    await window.MWBridge.importList({kind:'collection',title:SHARED.n,items:SHARED.i.map(([id,p,quantity])=>({id,quantity:quantity||1,priority:PR_BACK[p]||'medium'}))});exitShared();return;
+  }
   const name=(SHARED.n||'Shared list');
   const id=newId(); LISTS.push({id,name}); await persistLists();
   const map=new Map(CATALOG.map(c=>[c.id,c]));
@@ -1764,13 +1810,13 @@ function pickImport(){
     rd.onload=async()=>{try{
       const d=JSON.parse(rd.result);
       const items=Array.isArray(d)?d:d.items;
-      if(!Array.isArray(items))throw 0;
+      if(!Array.isArray(items)||items.length>2000)throw 0;
       const name=(d&&d.name)?d.name:(f.name.replace(/\.[^.]*$/,'').replace(/\.mostwanted$/,'')||'Imported list');
       const id=newId(); LISTS.push({id,name}); await persistLists();
       let n=0;
-      for(const it of items){ if(it&&it.id&&it.card){
-        await itemPut({key:`${id}::${it.id}`,listId:id,id:it.id,card:it.card,
-          priority:it.priority||'medium',note:it.note||'',addedAt:it.addedAt||Date.now()}); n++; }
+      for(const it of items){ if(it&&/^[A-Za-z0-9_-]{1,100}$/.test(it.id)&&it.card&&normalizeCatalog([it.card]).length){
+        await itemPut({key:`${id}::${it.id}`,listId:id,id:it.id,card:normalizeCatalog([it.card])[0]||CATALOG.find(c=>c.id===it.id),
+          priority:PRIORITIES.includes(it.priority)?it.priority:'medium',note:it.note||'',addedAt:it.addedAt||Date.now()}); n++; }
       }
       await buildMember(); await switchList(id);
       toast(`Imported “${name}” · ${n} cards`);
@@ -1783,7 +1829,7 @@ function pickImport(){
 function wireCatalogPicker(){
   const inp=document.getElementById('catPick'); if(!inp)return;
   inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();
-    rd.onload=()=>{try{CATALOG=JSON.parse(rd.result);buildChips();render();toast('Catalog loaded');}catch(e){toast('Could not read catalog.json');}};
+    rd.onload=()=>{try{CATALOG=normalizeCatalog(JSON.parse(rd.result));buildChips();render();toast('Catalog loaded');}catch(e){toast('Could not read catalog.json');}};
     rd.readAsText(f);};
 }
 
@@ -1807,6 +1853,49 @@ function imgFallback(el){ // local missing -> official CDN -> Yuyutei thumb -> d
   if(step<chain.length){ el.dataset.f=step+1; el.src=chain[step]; }
   else { el.style.opacity=.15; }
 }
+
+function safeAsset(value){
+  if(typeof value!=='string'||/[<>"'\\]/.test(value))return '';
+  try{const u=new URL(value,location.href);return u.protocol==='https:'||(u.origin===location.origin&&u.protocol==='http:')?u.href:'';}catch(_){return '';}
+}
+function normalizeCatalog(data){
+  if(!Array.isArray(data))return [];
+  return data.filter(c=>c&&/^[A-Za-z0-9_-]{1,100}$/.test(c.id)).map(c=>({...c,
+    name:String(c.name||c.code||''),code:String(c.code||''),set:String(c.set||''),rarity:String(c.rarity||''),
+    colors:Array.isArray(c.colors)?c.colors.filter(x=>Object.hasOwn(COLORS,x)):[],
+    price:typeof c.price==='number'&&Number.isFinite(c.price)&&c.price>=0?c.price:null,
+    img:safeAsset(c.img),imgAlt:safeAsset(c.imgAlt),imgAlt2:safeAsset(c.imgAlt2),url:safeAsset(c.url)
+  }));
+}
+window.MWBridge={
+  async exportCurrent(){
+    const collection=VIEW==='collection';
+    const selected=collection?CUR_COL:CURRENT;
+    const lists=collection?COLLECTIONS:LISTS;
+    const source=collection?await colAll():await itemsAll();
+    const items=source.filter(x=>(collection?x.colId:x.listId)===selected).map(x=>({id:x.id,quantity:x.quantity||1,
+      priority:PRIORITIES.includes(x.priority)?x.priority:'medium',note:String(x.note||'').slice(0,2000),
+      pricePaid:x.pricePaid??null,obtainedAt:x.obtainedAt||0,addedAt:x.addedAt||0}));
+    return {localId:selected,kind:collection?'collection':'wishlist',title:lists.find(x=>x.id===selected)?.name||'List',items};
+  },
+  async importList(row){
+    const collection=row.kind==='collection',id=newId(),name=String(row.title||'Cloud copy').slice(0,100);
+    const known=new Map(CATALOG.map(c=>[c.id,c]));
+    const entries=row.items.filter(x=>known.has(x.id));
+    const skipped=row.items.length-entries.length;
+    if(skipped&&!confirm(`${skipped} cards are not in this catalog. Download the ${entries.length} known cards?`))return;
+    if(collection){COLLECTIONS.push({id,name});await persistCols();}
+    else{LISTS.push({id,name});await persistLists();}
+    for(const x of entries){
+      const item={...x,key:`${id}::${x.id}`,card:known.get(x.id)};
+      if(collection){item.colId=id;await colPut(item);}else{item.listId=id;await itemPut(item);}
+    }
+    VIEW=collection?'collection':'wishlist';
+    if(collection){await buildCMember();await switchCol(id);}else{await buildMember();await switchList(id);}
+    document.querySelectorAll('nav.tabbar button').forEach(x=>x.classList.toggle('active',x.dataset.view===VIEW));
+  }
+};
+
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
 let tt; function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2200);}
 </script>

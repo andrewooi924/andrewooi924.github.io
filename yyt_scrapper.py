@@ -20,7 +20,6 @@ import re
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-from playwright.async_api import async_playwright
 
 
 BASE_URL = "https://yuyu-tei.jp/sell/opc/s/{}"
@@ -55,7 +54,7 @@ def variant_signature(name):
 
 
 def parse_listing_html(html, set_code):
-    soup = BeautifulSoup(html, "lxml")
+    soup = BeautifulSoup(html, "html.parser")
     out = []
 
     for prod in soup.select("div.card-product"):
@@ -134,6 +133,7 @@ async def scrape_set(page, set_code):
 
 
 async def main():
+    from playwright.async_api import async_playwright
     all_rows = []
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
