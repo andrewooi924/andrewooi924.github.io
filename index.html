@@ -591,6 +591,9 @@ let AUTH_TOKEN=null; // Optional token for the legacy short-link Worker when SHA
 const yen = n => (n==null ? '—' : '¥'+n.toLocaleString('en-US'));
 const myr = n => (n==null ? '—' : 'RM'+(n*RATE).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}));
 const priceMain = n => BROWSE_CUR==='myr' ? myr(n) : yen(n);
+const priceNote = c => c.priceStatus==='legacy-undated'
+  ? '<small title="Imported price with no verified observation date"> · undated</small>'
+  : c.priceStatus==='fresh' ? '<small title="Observed retailer price"> · observed</small>' : '';
 
 /* ---------- tiny IndexedDB wrapper ---------- */
 const DB='mostwanted', ITEMS='items', SET='settings', LEGACY='wishlist', COLI='colitems';
@@ -893,7 +896,7 @@ function cardCell(c){
       <div class="nm">${esc(c.name)}</div>
       ${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
       ${c.variant&&c.variant!=='Normal'?`<div class="vr">${esc(c.variant)}</div>`:''}
-      <div class="price tnum">${priceMain(c.price)}</div>
+      <div class="price tnum">${priceMain(c.price)}${priceNote(c)}</div>
     </div>
     <button class="addbtn ${col?'col ':''}${inWL?'in':''}" data-add="${c.id}" aria-label="${col?(inWL?'In collection':'Add to collection'):(inWL?'In a wishlist':'Add to wishlist')}">${inWL?'✓':'+'}</button>
   </div>`;
@@ -1026,7 +1029,7 @@ function wlRow(i){const c=i.card;
       <div class="code">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}${c.variant&&c.variant!=='Normal'?' · '+esc(c.variant):''}</div>
       <div class="nm">${esc(c.name)}</div>
       ${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
-      <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
+      <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span>${priceNote(c)}</div>
       <div class="seg" data-id="${c.id}">
         ${PRIORITIES.map(p=>`<button data-on="${p}" class="${i.priority===p?'active':''}" data-pri="${p}">${p[0].toUpperCase()}</button>`).join('')}
       </div>
@@ -1049,7 +1052,7 @@ function openDetail(id){
     <div class="dcode">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}</div>
     <h2>${esc(c.name)}</h2>
     ${c.nameEn?`<div class="h2-en">${esc(c.nameEn)}</div>`:''}
-    <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small></div>
+    <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small>${priceNote(c)}</div>
     <div class="kv">
       ${c.colors.map(col=>`<span class="k"><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px;background:${COLORS[col]||'#999'}"></span>${col}</span>`).join('')}
       ${c.type?`<span class="k"><b>Type</b> ${esc(c.type)}</span>`:''}
@@ -1216,7 +1219,7 @@ function colRow(i){const c=i.card;
     <div class="info">
       <div class="code">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}${c.variant&&c.variant!=='Normal'?' · '+esc(c.variant):''}</div>
       <div class="nm">${esc(c.name)}</div>${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
-      <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
+      <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span>${priceNote(c)}</div>
       <div class="paidfield">Quantity <input type="number" min="1" max="999" step="1" value="${itemQuantity(i)}" data-quantity="${c.id}" aria-label="Quantity"></div>
       <div class="paidfield">Paid per card <span>¥</span><input type="number" inputmode="numeric" min="0" placeholder="—" value="${esc(i.pricePaid??'')}" data-paid="${c.id}"></div>
       <textarea class="note" rows="1" placeholder="Add a note — grade, seller…" data-cnote="${c.id}">${esc(i.note||'')}</textarea>
@@ -1772,7 +1775,7 @@ function renderShared(){
         <div class="info">
           <div class="code">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}${c.variant&&c.variant!=='Normal'?' · '+esc(c.variant):''}</div>
           <div class="nm">${esc(c.name)}</div>${c.nameEn?`<div class="nm-en">${esc(c.nameEn)}</div>`:''}
-          <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span></div>
+          <div class="pr tnum">${yen(c.price)} <span style="color:var(--brass-deep);font-weight:700">· ${myr(c.price)}</span>${priceNote(c)}</div>
           <span class="pri-badge ${p}">${p} · ×${quantity}</span>
         </div></div>`).join('')
     : emptyMsg;
