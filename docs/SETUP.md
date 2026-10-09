@@ -134,6 +134,12 @@ Failed sources preserve their last observations, which expire from valuation aft
 The scheduled workflow is **disabled by default**. Test with workflow_dispatch
 (publish=false) first. Configure GitHub Actions for this repository:
 
+The official card-list footer prohibits unauthorized reuse/reposting of its images,
+text, and data. Keep scheduled publication and image mirroring disabled until you
+have permission or a licensed source for the material you publish:
+https://www.onepiece-cardgame.com/cardlist/. The existing scraper is a technical
+prototype, not a grant of data rights.
+
 - Repository secrets: `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
 - Repository variables: `CLOUDFLARE_ACCOUNT_ID`, `R2_DATA_BUCKET`.
 - Repository variable `MW_REFRESH_ENABLED=true` only when the dry run and budget fit.
