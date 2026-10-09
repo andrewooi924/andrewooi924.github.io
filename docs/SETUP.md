@@ -142,7 +142,8 @@ The scheduled workflow is **disabled by default**. Test with workflow_dispatch
   `R2_ASSETS_BUCKET`, `ASSETS_BASE_URL`. Leave disabled until asset
   hosting is configured. Run the bounded manual uploader for the initial backlog.
 
-Schedule: 20:17 UTC (04:17 Malaysia), bounded to 40 minutes/run and 180 HTTP requests.
+Schedule target: 20:17 UTC (04:17 Malaysia); GitHub may start scheduled runs hours late.
+Each run is bounded to 40 minutes and 180 HTTP requests.
 Jobs serialize, and publish the pointer only after uploading the entire snapshot.
 Pinning actions prevents tag changes silently changing dependency code. No secrets
 are used in pull-request checks. Keep paid Actions overages disabled.

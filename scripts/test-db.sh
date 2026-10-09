@@ -4,9 +4,13 @@ name="mw-db-test-$$"
 trap 'docker rm -f "$name" >/dev/null 2>&1 || true' EXIT
 docker run --name "$name" -e POSTGRES_PASSWORD=local-test-only -d postgres:17-alpine >/dev/null
 for i in {1..30}; do
-  if docker exec "$name" pg_isready -U postgres >/dev/null 2>&1; then break; fi
+  # The image briefly starts a temporary server during initialization. Wait for
+  # the final server so it cannot disappear between readiness and the SQL checks.
+  if docker logs "$name" 2>&1 | grep -q 'PostgreSQL init process complete' &&
+     docker exec "$name" pg_isready -U postgres >/dev/null 2>&1; then break; fi
   sleep 1
 done
+docker exec "$name" pg_isready -U postgres >/dev/null
 docker exec -i "$name" psql -U postgres -v ON_ERROR_STOP=1 <<'SQL'
 create role anon; create role authenticated;
 create schema auth;
