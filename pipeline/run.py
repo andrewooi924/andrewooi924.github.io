@@ -2,6 +2,7 @@
 import argparse
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 from .http import Fetcher
 from . import adapters
@@ -30,6 +31,14 @@ def main():
         # Failed sources are saved for diagnosis, but are not eligible to replace good offers.
         (out/(source+'.json')).write_text(json.dumps(rows,ensure_ascii=False),encoding='utf-8')
     (out/'report.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+    summary=os.environ.get('GITHUB_STEP_SUMMARY')
+    if summary:
+        with Path(summary).open('a',encoding='utf-8') as f:
+            f.write('### Catalog source health\n\n| Source | Status | Records | Pages |\n| --- | --- | ---: | ---: |\n')
+            for source,health in report.items():
+                f.write(f"| {source} | {health['status']} | {health.get('records',0)} | {health.get('pages',0)} |\n")
+    for source,health in report.items():
+        if health['status']=='failed':print(f'::warning title={source} ingestion failed::See ingestion-review artifact for details')
     print(json.dumps(report,indent=2))
     if not any(x['status']=='ok' for x in report.values()):raise SystemExit('No source completed successfully')
 if __name__=='__main__':main()

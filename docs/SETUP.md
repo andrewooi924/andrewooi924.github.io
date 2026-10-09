@@ -126,6 +126,9 @@ network destinations, bounds response sizes, and does not circumvent challenges.
 Review `artifacts/ingestion/report.json` and `artifacts/api/unmatched.json`. Add
 explicit entries to `pipeline/mappings.json` with `source`, `source_id`, `legacy_id`,
 `condition` (`standard` only when verified), `reviewed_by`, and `evidence`.
+GitHub Actions displays a per-source health table and warning annotations when a
+source fails; a successful workflow means the remaining sources completed, not
+that every retailer was reachable.
 Matching also checks card code. Never map alternate artwork by price or filename order.
 New official records are published unpriced, separately from uncertain legacy matches.
 Failed sources preserve their last observations, which expire from valuation after
