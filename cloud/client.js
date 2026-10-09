@@ -5,6 +5,7 @@ const api=(cfg.apiUrl||'').replace(/\/$/,'');
 const ready=Boolean(api&&cfg.supabaseUrl&&cfg.supabasePublishableKey);
 const auth=ready?createClient(cfg.supabaseUrl,cfg.supabasePublishableKey,{auth:{flowType:'pkce',persistSession:true,detectSessionInUrl:true}}):null;
 let session=null, rows=[], loadedFor=null, dialog;
+const signInRedirect=()=>{const url=new URL(location.href);url.search='';url.hash='';return url.href;};
 const element=(tag,text,cls)=>{const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e;};
 async function request(path,options={}){
   const headers=new Headers(options.headers);
@@ -38,13 +39,16 @@ function render(){
   const content=dialog.querySelector('.cloud-content');content.replaceChildren();
   if(!ready){content.append(element('p','Cloud features are not connected yet. Your lists continue to be saved on this device.'));return;}
   if(!session){
-    content.append(element('p','Sign in by email to save private cloud copies and create revocable links. Local lists stay on this device until you choose to save them.'));
+    content.append(element('p','Sign in to save private cloud copies and create revocable links. Local lists stay on this device until you choose to save them.'));
+    if(cfg.googleAuthEnabled)content.append(action('Continue with Google',async()=>{
+      const {error}=await auth.auth.signInWithOAuth({provider:'google',options:{redirectTo:signInRedirect()}});
+      if(error)throw error;
+    }));
     const email=element('input');email.type='email';email.autocomplete='email';email.placeholder='Email address';email.required=true;
     email.setAttribute('aria-label','Email address');content.append(email);
     content.append(action('Send sign-in link',async()=>{
       if(!email.validity.valid||!email.value.trim())throw Error('Enter a valid email address.');
-      const redirect=new URL(location.href);redirect.hash='';redirect.search='';
-      const {error}=await auth.auth.signInWithOtp({email:email.value.trim(),options:{emailRedirectTo:redirect.href,shouldCreateUser:true}});
+      const {error}=await auth.auth.signInWithOtp({email:email.value.trim(),options:{emailRedirectTo:signInRedirect(),shouldCreateUser:true}});
       if(error)throw error;
       message('Check your email for the sign-in link.');
     }));return;

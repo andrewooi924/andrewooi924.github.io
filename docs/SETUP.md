@@ -34,8 +34,14 @@ regenerate it with `npm run build` when editing `cloud/client.js`.
    `private` schema and narrowly granted RPC functions in `public`.
 3. Keep Email authentication and email confirmation enabled. Set the Auth site
    URL and redirect allowlist to the exact app URL. The account panel sends an
-   email sign-in link. After creating your own account, disable public signup
-   if this remains a personal-only deployment.
+   email sign-in link. For Google sign-in, configure a Web OAuth client in Google
+   Cloud with `https://andrewooi924.github.io` as an authorized JavaScript origin
+   and the callback URL shown in Supabase Auth → Providers → Google as an authorized
+   redirect URI. Put the Google client ID and secret in that Supabase provider,
+   leaving nonce checks enabled. Then set `googleAuthEnabled: true` in
+   `app-config.js`; no Google secret belongs in this file or the Worker.
+   After creating your own app account, disable public signup if this remains a
+   personal-only deployment.
 4. Put the project URL and **publishable** key in `app-config.js` and the Worker vars.
    Never put service-role or secret keys in frontend configuration.
 5. Enable MFA on administrative accounts. Keep an encrypted database export and

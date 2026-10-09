@@ -87,49 +87,11 @@ add `{ expirationTtl: 31536000 }` (1 year) to the `WISHLISTS.put(...)` call in `
 
 ---
 
-## Part 3 — Google Sign-In (optional)
+## Google Sign-In
 
-Decide *why* you want auth first — it changes how much you build:
-
-- **A) Gate link creation** (stop strangers from filling your KV): small change,
-  fully supported by this Worker already. Steps below.
-- **B) Cloud-sync your own wishlists across devices / accounts**: a larger feature
-  (the app is currently local-first via IndexedDB). This needs per-user storage and
-  read/write/delete endpoints. Not included here — ask and I'll build it.
-
-### Setup for A (gate creation)
-
-1. In [Google Cloud Console](https://console.cloud.google.com/) → **APIs & Services
-   → Credentials → Create credentials → OAuth client ID → Web application**.
-2. Under **Authorized JavaScript origins** add your app origin, e.g.
-   `https://yourname.github.io` (and `http://localhost:PORT` for local testing).
-3. Copy the **Client ID** (looks like `1234-abc.apps.googleusercontent.com`).
-4. In `wrangler.toml` set:
-   ```
-   REQUIRE_AUTH = "1"
-   GOOGLE_CLIENT_ID = "1234-abc.apps.googleusercontent.com"
-   ```
-   then `wrangler deploy` again.
-5. In the app, set the same client id and add Google's script + a sign-in button.
-   The Worker expects the Google **ID token** in `Authorization: Bearer <token>`,
-   and the app already sends `AUTH_TOKEN` if it's set. Minimal client wiring:
-
-   ```html
-   <script src="https://accounts.google.com/gsi/client" async></script>
-   ```
-   ```js
-   const GOOGLE_CLIENT_ID = '1234-abc.apps.googleusercontent.com';
-   function startGoogleSignIn(){
-     google.accounts.id.initialize({
-       client_id: GOOGLE_CLIENT_ID,
-       callback: (resp) => { AUTH_TOKEN = resp.credential; toast('Signed in ✓'); }
-     });
-     google.accounts.id.prompt();   // or render a button with google.accounts.id.renderButton
-   }
-   ```
-   Call `startGoogleSignIn()` from a "Sign in" button. After sign-in, **Copy public
-   link** will be authorized. (Google's script loads only when the user signs in, so
-   the app stays offline-friendly otherwise.)
-
-Note: this Worker verifies tokens via Google's `tokeninfo` endpoint — simple and fine
-for personal scale. For high traffic you'd verify the JWT signature locally instead.
+Most Wanted uses Supabase Auth for private cloud lists and revocable public links.
+The account panel can use Google OAuth after the provider is configured. See
+[the Supabase setup guide](docs/SETUP.md#supabase-free) for the required Google
+Cloud client, callback, and deployment flag. The Google client secret stays in
+Supabase; the browser sends Supabase session tokens to the Worker for private
+list requests.

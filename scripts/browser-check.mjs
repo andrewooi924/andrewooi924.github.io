@@ -28,16 +28,24 @@ try {
  await page.getByRole('button',{name:'Price history',exact:true}).click();
  await page.getByText('No dates have observed prices for every card in this collection yet. Missing prices are never counted as zero.').waitFor();
  const chart=await browser.newPage();
- await chart.route('**/app-config.js',r=>r.fulfill({contentType:'text/javascript',body:"window.MW_CONFIG={apiUrl:'https://api.example.test',supabaseUrl:'https://project.supabase.co',supabasePublishableKey:'sb_publishable_test'}"}));
+ await chart.route('**/app-config.js',r=>r.fulfill({contentType:'text/javascript',body:"window.MW_CONFIG={apiUrl:'https://api.example.test',supabaseUrl:'https://project.supabase.co',supabasePublishableKey:'sb_publishable_test',googleAuthEnabled:true}"}));
  await chart.route('https://api.example.test/**',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(r.request().url().endsWith('price-history')?{a:[['2026-09-16',100],['2026-09-17',120]]}:[])}));
  await chart.goto('http://127.0.0.1:8000');await chart.waitForFunction(()=>window.MWCloud);
  await chart.getByRole('button',{name:'Account',exact:true}).click();
+ assert(await chart.getByRole('button',{name:'Continue with Google'}).isVisible());
  assert(await chart.getByRole('button',{name:'Send sign-in link'}).isVisible());
  assert(await chart.getByRole('textbox',{name:'Email address'}).isVisible());
  await chart.getByRole('button',{name:'Close',exact:true}).click();
  await chart.evaluate(async()=>{const el=document.createElement('div');el.id='chartTest';document.body.append(el);await window.MWCloud.showHistory(el,[{id:'a',quantity:2}]);});
  assert.match(await chart.locator('#chartTest').innerText(),/\+¥40/);
  assert.equal(await chart.locator('#chartTest svg circle').count(),2);
+ await chart.route('https://project.supabase.co/auth/v1/authorize**',r=>r.fulfill({contentType:'text/html',body:'OAuth test redirect'}));
+ await chart.getByRole('button',{name:'Account',exact:true}).click();
+ await chart.getByRole('button',{name:'Continue with Google'}).click();
+ await chart.waitForURL(/\/auth\/v1\/authorize/);
+ const oauthUrl=new URL(chart.url());
+ assert.equal(oauthUrl.searchParams.get('provider'),'google');
+ assert.equal(oauthUrl.searchParams.get('redirect_to'),'http://127.0.0.1:8000/');
  await chart.close();
  assert.deepEqual(errors,[]);console.log('Browser checks passed: account state, filters, collection quantities, persistence, mobile layout, no JS errors.');
 } finally {await browser.close();}
