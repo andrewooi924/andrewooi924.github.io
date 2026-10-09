@@ -31,10 +31,16 @@ try {
  await chart.route('**/app-config.js',r=>r.fulfill({contentType:'text/javascript',body:"window.MW_CONFIG={apiUrl:'https://api.example.test',supabaseUrl:'https://project.supabase.co',supabasePublishableKey:'sb_publishable_test',googleAuthEnabled:true}"}));
  await chart.route('https://api.example.test/**',r=>r.fulfill({contentType:'application/json',body:JSON.stringify(r.request().url().endsWith('price-history')?{a:[['2026-09-16',100],['2026-09-17',120]]}:[])}));
  await chart.goto('http://127.0.0.1:8000');await chart.waitForFunction(()=>window.MWCloud);
+ let otpPayload;
+ await chart.route('https://project.supabase.co/auth/v1/otp**',async r=>{if(r.request().method()==='POST')otpPayload=r.request().postDataJSON();await r.fulfill({contentType:'application/json',headers:{'access-control-allow-origin':'*','access-control-allow-headers':'*'},body:'{}'});});
  await chart.getByRole('button',{name:'Account',exact:true}).click();
  assert(await chart.getByRole('button',{name:'Continue with Google'}).isVisible());
  assert(await chart.getByRole('button',{name:'Send sign-in link'}).isVisible());
  assert(await chart.getByRole('textbox',{name:'Email address'}).isVisible());
+ await chart.getByRole('textbox',{name:'Email address'}).fill('existing@example.test');
+ await chart.getByRole('button',{name:'Send sign-in link'}).click();
+ await chart.getByRole('status').getByText('Check your email for the sign-in link.').waitFor();
+ assert.equal(otpPayload.create_user,false);
  await chart.getByRole('button',{name:'Close',exact:true}).click();
  await chart.evaluate(async()=>{const el=document.createElement('div');el.id='chartTest';document.body.append(el);await window.MWCloud.showHistory(el,[{id:'a',quantity:2}]);});
  assert.match(await chart.locator('#chartTest').innerText(),/\+¥40/);

@@ -48,7 +48,7 @@ function render(){
     email.setAttribute('aria-label','Email address');content.append(email);
     content.append(action('Send sign-in link',async()=>{
       if(!email.validity.valid||!email.value.trim())throw Error('Enter a valid email address.');
-      const {error}=await auth.auth.signInWithOtp({email:email.value.trim(),options:{emailRedirectTo:signInRedirect(),shouldCreateUser:true}});
+      const {error}=await auth.auth.signInWithOtp({email:email.value.trim(),options:{emailRedirectTo:signInRedirect(),shouldCreateUser:false}});
       if(error)throw error;
       message('Check your email for the sign-in link.');
     }));return;
