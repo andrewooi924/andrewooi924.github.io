@@ -146,13 +146,16 @@ prototype, not a grant of data rights.
 - Repository secrets: `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`.
 - Repository variables: `CLOUDFLARE_ACCOUNT_ID`, `R2_DATA_BUCKET`.
 - Repository variable `MW_REFRESH_ENABLED=true` only when the dry run and budget fit.
-- Optional `MW_MIRROR_IMAGES=true`: upload at most 50 new official images per run.
+- Optional `MW_MIRROR_IMAGES=true`: upload at most 200 new official and 200
+  existing curated images per run. The uploader resumes from the R2 index.
   The publishing token must be scoped to both app buckets. Configure variables
   `R2_ASSETS_BUCKET`, `ASSETS_BASE_URL`. Leave disabled until asset
   hosting is configured. Run the bounded manual uploader for the initial backlog.
 
 Schedule target: 20:17 UTC (04:17 Malaysia); GitHub may start scheduled runs hours late.
-Each run is bounded to 40 minutes and 180 HTTP requests.
+Each run is bounded to 40 minutes. Metadata crawling has a 180-request budget;
+the optional official-image batch has its own 210-request cap, including robots.txt
+and redirects.
 Jobs serialize, and publish the pointer only after uploading the entire snapshot.
 Pinning actions prevents tag changes silently changing dependency code. No secrets
 are used in pull-request checks. Keep paid Actions overages disabled.
