@@ -68,3 +68,11 @@ class OfficialLinks(unittest.TestCase):
   cat={'y1':{'id':'y1','code':'OP01-001','variant':'Parallel','img':'https://y/1.jpg'},
        'b_OP01-001_p1':self.official('OP01-001_p1'),'b_OP01-001_p2':self.official('OP01-001_p2')}
   self.assertEqual(link_official(cat,{}),0);self.assertEqual(cat['y1']['img'],'https://y/1.jpg')
+ def test_image_verified_links_resolve_ambiguous_parallels(self):
+  cat={'y1':{'id':'y1','code':'OP01-001','variant':'Super Parallel','img':'https://y/1.jpg'},
+       'b_OP01-001_p1':self.official('OP01-001_p1'),'b_OP01-001_p2':self.official('OP01-001_p2')}
+  self.assertEqual(link_official(cat,{},{'y1':{'printingId':'OP01-001_p2'}}),1)
+  self.assertEqual(cat['y1']['printingId'],'OP01-001_p2');self.assertEqual(cat['b_OP01-001_p2']['aliasOf'],'y1')
+ def test_link_to_another_code_is_ignored(self):
+  cat={'y1':{'id':'y1','code':'OP01-002','variant':'Parallel','img':'https://y/1.jpg'},'b_OP01-001_p1':self.official('OP01-001_p1')}
+  self.assertEqual(link_official(cat,{},{'y1':{'printingId':'OP01-001_p1'}}),0)

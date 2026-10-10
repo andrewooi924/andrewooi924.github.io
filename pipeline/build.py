@@ -33,21 +33,13 @@ def official_fields(row):
             'life':_value(cost,'ライフ') if cost.startswith('ライフ') else '','counter':_value(row.get('counter'),'カウンター'),
             'feature':_value(row.get('feature'),'特徴'),'effect':_value(row.get('effect'),'テキスト')}
 
-def link_official(catalog,assets):
-    """Give retailer rows the official printing when the code+version match is one-to-one.
+def link_official(catalog,assets,pinned=None):
+    """Give retailer rows their official printing: first the image-verified links in `pinned`
+    ({row id: {'printingId':...}}), then any code+version match that is one-to-one.
     The retailer row keeps its ID and price; the official duplicate is hidden behind it."""
     PAR=re.compile(r'_p\d+$');kind={'Normal':'base','Parallel':'par'}
-    official={};legacy={}
-    for id,c in catalog.items():
-        if id.startswith('b_') and c.get('printingId'):
-            official.setdefault((c['code'],'par' if PAR.search(c['printingId']) else 'base'),[]).append(c)
-        elif not id.startswith('b_') and c.get('variant') in kind:
-            legacy.setdefault((c['code'],kind[c['variant']]),[]).append(c)
-    linked=0
-    for key,rows in legacy.items():
-        match=official.get(key,[])
-        if len(rows)!=1 or len(match)!=1:continue
-        c,o=rows[0],match[0]
+    by_printing={c['printingId']:c for id,c in catalog.items() if id.startswith('b_') and c.get('printingId')}
+    def attach(c,o):
         source=o['img'];mirror=assets.get(source,{})
         img=mirror['url'] if mirror.get('uploaded') and mirror.get('url','').startswith('https://') else source
         retailer=c.get('imgRetailer') or c.get('img','')
@@ -55,7 +47,21 @@ def link_official(catalog,assets):
                  imgRetailer=retailer,printingId=o['printingId'],officialId=o['id'],mappingStatus='official-auto')
         for f in ('colors','type','feature','cost','life','counter','power'):
             if o.get(f) and not c.get(f):c[f]=o[f]
-        o['aliasOf']=c['id'];linked+=1
+        o['aliasOf']=c['id']
+    linked=0
+    for id,link in (pinned or {}).items():
+        o=by_printing.get(link.get('printingId'))
+        if id in catalog and o and not o.get('aliasOf') and not catalog[id].get('officialId') and catalog[id].get('code')==o['code']:
+            attach(catalog[id],o);linked+=1
+    official={};legacy={}
+    for id,c in catalog.items():
+        if id.startswith('b_') and c.get('printingId') and not c.get('aliasOf'):
+            official.setdefault((c['code'],'par' if PAR.search(c['printingId']) else 'base'),[]).append(c)
+        elif not id.startswith('b_') and c.get('variant') in kind and not c.get('officialId') and id not in (pinned or {}):
+            legacy.setdefault((c['code'],kind[c['variant']]),[]).append(c)
+    for key,rows in legacy.items():
+        match=official.get(key,[])
+        if len(rows)==1 and len(match)==1:attach(rows[0],match[0]);linked+=1
     return linked
 
 def load(path,default):return json.loads(Path(path).read_text()) if Path(path).is_file() else default
@@ -121,7 +127,7 @@ def build(root,output,ingestion=None,previous=None,now=None):
         c.pop('aliasOf',None)
         if c.pop('officialId',None):
             c.update(img=c.pop('imgRetailer',c.get('img','')),imgAlt='',imgAlt2='',mappingStatus='legacy-provisional');c.pop('printingId',None)
-    linked=link_official(catalog,assets)
+    linked=link_official(catalog,assets,load(root/'pipeline/image_links.json',{}))
     for id,c in catalog.items():
         c.setdefault('variantId',identity('migration:'+id));c.setdefault('mappingStatus','legacy-provisional')
         local=imgmap.get(id) or c.get('img')
