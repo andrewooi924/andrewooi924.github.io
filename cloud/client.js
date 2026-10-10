@@ -22,10 +22,8 @@ async function request(path,options={}){
 function message(text){dialog.querySelector('[role=status]').textContent=text;}
 function action(label,fn,variant=''){const b=element('button',label,`cloud-action ${variant}`);b.type='button';b.onclick=async()=>{b.disabled=true;try{await fn();}catch(e){message(e.message);}finally{b.disabled=false;}};return b;}
 function updateAccountButton(){
-  const button=document.querySelector('.account-button');if(!button)return;
-  button.dataset.signedIn=String(Boolean(session));
-  button.setAttribute('aria-label',session?'Account and sharing':'Sign in with Google');
-  button.title=session?'Account and sharing':'Sign in with Google';
+  const button=document.querySelector('.account-button');if(button)button.dataset.signedIn=String(Boolean(session));
+  document.dispatchEvent(new CustomEvent('mw:auth'));
 }
 async function startGoogleSignIn(){
   const {error}=await auth.auth.signInWithOAuth({provider:'google',options:{redirectTo:signInRedirect()}});
@@ -147,7 +145,8 @@ async function showHistory(container,items){
     for(const p of points)details.append(element('div',`${p.date}: ${p.complete?'¥'+p.value.toLocaleString():`Incomplete (${p.priced}/${items.length} priced)`}`));container.append(details);
   }catch(e){container.replaceChildren(element('p',e.message));}
 }
-window.MWCloud={open,showHistory,enabled:Boolean(api),
+window.MWCloud={open,showHistory,enabled:Boolean(api),signInAvailable:Boolean(ready&&cfg.googleAuthEnabled),
+  account(){return session?{email:session.user.email||''}:null;},
   async catalog(){if(!api)return null;return request('/v1/catalog');},
   async shared(token){if(!api)throw Error('Sharing is not connected on this installation.');return request('/v1/shared/'+encodeURIComponent(token));},
   async history(id){if(!api)return [];return request('/v1/variants/'+encodeURIComponent(id)+'/price-history');}
