@@ -33,6 +33,31 @@ def official_fields(row):
             'life':_value(cost,'ライフ') if cost.startswith('ライフ') else '','counter':_value(row.get('counter'),'カウンター'),
             'feature':_value(row.get('feature'),'特徴'),'effect':_value(row.get('effect'),'テキスト')}
 
+def link_official(catalog,assets):
+    """Give retailer rows the official printing when the code+version match is one-to-one.
+    The retailer row keeps its ID and price; the official duplicate is hidden behind it."""
+    PAR=re.compile(r'_p\d+$');kind={'Normal':'base','Parallel':'par'}
+    official={};legacy={}
+    for id,c in catalog.items():
+        if id.startswith('b_') and c.get('printingId'):
+            official.setdefault((c['code'],'par' if PAR.search(c['printingId']) else 'base'),[]).append(c)
+        elif not id.startswith('b_') and c.get('variant') in kind:
+            legacy.setdefault((c['code'],kind[c['variant']]),[]).append(c)
+    linked=0
+    for key,rows in legacy.items():
+        match=official.get(key,[])
+        if len(rows)!=1 or len(match)!=1:continue
+        c,o=rows[0],match[0]
+        source=o['img'];mirror=assets.get(source,{})
+        img=mirror['url'] if mirror.get('uploaded') and mirror.get('url','').startswith('https://') else source
+        retailer=c.get('imgRetailer') or c.get('img','')
+        c.update(img=img,imgAlt=source if img!=source else retailer,imgAlt2=retailer if img!=source else '',
+                 imgRetailer=retailer,printingId=o['printingId'],officialId=o['id'],mappingStatus='official-auto')
+        for f in ('colors','type','feature','cost','life','counter','power'):
+            if o.get(f) and not c.get(f):c[f]=o[f]
+        o['aliasOf']=c['id'];linked+=1
+    return linked
+
 def load(path,default):return json.loads(Path(path).read_text()) if Path(path).is_file() else default
 
 def reference(offers,now):
@@ -91,10 +116,17 @@ def build(root,output,ingestion=None,previous=None,now=None):
                 # Replace observations only for this source+listing, never erase absent listings.
                 existing=[o for o in offers.get(id,[]) if (o['source'],o['source_id'])!=(source,row['source_id'])]
                 offers[id]=existing+[row]
+    for c in catalog.values():
+        # Links are recomputed every build, so a match that became ambiguous is undone.
+        c.pop('aliasOf',None)
+        if c.pop('officialId',None):
+            c.update(img=c.pop('imgRetailer',c.get('img','')),imgAlt='',imgAlt2='',mappingStatus='legacy-provisional');c.pop('printingId',None)
+    linked=link_official(catalog,assets)
     for id,c in catalog.items():
         c.setdefault('variantId',identity('migration:'+id));c.setdefault('mappingStatus','legacy-provisional')
         local=imgmap.get(id) or c.get('img')
-        if local and local in assets and assets[local].get('uploaded') and assets[local].get('url','').startswith('https://'):
+        if c.get('officialId'):pass
+        elif local and local in assets and assets[local].get('uploaded') and assets[local].get('url','').startswith('https://'):
             c['imgAlt2']=c.get('imgAlt','');c['imgAlt']=c.get('img','');c['img']=assets[local]['url']
         ref=reference(offers.get(id,[]),now)
         c['reference']=ref
@@ -118,7 +150,7 @@ def build(root,output,ingestion=None,previous=None,now=None):
     write(Path('offers.json'),offers)
     write(Path('history.json'),history)
     manifest={'version':version,'publishedAt':now.isoformat(),'variantCount':len(catalog),'sources':report,
-              'valuationMethod':'median-retail-v1','historyDays':365,'unmatchedCount':len(unmatched)}
+              'valuationMethod':'median-retail-v1','historyDays':365,'unmatchedCount':len(unmatched),'officialLinked':linked}
     write(Path('manifest.json'),manifest)
     output.mkdir(parents=True,exist_ok=True)
     (output/'published.json').write_text(json.dumps({'version':version}))
