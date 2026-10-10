@@ -1,0 +1,6852 @@
+{
+ "eb01_10002": {
+  "printingId": "EB01-001_p1",
+  "score": 0.0,
+  "margin": 0.837
+ },
+ "eb01_10005": {
+  "printingId": "EB01-003_p1",
+  "score": 0.0,
+  "margin": 0.911
+ },
+ "eb01_10008": {
+  "printingId": "EB01-006",
+  "score": 0.0,
+  "margin": 0.708
+ },
+ "eb01_10009": {
+  "printingId": "EB01-006_p1",
+  "score": 0.0,
+  "margin": 0.789
+ },
+ "eb01_10010": {
+  "printingId": "EB01-006_p2",
+  "score": 0.0,
+  "margin": 0.866
+ },
+ "eb01_10013": {
+  "printingId": "EB01-009",
+  "score": 0.0,
+  "margin": 0.332
+ },
+ "eb01_10016": {
+  "printingId": "EB01-012",
+  "score": 0.0,
+  "margin": 0.342
+ },
+ "eb01_10017": {
+  "printingId": "EB01-012_p1",
+  "score": 0.0,
+  "margin": 0.884
+ },
+ "eb01_10021": {
+  "printingId": "EB01-015",
+  "score": 0.0,
+  "margin": 0.336
+ },
+ "eb01_10024": {
+  "printingId": "EB01-018",
+  "score": 0.0,
+  "margin": 0.341
+ },
+ "eb01_10028": {
+  "printingId": "EB01-021_p1",
+  "score": 0.0,
+  "margin": 0.838
+ },
+ "eb01_10049": {
+  "printingId": "EB01-038",
+  "score": 0.0,
+  "margin": 0.332
+ },
+ "eb01_10052": {
+  "printingId": "EB01-040_p1",
+  "score": 0.0,
+  "margin": 0.942
+ },
+ "eb01_10058": {
+  "printingId": "EB01-046",
+  "score": 0.0,
+  "margin": 0.363
+ },
+ "eb01_10059": {
+  "printingId": "EB01-046_p1",
+  "score": 0.0,
+  "margin": 0.917
+ },
+ "eb01_10061": {
+  "printingId": "EB01-048",
+  "score": 0.0,
+  "margin": 0.35
+ },
+ "eb01_10066": {
+  "printingId": "EB01-051",
+  "score": 0.0,
+  "margin": 0.348
+ },
+ "eb01_10073": {
+  "printingId": "EB01-056_p1",
+  "score": 0.0,
+  "margin": 1.057
+ },
+ "eb01_10074": {
+  "printingId": "EB01-057",
+  "score": 0.0,
+  "margin": 0.339
+ },
+ "eb01_10075": {
+  "printingId": "EB01-057_p1",
+  "score": 0.0,
+  "margin": 0.987
+ },
+ "eb01_10078": {
+  "printingId": "EB01-060",
+  "score": 0.0,
+  "margin": 0.356
+ },
+ "eb01_10079": {
+  "printingId": "EB01-061",
+  "score": 0.0,
+  "margin": 0.349
+ },
+ "eb02_10008": {
+  "printingId": "EB02-006_p1",
+  "score": 0.0,
+  "margin": 0.865
+ },
+ "eb02_10013": {
+  "printingId": "EB02-010_p1",
+  "score": 0.0,
+  "margin": 0.79
+ },
+ "eb02_10023": {
+  "printingId": "EB02-017_p1",
+  "score": 0.0,
+  "margin": 0.987
+ },
+ "eb02_10025": {
+  "printingId": "EB02-019",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb02_10034": {
+  "printingId": "EB02-026_p1",
+  "score": 0.0,
+  "margin": 0.963
+ },
+ "eb02_10044": {
+  "printingId": "EB02-035_p1",
+  "score": 0.0,
+  "margin": 0.813
+ },
+ "eb02_10066": {
+  "printingId": "EB02-052_p1",
+  "score": 0.0,
+  "margin": 1.069
+ },
+ "eb02_10069": {
+  "printingId": "EB02-054_p1",
+  "score": 0.0,
+  "margin": 1.063
+ },
+ "eb02_10077": {
+  "printingId": "EB02-061",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb02_10078": {
+  "printingId": "EB02-061_p1",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb02_10079": {
+  "printingId": "EB02-061_p3",
+  "score": 0.0,
+  "margin": 1.05
+ },
+ "eb02_10081": {
+  "printingId": "OP05-001_p2",
+  "score": 0.011,
+  "margin": 1.266
+ },
+ "eb02_10082": {
+  "printingId": "OP05-002_p2",
+  "score": 0.013,
+  "margin": 1.135
+ },
+ "eb02_10083": {
+  "printingId": "OP05-022_p2",
+  "score": 0.01,
+  "margin": 1.167
+ },
+ "eb02_10084": {
+  "printingId": "OP05-060_p4",
+  "score": 0.01,
+  "margin": 0.787
+ },
+ "eb02_10085": {
+  "printingId": "OP05-098_p3",
+  "score": 0.008,
+  "margin": 0.772
+ },
+ "eb02_10086": {
+  "printingId": "OP06-001_p2",
+  "score": 0.007,
+  "margin": 1.169
+ },
+ "eb02_10087": {
+  "printingId": "OP06-020_p2",
+  "score": 0.008,
+  "margin": 1.241
+ },
+ "eb02_10088": {
+  "printingId": "OP06-021_p2",
+  "score": 0.009,
+  "margin": 1.104
+ },
+ "eb02_10089": {
+  "printingId": "OP06-022_p2",
+  "score": 0.01,
+  "margin": 0.713
+ },
+ "eb02_10090": {
+  "printingId": "OP06-042_p2",
+  "score": 0.011,
+  "margin": 1.063
+ },
+ "eb02_10091": {
+  "printingId": "OP06-080_p2",
+  "score": 0.009,
+  "margin": 1.059
+ },
+ "eb02_10092": {
+  "printingId": "OP07-001_p2",
+  "score": 0.011,
+  "margin": 0.786
+ },
+ "eb02_10093": {
+  "printingId": "OP07-019_p2",
+  "score": 0.011,
+  "margin": 0.672
+ },
+ "eb02_10094": {
+  "printingId": "OP07-038_p2",
+  "score": 0.011,
+  "margin": 0.936
+ },
+ "eb02_10095": {
+  "printingId": "OP07-059_p2",
+  "score": 0.008,
+  "margin": 0.899
+ },
+ "eb02_10096": {
+  "printingId": "OP07-079_p2",
+  "score": 0.01,
+  "margin": 0.767
+ },
+ "eb02_10097": {
+  "printingId": "OP07-097_p2",
+  "score": 0.011,
+  "margin": 0.785
+ },
+ "eb02_10098": {
+  "printingId": "OP08-001_p2",
+  "score": 0.012,
+  "margin": 0.911
+ },
+ "eb02_10099": {
+  "printingId": "OP08-002_p2",
+  "score": 0.011,
+  "margin": 1.02
+ },
+ "eb02_10100": {
+  "printingId": "OP08-021_p2",
+  "score": 0.008,
+  "margin": 1.155
+ },
+ "eb02_10101": {
+  "printingId": "OP08-057_p2",
+  "score": 0.01,
+  "margin": 1.163
+ },
+ "eb02_10102": {
+  "printingId": "OP08-058_p2",
+  "score": 0.008,
+  "margin": 1.053
+ },
+ "eb02_10103": {
+  "printingId": "OP08-098_p2",
+  "score": 0.011,
+  "margin": 1.089
+ },
+ "eb02_10104": {
+  "printingId": "EB01-001_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb02_10105": {
+  "printingId": "EB01-021_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb02_10106": {
+  "printingId": "EB01-040_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10005": {
+  "printingId": "EB03-003_p1",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10023": {
+  "printingId": "EB03-018_p1",
+  "score": 0.0,
+  "margin": 0.969
+ },
+ "eb03_10030": {
+  "printingId": "EB03-024_p1",
+  "score": 0.0,
+  "margin": 1.041
+ },
+ "eb03_10034": {
+  "printingId": "EB03-026_p1",
+  "score": 0.0,
+  "margin": 0.967
+ },
+ "eb03_10040": {
+  "printingId": "EB03-031_p1",
+  "score": 0.0,
+  "margin": 0.911
+ },
+ "eb03_10041": {
+  "printingId": "EB03-032",
+  "score": 0.0,
+  "margin": 0.359
+ },
+ "eb03_10045": {
+  "printingId": "EB03-035",
+  "score": 0.0,
+  "margin": 0.492
+ },
+ "eb03_10054": {
+  "printingId": "EB03-042_p1",
+  "score": 0.0,
+  "margin": 0.982
+ },
+ "eb03_10058": {
+  "printingId": "EB03-045_p1",
+  "score": 0.0,
+  "margin": 0.824
+ },
+ "eb03_10067": {
+  "printingId": "EB03-053_p1",
+  "score": 0.0,
+  "margin": 0.991
+ },
+ "eb03_10070": {
+  "printingId": "EB03-055_p1",
+  "score": 0.0,
+  "margin": 1.053
+ },
+ "eb03_10078": {
+  "printingId": "EB03-061_p1",
+  "score": 0.0,
+  "margin": 0.739
+ },
+ "eb03_10079": {
+  "printingId": "EB03-061_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10090": {
+  "printingId": "EB03-003_p2",
+  "score": 0.0,
+  "margin": 0.999
+ },
+ "eb03_10091": {
+  "printingId": "EB03-018_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10092": {
+  "printingId": "EB03-024_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10093": {
+  "printingId": "EB03-026_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10094": {
+  "printingId": "EB03-031_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10095": {
+  "printingId": "EB03-042_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10096": {
+  "printingId": "EB03-045_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10097": {
+  "printingId": "EB03-053_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb03_10098": {
+  "printingId": "EB03-055_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb04_10010": {
+  "printingId": "EB04-007_p1",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb04_10034": {
+  "printingId": "EB04-026",
+  "score": 0.0,
+  "margin": 0.308
+ },
+ "eb04_10057": {
+  "printingId": "EB04-044_p1",
+  "score": 0.0,
+  "margin": 0.899
+ },
+ "eb04_10058": {
+  "printingId": "EB04-044_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb04_10075": {
+  "printingId": "EB04-058_p1",
+  "score": 0.0,
+  "margin": 1.08
+ },
+ "eb04_10079": {
+  "printingId": "EB04-061_p1",
+  "score": 0.0,
+  "margin": 1
+ },
+ "eb04_10082": {
+  "printingId": "OP11-106_p2",
+  "score": 0.011,
+  "margin": 1.067
+ },
+ "eb04_10083": {
+  "printingId": "EB01-023_p2",
+  "score": 0.0,
+  "margin": 1.067
+ },
+ "eb04_10086": {
+  "printingId": "PRB02-006_p2",
+  "score": 0.009,
+  "margin": 1.058
+ },
+ "eb04_10087": {
+  "printingId": "PRB02-014_p2",
+  "score": 0.018,
+  "margin": 1.084
+ },
+ "op01_10002": {
+  "printingId": "OP01-001_p2",
+  "score": 0.441,
+  "margin": 0.719
+ },
+ "op01_10009": {
+  "printingId": "OP01-006",
+  "score": 0.23,
+  "margin": 0.3
+ },
+ "op01_10018": {
+  "printingId": "OP01-013_p2",
+  "score": 0.379,
+  "margin": 0.624
+ },
+ "op01_10020": {
+  "printingId": "OP01-015",
+  "score": 0.261,
+  "margin": 1
+ },
+ "op01_10022": {
+  "printingId": "OP01-016_p2",
+  "score": 0.394,
+  "margin": 0.425
+ },
+ "op01_10027": {
+  "printingId": "OP01-021",
+  "score": 0.188,
+  "margin": 1
+ },
+ "op01_10030": {
+  "printingId": "OP01-024",
+  "score": 0.352,
+  "margin": 0.3
+ },
+ "op01_10031": {
+  "printingId": "OP01-024_p1",
+  "score": 0.351,
+  "margin": 0.757
+ },
+ "op01_10033": {
+  "printingId": "OP01-025_p1",
+  "score": 0.562,
+  "margin": 1
+ },
+ "op01_10037": {
+  "printingId": "OP01-029",
+  "score": 0.188,
+  "margin": 0.3
+ },
+ "op01_10042": {
+  "printingId": "OP01-033",
+  "score": 0.135,
+  "margin": 0.3
+ },
+ "op01_10049": {
+  "printingId": "OP01-039",
+  "score": 0.176,
+  "margin": 0.324
+ },
+ "op01_10052": {
+  "printingId": "OP01-041",
+  "score": 0.389,
+  "margin": 0.3
+ },
+ "op01_10058": {
+  "printingId": "OP01-047",
+  "score": 0.316,
+  "margin": 0.3
+ },
+ "op01_10059": {
+  "printingId": "OP01-047_p1",
+  "score": 0.339,
+  "margin": 0.727
+ },
+ "op01_10064": {
+  "printingId": "OP01-051",
+  "score": 0.317,
+  "margin": 0.3
+ },
+ "op01_10065": {
+  "printingId": "OP01-051_p1",
+  "score": 0.354,
+  "margin": 0.642
+ },
+ "op01_10066": {
+  "printingId": "OP01-052",
+  "score": 0.163,
+  "margin": 0.3
+ },
+ "op01_10069": {
+  "printingId": "OP01-055",
+  "score": 0.138,
+  "margin": 0.345
+ },
+ "op01_10074": {
+  "printingId": "OP01-060",
+  "score": 0.155,
+  "margin": 1
+ },
+ "op01_10075": {
+  "printingId": "OP01-060_p1",
+  "score": 0.411,
+  "margin": 0.725
+ },
+ "op01_10089": {
+  "printingId": "OP01-070",
+  "score": 0.278,
+  "margin": 0.3
+ },
+ "op01_10090": {
+  "printingId": "OP01-070_p1",
+  "score": 0.43,
+  "margin": 0.713
+ },
+ "op01_10093": {
+  "printingId": "OP01-073",
+  "score": 0.307,
+  "margin": 1
+ },
+ "op01_10094": {
+  "printingId": "OP01-073_p1",
+  "score": 0.355,
+  "margin": 0.749
+ },
+ "op01_10098": {
+  "printingId": "OP01-077",
+  "score": 0.25,
+  "margin": 1
+ },
+ "op01_10099": {
+  "printingId": "OP01-077_p1",
+  "score": 0.409,
+  "margin": 0.566
+ },
+ "op01_10100": {
+  "printingId": "OP01-078",
+  "score": 0.364,
+  "margin": 0.3
+ },
+ "op01_10101": {
+  "printingId": "OP01-078_p1",
+  "score": 0.37,
+  "margin": 1
+ },
+ "op01_10109": {
+  "printingId": "OP01-086",
+  "score": 0.376,
+  "margin": 1
+ },
+ "op01_10120": {
+  "printingId": "OP01-094_p1",
+  "score": 0.54,
+  "margin": 0.6
+ },
+ "op01_10150": {
+  "printingId": "OP01-120",
+  "score": 0.465,
+  "margin": 0.3
+ },
+ "op01_10152": {
+  "printingId": "OP01-120_p2",
+  "score": 0.317,
+  "margin": 0.547
+ },
+ "op01_10153": {
+  "printingId": "OP01-121",
+  "score": 0.303,
+  "margin": 0.3
+ },
+ "op01_10154": {
+  "printingId": "OP01-121_p1",
+  "score": 0.402,
+  "margin": 0.664
+ },
+ "op02_10001": {
+  "printingId": "OP02-001",
+  "score": 0.257,
+  "margin": 1
+ },
+ "op02_10002": {
+  "printingId": "OP02-001_p1",
+  "score": 0.193,
+  "margin": 0.841
+ },
+ "op02_10006": {
+  "printingId": "OP02-004",
+  "score": 0.318,
+  "margin": 0.3
+ },
+ "op02_10007": {
+  "printingId": "OP02-004_p1",
+  "score": 0.307,
+  "margin": 0.641
+ },
+ "op02_10008": {
+  "printingId": "OP02-005",
+  "score": 0.262,
+  "margin": 0.33
+ },
+ "op02_10011": {
+  "printingId": "OP02-008",
+  "score": 0.26,
+  "margin": 0.358
+ },
+ "op02_10017": {
+  "printingId": "OP02-013",
+  "score": 0.346,
+  "margin": 0.732
+ },
+ "op02_10018": {
+  "printingId": "OP02-013_p1",
+  "score": 0.383,
+  "margin": 0.721
+ },
+ "op02_10019": {
+  "printingId": "OP02-013_p2",
+  "score": 0.435,
+  "margin": 0.7
+ },
+ "op02_10021": {
+  "printingId": "OP02-015",
+  "score": 0.315,
+  "margin": 0.3
+ },
+ "op02_10025": {
+  "printingId": "OP02-018",
+  "score": 0.379,
+  "margin": 0.3
+ },
+ "op02_10026": {
+  "printingId": "OP02-018_p1",
+  "score": 0.36,
+  "margin": 0.604
+ },
+ "op02_10027": {
+  "printingId": "OP02-019",
+  "score": 0.363,
+  "margin": 0.285
+ },
+ "op02_10031": {
+  "printingId": "OP02-023",
+  "score": 0.256,
+  "margin": 0.294
+ },
+ "op02_10049": {
+  "printingId": "OP02-036_p1",
+  "score": 0.337,
+  "margin": 1
+ },
+ "op02_10053": {
+  "printingId": "OP02-040",
+  "score": 0.335,
+  "margin": 1
+ },
+ "op02_10054": {
+  "printingId": "OP02-041",
+  "score": 0.387,
+  "margin": 1
+ },
+ "op02_10055": {
+  "printingId": "OP02-041_p1",
+  "score": 0.311,
+  "margin": 0.765
+ },
+ "op02_10070": {
+  "printingId": "OP02-054",
+  "score": 0.217,
+  "margin": 0.319
+ },
+ "op02_10073": {
+  "printingId": "OP02-057",
+  "score": 0.191,
+  "margin": 0.322
+ },
+ "op02_10077": {
+  "printingId": "OP02-059_p1",
+  "score": 0.329,
+  "margin": 0.793
+ },
+ "op02_10087": {
+  "printingId": "OP02-068",
+  "score": 0.38,
+  "margin": 0.341
+ },
+ "op02_10108": {
+  "printingId": "OP02-085_p1",
+  "score": 0.388,
+  "margin": 1
+ },
+ "op02_10113": {
+  "printingId": "OP02-089",
+  "score": 0.367,
+  "margin": 0.3
+ },
+ "op02_10117": {
+  "printingId": "OP02-093",
+  "score": 0.192,
+  "margin": 1
+ },
+ "op02_10118": {
+  "printingId": "OP02-093_p1",
+  "score": 0.22,
+  "margin": 0.875
+ },
+ "op02_10121": {
+  "printingId": "OP02-096",
+  "score": 0.347,
+  "margin": 0.3
+ },
+ "op02_10122": {
+  "printingId": "OP02-096_p1",
+  "score": 0.272,
+  "margin": 0.687
+ },
+ "op02_10124": {
+  "printingId": "OP02-098",
+  "score": 0.33,
+  "margin": 1
+ },
+ "op02_10125": {
+  "printingId": "OP02-099",
+  "score": 0.382,
+  "margin": 0.3
+ },
+ "op02_10126": {
+  "printingId": "OP02-099_p1",
+  "score": 0.341,
+  "margin": 0.525
+ },
+ "op02_10133": {
+  "printingId": "OP02-105_p1",
+  "score": 0.295,
+  "margin": 0.783
+ },
+ "op02_10134": {
+  "printingId": "OP02-106",
+  "score": 0.193,
+  "margin": 0.3
+ },
+ "op02_10136": {
+  "printingId": "OP02-108",
+  "score": 0.24,
+  "margin": 0.303
+ },
+ "op02_10137": {
+  "printingId": "OP02-108_p1",
+  "score": 0.211,
+  "margin": 1
+ },
+ "op02_10138": {
+  "printingId": "OP02-109",
+  "score": 0.263,
+  "margin": 0.29
+ },
+ "op02_10142": {
+  "printingId": "OP02-113",
+  "score": 0.173,
+  "margin": 0.308
+ },
+ "op02_10143": {
+  "printingId": "OP02-114",
+  "score": 0.259,
+  "margin": 0.3
+ },
+ "op02_10144": {
+  "printingId": "OP02-114_p1",
+  "score": 0.231,
+  "margin": 0.658
+ },
+ "op02_10147": {
+  "printingId": "OP02-116",
+  "score": 0.176,
+  "margin": 0.324
+ },
+ "op02_10148": {
+  "printingId": "OP02-117",
+  "score": 0.151,
+  "margin": 0.3
+ },
+ "op02_10152": {
+  "printingId": "OP02-120_p1",
+  "score": 0.504,
+  "margin": 1
+ },
+ "op02_10153": {
+  "printingId": "OP02-121",
+  "score": 0.253,
+  "margin": 0.3
+ },
+ "op02_10154": {
+  "printingId": "OP02-121_p1",
+  "score": 0.304,
+  "margin": 0.543
+ },
+ "op03_10002": {
+  "printingId": "OP03-001_p1",
+  "score": 0.294,
+  "margin": 1
+ },
+ "op03_10004": {
+  "printingId": "OP03-003",
+  "score": 0.342,
+  "margin": 0.3
+ },
+ "op03_10007": {
+  "printingId": "OP03-006",
+  "score": 0.187,
+  "margin": 0.298
+ },
+ "op03_10008": {
+  "printingId": "OP03-007",
+  "score": 0.174,
+  "margin": 0.305
+ },
+ "op03_10009": {
+  "printingId": "OP03-008",
+  "score": 0.205,
+  "margin": 0.374
+ },
+ "op03_10010": {
+  "printingId": "OP03-009",
+  "score": 0.176,
+  "margin": 0.279
+ },
+ "op03_10011": {
+  "printingId": "OP03-010",
+  "score": 0.178,
+  "margin": 0.289
+ },
+ "op03_10015": {
+  "printingId": "OP03-013_p1",
+  "score": 0.361,
+  "margin": 0.458
+ },
+ "op03_10053": {
+  "printingId": "OP03-044",
+  "score": 0.311,
+  "margin": 0.324
+ },
+ "op03_10058": {
+  "printingId": "OP03-048",
+  "score": 0.183,
+  "margin": 0.335
+ },
+ "op03_10065": {
+  "printingId": "OP03-055",
+  "score": 0.156,
+  "margin": 0.3
+ },
+ "op03_10066": {
+  "printingId": "OP03-056",
+  "score": 0.159,
+  "margin": 0.3
+ },
+ "op03_10067": {
+  "printingId": "OP03-057",
+  "score": 0.345,
+  "margin": 0.3
+ },
+ "op03_10071": {
+  "printingId": "OP03-060",
+  "score": 0.204,
+  "margin": 0.3
+ },
+ "op03_10084": {
+  "printingId": "OP03-072",
+  "score": 0.377,
+  "margin": 0.354
+ },
+ "op03_10093": {
+  "printingId": "OP03-078_p1",
+  "score": 0.288,
+  "margin": 0.879
+ },
+ "op03_10094": {
+  "printingId": "OP03-079",
+  "score": 0.173,
+  "margin": 0.3
+ },
+ "op03_10107": {
+  "printingId": "OP03-089",
+  "score": 0.282,
+  "margin": 0.3
+ },
+ "op03_10111": {
+  "printingId": "OP03-092_p1",
+  "score": 0.287,
+  "margin": 0.658
+ },
+ "op03_10113": {
+  "printingId": "OP03-094",
+  "score": 0.124,
+  "margin": 0.3
+ },
+ "op03_10116": {
+  "printingId": "OP03-097",
+  "score": 0.352,
+  "margin": 0.326
+ },
+ "op03_10118": {
+  "printingId": "OP03-099",
+  "score": 0.161,
+  "margin": 1
+ },
+ "op03_10119": {
+  "printingId": "OP03-099_p1",
+  "score": 0.207,
+  "margin": 0.776
+ },
+ "op03_10126": {
+  "printingId": "OP03-106",
+  "score": 0.236,
+  "margin": 0.271
+ },
+ "op03_10127": {
+  "printingId": "OP03-107",
+  "score": 0.197,
+  "margin": 0.275
+ },
+ "op03_10128": {
+  "printingId": "OP03-108",
+  "score": 0.256,
+  "margin": 0.3
+ },
+ "op03_10129": {
+  "printingId": "OP03-108_p1",
+  "score": 0.299,
+  "margin": 0.707
+ },
+ "op03_10131": {
+  "printingId": "OP03-110",
+  "score": 0.452,
+  "margin": 0.3
+ },
+ "op03_10133": {
+  "printingId": "OP03-112",
+  "score": 0.467,
+  "margin": 1
+ },
+ "op03_10134": {
+  "printingId": "OP03-112_p1",
+  "score": 0.368,
+  "margin": 0.76
+ },
+ "op03_10135": {
+  "printingId": "OP03-113",
+  "score": 0.335,
+  "margin": 0.3
+ },
+ "op03_10136": {
+  "printingId": "OP03-113_p1",
+  "score": 0.367,
+  "margin": 0.592
+ },
+ "op03_10138": {
+  "printingId": "OP03-114_p1",
+  "score": 0.358,
+  "margin": 0.914
+ },
+ "op03_10139": {
+  "printingId": "OP03-115",
+  "score": 0.43,
+  "margin": 1
+ },
+ "op03_10140": {
+  "printingId": "OP03-116",
+  "score": 0.178,
+  "margin": 0.3
+ },
+ "op03_10142": {
+  "printingId": "OP03-118",
+  "score": 0.141,
+  "margin": 0.294
+ },
+ "op03_10145": {
+  "printingId": "OP03-121",
+  "score": 0.159,
+  "margin": 0.291
+ },
+ "op03_10146": {
+  "printingId": "OP03-122",
+  "score": 0.45,
+  "margin": 0.603
+ },
+ "op03_10147": {
+  "printingId": "OP03-122_p1",
+  "score": 0.324,
+  "margin": 1
+ },
+ "op03_10148": {
+  "printingId": "OP03-122_p2",
+  "score": 0.3,
+  "margin": 0.812
+ },
+ "op03_10149": {
+  "printingId": "OP03-123",
+  "score": 0.367,
+  "margin": 0.3
+ },
+ "op03_10150": {
+  "printingId": "OP03-123_p1",
+  "score": 0.351,
+  "margin": 0.565
+ },
+ "op03_10152": {
+  "printingId": "OP01-051_p2",
+  "score": 0.296,
+  "margin": 0.769
+ },
+ "op03_10153": {
+  "printingId": "ST01-012_p1",
+  "score": 0.36,
+  "margin": 0.66
+ },
+ "op03_10155": {
+  "printingId": "ST04-003_p1",
+  "score": 0.326,
+  "margin": 0.723
+ },
+ "op04_10018": {
+  "printingId": "OP04-016",
+  "score": 0.368,
+  "margin": 0.308
+ },
+ "op04_10029": {
+  "printingId": "OP04-024_p1",
+  "score": 0.36,
+  "margin": 0.679
+ },
+ "op04_10035": {
+  "printingId": "OP04-029",
+  "score": 0.197,
+  "margin": 0.3
+ },
+ "op04_10038": {
+  "printingId": "OP04-031",
+  "score": 0.42,
+  "margin": 0.3
+ },
+ "op04_10039": {
+  "printingId": "OP04-031_p1",
+  "score": 0.432,
+  "margin": 0.553
+ },
+ "op04_10040": {
+  "printingId": "OP04-032",
+  "score": 0.147,
+  "margin": 0.3
+ },
+ "op04_10044": {
+  "printingId": "OP04-036",
+  "score": 0.165,
+  "margin": 0.3
+ },
+ "op04_10054": {
+  "printingId": "OP04-044",
+  "score": 0.255,
+  "margin": 0.3
+ },
+ "op04_10055": {
+  "printingId": "OP04-044_p1",
+  "score": 0.334,
+  "margin": 0.55
+ },
+ "op04_10068": {
+  "printingId": "OP04-056",
+  "score": 0.35,
+  "margin": 0.3
+ },
+ "op04_10079": {
+  "printingId": "OP04-064_p1",
+  "score": 0.428,
+  "margin": 1
+ },
+ "op04_10093": {
+  "printingId": "OP04-077",
+  "score": 0.137,
+  "margin": 0.324
+ },
+ "op04_10100": {
+  "printingId": "OP04-083",
+  "score": 0.314,
+  "margin": 0.326
+ },
+ "op04_10101": {
+  "printingId": "OP04-083_p1",
+  "score": 0.28,
+  "margin": 0.455
+ },
+ "op04_10102": {
+  "printingId": "OP04-083_p2",
+  "score": 0.305,
+  "margin": 0.728
+ },
+ "op04_10108": {
+  "printingId": "OP04-089",
+  "score": 0.235,
+  "margin": 0.3
+ },
+ "op04_10112": {
+  "printingId": "OP04-092",
+  "score": 0.211,
+  "margin": 1
+ },
+ "op04_10115": {
+  "printingId": "OP04-095",
+  "score": 0.14,
+  "margin": 0.3
+ },
+ "op04_10116": {
+  "printingId": "OP04-096",
+  "score": 0.107,
+  "margin": 0.328
+ },
+ "op04_10120": {
+  "printingId": "OP04-100",
+  "score": 0.42,
+  "margin": 0.3
+ },
+ "op04_10121": {
+  "printingId": "OP04-100_p1",
+  "score": 0.391,
+  "margin": 0.464
+ },
+ "op04_10125": {
+  "printingId": "OP04-104",
+  "score": 0.232,
+  "margin": 0.3
+ },
+ "op04_10126": {
+  "printingId": "OP04-104_p1",
+  "score": 0.51,
+  "margin": 1
+ },
+ "op04_10134": {
+  "printingId": "OP04-112",
+  "score": 0.246,
+  "margin": 0.3
+ },
+ "op04_10135": {
+  "printingId": "OP04-112_p1",
+  "score": 0.366,
+  "margin": 0.597
+ },
+ "op04_10144": {
+  "printingId": "OP04-119_p1",
+  "score": 0.374,
+  "margin": 1
+ },
+ "op04_10146": {
+  "printingId": "OP01-047_p2",
+  "score": 0.246,
+  "margin": 0.748
+ },
+ "op04_10147": {
+  "printingId": "OP01-078_p2",
+  "score": 0.363,
+  "margin": 0.732
+ },
+ "op04_10148": {
+  "printingId": "OP02-004_p2",
+  "score": 0.285,
+  "margin": 0.784
+ },
+ "op04_10149": {
+  "printingId": "OP02-085_p2",
+  "score": 0.207,
+  "margin": 0.833
+ },
+ "op04_10150": {
+  "printingId": "OP02-099_p2",
+  "score": 0.345,
+  "margin": 0.684
+ },
+ "op05_10002": {
+  "printingId": "OP05-001_p1",
+  "score": 0.262,
+  "margin": 1
+ },
+ "op05_10004": {
+  "printingId": "OP05-002_p1",
+  "score": 0.319,
+  "margin": 1
+ },
+ "op05_10006": {
+  "printingId": "OP05-004",
+  "score": 0.21,
+  "margin": 0.324
+ },
+ "op05_10008": {
+  "printingId": "OP05-006",
+  "score": 0.409,
+  "margin": 0.3
+ },
+ "op05_10009": {
+  "printingId": "OP05-006_p1",
+  "score": 0.345,
+  "margin": 1
+ },
+ "op05_10010": {
+  "printingId": "OP05-007",
+  "score": 0.293,
+  "margin": 0.3
+ },
+ "op05_10011": {
+  "printingId": "OP05-007_p1",
+  "score": 0.265,
+  "margin": 0.877
+ },
+ "op05_10014": {
+  "printingId": "OP05-010",
+  "score": 0.217,
+  "margin": 0.3
+ },
+ "op05_10019": {
+  "printingId": "OP05-015",
+  "score": 0.369,
+  "margin": 0.3
+ },
+ "op05_10020": {
+  "printingId": "OP05-015_p1",
+  "score": 0.378,
+  "margin": 0.568
+ },
+ "op05_10026": {
+  "printingId": "OP05-021",
+  "score": 0.163,
+  "margin": 0.32
+ },
+ "op05_10028": {
+  "printingId": "OP05-022_p1",
+  "score": 0.318,
+  "margin": 1
+ },
+ "op05_10036": {
+  "printingId": "OP05-030",
+  "score": 0.376,
+  "margin": 0.34
+ },
+ "op05_10041": {
+  "printingId": "OP05-034",
+  "score": 0.302,
+  "margin": 0.3
+ },
+ "op05_10042": {
+  "printingId": "OP05-034_p1",
+  "score": 0.435,
+  "margin": 0.43
+ },
+ "op05_10044": {
+  "printingId": "OP05-036",
+  "score": 0.191,
+  "margin": 0.328
+ },
+ "op05_10045": {
+  "printingId": "OP05-037",
+  "score": 0.404,
+  "margin": 0.324
+ },
+ "op05_10052": {
+  "printingId": "OP05-043",
+  "score": 0.347,
+  "margin": 0.3
+ },
+ "op05_10053": {
+  "printingId": "OP05-043_p1",
+  "score": 0.332,
+  "margin": 0.583
+ },
+ "op05_10062": {
+  "printingId": "OP05-051_p1",
+  "score": 0.286,
+  "margin": 0.734
+ },
+ "op05_10063": {
+  "printingId": "OP05-052",
+  "score": 0.188,
+  "margin": 0.33
+ },
+ "op05_10069": {
+  "printingId": "OP05-057",
+  "score": 0.422,
+  "margin": 0.3
+ },
+ "op05_10072": {
+  "printingId": "OP05-060",
+  "score": 0.2,
+  "margin": 1
+ },
+ "op05_10073": {
+  "printingId": "OP05-060_p1",
+  "score": 0.297,
+  "margin": 1.0
+ },
+ "op05_10074": {
+  "printingId": "OP05-061",
+  "score": 0.226,
+  "margin": 0.289
+ },
+ "op05_10076": {
+  "printingId": "OP05-063",
+  "score": 0.222,
+  "margin": 0.304
+ },
+ "op05_10078": {
+  "printingId": "OP05-065",
+  "score": 0.245,
+  "margin": 0.315
+ },
+ "op05_10079": {
+  "printingId": "OP05-066",
+  "score": 0.209,
+  "margin": 0.303
+ },
+ "op05_10080": {
+  "printingId": "OP05-067",
+  "score": 0.323,
+  "margin": 1
+ },
+ "op05_10081": {
+  "printingId": "OP05-067_p1",
+  "score": 0.402,
+  "margin": 0.691
+ },
+ "op05_10082": {
+  "printingId": "OP05-068",
+  "score": 0.211,
+  "margin": 0.292
+ },
+ "op05_10083": {
+  "printingId": "OP05-069",
+  "score": 0.293,
+  "margin": 0.771
+ },
+ "op05_10084": {
+  "printingId": "OP05-069_p1",
+  "score": 0.453,
+  "margin": 1
+ },
+ "op05_10085": {
+  "printingId": "OP05-069_p2",
+  "score": 0.368,
+  "margin": 0.689
+ },
+ "op05_10086": {
+  "printingId": "OP05-070",
+  "score": 0.211,
+  "margin": 0.3
+ },
+ "op05_10088": {
+  "printingId": "OP05-072",
+  "score": 0.182,
+  "margin": 0.311
+ },
+ "op05_10089": {
+  "printingId": "OP05-073",
+  "score": 0.256,
+  "margin": 0.3
+ },
+ "op05_10090": {
+  "printingId": "OP05-074",
+  "score": 0.314,
+  "margin": 0.3
+ },
+ "op05_10091": {
+  "printingId": "OP05-074_p1",
+  "score": 0.347,
+  "margin": 0.633
+ },
+ "op05_10092": {
+  "printingId": "OP05-074_p2",
+  "score": 0.423,
+  "margin": 0.59
+ },
+ "op05_10094": {
+  "printingId": "OP05-076",
+  "score": 0.383,
+  "margin": 1
+ },
+ "op05_10095": {
+  "printingId": "OP05-077",
+  "score": 0.213,
+  "margin": 0.327
+ },
+ "op05_10099": {
+  "printingId": "OP05-081",
+  "score": 0.188,
+  "margin": 0.3
+ },
+ "op05_10100": {
+  "printingId": "OP05-082",
+  "score": 0.308,
+  "margin": 0.3
+ },
+ "op05_10110": {
+  "printingId": "OP05-091",
+  "score": 0.307,
+  "margin": 0.326
+ },
+ "op05_10111": {
+  "printingId": "OP05-091_p1",
+  "score": 0.306,
+  "margin": 0.436
+ },
+ "op05_10114": {
+  "printingId": "OP05-093_p1",
+  "score": 0.331,
+  "margin": 1
+ },
+ "op05_10118": {
+  "printingId": "OP05-097",
+  "score": 0.13,
+  "margin": 0.319
+ },
+ "op05_10120": {
+  "printingId": "OP05-098_p1",
+  "score": 0.548,
+  "margin": 1
+ },
+ "op05_10123": {
+  "printingId": "OP05-100_p1",
+  "score": 0.388,
+  "margin": 1
+ },
+ "op05_10125": {
+  "printingId": "OP05-102",
+  "score": 0.491,
+  "margin": 0.321
+ },
+ "op05_10126": {
+  "printingId": "OP05-102_p1",
+  "score": 0.317,
+  "margin": 1
+ },
+ "op05_10129": {
+  "printingId": "OP05-105",
+  "score": 0.535,
+  "margin": 0.3
+ },
+ "op05_10138": {
+  "printingId": "OP05-114",
+  "score": 0.164,
+  "margin": 0.3
+ },
+ "op05_10139": {
+  "printingId": "OP05-115",
+  "score": 0.448,
+  "margin": 0.3
+ },
+ "op05_10141": {
+  "printingId": "OP05-117",
+  "score": 0.111,
+  "margin": 0.3
+ },
+ "op05_10142": {
+  "printingId": "OP05-118",
+  "score": 0.376,
+  "margin": 0.3
+ },
+ "op05_10143": {
+  "printingId": "OP05-118_p1",
+  "score": 0.364,
+  "margin": 0.656
+ },
+ "op05_10144": {
+  "printingId": "OP05-119",
+  "score": 0.45,
+  "margin": 0.3
+ },
+ "op05_10145": {
+  "printingId": "OP05-119_p1",
+  "score": 0.431,
+  "margin": 0.543
+ },
+ "op05_10146": {
+  "printingId": "OP05-119_p2",
+  "score": 0.329,
+  "margin": 0.519
+ },
+ "op05_10148": {
+  "printingId": "OP01-016_p4",
+  "score": 0.454,
+  "margin": 0.63
+ },
+ "op05_10149": {
+  "printingId": "OP01-121_p2",
+  "score": 0.52,
+  "margin": 1
+ },
+ "op05_10150": {
+  "printingId": "OP02-120_p2",
+  "score": 0.423,
+  "margin": 0.504
+ },
+ "op05_10151": {
+  "printingId": "OP03-092_p2",
+  "score": 0.421,
+  "margin": 1
+ },
+ "op05_10152": {
+  "printingId": "OP04-044_p2",
+  "score": 0.355,
+  "margin": 0.714
+ },
+ "op05_10153": {
+  "printingId": "OP05-100_p2",
+  "score": 0.385,
+  "margin": 0.709
+ },
+ "op05_10154": {
+  "printingId": "ST01-012_p4",
+  "score": 0.272,
+  "margin": 0.501
+ },
+ "op05_10155": {
+  "printingId": "ST01-012_p3",
+  "score": 0.3,
+  "margin": 0.834
+ },
+ "op06_10002": {
+  "printingId": "OP06-001_p1",
+  "score": 0.367,
+  "margin": 1
+ },
+ "op06_10004": {
+  "printingId": "OP06-003",
+  "score": 0.261,
+  "margin": 0.3
+ },
+ "op06_10008": {
+  "printingId": "OP06-007",
+  "score": 0.35,
+  "margin": 0.317
+ },
+ "op06_10009": {
+  "printingId": "OP06-007_p1",
+  "score": 0.55,
+  "margin": 0.634
+ },
+ "op06_10025": {
+  "printingId": "OP06-020_p1",
+  "score": 0.271,
+  "margin": 1
+ },
+ "op06_10027": {
+  "printingId": "OP06-021_p1",
+  "score": 0.331,
+  "margin": 1
+ },
+ "op06_10028": {
+  "printingId": "OP06-022",
+  "score": 0.174,
+  "margin": 1
+ },
+ "op06_10029": {
+  "printingId": "OP06-022_p1",
+  "score": 0.344,
+  "margin": 0.761
+ },
+ "op06_10030": {
+  "printingId": "OP06-023",
+  "score": 0.265,
+  "margin": 0.3
+ },
+ "op06_10033": {
+  "printingId": "OP06-025_p1",
+  "score": 0.398,
+  "margin": 1
+ },
+ "op06_10043": {
+  "printingId": "OP06-035",
+  "score": 0.301,
+  "margin": 0.3
+ },
+ "op06_10044": {
+  "printingId": "OP06-035_p1",
+  "score": 0.316,
+  "margin": 0.579
+ },
+ "op06_10045": {
+  "printingId": "OP06-036",
+  "score": 0.36,
+  "margin": 0.3
+ },
+ "op06_10047": {
+  "printingId": "OP06-038",
+  "score": 0.141,
+  "margin": 0.3
+ },
+ "op06_10052": {
+  "printingId": "OP06-042_p1",
+  "score": 0.351,
+  "margin": 1
+ },
+ "op06_10055": {
+  "printingId": "OP06-044",
+  "score": 0.227,
+  "margin": 0.32
+ },
+ "op06_10058": {
+  "printingId": "OP06-047",
+  "score": 0.359,
+  "margin": 0.303
+ },
+ "op06_10060": {
+  "printingId": "OP06-049",
+  "score": 0.181,
+  "margin": 0.323
+ },
+ "op06_10062": {
+  "printingId": "OP06-050_p1",
+  "score": 0.363,
+  "margin": 0.821
+ },
+ "op06_10068": {
+  "printingId": "OP06-056",
+  "score": 0.17,
+  "margin": 0.3
+ },
+ "op06_10070": {
+  "printingId": "OP06-058",
+  "score": 0.389,
+  "margin": 0.305
+ },
+ "op06_10071": {
+  "printingId": "OP06-059",
+  "score": 0.167,
+  "margin": 0.31
+ },
+ "op06_10072": {
+  "printingId": "OP06-060",
+  "score": 0.269,
+  "margin": 0.3
+ },
+ "op06_10077": {
+  "printingId": "OP06-063",
+  "score": 0.232,
+  "margin": 0.304
+ },
+ "op06_10078": {
+  "printingId": "OP06-064",
+  "score": 0.232,
+  "margin": 0.3
+ },
+ "op06_10079": {
+  "printingId": "OP06-065",
+  "score": 0.364,
+  "margin": 0.3
+ },
+ "op06_10080": {
+  "printingId": "OP06-066",
+  "score": 0.223,
+  "margin": 0.3
+ },
+ "op06_10081": {
+  "printingId": "OP06-067",
+  "score": 0.361,
+  "margin": 0.3
+ },
+ "op06_10082": {
+  "printingId": "OP06-068",
+  "score": 0.257,
+  "margin": 0.3
+ },
+ "op06_10083": {
+  "printingId": "OP06-069",
+  "score": 0.475,
+  "margin": 0.3
+ },
+ "op06_10084": {
+  "printingId": "OP06-069_p1",
+  "score": 0.471,
+  "margin": 0.5
+ },
+ "op06_10088": {
+  "printingId": "OP06-073",
+  "score": 0.273,
+  "margin": 0.327
+ },
+ "op06_10091": {
+  "printingId": "OP06-076",
+  "score": 0.285,
+  "margin": 0.316
+ },
+ "op06_10093": {
+  "printingId": "OP06-078",
+  "score": 0.238,
+  "margin": 0.31
+ },
+ "op06_10094": {
+  "printingId": "OP06-079",
+  "score": 0.23,
+  "margin": 0.3
+ },
+ "op06_10096": {
+  "printingId": "OP06-080_p1",
+  "score": 0.33,
+  "margin": 1
+ },
+ "op06_10103": {
+  "printingId": "OP06-086",
+  "score": 0.323,
+  "margin": 0.3
+ },
+ "op06_10104": {
+  "printingId": "OP06-086_p1",
+  "score": 0.299,
+  "margin": 0.51
+ },
+ "op06_10109": {
+  "printingId": "OP06-091",
+  "score": 0.183,
+  "margin": 0.3
+ },
+ "op06_10112": {
+  "printingId": "OP06-093_p1",
+  "score": 0.333,
+  "margin": 0.617
+ },
+ "op06_10119": {
+  "printingId": "OP06-100",
+  "score": 0.221,
+  "margin": 0.288
+ },
+ "op06_10121": {
+  "printingId": "OP06-101_p1",
+  "score": 0.416,
+  "margin": 0.484
+ },
+ "op06_10123": {
+  "printingId": "OP06-103",
+  "score": 0.176,
+  "margin": 0.313
+ },
+ "op06_10124": {
+  "printingId": "OP06-104",
+  "score": 0.398,
+  "margin": 1
+ },
+ "op06_10126": {
+  "printingId": "OP06-106",
+  "score": 0.516,
+  "margin": 0.3
+ },
+ "op06_10127": {
+  "printingId": "OP06-106_p1",
+  "score": 0.348,
+  "margin": 0.582
+ },
+ "op06_10128": {
+  "printingId": "OP06-107",
+  "score": 0.292,
+  "margin": 0.306
+ },
+ "op06_10131": {
+  "printingId": "OP06-109",
+  "score": 0.22,
+  "margin": 0.309
+ },
+ "op06_10132": {
+  "printingId": "OP06-110",
+  "score": 0.179,
+  "margin": 0.284
+ },
+ "op06_10134": {
+  "printingId": "OP06-112",
+  "score": 0.132,
+  "margin": 0.304
+ },
+ "op06_10136": {
+  "printingId": "OP06-114",
+  "score": 0.172,
+  "margin": 0.3
+ },
+ "op06_10137": {
+  "printingId": "OP06-115",
+  "score": 0.48,
+  "margin": 0.309
+ },
+ "op06_10140": {
+  "printingId": "OP06-118",
+  "score": 0.447,
+  "margin": 0.327
+ },
+ "op06_10141": {
+  "printingId": "OP06-118_p1",
+  "score": 0.429,
+  "margin": 1
+ },
+ "op06_10142": {
+  "printingId": "OP06-118_p2",
+  "score": 0.33,
+  "margin": 0.567
+ },
+ "op06_10143": {
+  "printingId": "OP06-119",
+  "score": 0.362,
+  "margin": 0.32
+ },
+ "op06_10144": {
+  "printingId": "OP06-119_p1",
+  "score": 0.387,
+  "margin": 0.673
+ },
+ "op06_10146": {
+  "printingId": "OP03-008_p1",
+  "score": 0.5,
+  "margin": 1
+ },
+ "op06_10147": {
+  "printingId": "OP03-114_p2",
+  "score": 0.446,
+  "margin": 1
+ },
+ "op06_10148": {
+  "printingId": "OP04-024_p2",
+  "score": 0.548,
+  "margin": 1
+ },
+ "op06_10149": {
+  "printingId": "OP04-064_p2",
+  "score": 0.347,
+  "margin": 0.729
+ },
+ "op06_10150": {
+  "printingId": "OP05-051_p2",
+  "score": 0.397,
+  "margin": 1
+ },
+ "op06_10151": {
+  "printingId": "OP05-091_p2",
+  "score": 0.406,
+  "margin": 0.599
+ },
+ "op07_10002": {
+  "printingId": "OP07-001_p1",
+  "score": 0.397,
+  "margin": 1
+ },
+ "op07_10016": {
+  "printingId": "OP07-014",
+  "score": 0.244,
+  "margin": 0.323
+ },
+ "op07_10017": {
+  "printingId": "OP07-015",
+  "score": 0.271,
+  "margin": 0.337
+ },
+ "op07_10018": {
+  "printingId": "OP07-015_p1",
+  "score": 0.411,
+  "margin": 0.52
+ },
+ "op07_10020": {
+  "printingId": "OP07-017",
+  "score": 0.226,
+  "margin": 0.317
+ },
+ "op07_10022": {
+  "printingId": "OP07-019",
+  "score": 0.234,
+  "margin": 1
+ },
+ "op07_10023": {
+  "printingId": "OP07-019_p1",
+  "score": 0.294,
+  "margin": 0.582
+ },
+ "op07_10025": {
+  "printingId": "OP07-021",
+  "score": 0.362,
+  "margin": 0.331
+ },
+ "op07_10028": {
+  "printingId": "OP07-023",
+  "score": 0.262,
+  "margin": 0.327
+ },
+ "op07_10030": {
+  "printingId": "OP07-025",
+  "score": 0.292,
+  "margin": 0.327
+ },
+ "op07_10031": {
+  "printingId": "OP07-026",
+  "score": 0.33,
+  "margin": 0.323
+ },
+ "op07_10035": {
+  "printingId": "OP07-029",
+  "score": 0.377,
+  "margin": 0.33
+ },
+ "op07_10038": {
+  "printingId": "OP07-031",
+  "score": 0.253,
+  "margin": 0.332
+ },
+ "op07_10040": {
+  "printingId": "OP07-033",
+  "score": 0.198,
+  "margin": 0.316
+ },
+ "op07_10041": {
+  "printingId": "OP07-034",
+  "score": 0.271,
+  "margin": 0.325
+ },
+ "op07_10043": {
+  "printingId": "OP07-036",
+  "score": 0.349,
+  "margin": 1
+ },
+ "op07_10044": {
+  "printingId": "OP07-037",
+  "score": 0.219,
+  "margin": 0.32
+ },
+ "op07_10046": {
+  "printingId": "OP07-038_p1",
+  "score": 0.223,
+  "margin": 1
+ },
+ "op07_10048": {
+  "printingId": "OP07-040",
+  "score": 0.252,
+  "margin": 0.323
+ },
+ "op07_10056": {
+  "printingId": "OP07-046_p1",
+  "score": 0.369,
+  "margin": 0.727
+ },
+ "op07_10058": {
+  "printingId": "OP07-047_p1",
+  "score": 0.284,
+  "margin": 0.628
+ },
+ "op07_10063": {
+  "printingId": "OP07-051_p1",
+  "score": 0.267,
+  "margin": 0.731
+ },
+ "op07_10064": {
+  "printingId": "OP07-051_p2",
+  "score": 0.341,
+  "margin": 0.583
+ },
+ "op07_10066": {
+  "printingId": "OP07-053",
+  "score": 0.408,
+  "margin": 1
+ },
+ "op07_10069": {
+  "printingId": "OP07-056",
+  "score": 0.279,
+  "margin": 0.307
+ },
+ "op07_10073": {
+  "printingId": "OP07-059_p1",
+  "score": 0.335,
+  "margin": 1
+ },
+ "op07_10078": {
+  "printingId": "OP07-064",
+  "score": 0.275,
+  "margin": 0.334
+ },
+ "op07_10079": {
+  "printingId": "OP07-064_p1",
+  "score": 0.403,
+  "margin": 0.649
+ },
+ "op07_10093": {
+  "printingId": "OP07-076",
+  "score": 0.187,
+  "margin": 0.319
+ },
+ "op07_10097": {
+  "printingId": "OP07-079_p1",
+  "score": 0.292,
+  "margin": 1
+ },
+ "op07_10104": {
+  "printingId": "OP07-085_p1",
+  "score": 0.244,
+  "margin": 0.739
+ },
+ "op07_10117": {
+  "printingId": "OP07-097_p1",
+  "score": 0.366,
+  "margin": 1
+ },
+ "op07_10127": {
+  "printingId": "OP07-107",
+  "score": 0.424,
+  "margin": 0.314
+ },
+ "op07_10128": {
+  "printingId": "OP07-107_p1",
+  "score": 0.3,
+  "margin": 0.734
+ },
+ "op07_10130": {
+  "printingId": "OP07-109",
+  "score": 0.368,
+  "margin": 0.284
+ },
+ "op07_10131": {
+  "printingId": "OP07-109_p1",
+  "score": 0.346,
+  "margin": 0.468
+ },
+ "op07_10134": {
+  "printingId": "OP07-111_p1",
+  "score": 0.339,
+  "margin": 0.756
+ },
+ "op07_10137": {
+  "printingId": "OP07-114",
+  "score": 0.2,
+  "margin": 0.312
+ },
+ "op07_10139": {
+  "printingId": "OP07-116",
+  "score": 0.513,
+  "margin": 1
+ },
+ "op07_10141": {
+  "printingId": "OP07-118",
+  "score": 0.389,
+  "margin": 0.317
+ },
+ "op07_10142": {
+  "printingId": "OP07-118_p1",
+  "score": 0.35,
+  "margin": 0.722
+ },
+ "op07_10143": {
+  "printingId": "OP07-119",
+  "score": 0.405,
+  "margin": 0.321
+ },
+ "op07_10144": {
+  "printingId": "OP07-119_p1",
+  "score": 0.373,
+  "margin": 0.791
+ },
+ "op07_10146": {
+  "printingId": "OP01-035_p2",
+  "score": 0.43,
+  "margin": 1
+ },
+ "op07_10147": {
+  "printingId": "OP01-073_p2",
+  "score": 0.47,
+  "margin": 1
+ },
+ "op07_10148": {
+  "printingId": "OP03-003_p1",
+  "score": 0.48,
+  "margin": 0.602
+ },
+ "op07_10149": {
+  "printingId": "OP03-078_p2",
+  "score": 0.353,
+  "margin": 1
+ },
+ "op07_10150": {
+  "printingId": "OP05-074_p3",
+  "score": 0.376,
+  "margin": 0.69
+ },
+ "op07_10151": {
+  "printingId": "OP06-101_p2",
+  "score": 0.578,
+  "margin": 0.615
+ },
+ "op07_10152": {
+  "printingId": "OP07-109",
+  "score": 0.387,
+  "margin": 1
+ },
+ "op08_10002": {
+  "printingId": "OP08-001_p1",
+  "score": 0.408,
+  "margin": 1
+ },
+ "op08_10004": {
+  "printingId": "OP08-002_p1",
+  "score": 0.406,
+  "margin": 1
+ },
+ "op08_10026": {
+  "printingId": "OP08-021_p1",
+  "score": 0.305,
+  "margin": 1
+ },
+ "op08_10028": {
+  "printingId": "OP08-023",
+  "score": 0.391,
+  "margin": 0.31
+ },
+ "op08_10029": {
+  "printingId": "OP08-023_p1",
+  "score": 0.382,
+  "margin": 0.647
+ },
+ "op08_10067": {
+  "printingId": "OP08-057_p1",
+  "score": 0.324,
+  "margin": 1
+ },
+ "op08_10069": {
+  "printingId": "OP08-058_p1",
+  "score": 0.248,
+  "margin": 1
+ },
+ "op08_10078": {
+  "printingId": "OP08-067",
+  "score": 0.397,
+  "margin": 0.303
+ },
+ "op08_10079": {
+  "printingId": "OP08-067_p1",
+  "score": 0.252,
+  "margin": 0.758
+ },
+ "op08_10082": {
+  "printingId": "OP08-069_p1",
+  "score": 0.367,
+  "margin": 1
+ },
+ "op08_10087": {
+  "printingId": "OP08-074",
+  "score": 0.412,
+  "margin": 0.339
+ },
+ "op08_10088": {
+  "printingId": "OP08-074_p1",
+  "score": 0.439,
+  "margin": 0.767
+ },
+ "op08_10090": {
+  "printingId": "OP08-076",
+  "score": 0.272,
+  "margin": 0.316
+ },
+ "op08_10101": {
+  "printingId": "OP08-084_p1",
+  "score": 0.408,
+  "margin": 0.634
+ },
+ "op08_10104": {
+  "printingId": "OP08-087",
+  "score": 0.424,
+  "margin": 0.312
+ },
+ "op08_10116": {
+  "printingId": "OP08-098_p1",
+  "score": 0.32,
+  "margin": 1
+ },
+ "op08_10117": {
+  "printingId": "OP08-099",
+  "score": 0.252,
+  "margin": 0.311
+ },
+ "op08_10124": {
+  "printingId": "OP08-105_p1",
+  "score": 0.364,
+  "margin": 1
+ },
+ "op08_10126": {
+  "printingId": "OP08-106_p1",
+  "score": 0.33,
+  "margin": 0.52
+ },
+ "op08_10131": {
+  "printingId": "OP08-110_p1",
+  "score": 0.344,
+  "margin": 1
+ },
+ "op08_10140": {
+  "printingId": "OP08-118",
+  "score": 0.363,
+  "margin": 0.312
+ },
+ "op08_10141": {
+  "printingId": "OP08-118_p1",
+  "score": 0.269,
+  "margin": 0.523
+ },
+ "op08_10142": {
+  "printingId": "OP08-118_p2",
+  "score": 0.307,
+  "margin": 1
+ },
+ "op08_10146": {
+  "printingId": "ST02-007_p3",
+  "score": 0.471,
+  "margin": 1
+ },
+ "op08_10147": {
+  "printingId": "ST03-004_p2",
+  "score": 0.397,
+  "margin": 0.617
+ },
+ "op08_10148": {
+  "printingId": "ST04-005_p3",
+  "score": 0.378,
+  "margin": 0.679
+ },
+ "op08_10149": {
+  "printingId": "ST06-006_p2",
+  "score": 0.469,
+  "margin": 1
+ },
+ "op08_10150": {
+  "printingId": "OP02-013_p3",
+  "score": 0.468,
+  "margin": 1
+ },
+ "op08_10151": {
+  "printingId": "OP03-112_p4",
+  "score": 0.339,
+  "margin": 0.621
+ },
+ "op09_10001": {
+  "printingId": "OP09-001",
+  "score": 0.201,
+  "margin": 1
+ },
+ "op09_10002": {
+  "printingId": "OP09-001_p1",
+  "score": 0.353,
+  "margin": 0.712
+ },
+ "op09_10003": {
+  "printingId": "OP09-002",
+  "score": 0.342,
+  "margin": 0.315
+ },
+ "op09_10004": {
+  "printingId": "OP09-002_p1",
+  "score": 0.416,
+  "margin": 0.681
+ },
+ "op09_10006": {
+  "printingId": "OP09-004",
+  "score": 0.325,
+  "margin": 0.32
+ },
+ "op09_10007": {
+  "printingId": "OP09-004_p1",
+  "score": 0.41,
+  "margin": 0.653
+ },
+ "op09_10008": {
+  "printingId": "OP09-004_p2",
+  "score": 0.261,
+  "margin": 0.487
+ },
+ "op09_10009": {
+  "printingId": "OP09-005",
+  "score": 0.405,
+  "margin": 0.316
+ },
+ "op09_10010": {
+  "printingId": "OP09-006",
+  "score": 0.308,
+  "margin": 0.302
+ },
+ "op09_10013": {
+  "printingId": "OP09-009",
+  "score": 0.306,
+  "margin": 0.323
+ },
+ "op09_10014": {
+  "printingId": "OP09-009_p1",
+  "score": 0.357,
+  "margin": 0.684
+ },
+ "op09_10015": {
+  "printingId": "OP09-010",
+  "score": 0.406,
+  "margin": 0.295
+ },
+ "op09_10016": {
+  "printingId": "OP09-011",
+  "score": 0.332,
+  "margin": 0.29
+ },
+ "op09_10017": {
+  "printingId": "OP09-012",
+  "score": 0.348,
+  "margin": 0.302
+ },
+ "op09_10018": {
+  "printingId": "OP09-013",
+  "score": 0.445,
+  "margin": 1
+ },
+ "op09_10019": {
+  "printingId": "OP09-014",
+  "score": 0.292,
+  "margin": 0.295
+ },
+ "op09_10020": {
+  "printingId": "OP09-015",
+  "score": 0.404,
+  "margin": 1
+ },
+ "op09_10021": {
+  "printingId": "OP09-016",
+  "score": 0.371,
+  "margin": 0.246
+ },
+ "op09_10025": {
+  "printingId": "OP09-020_r1",
+  "score": 0.431,
+  "margin": 1
+ },
+ "op09_10034": {
+  "printingId": "OP09-027",
+  "score": 0.273,
+  "margin": 0.313
+ },
+ "op09_10040": {
+  "printingId": "OP09-033",
+  "score": 0.278,
+  "margin": 0.327
+ },
+ "op09_10042": {
+  "printingId": "OP09-034_p1",
+  "score": 0.38,
+  "margin": 0.621
+ },
+ "op09_10043": {
+  "printingId": "OP09-035",
+  "score": 0.339,
+  "margin": 0.281
+ },
+ "op09_10046": {
+  "printingId": "OP09-037_p1",
+  "score": 0.259,
+  "margin": 0.894
+ },
+ "op09_10051": {
+  "printingId": "OP09-042",
+  "score": 0.169,
+  "margin": 1
+ },
+ "op09_10052": {
+  "printingId": "OP09-042_p1",
+  "score": 0.368,
+  "margin": 0.819
+ },
+ "op09_10053": {
+  "printingId": "OP09-043",
+  "score": 0.295,
+  "margin": 0.293
+ },
+ "op09_10055": {
+  "printingId": "OP09-045",
+  "score": 0.251,
+  "margin": 0.313
+ },
+ "op09_10056": {
+  "printingId": "OP09-046",
+  "score": 0.311,
+  "margin": 0.306
+ },
+ "op09_10059": {
+  "printingId": "OP09-048",
+  "score": 0.312,
+  "margin": 0.341
+ },
+ "op09_10062": {
+  "printingId": "OP09-050",
+  "score": 0.413,
+  "margin": 1
+ },
+ "op09_10063": {
+  "printingId": "OP09-050_p1",
+  "score": 0.372,
+  "margin": 0.578
+ },
+ "op09_10064": {
+  "printingId": "OP09-051_r1",
+  "score": 0.375,
+  "margin": 1
+ },
+ "op09_10065": {
+  "printingId": "OP09-051_p1",
+  "score": 0.337,
+  "margin": 0.747
+ },
+ "op09_10066": {
+  "printingId": "OP09-051_p2",
+  "score": 0.321,
+  "margin": 0.422
+ },
+ "op09_10068": {
+  "printingId": "OP09-053",
+  "score": 0.274,
+  "margin": 0.277
+ },
+ "op09_10069": {
+  "printingId": "OP09-054",
+  "score": 0.275,
+  "margin": 0.303
+ },
+ "op09_10070": {
+  "printingId": "OP09-055",
+  "score": 0.306,
+  "margin": 0.344
+ },
+ "op09_10071": {
+  "printingId": "OP09-056",
+  "score": 0.434,
+  "margin": 0.313
+ },
+ "op09_10072": {
+  "printingId": "OP09-057_r1",
+  "score": 0.458,
+  "margin": 1
+ },
+ "op09_10076": {
+  "printingId": "OP09-061",
+  "score": 0.265,
+  "margin": 1
+ },
+ "op09_10077": {
+  "printingId": "OP09-061_p1",
+  "score": 0.347,
+  "margin": 0.81
+ },
+ "op09_10080": {
+  "printingId": "OP09-063",
+  "score": 0.276,
+  "margin": 0.283
+ },
+ "op09_10082": {
+  "printingId": "OP09-065",
+  "score": 0.424,
+  "margin": 0.315
+ },
+ "op09_10083": {
+  "printingId": "OP09-065_p1",
+  "score": 0.442,
+  "margin": 0.704
+ },
+ "op09_10087": {
+  "printingId": "OP09-069",
+  "score": 0.489,
+  "margin": 0.298
+ },
+ "op09_10088": {
+  "printingId": "OP09-069_p1",
+  "score": 0.428,
+  "margin": 0.736
+ },
+ "op09_10089": {
+  "printingId": "OP09-070",
+  "score": 0.346,
+  "margin": 0.293
+ },
+ "op09_10091": {
+  "printingId": "OP09-072",
+  "score": 0.404,
+  "margin": 0.322
+ },
+ "op09_10096": {
+  "printingId": "OP09-076",
+  "score": 0.418,
+  "margin": 0.312
+ },
+ "op09_10098": {
+  "printingId": "OP09-078_r1",
+  "score": 0.394,
+  "margin": 1
+ },
+ "op09_10099": {
+  "printingId": "OP09-079",
+  "score": 0.237,
+  "margin": 0.332
+ },
+ "op09_10101": {
+  "printingId": "OP09-081",
+  "score": 0.256,
+  "margin": 1
+ },
+ "op09_10102": {
+  "printingId": "OP09-081_p1",
+  "score": 0.331,
+  "margin": 0.903
+ },
+ "op09_10104": {
+  "printingId": "OP09-083",
+  "score": 0.326,
+  "margin": 1
+ },
+ "op09_10105": {
+  "printingId": "OP09-084",
+  "score": 0.35,
+  "margin": 0.318
+ },
+ "op09_10107": {
+  "printingId": "OP09-086",
+  "score": 0.392,
+  "margin": 0.316
+ },
+ "op09_10109": {
+  "printingId": "OP09-088",
+  "score": 0.271,
+  "margin": 0.311
+ },
+ "op09_10110": {
+  "printingId": "OP09-089",
+  "score": 0.293,
+  "margin": 0.311
+ },
+ "op09_10111": {
+  "printingId": "OP09-090_r1",
+  "score": 0.363,
+  "margin": 1
+ },
+ "op09_10112": {
+  "printingId": "OP09-091",
+  "score": 0.303,
+  "margin": 0.277
+ },
+ "op09_10114": {
+  "printingId": "OP09-093",
+  "score": 0.346,
+  "margin": 0.341
+ },
+ "op09_10115": {
+  "printingId": "OP09-093_p1",
+  "score": 0.309,
+  "margin": 0.545
+ },
+ "op09_10116": {
+  "printingId": "OP09-093_p2",
+  "score": 0.371,
+  "margin": 0.823
+ },
+ "op09_10118": {
+  "printingId": "OP09-095",
+  "score": 0.391,
+  "margin": 1
+ },
+ "op09_10119": {
+  "printingId": "OP09-096",
+  "score": 0.339,
+  "margin": 0.329
+ },
+ "op09_10120": {
+  "printingId": "OP09-097",
+  "score": 0.199,
+  "margin": 0.31
+ },
+ "op09_10121": {
+  "printingId": "OP09-098",
+  "score": 0.248,
+  "margin": 0.322
+ },
+ "op09_10122": {
+  "printingId": "OP09-099",
+  "score": 0.32,
+  "margin": 0.293
+ },
+ "op09_10130": {
+  "printingId": "OP09-106",
+  "score": 0.375,
+  "margin": 1
+ },
+ "op09_10144": {
+  "printingId": "OP09-118_p1",
+  "score": 0.383,
+  "margin": 0.568
+ },
+ "op09_10145": {
+  "printingId": "OP09-118_p2",
+  "score": 0.581,
+  "margin": 1
+ },
+ "op09_10147": {
+  "printingId": "OP09-119_p1",
+  "score": 0.387,
+  "margin": 0.693
+ },
+ "op09_10148": {
+  "printingId": "OP09-119_p2",
+  "score": 0.408,
+  "margin": 0.76
+ },
+ "op09_10150": {
+  "printingId": "OP04-119_p2",
+  "score": 0.33,
+  "margin": 0.757
+ },
+ "op09_10151": {
+  "printingId": "OP05-067_p4",
+  "score": 0.367,
+  "margin": 0.688
+ },
+ "op09_10152": {
+  "printingId": "OP05-093_p2",
+  "score": 0.321,
+  "margin": 0.61
+ },
+ "op09_10153": {
+  "printingId": "OP07-015_p2",
+  "score": 0.501,
+  "margin": 1
+ },
+ "op09_10154": {
+  "printingId": "OP07-051_p3",
+  "score": 0.411,
+  "margin": 0.658
+ },
+ "op09_10155": {
+  "printingId": "OP08-106_p4",
+  "score": 0.466,
+  "margin": 0.481
+ },
+ "op09_10156": {
+  "printingId": "OP09-004_p3",
+  "score": 0.271,
+  "margin": 0.843
+ },
+ "op09_10157": {
+  "printingId": "OP09-051_p3",
+  "score": 0.326,
+  "margin": 0.775
+ },
+ "op09_10158": {
+  "printingId": "OP09-093_p3",
+  "score": 0.313,
+  "margin": 0.761
+ },
+ "op09_10159": {
+  "printingId": "OP05-119_p5",
+  "score": 0.355,
+  "margin": 0.587
+ },
+ "op09_10160": {
+  "printingId": "OP09-077",
+  "score": 0.214,
+  "margin": 0.292
+ },
+ "op10_10006": {
+  "printingId": "OP10-003_p1",
+  "score": 0.333,
+  "margin": 1
+ },
+ "op10_10009": {
+  "printingId": "OP10-005_p1",
+  "score": 0.294,
+  "margin": 0.78
+ },
+ "op10_10015": {
+  "printingId": "OP10-011",
+  "score": 0.32,
+  "margin": 0.299
+ },
+ "op10_10023": {
+  "printingId": "OP10-018",
+  "score": 0.18,
+  "margin": 0.299
+ },
+ "op10_10029": {
+  "printingId": "OP10-022_p1",
+  "score": 0.35,
+  "margin": 0.789
+ },
+ "op10_10038": {
+  "printingId": "OP10-030_p1",
+  "score": 0.411,
+  "margin": 1
+ },
+ "op10_10040": {
+  "printingId": "OP10-032",
+  "score": 0.395,
+  "margin": 0.299
+ },
+ "op10_10041": {
+  "printingId": "OP10-032_p1",
+  "score": 0.326,
+  "margin": 0.609
+ },
+ "op10_10045": {
+  "printingId": "OP10-036",
+  "score": 0.248,
+  "margin": 0.241
+ },
+ "op10_10053": {
+  "printingId": "OP10-042_p1",
+  "score": 0.356,
+  "margin": 0.771
+ },
+ "op10_10057": {
+  "printingId": "OP10-045_p1",
+  "score": 0.363,
+  "margin": 1
+ },
+ "op10_10058": {
+  "printingId": "OP10-046",
+  "score": 0.365,
+  "margin": 0.297
+ },
+ "op10_10096": {
+  "printingId": "OP10-079",
+  "score": 0.184,
+  "margin": 0.297
+ },
+ "op10_10100": {
+  "printingId": "OP10-082_p1",
+  "score": 0.329,
+  "margin": 1
+ },
+ "op10_10102": {
+  "printingId": "OP10-084",
+  "score": 0.199,
+  "margin": 0.302
+ },
+ "op10_10114": {
+  "printingId": "OP10-095",
+  "score": 0.301,
+  "margin": 0.299
+ },
+ "op10_10119": {
+  "printingId": "OP10-099_p1",
+  "score": 0.306,
+  "margin": 0.626
+ },
+ "op10_10121": {
+  "printingId": "OP10-101",
+  "score": 0.18,
+  "margin": 0.248
+ },
+ "op10_10123": {
+  "printingId": "OP10-103",
+  "score": 0.376,
+  "margin": 0.313
+ },
+ "op10_10125": {
+  "printingId": "OP10-105",
+  "score": 0.196,
+  "margin": 0.3
+ },
+ "op10_10128": {
+  "printingId": "OP10-108",
+  "score": 0.22,
+  "margin": 0.301
+ },
+ "op10_10129": {
+  "printingId": "OP10-109",
+  "score": 0.444,
+  "margin": 0.301
+ },
+ "op10_10131": {
+  "printingId": "OP10-111",
+  "score": 0.455,
+  "margin": 0.353
+ },
+ "op10_10132": {
+  "printingId": "OP10-111_p1",
+  "score": 0.38,
+  "margin": 1
+ },
+ "op10_10133": {
+  "printingId": "OP10-112",
+  "score": 0.285,
+  "margin": 0.301
+ },
+ "op10_10136": {
+  "printingId": "OP10-114",
+  "score": 0.194,
+  "margin": 0.27
+ },
+ "op10_10142": {
+  "printingId": "OP10-119",
+  "score": 0.321,
+  "margin": 0.298
+ },
+ "op10_10143": {
+  "printingId": "OP10-119_p1",
+  "score": 0.351,
+  "margin": 0.637
+ },
+ "op10_10144": {
+  "printingId": "OP10-119_p2",
+  "score": 0.334,
+  "margin": 0.514
+ },
+ "op10_10146": {
+  "printingId": "OP07-021_p1",
+  "score": 0.329,
+  "margin": 0.635
+ },
+ "op10_10149": {
+  "printingId": "ST15-002_p1",
+  "score": 0.411,
+  "margin": 0.73
+ },
+ "op10_10150": {
+  "printingId": "ST18-001_p1",
+  "score": 0.4,
+  "margin": 1
+ },
+ "op10_10151": {
+  "printingId": "EB01-056_p2",
+  "score": 0.256,
+  "margin": 1
+ },
+ "op11_10004": {
+  "printingId": "OP11-003",
+  "score": 0.393,
+  "margin": 0.271
+ },
+ "op11_10012": {
+  "printingId": "OP11-009",
+  "score": 0.255,
+  "margin": 0.285
+ },
+ "op11_10014": {
+  "printingId": "OP11-010_p1",
+  "score": 0.396,
+  "margin": 0.687
+ },
+ "op11_10016": {
+  "printingId": "OP11-012",
+  "score": 0.288,
+  "margin": 0.271
+ },
+ "op11_10052": {
+  "printingId": "OP11-041_p1",
+  "score": 0.344,
+  "margin": 1
+ },
+ "op11_10068": {
+  "printingId": "OP11-054_p1",
+  "score": 0.364,
+  "margin": 0.456
+ },
+ "op11_10077": {
+  "printingId": "OP11-062_p1",
+  "score": 0.429,
+  "margin": 0.807
+ },
+ "op11_10080": {
+  "printingId": "OP11-065",
+  "score": 0.316,
+  "margin": 0.283
+ },
+ "op11_10081": {
+  "printingId": "OP11-066",
+  "score": 0.457,
+  "margin": 0.324
+ },
+ "op11_10083": {
+  "printingId": "OP11-067_p1",
+  "score": 0.477,
+  "margin": 0.63
+ },
+ "op11_10084": {
+  "printingId": "OP11-068",
+  "score": 0.326,
+  "margin": 0.268
+ },
+ "op11_10088": {
+  "printingId": "OP11-071",
+  "score": 0.455,
+  "margin": 0.28
+ },
+ "op11_10091": {
+  "printingId": "OP11-073_p1",
+  "score": 0.477,
+  "margin": 1
+ },
+ "op11_10097": {
+  "printingId": "OP11-079",
+  "score": 0.267,
+  "margin": 0.277
+ },
+ "op11_10100": {
+  "printingId": "OP11-081",
+  "score": 0.333,
+  "margin": 0.285
+ },
+ "op11_10130": {
+  "printingId": "OP11-106_p1",
+  "score": 0.439,
+  "margin": 1
+ },
+ "op11_10144": {
+  "printingId": "OP11-118_p1",
+  "score": 0.389,
+  "margin": 1
+ },
+ "op11_10145": {
+  "printingId": "OP11-118_p2",
+  "score": 0.343,
+  "margin": 0.742
+ },
+ "op11_10147": {
+  "printingId": "OP11-119_p1",
+  "score": 0.325,
+  "margin": 0.542
+ },
+ "op11_10149": {
+  "printingId": "OP06-119_p2",
+  "score": 0.527,
+  "margin": 1
+ },
+ "op11_10150": {
+  "printingId": "OP07-085_p2",
+  "score": 0.472,
+  "margin": 1
+ },
+ "op11_10152": {
+  "printingId": "ST16-004_p1",
+  "score": 0.591,
+  "margin": 1
+ },
+ "op11_10155": {
+  "printingId": "OP05-119_p7",
+  "score": 0.531,
+  "margin": 1
+ },
+ "op12_10017": {
+  "printingId": "OP12-014_p1",
+  "score": 0.277,
+  "margin": 0.847
+ },
+ "op12_10024": {
+  "printingId": "OP12-020",
+  "score": 0.374,
+  "margin": 1
+ },
+ "op12_10025": {
+  "printingId": "OP12-020_p1",
+  "score": 0.346,
+  "margin": 0.523
+ },
+ "op12_10028": {
+  "printingId": "OP12-023",
+  "score": 0.342,
+  "margin": 0.254
+ },
+ "op12_10031": {
+  "printingId": "OP12-026",
+  "score": 0.331,
+  "margin": 0.273
+ },
+ "op12_10032": {
+  "printingId": "OP12-027",
+  "score": 0.306,
+  "margin": 0.27
+ },
+ "op12_10033": {
+  "printingId": "OP12-028",
+  "score": 0.384,
+  "margin": 0.303
+ },
+ "op12_10036": {
+  "printingId": "OP12-030_p1",
+  "score": 0.384,
+  "margin": 0.719
+ },
+ "op12_10037": {
+  "printingId": "OP12-031",
+  "score": 0.517,
+  "margin": 0.341
+ },
+ "op12_10038": {
+  "printingId": "OP12-031_p1",
+  "score": 0.342,
+  "margin": 0.698
+ },
+ "op12_10042": {
+  "printingId": "OP12-034_p1",
+  "score": 0.484,
+  "margin": 1
+ },
+ "op12_10050": {
+  "printingId": "OP12-040_p1",
+  "score": 0.41,
+  "margin": 0.455
+ },
+ "op12_10054": {
+  "printingId": "OP12-043",
+  "score": 0.513,
+  "margin": 0.324
+ },
+ "op12_10057": {
+  "printingId": "OP12-045",
+  "score": 0.39,
+  "margin": 0.287
+ },
+ "op12_10058": {
+  "printingId": "OP12-046",
+  "score": 0.357,
+  "margin": 0.267
+ },
+ "op12_10059": {
+  "printingId": "OP12-047",
+  "score": 0.484,
+  "margin": 0.305
+ },
+ "op12_10062": {
+  "printingId": "OP12-050",
+  "score": 0.346,
+  "margin": 0.265
+ },
+ "op12_10064": {
+  "printingId": "OP12-052",
+  "score": 0.342,
+  "margin": 0.267
+ },
+ "op12_10069": {
+  "printingId": "OP12-056_p1",
+  "score": 0.358,
+  "margin": 0.766
+ },
+ "op12_10070": {
+  "printingId": "OP12-057",
+  "score": 0.327,
+  "margin": 0.274
+ },
+ "op12_10111": {
+  "printingId": "OP12-090",
+  "score": 0.4,
+  "margin": 0.275
+ },
+ "op12_10114": {
+  "printingId": "OP12-093",
+  "score": 0.306,
+  "margin": 0.275
+ },
+ "op12_10116": {
+  "printingId": "OP12-094_p1",
+  "score": 0.375,
+  "margin": 0.706
+ },
+ "op12_10120": {
+  "printingId": "OP12-098",
+  "score": 0.299,
+  "margin": 0.273
+ },
+ "op12_10137": {
+  "printingId": "OP12-113",
+  "score": 0.382,
+  "margin": 0.267
+ },
+ "op12_10143": {
+  "printingId": "OP12-118_p1",
+  "score": 0.548,
+  "margin": 1
+ },
+ "op12_10144": {
+  "printingId": "OP12-118_p2",
+  "score": 0.413,
+  "margin": 0.538
+ },
+ "op12_10146": {
+  "printingId": "OP12-119_p1",
+  "score": 0.529,
+  "margin": 1
+ },
+ "op12_10148": {
+  "printingId": "OP06-050_p2",
+  "score": 0.411,
+  "margin": 1
+ },
+ "op12_10150": {
+  "printingId": "OP09-037_p2",
+  "score": 0.31,
+  "margin": 1
+ },
+ "op12_10151": {
+  "printingId": "OP10-082_p2",
+  "score": 0.323,
+  "margin": 0.833
+ },
+ "op12_10152": {
+  "printingId": "ST13-011_p2",
+  "score": 0.417,
+  "margin": 1
+ },
+ "op12_10154": {
+  "printingId": "OP09-093_p4",
+  "score": 0.527,
+  "margin": 1
+ },
+ "op13_10002": {
+  "printingId": "OP13-001_p2",
+  "score": 0.444,
+  "margin": 1
+ },
+ "op13_10008": {
+  "printingId": "OP13-004_p1",
+  "score": 0.35,
+  "margin": 0.562
+ },
+ "op13_10009": {
+  "printingId": "OP13-005",
+  "score": 0.191,
+  "margin": 0.292
+ },
+ "op13_10013": {
+  "printingId": "OP13-008",
+  "score": 0.21,
+  "margin": 0.29
+ },
+ "op13_10023": {
+  "printingId": "OP13-017",
+  "score": 0.291,
+  "margin": 0.303
+ },
+ "op13_10027": {
+  "printingId": "OP13-021",
+  "score": 0.215,
+  "margin": 0.299
+ },
+ "op13_10037": {
+  "printingId": "OP13-028_p1",
+  "score": 0.473,
+  "margin": 0.535
+ },
+ "op13_10049": {
+  "printingId": "OP13-040",
+  "score": 0.401,
+  "margin": 1
+ },
+ "op13_10052": {
+  "printingId": "OP13-042_p1",
+  "score": 0.415,
+  "margin": 0.575
+ },
+ "op13_10097": {
+  "printingId": "OP13-080",
+  "score": 0.294,
+  "margin": 1
+ },
+ "op13_10100": {
+  "printingId": "OP13-081",
+  "score": 0.177,
+  "margin": 0.296
+ },
+ "op13_10103": {
+  "printingId": "OP13-083",
+  "score": 0.386,
+  "margin": 1
+ },
+ "op13_10106": {
+  "printingId": "OP13-084",
+  "score": 0.326,
+  "margin": 1
+ },
+ "op13_10113": {
+  "printingId": "OP13-089",
+  "score": 0.221,
+  "margin": 1
+ },
+ "op13_10117": {
+  "printingId": "OP13-091",
+  "score": 0.357,
+  "margin": 1
+ },
+ "op13_10138": {
+  "printingId": "OP13-108_p1",
+  "score": 0.369,
+  "margin": 0.723
+ },
+ "op13_10149": {
+  "printingId": "OP13-116",
+  "score": 0.163,
+  "margin": 0.293
+ },
+ "op13_10152": {
+  "printingId": "OP13-118_p1",
+  "score": 0.305,
+  "margin": 0.423
+ },
+ "op13_10153": {
+  "printingId": "OP13-118_p2",
+  "score": 0.401,
+  "margin": 0.459
+ },
+ "op13_10156": {
+  "printingId": "OP13-119_p1",
+  "score": 0.346,
+  "margin": 0.409
+ },
+ "op13_10157": {
+  "printingId": "OP13-119_p2",
+  "score": 0.447,
+  "margin": 0.384
+ },
+ "op13_10158": {
+  "printingId": "OP13-119_p3",
+  "score": 0.538,
+  "margin": 0.393
+ },
+ "op13_10160": {
+  "printingId": "OP13-120_p1",
+  "score": 0.207,
+  "margin": 0.303
+ },
+ "op13_10161": {
+  "printingId": "OP13-120_p2",
+  "score": 0.326,
+  "margin": 0.327
+ },
+ "op13_10162": {
+  "printingId": "OP13-120_p3",
+  "score": 0.447,
+  "margin": 0.601
+ },
+ "op13_10165": {
+  "printingId": "OP07-111_p2",
+  "score": 0.366,
+  "margin": 1
+ },
+ "op13_10166": {
+  "printingId": "OP07-118_p2",
+  "score": 0.453,
+  "margin": 1
+ },
+ "op13_10167": {
+  "printingId": "OP09-009_p2",
+  "score": 0.483,
+  "margin": 1
+ },
+ "op13_10168": {
+  "printingId": "OP09-118_p3",
+  "score": 0.239,
+  "margin": 0.966
+ },
+ "op13_10169": {
+  "printingId": "OP09-119_p3",
+  "score": 0.443,
+  "margin": 1
+ },
+ "op13_10170": {
+  "printingId": "OP10-030_p2",
+  "score": 0.388,
+  "margin": 0.615
+ },
+ "op13_10171": {
+  "printingId": "OP13-118_p4",
+  "score": 0.197,
+  "margin": 0.925
+ },
+ "op13_10172": {
+  "printingId": "OP13-119_p4",
+  "score": 0.251,
+  "margin": 0.922
+ },
+ "op13_10173": {
+  "printingId": "OP13-120_p4",
+  "score": 0.214,
+  "margin": 0.889
+ },
+ "op13_10176": {
+  "printingId": "OP09-004_p6",
+  "score": 0.316,
+  "margin": 0.658
+ },
+ "op14_10018": {
+  "printingId": "OP14-015",
+  "score": 0.467,
+  "margin": 0.341
+ },
+ "op14_10041": {
+  "printingId": "OP14-033_p1",
+  "score": 0.381,
+  "margin": 1
+ },
+ "op14_10073": {
+  "printingId": "OP14-060_p1",
+  "score": 0.4,
+  "margin": 0.633
+ },
+ "op14_10102": {
+  "printingId": "OP14-084_p1",
+  "score": 0.298,
+  "margin": 1
+ },
+ "op14_10105": {
+  "printingId": "OP14-087",
+  "score": 0.389,
+  "margin": 1
+ },
+ "op14_10136": {
+  "printingId": "OP14-112_p1",
+  "score": 0.352,
+  "margin": 0.629
+ },
+ "op14_10143": {
+  "printingId": "OP14-118_p1",
+  "score": 0.299,
+  "margin": 0.703
+ },
+ "op14_10145": {
+  "printingId": "OP14-119_p1",
+  "score": 0.326,
+  "margin": 1
+ },
+ "op14_10146": {
+  "printingId": "OP14-119_p2",
+  "score": 0.286,
+  "margin": 0.655
+ },
+ "op14_10151": {
+  "printingId": "OP06-093_p3",
+  "score": 0.44,
+  "margin": 1
+ },
+ "op14_10152": {
+  "printingId": "OP07-046_p2",
+  "score": 0.475,
+  "margin": 1
+ },
+ "op14_10154": {
+  "printingId": "OP12-030_p2",
+  "score": 0.437,
+  "margin": 1
+ },
+ "op14_10155": {
+  "printingId": "OP14-112_p2",
+  "score": 0.382,
+  "margin": 1
+ },
+ "op14_10156": {
+  "printingId": "EB01-003_p3",
+  "score": 0.446,
+  "margin": 1
+ },
+ "op14_10157": {
+  "printingId": "OP09-051_p5",
+  "score": 0.479,
+  "margin": 1
+ },
+ "op15_10004": {
+  "printingId": "OP15-002_p1",
+  "score": 0.314,
+  "margin": 0.866
+ },
+ "op15_10044": {
+  "printingId": "OP15-036",
+  "score": 0.164,
+  "margin": 0.3
+ },
+ "op15_10048": {
+  "printingId": "OP15-039_p1",
+  "score": 0.325,
+  "margin": 0.68
+ },
+ "op15_10074": {
+  "printingId": "OP15-060_p1",
+  "score": 0.463,
+  "margin": 0.501
+ },
+ "op15_10135": {
+  "printingId": "OP15-113_p1",
+  "score": 0.415,
+  "margin": 0.684
+ },
+ "op15_10143": {
+  "printingId": "OP15-118_p1",
+  "score": 0.593,
+  "margin": 1
+ },
+ "op15_10144": {
+  "printingId": "OP15-118_p2",
+  "score": 0.493,
+  "margin": 0.51
+ },
+ "op15_10149": {
+  "printingId": "OP12-014_p2",
+  "score": 0.408,
+  "margin": 1
+ },
+ "op15_10151": {
+  "printingId": "OP13-042_p2",
+  "score": 0.417,
+  "margin": 1
+ },
+ "op15_10153": {
+  "printingId": "EB02-052_p2",
+  "score": 0.413,
+  "margin": 1
+ },
+ "op15_10154": {
+  "printingId": "P-105_p2",
+  "score": 0.444,
+  "margin": 1
+ },
+ "op16_10002": {
+  "printingId": "OP16-001_p1",
+  "score": 0.298,
+  "margin": 0.907
+ },
+ "op16_10040": {
+  "printingId": "OP16-032_p1",
+  "score": 0.341,
+  "margin": 0.728
+ },
+ "op16_10043": {
+  "printingId": "OP16-034_p1",
+  "score": 0.284,
+  "margin": 0.61
+ },
+ "op16_10078": {
+  "printingId": "OP16-063_p1",
+  "score": 0.359,
+  "margin": 1
+ },
+ "op16_10079": {
+  "printingId": "OP16-063_p2",
+  "score": 0.324,
+  "margin": 0.702
+ },
+ "op16_10082": {
+  "printingId": "OP16-065_p1",
+  "score": 0.332,
+  "margin": 0.728
+ },
+ "op16_10092": {
+  "printingId": "OP16-073_p1",
+  "score": 0.334,
+  "margin": 0.695
+ },
+ "op16_10093": {
+  "printingId": "OP16-073_p2",
+  "score": 0.38,
+  "margin": 1
+ },
+ "op16_10123": {
+  "printingId": "OP16-098_p1",
+  "score": 0.276,
+  "margin": 0.737
+ },
+ "op16_10152": {
+  "printingId": "OP10-045_p2",
+  "score": 0.246,
+  "margin": 0.835
+ },
+ "op16_10153": {
+  "printingId": "OP11-067_p2",
+  "score": 0.227,
+  "margin": 0.86
+ },
+ "op16_10155": {
+  "printingId": "OP14-084_p2",
+  "score": 0.283,
+  "margin": 0.83
+ },
+ "op16_10156": {
+  "printingId": "ST15-005_p1",
+  "score": 0.365,
+  "margin": 0.847
+ },
+ "prb01_10003": {
+  "printingId": "OP01-006_p1",
+  "score": 0.479,
+  "margin": 1
+ },
+ "prb01_10004": {
+  "printingId": "OP01-006_p2",
+  "score": 0.445,
+  "margin": 0.426
+ },
+ "prb01_10005": {
+  "printingId": "OP01-006_p3",
+  "score": 0.479,
+  "margin": 0.536
+ },
+ "prb01_10006": {
+  "printingId": "OP01-016_p7",
+  "score": 0.428,
+  "margin": 0.408
+ },
+ "prb01_10007": {
+  "printingId": "OP01-024_p2",
+  "score": 0.591,
+  "margin": 1
+ },
+ "prb01_10008": {
+  "printingId": "OP01-029_p4",
+  "score": 0.455,
+  "margin": 1
+ },
+ "prb01_10010": {
+  "printingId": "OP01-033_p2",
+  "score": 0.309,
+  "margin": 0.811
+ },
+ "prb01_10011": {
+  "printingId": "OP01-033_p3",
+  "score": 0.194,
+  "margin": 0.292
+ },
+ "prb01_10012": {
+  "printingId": "OP01-033_p4",
+  "score": 0.463,
+  "margin": 1
+ },
+ "prb01_10013": {
+  "printingId": "OP01-041_p2",
+  "score": 0.372,
+  "margin": 0.381
+ },
+ "prb01_10015": {
+  "printingId": "OP01-041_p4",
+  "score": 0.443,
+  "margin": 1
+ },
+ "prb01_10016": {
+  "printingId": "OP01-047_p3",
+  "score": 0.43,
+  "margin": 1
+ },
+ "prb01_10017": {
+  "printingId": "OP01-051_p3",
+  "score": 0.389,
+  "margin": 1
+ },
+ "prb01_10018": {
+  "printingId": "OP01-052_p1",
+  "score": 0.436,
+  "margin": 1
+ },
+ "prb01_10019": {
+  "printingId": "OP01-052_p2",
+  "score": 0.415,
+  "margin": 0.408
+ },
+ "prb01_10020": {
+  "printingId": "OP01-070_p3",
+  "score": 0.336,
+  "margin": 0.671
+ },
+ "prb01_10021": {
+  "printingId": "OP01-078_p3",
+  "score": 0.357,
+  "margin": 0.652
+ },
+ "prb01_10023": {
+  "printingId": "OP01-120_p5",
+  "score": 0.356,
+  "margin": 0.57
+ },
+ "prb01_10026": {
+  "printingId": "OP01-121_p3",
+  "score": 0.392,
+  "margin": 0.591
+ },
+ "prb01_10027": {
+  "printingId": "OP02-004_p4",
+  "score": 0.481,
+  "margin": 1
+ },
+ "prb01_10029": {
+  "printingId": "OP02-015_p1",
+  "score": 0.525,
+  "margin": 1
+ },
+ "prb01_10030": {
+  "printingId": "OP02-015_p2",
+  "score": 0.437,
+  "margin": 0.294
+ },
+ "prb01_10031": {
+  "printingId": "OP02-018_p3",
+  "score": 0.425,
+  "margin": 0.549
+ },
+ "prb01_10032": {
+  "printingId": "OP02-018_p4",
+  "score": 0.347,
+  "margin": 0.225
+ },
+ "prb01_10033": {
+  "printingId": "OP02-018_p5",
+  "score": 0.492,
+  "margin": 1
+ },
+ "prb01_10034": {
+  "printingId": "OP02-089_p2",
+  "score": 0.386,
+  "margin": 0.662
+ },
+ "prb01_10036": {
+  "printingId": "OP02-089_p3",
+  "score": 0.425,
+  "margin": 1
+ },
+ "prb01_10037": {
+  "printingId": "OP02-096_p4",
+  "score": 0.394,
+  "margin": 0.6
+ },
+ "prb01_10038": {
+  "printingId": "OP02-099_p5",
+  "score": 0.441,
+  "margin": 0.555
+ },
+ "prb01_10039": {
+  "printingId": "OP02-106_p4",
+  "score": 0.328,
+  "margin": 1
+ },
+ "prb01_10040": {
+  "printingId": "OP02-106_p5",
+  "score": 0.256,
+  "margin": 0.394
+ },
+ "prb01_10041": {
+  "printingId": "OP02-114_p4",
+  "score": 0.415,
+  "margin": 0.563
+ },
+ "prb01_10042": {
+  "printingId": "OP02-117_p4",
+  "score": 0.431,
+  "margin": 1
+ },
+ "prb01_10045": {
+  "printingId": "OP02-121_p2",
+  "score": 0.349,
+  "margin": 1
+ },
+ "prb01_10046": {
+  "printingId": "OP03-003_p3",
+  "score": 0.567,
+  "margin": 1
+ },
+ "prb01_10047": {
+  "printingId": "OP03-003_p4",
+  "score": 0.409,
+  "margin": 0.236
+ },
+ "prb01_10048": {
+  "printingId": "OP03-003_p5",
+  "score": 0.365,
+  "margin": 0.576
+ },
+ "prb01_10049": {
+  "printingId": "OP03-055_p3",
+  "score": 0.457,
+  "margin": 1
+ },
+ "prb01_10051": {
+  "printingId": "OP03-056_p1",
+  "score": 0.459,
+  "margin": 1
+ },
+ "prb01_10053": {
+  "printingId": "OP03-056_p3",
+  "score": 0.357,
+  "margin": 0.725
+ },
+ "prb01_10054": {
+  "printingId": "OP03-057_p1",
+  "score": 0.38,
+  "margin": 1
+ },
+ "prb01_10056": {
+  "printingId": "OP03-057_p3",
+  "score": 0.335,
+  "margin": 0.698
+ },
+ "prb01_10057": {
+  "printingId": "OP03-060_p1",
+  "score": 0.43,
+  "margin": 1
+ },
+ "prb01_10058": {
+  "printingId": "OP03-060_p2",
+  "score": 0.393,
+  "margin": 0.285
+ },
+ "prb01_10059": {
+  "printingId": "OP03-079_p2",
+  "score": 0.366,
+  "margin": 0.547
+ },
+ "prb01_10060": {
+  "printingId": "OP03-079_p3",
+  "score": 0.425,
+  "margin": 1
+ },
+ "prb01_10061": {
+  "printingId": "OP03-089_p3",
+  "score": 0.469,
+  "margin": 1
+ },
+ "prb01_10062": {
+  "printingId": "OP03-089_p4",
+  "score": 0.289,
+  "margin": 0.435
+ },
+ "prb01_10063": {
+  "printingId": "OP03-089_p5",
+  "score": 0.37,
+  "margin": 0.555
+ },
+ "prb01_10064": {
+  "printingId": "OP03-094_p2",
+  "score": 0.33,
+  "margin": 1
+ },
+ "prb01_10066": {
+  "printingId": "OP03-108_p2",
+  "score": 0.421,
+  "margin": 1
+ },
+ "prb01_10067": {
+  "printingId": "OP03-110_p2",
+  "score": 0.55,
+  "margin": 1
+ },
+ "prb01_10068": {
+  "printingId": "OP03-110_p3",
+  "score": 0.423,
+  "margin": 0.251
+ },
+ "prb01_10069": {
+  "printingId": "OP03-110_p4",
+  "score": 0.382,
+  "margin": 0.609
+ },
+ "prb01_10070": {
+  "printingId": "OP03-113_p2",
+  "score": 0.434,
+  "margin": 1
+ },
+ "prb01_10071": {
+  "printingId": "OP03-116_p2",
+  "score": 0.568,
+  "margin": 0.53
+ },
+ "prb01_10072": {
+  "printingId": "OP03-116_p3",
+  "score": 0.377,
+  "margin": 0.217
+ },
+ "prb01_10074": {
+  "printingId": "OP03-121_p4",
+  "score": 0.482,
+  "margin": 1
+ },
+ "prb01_10077": {
+  "printingId": "OP03-123_p3",
+  "score": 0.445,
+  "margin": 0.494
+ },
+ "prb01_10078": {
+  "printingId": "OP04-029_p1",
+  "score": 0.532,
+  "margin": 1
+ },
+ "prb01_10079": {
+  "printingId": "OP04-029_p2",
+  "score": 0.405,
+  "margin": 0.347
+ },
+ "prb01_10080": {
+  "printingId": "OP04-031_p2",
+  "score": 0.434,
+  "margin": 1
+ },
+ "prb01_10081": {
+  "printingId": "OP04-032_p1",
+  "score": 0.436,
+  "margin": 0.564
+ },
+ "prb01_10083": {
+  "printingId": "OP04-036_p1",
+  "score": 0.449,
+  "margin": 1
+ },
+ "prb01_10085": {
+  "printingId": "OP04-044_p3",
+  "score": 0.355,
+  "margin": 1
+ },
+ "prb01_10086": {
+  "printingId": "OP04-056_p1",
+  "score": 0.39,
+  "margin": 1
+ },
+ "prb01_10088": {
+  "printingId": "OP04-056_p3",
+  "score": 0.382,
+  "margin": 0.596
+ },
+ "prb01_10090": {
+  "printingId": "OP04-089_p1",
+  "score": 0.3,
+  "margin": 0.258
+ },
+ "prb01_10091": {
+  "printingId": "OP04-089_p2",
+  "score": 0.402,
+  "margin": 1
+ },
+ "prb01_10092": {
+  "printingId": "OP04-089_p3",
+  "score": 0.387,
+  "margin": 0.603
+ },
+ "prb01_10093": {
+  "printingId": "OP04-095_p3",
+  "score": 0.344,
+  "margin": 1
+ },
+ "prb01_10095": {
+  "printingId": "OP04-100_p3",
+  "score": 0.483,
+  "margin": 1
+ },
+ "prb01_10096": {
+  "printingId": "OP04-100_p4",
+  "score": 0.41,
+  "margin": 0.227
+ },
+ "prb01_10097": {
+  "printingId": "OP04-100_p5",
+  "score": 0.455,
+  "margin": 0.468
+ },
+ "prb01_10098": {
+  "printingId": "OP04-104_p2",
+  "score": 0.451,
+  "margin": 0.465
+ },
+ "prb01_10099": {
+  "printingId": "OP04-112_p3",
+  "score": 0.4,
+  "margin": 0.716
+ },
+ "prb01_10100": {
+  "printingId": "OP05-006_p2",
+  "score": 0.334,
+  "margin": 0.532
+ },
+ "prb01_10101": {
+  "printingId": "OP05-007_p2",
+  "score": 0.406,
+  "margin": 1
+ },
+ "prb01_10102": {
+  "printingId": "OP05-010_p1",
+  "score": 0.444,
+  "margin": 1
+ },
+ "prb01_10103": {
+  "printingId": "OP05-010_p2",
+  "score": 0.307,
+  "margin": 0.377
+ },
+ "prb01_10104": {
+  "printingId": "OP05-015_p2",
+  "score": 0.492,
+  "margin": 1
+ },
+ "prb01_10105": {
+  "printingId": "OP05-015_p3",
+  "score": 0.41,
+  "margin": 0.314
+ },
+ "prb01_10106": {
+  "printingId": "OP05-015_p4",
+  "score": 0.398,
+  "margin": 0.568
+ },
+ "prb01_10107": {
+  "printingId": "OP05-034_p2",
+  "score": 0.468,
+  "margin": 1
+ },
+ "prb01_10109": {
+  "printingId": "OP05-034_p4",
+  "score": 0.346,
+  "margin": 0.549
+ },
+ "prb01_10110": {
+  "printingId": "OP05-043_p2",
+  "score": 0.356,
+  "margin": 1
+ },
+ "prb01_10111": {
+  "printingId": "OP05-057_p2",
+  "score": 0.402,
+  "margin": 1
+ },
+ "prb01_10113": {
+  "printingId": "OP05-057_p3",
+  "score": 0.373,
+  "margin": 0.595
+ },
+ "prb01_10114": {
+  "printingId": "OP05-073_p1",
+  "score": 0.596,
+  "margin": 1
+ },
+ "prb01_10115": {
+  "printingId": "OP05-073_p2",
+  "score": 0.369,
+  "margin": 0.342
+ },
+ "prb01_10116": {
+  "printingId": "OP05-074_p4",
+  "score": 0.54,
+  "margin": 1
+ },
+ "prb01_10117": {
+  "printingId": "OP05-081_p1",
+  "score": 0.405,
+  "margin": 1
+ },
+ "prb01_10118": {
+  "printingId": "OP05-081_p2",
+  "score": 0.295,
+  "margin": 0.265
+ },
+ "prb01_10119": {
+  "printingId": "OP05-081_p3",
+  "score": 0.267,
+  "margin": 0.429
+ },
+ "prb01_10120": {
+  "printingId": "OP05-082_p1",
+  "score": 0.432,
+  "margin": 1
+ },
+ "prb01_10122": {
+  "printingId": "OP05-082_p3",
+  "score": 0.35,
+  "margin": 0.393
+ },
+ "prb01_10123": {
+  "printingId": "OP05-105_p1",
+  "score": 0.553,
+  "margin": 1
+ },
+ "prb01_10124": {
+  "printingId": "OP05-105_p2",
+  "score": 0.409,
+  "margin": 0.205
+ },
+ "prb01_10125": {
+  "printingId": "OP05-105_p3",
+  "score": 0.314,
+  "margin": 0.706
+ },
+ "prb01_10126": {
+  "printingId": "OP05-114_p3",
+  "score": 0.486,
+  "margin": 1
+ },
+ "prb01_10128": {
+  "printingId": "OP05-115_p2",
+  "score": 0.463,
+  "margin": 1
+ },
+ "prb01_10130": {
+  "printingId": "OP05-115_p3",
+  "score": 0.422,
+  "margin": 0.406
+ },
+ "prb01_10132": {
+  "printingId": "OP05-117_p1",
+  "score": 0.298,
+  "margin": 0.479
+ },
+ "prb01_10133": {
+  "printingId": "OP05-117_p3",
+  "score": 0.394,
+  "margin": 1
+ },
+ "prb01_10134": {
+  "printingId": "OP05-118_p2",
+  "score": 0.424,
+  "margin": 1
+ },
+ "prb01_10135": {
+  "printingId": "OP05-119_p3",
+  "score": 0.386,
+  "margin": 0.617
+ },
+ "prb01_10136": {
+  "printingId": "OP06-003_p1",
+  "score": 0.462,
+  "margin": 0.273
+ },
+ "prb01_10137": {
+  "printingId": "OP06-003_p2",
+  "score": 0.494,
+  "margin": 1
+ },
+ "prb01_10138": {
+  "printingId": "OP06-023_p1",
+  "score": 0.442,
+  "margin": 1
+ },
+ "prb01_10139": {
+  "printingId": "OP06-023_p2",
+  "score": 0.398,
+  "margin": 0.436
+ },
+ "prb01_10140": {
+  "printingId": "OP06-023_p3",
+  "score": 0.394,
+  "margin": 0.543
+ },
+ "prb01_10141": {
+  "printingId": "OP06-035_p2",
+  "score": 0.488,
+  "margin": 1
+ },
+ "prb01_10142": {
+  "printingId": "OP06-036_p1",
+  "score": 0.453,
+  "margin": 0.496
+ },
+ "prb01_10143": {
+  "printingId": "OP06-036_p2",
+  "score": 0.502,
+  "margin": 1
+ },
+ "prb01_10144": {
+  "printingId": "OP06-036_p3",
+  "score": 0.422,
+  "margin": 0.566
+ },
+ "prb01_10145": {
+  "printingId": "OP06-038_p3",
+  "score": 0.358,
+  "margin": 1
+ },
+ "prb01_10147": {
+  "printingId": "OP06-056_p3",
+  "score": 0.493,
+  "margin": 1
+ },
+ "prb01_10149": {
+  "printingId": "OP06-060_p1",
+  "score": 0.536,
+  "margin": 1
+ },
+ "prb01_10150": {
+  "printingId": "OP06-060_p2",
+  "score": 0.394,
+  "margin": 0.57
+ },
+ "prb01_10151": {
+  "printingId": "OP06-064_p1",
+  "score": 0.568,
+  "margin": 1
+ },
+ "prb01_10152": {
+  "printingId": "OP06-064_p2",
+  "score": 0.339,
+  "margin": 0.518
+ },
+ "prb01_10153": {
+  "printingId": "OP06-065_p1",
+  "score": 0.505,
+  "margin": 1
+ },
+ "prb01_10154": {
+  "printingId": "OP06-065_p2",
+  "score": 0.43,
+  "margin": 0.265
+ },
+ "prb01_10155": {
+  "printingId": "OP06-065_p3",
+  "score": 0.413,
+  "margin": 0.571
+ },
+ "prb01_10156": {
+  "printingId": "OP06-066_p1",
+  "score": 0.46,
+  "margin": 1
+ },
+ "prb01_10157": {
+  "printingId": "OP06-066_p2",
+  "score": 0.318,
+  "margin": 0.505
+ },
+ "prb01_10158": {
+  "printingId": "OP06-067_p1",
+  "score": 0.475,
+  "margin": 1
+ },
+ "prb01_10159": {
+  "printingId": "OP06-067_p2",
+  "score": 0.375,
+  "margin": 0.273
+ },
+ "prb01_10160": {
+  "printingId": "OP06-067_p3",
+  "score": 0.422,
+  "margin": 0.603
+ },
+ "prb01_10161": {
+  "printingId": "OP06-068_p1",
+  "score": 0.535,
+  "margin": 1
+ },
+ "prb01_10162": {
+  "printingId": "OP06-068_p2",
+  "score": 0.394,
+  "margin": 0.309
+ },
+ "prb01_10163": {
+  "printingId": "OP06-069_p3",
+  "score": 0.585,
+  "margin": 0.482
+ },
+ "prb01_10165": {
+  "printingId": "OP06-079_p1",
+  "score": 0.346,
+  "margin": 0.694
+ },
+ "prb01_10167": {
+  "printingId": "OP06-086_p2",
+  "score": 0.327,
+  "margin": 1
+ },
+ "prb01_10168": {
+  "printingId": "OP06-091_p1",
+  "score": 0.431,
+  "margin": 1
+ },
+ "prb01_10169": {
+  "printingId": "OP06-091_p2",
+  "score": 0.272,
+  "margin": 0.433
+ },
+ "prb01_10171": {
+  "printingId": "OP06-100_p2",
+  "score": 0.405,
+  "margin": 0.352
+ },
+ "prb01_10172": {
+  "printingId": "OP06-106_p2",
+  "score": 0.484,
+  "margin": 1
+ },
+ "prb01_10173": {
+  "printingId": "OP06-110_p1",
+  "score": 0.521,
+  "margin": 1
+ },
+ "prb01_10174": {
+  "printingId": "OP06-110_p2",
+  "score": 0.393,
+  "margin": 0.346
+ },
+ "prb01_10175": {
+  "printingId": "OP06-114_p1",
+  "score": 0.546,
+  "margin": 1
+ },
+ "prb01_10176": {
+  "printingId": "OP06-114_p2",
+  "score": 0.374,
+  "margin": 0.201
+ },
+ "prb01_10177": {
+  "printingId": "ST01-006_p8",
+  "score": 0.527,
+  "margin": 0.443
+ },
+ "prb01_10178": {
+  "printingId": "ST01-006_p9",
+  "score": 0.303,
+  "margin": 0.474
+ },
+ "prb01_10179": {
+  "printingId": "ST01-006_p10",
+  "score": 0.504,
+  "margin": 0.473
+ },
+ "prb01_10180": {
+  "printingId": "ST01-014_p3",
+  "score": 0.374,
+  "margin": 1
+ },
+ "prb01_10182": {
+  "printingId": "ST02-004_p3",
+  "score": 0.329,
+  "margin": 0.704
+ },
+ "prb01_10183": {
+  "printingId": "ST02-004_p4",
+  "score": 0.199,
+  "margin": 0.296
+ },
+ "prb01_10184": {
+  "printingId": "ST02-004_p5",
+  "score": 0.416,
+  "margin": 1
+ },
+ "prb01_10185": {
+  "printingId": "ST03-005_p4",
+  "score": 0.406,
+  "margin": 0.349
+ },
+ "prb01_10186": {
+  "printingId": "ST03-005_p5",
+  "score": 0.376,
+  "margin": 0.371
+ },
+ "prb01_10187": {
+  "printingId": "ST03-008_p7",
+  "score": 0.496,
+  "margin": 0.492
+ },
+ "prb01_10188": {
+  "printingId": "ST03-008_p8",
+  "score": 0.348,
+  "margin": 0.493
+ },
+ "prb01_10189": {
+  "printingId": "ST03-013_p2",
+  "score": 0.589,
+  "margin": 1
+ },
+ "prb01_10191": {
+  "printingId": "ST03-013_p4",
+  "score": 0.368,
+  "margin": 0.528
+ },
+ "prb01_10192": {
+  "printingId": "ST04-003_p4",
+  "score": 0.361,
+  "margin": 0.565
+ },
+ "prb01_10193": {
+  "printingId": "ST04-005_p4",
+  "score": 0.438,
+  "margin": 1
+ },
+ "prb01_10194": {
+  "printingId": "ST04-005_p5",
+  "score": 0.292,
+  "margin": 0.517
+ },
+ "prb01_10195": {
+  "printingId": "ST04-016_p4",
+  "score": 0.371,
+  "margin": 0.583
+ },
+ "prb01_10197": {
+  "printingId": "ST06-010_p1",
+  "score": 0.533,
+  "margin": 1
+ },
+ "prb01_10198": {
+  "printingId": "ST06-010_p2",
+  "score": 0.33,
+  "margin": 0.402
+ },
+ "prb01_10199": {
+  "printingId": "ST06-014_p2",
+  "score": 0.502,
+  "margin": 1
+ },
+ "prb01_10201": {
+  "printingId": "ST07-007_p2",
+  "score": 0.585,
+  "margin": 1
+ },
+ "prb01_10203": {
+  "printingId": "ST09-014_p2",
+  "score": 0.51,
+  "margin": 1
+ },
+ "prb01_10205": {
+  "printingId": "ST10-010_p3",
+  "score": 0.529,
+  "margin": 0.535
+ },
+ "prb01_10206": {
+  "printingId": "ST12-014_p1",
+  "score": 0.51,
+  "margin": 1
+ },
+ "prb01_10207": {
+  "printingId": "ST12-014_p2",
+  "score": 0.447,
+  "margin": 0.357
+ },
+ "prb01_10208": {
+  "printingId": "P-014_p1",
+  "score": 0.551,
+  "margin": 1
+ },
+ "prb01_10210": {
+  "printingId": "P-029_p2",
+  "score": 0.504,
+  "margin": 1
+ },
+ "prb01_10212": {
+  "printingId": "P-053_p2",
+  "score": 0.438,
+  "margin": 1
+ },
+ "prb01_10213": {
+  "printingId": "P-053_p3",
+  "score": 0.296,
+  "margin": 0.384
+ },
+ "prb01_10214": {
+  "printingId": "P-055_p2",
+  "score": 0.536,
+  "margin": 1
+ },
+ "prb01_10215": {
+  "printingId": "P-055_p3",
+  "score": 0.378,
+  "margin": 0.341
+ },
+ "prb01_10306": {
+  "printingId": "P-029_r1",
+  "score": 0.505,
+  "margin": 0.32
+ },
+ "prb02_10010": {
+  "printingId": "PRB02-005_p1",
+  "score": 0.403,
+  "margin": 0.692
+ },
+ "prb02_10012": {
+  "printingId": "PRB02-006_p1",
+  "score": 0.465,
+  "margin": 1
+ },
+ "prb02_10028": {
+  "printingId": "PRB02-014_p1",
+  "score": 0.346,
+  "margin": 1
+ },
+ "prb02_10037": {
+  "printingId": "OP01-039_p2",
+  "score": 0.567,
+  "margin": 1
+ },
+ "prb02_10038": {
+  "printingId": "OP01-055_p1",
+  "score": 0.333,
+  "margin": 1
+ },
+ "prb02_10039": {
+  "printingId": "OP02-005_p3",
+  "score": 0.484,
+  "margin": 0.544
+ },
+ "prb02_10040": {
+  "printingId": "OP02-068_p1",
+  "score": 0.334,
+  "margin": 1
+ },
+ "prb02_10041": {
+  "printingId": "OP03-008_p2",
+  "score": 0.482,
+  "margin": 0.805
+ },
+ "prb02_10042": {
+  "printingId": "OP03-048_p1",
+  "score": 0.454,
+  "margin": 1
+ },
+ "prb02_10043": {
+  "printingId": "OP03-072_p1",
+  "score": 0.421,
+  "margin": 1
+ },
+ "prb02_10044": {
+  "printingId": "OP04-016_p1",
+  "score": 0.319,
+  "margin": 0.545
+ },
+ "prb02_10045": {
+  "printingId": "OP04-077_p1",
+  "score": 0.511,
+  "margin": 1
+ },
+ "prb02_10046": {
+  "printingId": "OP04-096_p1",
+  "score": 0.296,
+  "margin": 1
+ },
+ "prb02_10048": {
+  "printingId": "OP05-021_p2",
+  "score": 0.359,
+  "margin": 1
+ },
+ "prb02_10049": {
+  "printingId": "OP05-030_p2",
+  "score": 0.466,
+  "margin": 1
+ },
+ "prb02_10050": {
+  "printingId": "OP05-036_p2",
+  "score": 0.496,
+  "margin": 1
+ },
+ "prb02_10051": {
+  "printingId": "OP05-052_p1",
+  "score": 0.39,
+  "margin": 1
+ },
+ "prb02_10052": {
+  "printingId": "OP05-077_p1",
+  "score": 0.473,
+  "margin": 1
+ },
+ "prb02_10053": {
+  "printingId": "OP05-097_p2",
+  "score": 0.321,
+  "margin": 0.337
+ },
+ "prb02_10054": {
+  "printingId": "OP05-097_p1",
+  "score": 0.337,
+  "margin": 1
+ },
+ "prb02_10055": {
+  "printingId": "OP06-044_p1",
+  "score": 0.524,
+  "margin": 1
+ },
+ "prb02_10056": {
+  "printingId": "OP06-049_p1",
+  "score": 0.452,
+  "margin": 1
+ },
+ "prb02_10057": {
+  "printingId": "OP06-056_p3",
+  "score": 0.481,
+  "margin": 0.253
+ },
+ "prb02_10059": {
+  "printingId": "OP06-059_p1",
+  "score": 0.516,
+  "margin": 1
+ },
+ "prb02_10060": {
+  "printingId": "OP06-063_p2",
+  "score": 0.481,
+  "margin": 0.283
+ },
+ "prb02_10062": {
+  "printingId": "OP06-076_p2",
+  "score": 0.585,
+  "margin": 1
+ },
+ "prb02_10063": {
+  "printingId": "OP06-078_p1",
+  "score": 0.599,
+  "margin": 1
+ },
+ "prb02_10065": {
+  "printingId": "OP06-119_p3",
+  "score": 0.445,
+  "margin": 0.685
+ },
+ "prb02_10066": {
+  "printingId": "OP07-014_p1",
+  "score": 0.459,
+  "margin": 1
+ },
+ "prb02_10067": {
+  "printingId": "OP07-017_p1",
+  "score": 0.462,
+  "margin": 1
+ },
+ "prb02_10068": {
+  "printingId": "OP07-021_p4",
+  "score": 0.36,
+  "margin": 0.723
+ },
+ "prb02_10069": {
+  "printingId": "OP07-031_p1",
+  "score": 0.539,
+  "margin": 1
+ },
+ "prb02_10070": {
+  "printingId": "OP07-040_p2",
+  "score": 0.593,
+  "margin": 0.459
+ },
+ "prb02_10071": {
+  "printingId": "OP07-040_p1",
+  "score": 0.454,
+  "margin": 0.569
+ },
+ "prb02_10072": {
+  "printingId": "OP07-056_p1",
+  "score": 0.506,
+  "margin": 1
+ },
+ "prb02_10073": {
+  "printingId": "OP07-076_p1",
+  "score": 0.489,
+  "margin": 1
+ },
+ "prb02_10074": {
+  "printingId": "OP07-114_p1",
+  "score": 0.411,
+  "margin": 1
+ },
+ "prb02_10075": {
+  "printingId": "OP08-076_p1",
+  "score": 0.491,
+  "margin": 1
+ },
+ "prb02_10076": {
+  "printingId": "OP08-087_p1",
+  "score": 0.571,
+  "margin": 1
+ },
+ "prb02_10077": {
+  "printingId": "OP08-099_p1",
+  "score": 0.559,
+  "margin": 1
+ },
+ "prb02_10078": {
+  "printingId": "OP09-014_p3",
+  "score": 0.507,
+  "margin": 1
+ },
+ "prb02_10079": {
+  "printingId": "OP09-014_p2",
+  "score": 0.368,
+  "margin": 0.747
+ },
+ "prb02_10080": {
+  "printingId": "OP09-020_p2",
+  "score": 0.52,
+  "margin": 0.525
+ },
+ "prb02_10081": {
+  "printingId": "OP09-027_p2",
+  "score": 0.435,
+  "margin": 1
+ },
+ "prb02_10084": {
+  "printingId": "OP09-057_p2",
+  "score": 0.5,
+  "margin": 0.617
+ },
+ "prb02_10085": {
+  "printingId": "OP09-076_p1",
+  "score": 0.408,
+  "margin": 0.572
+ },
+ "prb02_10086": {
+  "printingId": "OP09-077_p1",
+  "score": 0.439,
+  "margin": 1
+ },
+ "prb02_10087": {
+  "printingId": "OP09-078_p2",
+  "score": 0.299,
+  "margin": 0.835
+ },
+ "prb02_10088": {
+  "printingId": "OP09-079_p1",
+  "score": 0.428,
+  "margin": 1
+ },
+ "prb02_10089": {
+  "printingId": "OP09-084_p1",
+  "score": 0.466,
+  "margin": 1
+ },
+ "prb02_10092": {
+  "printingId": "OP09-097_p1",
+  "score": 0.382,
+  "margin": 1
+ },
+ "prb02_10093": {
+  "printingId": "OP09-098_p1",
+  "score": 0.408,
+  "margin": 1
+ },
+ "prb02_10095": {
+  "printingId": "OP10-018_p1",
+  "score": 0.372,
+  "margin": 1
+ },
+ "prb02_10096": {
+  "printingId": "OP10-079_p1",
+  "score": 0.457,
+  "margin": 1
+ },
+ "prb02_10098": {
+  "printingId": "OP10-105_p1",
+  "score": 0.575,
+  "margin": 1
+ },
+ "prb02_10099": {
+  "printingId": "OP10-108_p1",
+  "score": 0.538,
+  "margin": 1
+ },
+ "prb02_10101": {
+  "printingId": "OP10-114_p2",
+  "score": 0.578,
+  "margin": 1
+ },
+ "prb02_10102": {
+  "printingId": "OP10-114_p1",
+  "score": 0.356,
+  "margin": 0.594
+ },
+ "prb02_10103": {
+  "printingId": "ST01-011_p5",
+  "score": 0.473,
+  "margin": 1
+ },
+ "prb02_10104": {
+  "printingId": "ST02-007_p4",
+  "score": 0.417,
+  "margin": 0.589
+ },
+ "prb02_10105": {
+  "printingId": "ST06-008_p2",
+  "score": 0.378,
+  "margin": 1
+ },
+ "prb02_10106": {
+  "printingId": "ST10-005_r1",
+  "score": 0.415,
+  "margin": 0.27
+ },
+ "prb02_10107": {
+  "printingId": "ST10-005_p1",
+  "score": 0.499,
+  "margin": 1
+ },
+ "prb02_10108": {
+  "printingId": "ST10-008_r1",
+  "score": 0.411,
+  "margin": 1
+ },
+ "prb02_10109": {
+  "printingId": "ST10-008_p2",
+  "score": 0.399,
+  "margin": 1
+ },
+ "prb02_10111": {
+  "printingId": "ST12-017_p1",
+  "score": 0.494,
+  "margin": 1
+ },
+ "prb02_10112": {
+  "printingId": "ST13-004_r1",
+  "score": 0.334,
+  "margin": 0.274
+ },
+ "prb02_10114": {
+  "printingId": "ST13-007_r1",
+  "score": 0.306,
+  "margin": 0.28
+ },
+ "prb02_10115": {
+  "printingId": "ST13-007_p2",
+  "score": 0.504,
+  "margin": 1
+ },
+ "prb02_10116": {
+  "printingId": "ST13-010_r1",
+  "score": 0.287,
+  "margin": 0.286
+ },
+ "prb02_10117": {
+  "printingId": "ST13-010_p2",
+  "score": 0.48,
+  "margin": 1
+ },
+ "prb02_10118": {
+  "printingId": "ST13-014_r1",
+  "score": 0.359,
+  "margin": 1
+ },
+ "prb02_10119": {
+  "printingId": "ST13-014_p2",
+  "score": 0.548,
+  "margin": 1
+ },
+ "prb02_10120": {
+  "printingId": "ST13-019_r1",
+  "score": 0.347,
+  "margin": 0.281
+ },
+ "prb02_10121": {
+  "printingId": "ST13-019_p1",
+  "score": 0.521,
+  "margin": 1
+ },
+ "prb02_10122": {
+  "printingId": "ST14-007_p1",
+  "score": 0.414,
+  "margin": 1
+ },
+ "prb02_10123": {
+  "printingId": "ST14-010_p1",
+  "score": 0.386,
+  "margin": 1
+ },
+ "prb02_10124": {
+  "printingId": "ST14-013_p1",
+  "score": 0.57,
+  "margin": 1
+ },
+ "prb02_10125": {
+  "printingId": "ST14-016_p1",
+  "score": 0.37,
+  "margin": 1
+ },
+ "prb02_10126": {
+  "printingId": "ST14-017_p1",
+  "score": 0.248,
+  "margin": 1
+ },
+ "prb02_10127": {
+  "printingId": "ST15-002_p2",
+  "score": 0.417,
+  "margin": 1
+ },
+ "prb02_10129": {
+  "printingId": "ST16-004_p2",
+  "score": 0.384,
+  "margin": 0.75
+ },
+ "prb02_10130": {
+  "printingId": "ST16-005_p1",
+  "score": 0.394,
+  "margin": 1
+ },
+ "prb02_10132": {
+  "printingId": "ST17-003_p2",
+  "score": 0.518,
+  "margin": 0.594
+ },
+ "prb02_10133": {
+  "printingId": "ST17-005_p1",
+  "score": 0.446,
+  "margin": 0.827
+ },
+ "prb02_10134": {
+  "printingId": "ST18-001_p3",
+  "score": 0.396,
+  "margin": 0.732
+ },
+ "prb02_10135": {
+  "printingId": "ST18-001_p2",
+  "score": 0.371,
+  "margin": 0.737
+ },
+ "prb02_10137": {
+  "printingId": "ST18-003_p1",
+  "score": 0.474,
+  "margin": 1
+ },
+ "prb02_10138": {
+  "printingId": "ST19-002_p2",
+  "score": 0.405,
+  "margin": 1
+ },
+ "prb02_10140": {
+  "printingId": "ST21-003_r1",
+  "score": 0.439,
+  "margin": 0.301
+ },
+ "prb02_10141": {
+  "printingId": "ST21-003_p2",
+  "score": 0.508,
+  "margin": 0.367
+ },
+ "prb02_10142": {
+  "printingId": "EB01-009_p1",
+  "score": 0.441,
+  "margin": 1
+ },
+ "prb02_10143": {
+  "printingId": "EB01-015_p2",
+  "score": 0.404,
+  "margin": 1
+ },
+ "prb02_10144": {
+  "printingId": "EB01-018_p1",
+  "score": 0.457,
+  "margin": 1
+ },
+ "prb02_10145": {
+  "printingId": "EB01-038_p1",
+  "score": 0.433,
+  "margin": 1
+ },
+ "prb02_10147": {
+  "printingId": "EB01-060_p1",
+  "score": 0.518,
+  "margin": 1
+ },
+ "prb02_10148": {
+  "printingId": "P-044_r1",
+  "score": 0.223,
+  "margin": 0.316
+ },
+ "prb02_10149": {
+  "printingId": "P-044_p1",
+  "score": 0.41,
+  "margin": 1
+ },
+ "prb02_10150": {
+  "printingId": "P-063_r1",
+  "score": 0.307,
+  "margin": 1
+ },
+ "prb02_10151": {
+  "printingId": "P-063_p2",
+  "score": 0.433,
+  "margin": 1
+ },
+ "prb02_10152": {
+  "printingId": "P-063_p1",
+  "score": 0.425,
+  "margin": 0.632
+ },
+ "prb02_10153": {
+  "printingId": "P-068_p1",
+  "score": 0.461,
+  "margin": 1
+ },
+ "prb02_10154": {
+  "printingId": "P-069_p2",
+  "score": 0.493,
+  "margin": 1
+ },
+ "prb02_10155": {
+  "printingId": "P-070_r1",
+  "score": 0.235,
+  "margin": 1
+ },
+ "prb02_10156": {
+  "printingId": "P-070_p1",
+  "score": 0.426,
+  "margin": 1
+ },
+ "prb02_10157": {
+  "printingId": "P-073_r1",
+  "score": 0.321,
+  "margin": 1
+ },
+ "prb02_10159": {
+  "printingId": "P-074_r1",
+  "score": 0.294,
+  "margin": 1
+ },
+ "prb02_10160": {
+  "printingId": "P-074_p2",
+  "score": 0.516,
+  "margin": 0.209
+ },
+ "prb02_10161": {
+  "printingId": "P-075_r1",
+  "score": 0.254,
+  "margin": 1
+ },
+ "prb02_10162": {
+  "printingId": "P-075_p2",
+  "score": 0.467,
+  "margin": 1
+ },
+ "prb02_10163": {
+  "printingId": "P-078_r1",
+  "score": 0.289,
+  "margin": 1
+ },
+ "prb02_10164": {
+  "printingId": "P-078_p2",
+  "score": 0.489,
+  "margin": 1
+ },
+ "prb02_10165": {
+  "printingId": "P-079_r1",
+  "score": 0.316,
+  "margin": 1
+ },
+ "prb02_10166": {
+  "printingId": "P-079_p2",
+  "score": 0.424,
+  "margin": 1
+ },
+ "prb02_10167": {
+  "printingId": "P-081_r1",
+  "score": 0.32,
+  "margin": 1
+ },
+ "prb02_10168": {
+  "printingId": "P-081_p2",
+  "score": 0.453,
+  "margin": 0.223
+ },
+ "prb02_10169": {
+  "printingId": "P-082_r1",
+  "score": 0.268,
+  "margin": 1
+ },
+ "prb02_10171": {
+  "printingId": "P-083_r1",
+  "score": 0.317,
+  "margin": 0.546
+ },
+ "prb02_10172": {
+  "printingId": "P-083_p1",
+  "score": 0.486,
+  "margin": 1
+ },
+ "prb02_10174": {
+  "printingId": "P-088_r1",
+  "score": 0.345,
+  "margin": 0.296
+ },
+ "prb02_10176": {
+  "printingId": "EB02-061_p3",
+  "score": 0.453,
+  "margin": 0.877
+ },
+ "prb02_10177": {
+  "printingId": "OP05-091_p4",
+  "score": 0.488,
+  "margin": 0.372
+ },
+ "prb02_10178": {
+  "printingId": "OP06-007_p2",
+  "score": 0.556,
+  "margin": 1
+ },
+ "prb02_10179": {
+  "printingId": "OP06-047_p3",
+  "score": 0.421,
+  "margin": 0.53
+ },
+ "prb02_10180": {
+  "printingId": "OP08-023_p2",
+  "score": 0.482,
+  "margin": 1
+ },
+ "prb02_10181": {
+  "printingId": "OP10-119_p3",
+  "score": 0.557,
+  "margin": 1
+ },
+ "promo-100_10007": {
+  "printingId": "P-001_p1",
+  "score": 0.456,
+  "margin": 0.64
+ },
+ "promo-100_10015": {
+  "printingId": "P-014",
+  "score": 0.248,
+  "margin": 0.3
+ },
+ "promo-100_10026": {
+  "printingId": "P-001_p2",
+  "score": 0.164,
+  "margin": 0.685
+ },
+ "promo-100_10029": {
+  "printingId": "P-003_p1",
+  "score": 0.35,
+  "margin": 1
+ },
+ "promo-100_10032": {
+  "printingId": "P-029",
+  "score": 0.204,
+  "margin": 0.3
+ },
+ "promo-100_10038": {
+  "printingId": "P-016_p1",
+  "score": 0.236,
+  "margin": 1
+ },
+ "promo-100_10039": {
+  "printingId": "P-022_p1",
+  "score": 0.196,
+  "margin": 1
+ },
+ "promo-100_10042": {
+  "printingId": "P-028_p1",
+  "score": 0.189,
+  "margin": 0.887
+ },
+ "promo-100_10045": {
+  "printingId": "P-041",
+  "score": 0.277,
+  "margin": 0.298
+ },
+ "promo-100_10047": {
+  "printingId": "P-041_p3",
+  "score": 0.277,
+  "margin": 0.76
+ },
+ "promo-100_10048": {
+  "printingId": "P-001_p4",
+  "score": 0.296,
+  "margin": 0.708
+ },
+ "promo-100_10049": {
+  "printingId": "P-003_p3",
+  "score": 0.286,
+  "margin": 0.87
+ },
+ "promo-100_10050": {
+  "printingId": "P-042",
+  "score": 0.217,
+  "margin": 1
+ },
+ "promo-100_10052": {
+  "printingId": "P-044",
+  "score": 0.307,
+  "margin": 1
+ },
+ "promo-100_10054": {
+  "printingId": "P-016_p2",
+  "score": 0.006,
+  "margin": 0.409
+ },
+ "promo-100_10055": {
+  "printingId": "P-022_p2",
+  "score": 0.007,
+  "margin": 0.59
+ },
+ "promo-100_10063": {
+  "printingId": "P-053",
+  "score": 0.168,
+  "margin": 0.3
+ },
+ "promo-100_10065": {
+  "printingId": "P-055",
+  "score": 0.214,
+  "margin": 0.3
+ },
+ "promo-100_10069": {
+  "printingId": "P-057",
+  "score": 0.246,
+  "margin": 1
+ },
+ "promo-100_10070": {
+  "printingId": "P-058",
+  "score": 0.271,
+  "margin": 1
+ },
+ "promo-100_10071": {
+  "printingId": "P-059",
+  "score": 0.145,
+  "margin": 1
+ },
+ "promo-100_10072": {
+  "printingId": "P-060",
+  "score": 0.234,
+  "margin": 1
+ },
+ "promo-100_10073": {
+  "printingId": "P-061",
+  "score": 0.185,
+  "margin": 0.275
+ },
+ "promo-100_10074": {
+  "printingId": "P-042",
+  "score": 0.215,
+  "margin": 1
+ },
+ "promo-100_10075": {
+  "printingId": "P-063",
+  "score": 0.295,
+  "margin": 0.324
+ },
+ "promo-100_10082": {
+  "printingId": "P-053_p1",
+  "score": 0.311,
+  "margin": 0.814
+ },
+ "promo-100_10083": {
+  "printingId": "P-055_p1",
+  "score": 0.333,
+  "margin": 0.793
+ },
+ "promo-100_10088": {
+  "printingId": "P-041_p4",
+  "score": 0.348,
+  "margin": 0.685
+ },
+ "promo-100_10091": {
+  "printingId": "P-068",
+  "score": 0.133,
+  "margin": 0.3
+ },
+ "promo-100_10095": {
+  "printingId": "P-070",
+  "score": 0.191,
+  "margin": 0.231
+ },
+ "promo-100_10097": {
+  "printingId": "P-069",
+  "score": 0.314,
+  "margin": 0.298
+ },
+ "promo-100_10099": {
+  "printingId": "P-081_r1",
+  "score": 0.532,
+  "margin": 1
+ },
+ "promo-100_10100": {
+  "printingId": "P-073",
+  "score": 0.287,
+  "margin": 0.745
+ },
+ "promo-100_10101": {
+  "printingId": "P-074",
+  "score": 0.252,
+  "margin": 0.782
+ },
+ "promo-100_10102": {
+  "printingId": "P-075",
+  "score": 0.22,
+  "margin": 0.677
+ },
+ "promo-100_10104": {
+  "printingId": "P-078",
+  "score": 0.224,
+  "margin": 0.8
+ },
+ "promo-100_10105": {
+  "printingId": "P-079",
+  "score": 0.129,
+  "margin": 0.709
+ },
+ "promo-100_10106": {
+  "printingId": "P-079_p1",
+  "score": 0.182,
+  "margin": 0.246
+ },
+ "promo-100_10107": {
+  "printingId": "P-078_p1",
+  "score": 0.294,
+  "margin": 0.518
+ },
+ "promo-100_10109": {
+  "printingId": "P-083",
+  "score": 0.421,
+  "margin": 1
+ },
+ "promo-100_10110": {
+  "printingId": "P-084",
+  "score": 0.466,
+  "margin": 1
+ },
+ "promo-100_10111": {
+  "printingId": "P-088",
+  "score": 0.28,
+  "margin": 0.491
+ },
+ "promo-100_10112": {
+  "printingId": "P-073_p1",
+  "score": 0.375,
+  "margin": 0.481
+ },
+ "promo-100_10114": {
+  "printingId": "P-075_p1",
+  "score": 0.256,
+  "margin": 0.229
+ },
+ "promo-100_10119": {
+  "printingId": "P-069_p1",
+  "score": 0.252,
+  "margin": 0.568
+ },
+ "promo-100_10124": {
+  "printingId": "P-085",
+  "score": 0.205,
+  "margin": 0.253
+ },
+ "promo-100_10130": {
+  "printingId": "P-080_p1",
+  "score": 0.421,
+  "margin": 1
+ },
+ "promo-200_10002": {
+  "printingId": "P-101",
+  "score": 0.276,
+  "margin": 0.549
+ },
+ "promo-200_10006": {
+  "printingId": "P-105",
+  "score": 0.283,
+  "margin": 0.732
+ },
+ "promo-200_10007": {
+  "printingId": "P-106",
+  "score": 0.253,
+  "margin": 1
+ },
+ "promo-200_10019": {
+  "printingId": "P-105_p1",
+  "score": 0.177,
+  "margin": 0.759
+ },
+ "promo-eb10_10001": {
+  "printingId": "EB01-003_p2",
+  "score": 0.398,
+  "margin": 0.631
+ },
+ "promo-eb10_10003": {
+  "printingId": "EB01-015_p1",
+  "score": 0.241,
+  "margin": 0.63
+ },
+ "promo-eb10_10004": {
+  "printingId": "EB01-043_p1",
+  "score": 0.0,
+  "margin": 0.679
+ },
+ "promo-eb10_10005": {
+  "printingId": "EB01-043_p2",
+  "score": 0.0,
+  "margin": 1
+ },
+ "promo-eb10_10006": {
+  "printingId": "EB01-006_p4",
+  "score": 0.434,
+  "margin": 0.368
+ },
+ "promo-eb10_10008": {
+  "printingId": "EB01-046_p2",
+  "score": 0.203,
+  "margin": 0.353
+ },
+ "promo-eb10_10020": {
+  "printingId": "EB02-054_p2",
+  "score": 0.331,
+  "margin": 1
+ },
+ "promo-eb10_10022": {
+  "printingId": "EB04-028_p1",
+  "score": 0.0,
+  "margin": 1
+ },
+ "promo-op10_10001": {
+  "printingId": "OP01-001_p1",
+  "score": 0.0,
+  "margin": 0.912
+ },
+ "promo-op10_10002": {
+  "printingId": "OP01-013_p1",
+  "score": 0.398,
+  "margin": 0.798
+ },
+ "promo-op10_10003": {
+  "printingId": "OP01-016_p1",
+  "score": 0.544,
+  "margin": 0.483
+ },
+ "promo-op10_10007": {
+  "printingId": "OP01-033_p1",
+  "score": 0.226,
+  "margin": 0.449
+ },
+ "promo-op10_10008": {
+  "printingId": "OP01-005_p1",
+  "score": 0.248,
+  "margin": 0.429
+ },
+ "promo-op10_10009": {
+  "printingId": "OP01-014_p1",
+  "score": 0.178,
+  "margin": 1
+ },
+ "promo-op10_10010": {
+  "printingId": "OP01-017_p1",
+  "score": 0.203,
+  "margin": 0.34
+ },
+ "promo-op10_10011": {
+  "printingId": "OP01-021_p1",
+  "score": 0.26,
+  "margin": 0.421
+ },
+ "promo-op10_10012": {
+  "printingId": "OP01-035_p1",
+  "score": 0.19,
+  "margin": 0.944
+ },
+ "promo-op10_10013": {
+  "printingId": "OP02-035_p1",
+  "score": 0.341,
+  "margin": 0.513
+ },
+ "promo-op10_10014": {
+  "printingId": "OP02-098_p1",
+  "score": 0.249,
+  "margin": 0.873
+ },
+ "promo-op10_10015": {
+  "printingId": "OP01-025_p4",
+  "score": 0.415,
+  "margin": 0.731
+ },
+ "promo-op10_10016": {
+  "printingId": "OP03-089_p1",
+  "score": 0.166,
+  "margin": 0.414
+ },
+ "promo-op10_10017": {
+  "printingId": "OP03-102_p1",
+  "score": 0.239,
+  "margin": 1
+ },
+ "promo-op10_10018": {
+  "printingId": "OP02-098_p3",
+  "score": 0.28,
+  "margin": 1
+ },
+ "promo-op10_10019": {
+  "printingId": "OP01-005_p2",
+  "score": 0.545,
+  "margin": 1
+ },
+ "promo-op10_10020": {
+  "printingId": "OP01-014_p2",
+  "score": 0.0,
+  "margin": 0.522
+ },
+ "promo-op10_10021": {
+  "printingId": "OP01-017_p2",
+  "score": 0.442,
+  "margin": 1
+ },
+ "promo-op10_10022": {
+  "printingId": "OP01-021_p4",
+  "score": 0.425,
+  "margin": 0.529
+ },
+ "promo-op10_10023": {
+  "printingId": "OP03-001_p2",
+  "score": 0.007,
+  "margin": 0.978
+ },
+ "promo-op10_10024": {
+  "printingId": "OP01-016_p5",
+  "score": 0.393,
+  "margin": 0.571
+ },
+ "promo-op10_10025": {
+  "printingId": "OP01-077_p3",
+  "score": 0.573,
+  "margin": 0.412
+ },
+ "promo-op10_10028": {
+  "printingId": "OP01-029_p2",
+  "score": 0.0,
+  "margin": 1.001
+ },
+ "promo-op10_10030": {
+  "printingId": "OP02-001_p3",
+  "score": 0.0,
+  "margin": 1.094
+ },
+ "promo-op10_10031": {
+  "printingId": "OP02-005_p2",
+  "score": 0.545,
+  "margin": 1
+ },
+ "promo-op10_10032": {
+  "printingId": "OP02-036_p3",
+  "score": 0.0,
+  "margin": 0.741
+ },
+ "promo-op10_10033": {
+  "printingId": "OP02-106_p2",
+  "score": 0.0,
+  "margin": 0.707
+ },
+ "promo-op10_10034": {
+  "printingId": "OP02-117_p2",
+  "score": 0.011,
+  "margin": 0.698
+ },
+ "promo-op10_10035": {
+  "printingId": "OP03-121_p2",
+  "score": 0.007,
+  "margin": 0.926
+ },
+ "promo-op10_10037": {
+  "printingId": "OP01-005_p3",
+  "score": 0.0,
+  "margin": 0.859
+ },
+ "promo-op10_10038": {
+  "printingId": "OP02-120_p3",
+  "score": 0.006,
+  "margin": 0.731
+ },
+ "promo-op10_10040": {
+  "printingId": "OP01-006_p4",
+  "score": 0.0,
+  "margin": 0.815
+ },
+ "promo-op10_10041": {
+  "printingId": "OP02-015_p3",
+  "score": 0.0,
+  "margin": 0.872
+ },
+ "promo-op10_10042": {
+  "printingId": "OP03-013_p3",
+  "score": 0.323,
+  "margin": 0.606
+ },
+ "promo-op10_10046": {
+  "printingId": "OP03-088_p1",
+  "score": 0.193,
+  "margin": 1
+ },
+ "promo-op10_10047": {
+  "printingId": "OP03-116_p1",
+  "score": 0.217,
+  "margin": 0.394
+ },
+ "promo-op10_10048": {
+  "printingId": "OP01-041_p1",
+  "score": 0.19,
+  "margin": 0.728
+ },
+ "promo-op10_10049": {
+  "printingId": "OP01-070_p2",
+  "score": 0.455,
+  "margin": 1
+ },
+ "promo-op10_10051": {
+  "printingId": "OP06-093_p2",
+  "score": 0.371,
+  "margin": 0.595
+ },
+ "promo-op10_10055": {
+  "printingId": "OP03-088_p1",
+  "score": 0.5,
+  "margin": 1
+ },
+ "promo-op10_10058": {
+  "printingId": "OP01-017_p3",
+  "score": 0.229,
+  "margin": 0.931
+ },
+ "promo-op10_10059": {
+  "printingId": "OP02-034_p3",
+  "score": 0.234,
+  "margin": 0.588
+ },
+ "promo-op10_10061": {
+  "printingId": "OP02-108_p2",
+  "score": 0.158,
+  "margin": 0.76
+ },
+ "promo-op10_10063": {
+  "printingId": "OP01-114_p2",
+  "score": 0.362,
+  "margin": 1
+ },
+ "promo-op10_10066": {
+  "printingId": "OP06-038_p1",
+  "score": 0.009,
+  "margin": 1.05
+ },
+ "promo-op10_10067": {
+  "printingId": "OP03-055_p1",
+  "score": 0.011,
+  "margin": 0.928
+ },
+ "promo-op10_10068": {
+  "printingId": "OP04-095_p1",
+  "score": 0.01,
+  "margin": 0.733
+ },
+ "promo-op10_10069": {
+  "printingId": "OP05-114_p1",
+  "score": 0.01,
+  "margin": 0.947
+ },
+ "promo-op10_10070": {
+  "printingId": "OP02-004_p3",
+  "score": 0.28,
+  "margin": 0.665
+ },
+ "promo-op10_10071": {
+  "printingId": "OP03-013_p2",
+  "score": 0.382,
+  "margin": 1
+ },
+ "promo-op10_10072": {
+  "printingId": "OP01-114_p1",
+  "score": 0.317,
+  "margin": 0.694
+ },
+ "promo-op10_10073": {
+  "printingId": "OP04-100_p2",
+  "score": 0.272,
+  "margin": 0.572
+ },
+ "promo-op10_10075": {
+  "printingId": "OP01-039_p1",
+  "score": 0.346,
+  "margin": 0.695
+ },
+ "promo-op10_10077": {
+  "printingId": "OP03-112_p2",
+  "score": 0.152,
+  "margin": 0.755
+ },
+ "promo-op10_10081": {
+  "printingId": "OP05-067_p2",
+  "score": 0.412,
+  "margin": 1
+ },
+ "promo-op10_10083": {
+  "printingId": "OP01-001_p3",
+  "score": 0.0,
+  "margin": 1
+ },
+ "promo-op10_10084": {
+  "printingId": "OP05-060_p2",
+  "score": 0.27,
+  "margin": 0.522
+ },
+ "promo-op10_10085": {
+  "printingId": "OP05-098_p2",
+  "score": 0.283,
+  "margin": 0.953
+ },
+ "promo-op10_10088": {
+  "printingId": "OP06-076_p1",
+  "score": 0.269,
+  "margin": 0.344
+ },
+ "promo-op10_10090": {
+  "printingId": "OP07-047_p2",
+  "score": 0.315,
+  "margin": 0.7
+ },
+ "promo-op10_10091": {
+  "printingId": "OP07-109_p3",
+  "score": 0.342,
+  "margin": 0.625
+ },
+ "promo-op10_10094": {
+  "printingId": "OP08-110_p2",
+  "score": 0.219,
+  "margin": 0.717
+ },
+ "promo-op10_10096": {
+  "printingId": "OP05-093_p3",
+  "score": 0.01,
+  "margin": 0.767
+ },
+ "promo-op10_10097": {
+  "printingId": "OP05-093_p4",
+  "score": 0.012,
+  "margin": 0.891
+ },
+ "promo-op10_10098": {
+  "printingId": "OP08-105_p2",
+  "score": 0.008,
+  "margin": 0.879
+ },
+ "promo-op10_10099": {
+  "printingId": "OP08-105_p3",
+  "score": 0.008,
+  "margin": 0.664
+ },
+ "promo-op10_10100": {
+  "printingId": "OP01-030_p1",
+  "score": 0.0,
+  "margin": 1
+ },
+ "promo-op10_10101": {
+  "printingId": "OP02-013_p5",
+  "score": 0.0,
+  "margin": 0.823
+ },
+ "promo-op10_10102": {
+  "printingId": "OP03-044_p3",
+  "score": 0.409,
+  "margin": 0.423
+ },
+ "promo-op10_10103": {
+  "printingId": "OP04-083_p5",
+  "score": 0.571,
+  "margin": 0.469
+ },
+ "promo-op10_10104": {
+  "printingId": "OP05-030_p1",
+  "score": 0.016,
+  "margin": 0.958
+ },
+ "promo-op10_10105": {
+  "printingId": "OP06-118_p4",
+  "score": 0.015,
+  "margin": 0.919
+ },
+ "promo-op10_10106": {
+  "printingId": "OP07-064_p2",
+  "score": 0.582,
+  "margin": 1
+ },
+ "promo-op10_10107": {
+  "printingId": "OP08-069_p2",
+  "score": 0.015,
+  "margin": 0.894
+ },
+ "promo-op10_10108": {
+  "printingId": "OP01-077_p4",
+  "score": 0.503,
+  "margin": 0.287
+ },
+ "promo-op10_10110": {
+  "printingId": "OP07-021_p2",
+  "score": 0.411,
+  "margin": 0.267
+ },
+ "promo-op10_10114": {
+  "printingId": "OP09-050_p2",
+  "score": 0.451,
+  "margin": 0.28
+ },
+ "promo-op10_10116": {
+  "printingId": "OP09-106_p1",
+  "score": 0.431,
+  "margin": 0.259
+ },
+ "promo-op10_10120": {
+  "printingId": "OP05-036_p1",
+  "score": 0.28,
+  "margin": 0.407
+ },
+ "promo-op10_10121": {
+  "printingId": "OP06-110_p3",
+  "score": 0.214,
+  "margin": 0.41
+ },
+ "promo-op10_10123": {
+  "printingId": "OP06-022_p4",
+  "score": 0.01,
+  "margin": 0.628
+ },
+ "promo-op10_10124": {
+  "printingId": "OP07-019_p4",
+  "score": 0.011,
+  "margin": 0.706
+ },
+ "promo-op10_10125": {
+  "printingId": "OP07-109_p2",
+  "score": 0.313,
+  "margin": 0.666
+ },
+ "promo-op10_10131": {
+  "printingId": "OP10-042_p2",
+  "score": 0.007,
+  "margin": 0.739
+ },
+ "promo-op10_10134": {
+  "printingId": "OP08-099_p2",
+  "score": 0.007,
+  "margin": 1.108
+ },
+ "promo-op10_10137": {
+  "printingId": "OP09-077_p2",
+  "score": 0.007,
+  "margin": 1.002
+ },
+ "promo-op10_10141": {
+  "printingId": "OP10-049_p1",
+  "score": 0.388,
+  "margin": 1
+ },
+ "promo-op10_10147": {
+  "printingId": "OP05-102_p2",
+  "score": 0.257,
+  "margin": 0.772
+ },
+ "promo-op10_10148": {
+  "printingId": "OP06-025_p2",
+  "score": 0.256,
+  "margin": 0.672
+ },
+ "promo-op10_10150": {
+  "printingId": "OP07-064_p3",
+  "score": 0.246,
+  "margin": 0.814
+ },
+ "promo-op10_10152": {
+  "printingId": "OP09-065_p2",
+  "score": 0.45,
+  "margin": 1
+ },
+ "promo-op10_10153": {
+  "printingId": "OP09-076_p2",
+  "score": 0.565,
+  "margin": 1
+ },
+ "promo-op10_10155": {
+  "printingId": "OP07-053_p4",
+  "score": 0.233,
+  "margin": 0.728
+ },
+ "promo-op10_10156": {
+  "printingId": "OP10-049_p2",
+  "score": 0.244,
+  "margin": 0.628
+ },
+ "promo-op10_10157": {
+  "printingId": "OP08-002_p3",
+  "score": 0.007,
+  "margin": 0.562
+ },
+ "promo-op10_10158": {
+  "printingId": "OP07-053_p3",
+  "score": 0.364,
+  "margin": 0.565
+ },
+ "promo-op10_10159": {
+  "printingId": "OP09-027_p1",
+  "score": 0.285,
+  "margin": 0.863
+ },
+ "promo-op10_10160": {
+  "printingId": "OP07-116_p2",
+  "score": 0.011,
+  "margin": 0.957
+ },
+ "promo-op10_10164": {
+  "printingId": "OP09-034_p2",
+  "score": 0.39,
+  "margin": 1
+ },
+ "promo-op10_10165": {
+  "printingId": "OP07-118_p3",
+  "score": 0.273,
+  "margin": 0.685
+ },
+ "promo-op10_10166": {
+  "printingId": "OP09-119_p4",
+  "score": 0.248,
+  "margin": 0.766
+ },
+ "promo-op10_10167": {
+  "printingId": "OP01-039_p3",
+  "score": 0.249,
+  "margin": 0.559
+ },
+ "promo-op10_10168": {
+  "printingId": "OP01-055_p2",
+  "score": 0.244,
+  "margin": 0.525
+ },
+ "promo-op10_10169": {
+  "printingId": "OP02-005_p4",
+  "score": 0.258,
+  "margin": 0.426
+ },
+ "promo-op10_10170": {
+  "printingId": "OP02-068_p2",
+  "score": 0.247,
+  "margin": 0.74
+ },
+ "promo-op10_10171": {
+  "printingId": "OP03-008_p3",
+  "score": 0.234,
+  "margin": 0.555
+ },
+ "promo-op10_10172": {
+  "printingId": "OP03-044_p4",
+  "score": 0.287,
+  "margin": 0.475
+ },
+ "promo-op10_10173": {
+  "printingId": "OP03-048_p2",
+  "score": 0.296,
+  "margin": 0.413
+ },
+ "promo-op10_10174": {
+  "printingId": "OP03-072_p2",
+  "score": 0.343,
+  "margin": 0.737
+ },
+ "promo-op10_10176": {
+  "printingId": "OP04-016_p2",
+  "score": 0.283,
+  "margin": 0.439
+ },
+ "promo-op10_10177": {
+  "printingId": "OP04-077_p2",
+  "score": 0.298,
+  "margin": 0.427
+ },
+ "promo-op10_10178": {
+  "printingId": "OP04-096_p2",
+  "score": 0.212,
+  "margin": 0.325
+ },
+ "promo-op10_10179": {
+  "printingId": "OP05-006_p3",
+  "score": 0.31,
+  "margin": 0.544
+ },
+ "promo-op10_10180": {
+  "printingId": "OP05-098_p4",
+  "score": 0.012,
+  "margin": 0.881
+ },
+ "promo-op10_10181": {
+  "printingId": "OP05-119_p8",
+  "score": 0.009,
+  "margin": 0.977
+ },
+ "promo-op10_10182": {
+  "printingId": "OP06-021_p3",
+  "score": 0.011,
+  "margin": 0.731
+ },
+ "promo-op10_10183": {
+  "printingId": "OP07-015_p3",
+  "score": 0.291,
+  "margin": 0.595
+ },
+ "promo-op10_10185": {
+  "printingId": "OP08-001_p3",
+  "score": 0.01,
+  "margin": 0.876
+ },
+ "promo-op10_10187": {
+  "printingId": "OP09-001_p3",
+  "score": 0.011,
+  "margin": 0.842
+ },
+ "promo-op10_10188": {
+  "printingId": "OP09-042_p3",
+  "score": 0.011,
+  "margin": 0.904
+ },
+ "promo-op10_10189": {
+  "printingId": "OP09-061_p3",
+  "score": 0.01,
+  "margin": 0.785
+ },
+ "promo-op10_10190": {
+  "printingId": "OP09-081_p3",
+  "score": 0.01,
+  "margin": 0.861
+ },
+ "promo-op10_10192": {
+  "printingId": "OP09-051_p4",
+  "score": 0.007,
+  "margin": 0.973
+ },
+ "promo-op10_10193": {
+  "printingId": "OP09-093_p6",
+  "score": 0.007,
+  "margin": 0.766
+ },
+ "promo-op10_10194": {
+  "printingId": "OP10-003_p2",
+  "score": 0.015,
+  "margin": 1.102
+ },
+ "promo-op10_10196": {
+  "printingId": "OP10-042_p3",
+  "score": 0.013,
+  "margin": 1.022
+ },
+ "promo-op10_10199": {
+  "printingId": "OP10-108_p2",
+  "score": 0.008,
+  "margin": 0.971
+ },
+ "promo-op10_10202": {
+  "printingId": "OP07-097_p3",
+  "score": 0.008,
+  "margin": 0.301
+ },
+ "promo-op20_10001": {
+  "printingId": "OP11-010_p2",
+  "score": 0.597,
+  "margin": 1
+ },
+ "promo-op20_10002": {
+  "printingId": "OP11-119_p2",
+  "score": 0.392,
+  "margin": 1
+ },
+ "promo-op20_10003": {
+  "printingId": "OP13-019_p1",
+  "score": 0.243,
+  "margin": 0.778
+ },
+ "promo-op20_10015": {
+  "printingId": "OP12-112_p1",
+  "score": 0.198,
+  "margin": 0.744
+ },
+ "promo-op20_10016": {
+  "printingId": "OP12-020_p2",
+  "score": 0.366,
+  "margin": 0.516
+ },
+ "promo-op20_10022": {
+  "printingId": "OP12-112_p2",
+  "score": 0.31,
+  "margin": 1
+ },
+ "promo-op20_10025": {
+  "printingId": "OP12-031_p2",
+  "score": 0.467,
+  "margin": 1
+ },
+ "promo-op20_10026": {
+  "printingId": "OP11-054_p2",
+  "score": 0.393,
+  "margin": 1
+ },
+ "promo-op20_10027": {
+  "printingId": "OP11-067_p3",
+  "score": 0.501,
+  "margin": 1
+ },
+ "promo-op20_10028": {
+  "printingId": "OP12-034_p2",
+  "score": 0.383,
+  "margin": 0.605
+ },
+ "promo-op20_10029": {
+  "printingId": "OP12-039_p2",
+  "score": 0.361,
+  "margin": 0.688
+ },
+ "promo-op20_10031": {
+  "printingId": "OP12-094_p2",
+  "score": 0.398,
+  "margin": 1
+ },
+ "promo-op20_10032": {
+  "printingId": "OP12-119_p2",
+  "score": 0.354,
+  "margin": 0.561
+ },
+ "promo-op20_10040": {
+  "printingId": "OP13-001_p1",
+  "score": 0.258,
+  "margin": 0.859
+ },
+ "promo-op20_10053": {
+  "printingId": "OP14-033_p2",
+  "score": 0.345,
+  "margin": 0.612
+ },
+ "promo-op20_10055": {
+  "printingId": "OP14-087",
+  "score": 0.54,
+  "margin": 1
+ },
+ "promo-st10_10001": {
+  "printingId": "ST01-002_p1",
+  "score": 0.547,
+  "margin": 1
+ },
+ "promo-st10_10002": {
+  "printingId": "ST01-005_p1",
+  "score": 0.478,
+  "margin": 0.496
+ },
+ "promo-st10_10003": {
+  "printingId": "ST01-006_p1",
+  "score": 0.516,
+  "margin": 0.42
+ },
+ "promo-st10_10004": {
+  "printingId": "ST01-008_p1",
+  "score": 0.423,
+  "margin": 0.633
+ },
+ "promo-st10_10008": {
+  "printingId": "ST01-006_p6",
+  "score": 0.439,
+  "margin": 0.516
+ },
+ "promo-st10_10009": {
+  "printingId": "ST04-011_p1",
+  "score": 0.206,
+  "margin": 1.058
+ },
+ "promo-st10_10010": {
+  "printingId": "ST03-008_p1",
+  "score": 0.475,
+  "margin": 0.499
+ },
+ "promo-st10_10013": {
+  "printingId": "ST02-007_p1",
+  "score": 0.153,
+  "margin": 0.591
+ },
+ "promo-st10_10014": {
+  "printingId": "ST03-007_p1",
+  "score": 0.145,
+  "margin": 1
+ },
+ "promo-st10_10017": {
+  "printingId": "ST01-002_p2",
+  "score": 0.233,
+  "margin": 0.374
+ },
+ "promo-st10_10018": {
+  "printingId": "ST01-004_p1",
+  "score": 0.216,
+  "margin": 0.422
+ },
+ "promo-st10_10019": {
+  "printingId": "ST01-006_p2",
+  "score": 0.243,
+  "margin": 0.379
+ },
+ "promo-st10_10020": {
+  "printingId": "ST01-007_p3",
+  "score": 0.254,
+  "margin": 0.411
+ },
+ "promo-st10_10021": {
+  "printingId": "ST01-011_p1",
+  "score": 0.218,
+  "margin": 0.324
+ },
+ "promo-st10_10022": {
+  "printingId": "ST01-013_p1",
+  "score": 0.242,
+  "margin": 0.476
+ },
+ "promo-st10_10023": {
+  "printingId": "ST01-011_p2",
+  "score": 0.206,
+  "margin": 0.408
+ },
+ "promo-st10_10026": {
+  "printingId": "ST06-006_p1",
+  "score": 0.156,
+  "margin": 0.801
+ },
+ "promo-st10_10027": {
+  "printingId": "ST01-004_p2",
+  "score": 0.282,
+  "margin": 0.923
+ },
+ "promo-st10_10029": {
+  "printingId": "ST04-008_p1",
+  "score": 0.408,
+  "margin": 1
+ },
+ "promo-st10_10030": {
+  "printingId": "ST07-008_p1",
+  "score": 0.236,
+  "margin": 0.678
+ },
+ "promo-st10_10031": {
+  "printingId": "ST04-005_p2",
+  "score": 0.364,
+  "margin": 0.652
+ },
+ "promo-st10_10035": {
+  "printingId": "ST03-008_p3",
+  "score": 0.212,
+  "margin": 0.637
+ },
+ "promo-st10_10036": {
+  "printingId": "ST01-002_p4",
+  "score": 0.467,
+  "margin": 0.664
+ },
+ "promo-st10_10037": {
+  "printingId": "ST01-004_p4",
+  "score": 0.572,
+  "margin": 1
+ },
+ "promo-st10_10038": {
+  "printingId": "ST01-006_p4",
+  "score": 0.481,
+  "margin": 0.552
+ },
+ "promo-st10_10039": {
+  "printingId": "ST01-007_p5",
+  "score": 0.493,
+  "margin": 0.521
+ },
+ "promo-st10_10040": {
+  "printingId": "ST01-011_p4",
+  "score": 0.395,
+  "margin": 0.578
+ },
+ "promo-st10_10041": {
+  "printingId": "ST01-013_p3",
+  "score": 0.542,
+  "margin": 0.414
+ },
+ "promo-st10_10042": {
+  "printingId": "ST04-011_p3",
+  "score": 0.538,
+  "margin": 1
+ },
+ "promo-st10_10048": {
+  "printingId": "ST04-003_p3",
+  "score": 0.244,
+  "margin": 0.818
+ },
+ "promo-st10_10051": {
+  "printingId": "ST04-016_p2",
+  "score": 0.387,
+  "margin": 1
+ },
+ "promo-st10_10056": {
+  "printingId": "ST11-003_p1",
+  "score": 0.208,
+  "margin": 0.767
+ },
+ "promo-st10_10057": {
+  "printingId": "ST11-004_p1",
+  "score": 0.187,
+  "margin": 0.56
+ },
+ "promo-st10_10058": {
+  "printingId": "ST11-005_p1",
+  "score": 0.19,
+  "margin": 0.783
+ },
+ "promo-st10_10064": {
+  "printingId": "ST06-006_p1",
+  "score": 0.518,
+  "margin": 0.452
+ },
+ "promo-st10_10065": {
+  "printingId": "ST01-001_p4",
+  "score": 0.47,
+  "margin": 0.495
+ },
+ "promo-st10_10066": {
+  "printingId": "ST03-004_p1",
+  "score": 0.183,
+  "margin": 0.837
+ },
+ "promo-st10_10067": {
+  "printingId": "ST07-007_p1",
+  "score": 0.237,
+  "margin": 0.397
+ },
+ "promo-st10_10068": {
+  "printingId": "ST02-004_p2",
+  "score": 0.402,
+  "margin": 0.671
+ },
+ "promo-st10_10069": {
+  "printingId": "ST03-013_p1",
+  "score": 0.233,
+  "margin": 0.677
+ },
+ "promo-st10_10070": {
+  "printingId": "ST06-008_p1",
+  "score": 0.224,
+  "margin": 0.743
+ },
+ "promo-st10_10073": {
+  "printingId": "ST10-013_p1",
+  "score": 0.343,
+  "margin": 0.657
+ },
+ "promo-st10_10074": {
+  "printingId": "ST01-007_p6",
+  "score": 0.325,
+  "margin": 0.555
+ },
+ "promo-st10_10075": {
+  "printingId": "ST01-007_p7",
+  "score": 0.513,
+  "margin": 0.348
+ },
+ "promo-st10_10076": {
+  "printingId": "ST10-013_p3",
+  "score": 0.469,
+  "margin": 0.386
+ },
+ "promo-st10_10078": {
+  "printingId": "ST16-001_p1",
+  "score": 0.335,
+  "margin": 0.441
+ },
+ "promo-st10_10079": {
+  "printingId": "ST16-001_p2",
+  "score": 0.472,
+  "margin": 1
+ },
+ "promo-st10_10080": {
+  "printingId": "ST17-004_p1",
+  "score": 0.234,
+  "margin": 0.431
+ },
+ "promo-st10_10081": {
+  "printingId": "ST17-004_p2",
+  "score": 0.368,
+  "margin": 1
+ },
+ "promo-st10_10082": {
+  "printingId": "ST13-015_p2",
+  "score": 0.549,
+  "margin": 1
+ },
+ "promo-st10_10086": {
+  "printingId": "ST13-012_p2",
+  "score": 0.436,
+  "margin": 1
+ },
+ "promo-st10_10087": {
+  "printingId": "ST19-002_p1",
+  "score": 0.176,
+  "margin": 0.53
+ },
+ "promo-st10_10091": {
+  "printingId": "ST04-003_p5",
+  "score": 0.459,
+  "margin": 1
+ },
+ "promo-st10_10092": {
+  "printingId": "ST10-008_p1",
+  "score": 0.241,
+  "margin": 0.477
+ },
+ "promo-st10_10096": {
+  "printingId": "ST10-006_p4",
+  "score": 0.369,
+  "margin": 0.811
+ },
+ "promo-st10_10097": {
+  "printingId": "ST01-012_p7",
+  "score": 0.292,
+  "margin": 0.709
+ },
+ "promo-st10_10099": {
+  "printingId": "ST21-014_p2",
+  "score": 0.233,
+  "margin": 1.008
+ },
+ "promo-st10_10101": {
+  "printingId": "ST15-005_p2",
+  "score": 0.426,
+  "margin": 1
+ },
+ "promo-st10_10102": {
+  "printingId": "ST10-006_p3",
+  "score": 0.344,
+  "margin": 0.683
+ },
+ "promo-st10_10106": {
+  "printingId": "ST01-011_p6",
+  "score": 0.256,
+  "margin": 0.501
+ },
+ "promo-st10_10107": {
+  "printingId": "ST02-007_p5",
+  "score": 0.284,
+  "margin": 0.431
+ },
+ "promo-st10_10108": {
+  "printingId": "ST06-008_p3",
+  "score": 0.246,
+  "margin": 0.439
+ },
+ "st01_10018": {
+  "printingId": "ST01-001_p1",
+  "score": 0.011,
+  "margin": 0.782
+ },
+ "st02_10018": {
+  "printingId": "ST02-001_p1",
+  "score": 0.009,
+  "margin": 1
+ },
+ "st03_10002": {
+  "printingId": "ST03-002",
+  "score": 0.229,
+  "margin": 0.311
+ },
+ "st03_10004": {
+  "printingId": "ST03-004",
+  "score": 0.238,
+  "margin": 0.332
+ },
+ "st03_10005": {
+  "printingId": "ST03-005",
+  "score": 0.233,
+  "margin": 0.3
+ },
+ "st03_10008": {
+  "printingId": "ST03-008",
+  "score": 0.292,
+  "margin": 0.298
+ },
+ "st03_10013": {
+  "printingId": "ST03-013",
+  "score": 0.287,
+  "margin": 0.3
+ },
+ "st04_10003": {
+  "printingId": "ST04-003",
+  "score": 0.302,
+  "margin": 0.3
+ },
+ "st04_10005": {
+  "printingId": "ST04-005",
+  "score": 0.24,
+  "margin": 0.3
+ },
+ "st04_10016": {
+  "printingId": "ST04-016",
+  "score": 0.251,
+  "margin": 0.3
+ },
+ "st06_10008": {
+  "printingId": "ST06-008",
+  "score": 0.205,
+  "margin": 0.307
+ },
+ "st06_10010": {
+  "printingId": "ST06-010",
+  "score": 0.204,
+  "margin": 0.3
+ },
+ "st06_10014": {
+  "printingId": "ST06-014",
+  "score": 0.177,
+  "margin": 0.3
+ },
+ "st07_10005": {
+  "printingId": "ST07-005",
+  "score": 0.166,
+  "margin": 0.311
+ },
+ "st07_10007": {
+  "printingId": "ST07-007",
+  "score": 0.149,
+  "margin": 0.3
+ },
+ "st07_10014": {
+  "printingId": "ST07-014",
+  "score": 0.295,
+  "margin": 0.222
+ },
+ "st09_10014": {
+  "printingId": "ST09-014",
+  "score": 0.173,
+  "margin": 0.3
+ },
+ "st10_10005": {
+  "printingId": "ST10-005_r1",
+  "score": 0.423,
+  "margin": 1
+ },
+ "st10_10008": {
+  "printingId": "ST10-008",
+  "score": 0.331,
+  "margin": 0.333
+ },
+ "st10_10010": {
+  "printingId": "ST10-010",
+  "score": 0.346,
+  "margin": 0.3
+ },
+ "st10_10018": {
+  "printingId": "OP01-016_p3",
+  "score": 0.43,
+  "margin": 0.223
+ },
+ "st10_10019": {
+  "printingId": "OP01-025_p2",
+  "score": 0.41,
+  "margin": 0.796
+ },
+ "st11_10001": {
+  "printingId": "ST11-001",
+  "score": 0.207,
+  "margin": 1
+ },
+ "st11_10003": {
+  "printingId": "ST11-003",
+  "score": 0.227,
+  "margin": 1
+ },
+ "st11_10004": {
+  "printingId": "ST11-004",
+  "score": 0.336,
+  "margin": 1
+ },
+ "st11_10005": {
+  "printingId": "ST11-005",
+  "score": 0.212,
+  "margin": 1
+ },
+ "st11_10006": {
+  "printingId": "OP02-040",
+  "score": 0.278,
+  "margin": 1
+ },
+ "st11_10007": {
+  "printingId": "OP02-041",
+  "score": 0.281,
+  "margin": 1
+ },
+ "st12_10005": {
+  "printingId": "ST12-005",
+  "score": 0.269,
+  "margin": 0.337
+ },
+ "st12_10014": {
+  "printingId": "ST12-014",
+  "score": 0.269,
+  "margin": 0.3
+ },
+ "st12_10017": {
+  "printingId": "ST12-017",
+  "score": 0.23,
+  "margin": 0.328
+ },
+ "st13_10002": {
+  "printingId": "ST13-001_p1",
+  "score": 0.29,
+  "margin": 1
+ },
+ "st13_10004": {
+  "printingId": "ST13-002_p1",
+  "score": 0.218,
+  "margin": 1
+ },
+ "st13_10006": {
+  "printingId": "ST13-003_p1",
+  "score": 0.344,
+  "margin": 1
+ },
+ "st13_10007": {
+  "printingId": "ST13-004_r1",
+  "score": 0.417,
+  "margin": 1
+ },
+ "st13_10008": {
+  "printingId": "ST13-004_p1",
+  "score": 0.302,
+  "margin": 0.456
+ },
+ "st13_10013": {
+  "printingId": "ST13-007_r1",
+  "score": 0.369,
+  "margin": 1
+ },
+ "st13_10014": {
+  "printingId": "ST13-007_p1",
+  "score": 0.198,
+  "margin": 0.532
+ },
+ "st13_10019": {
+  "printingId": "ST13-010_r1",
+  "score": 0.337,
+  "margin": 1
+ },
+ "st13_10020": {
+  "printingId": "ST13-010_p1",
+  "score": 0.226,
+  "margin": 0.918
+ },
+ "st13_10022": {
+  "printingId": "ST13-011_p1",
+  "score": 0.259,
+  "margin": 1.133
+ },
+ "st13_10024": {
+  "printingId": "ST13-012_p1",
+  "score": 0.166,
+  "margin": 0.887
+ },
+ "st13_10027": {
+  "printingId": "ST13-014",
+  "score": 0.336,
+  "margin": 0.309
+ },
+ "st13_10028": {
+  "printingId": "ST13-014_p1",
+  "score": 0.223,
+  "margin": 0.705
+ },
+ "st13_10030": {
+  "printingId": "ST13-015_p1",
+  "score": 0.259,
+  "margin": 0.562
+ },
+ "st13_10031": {
+  "printingId": "ST13-016",
+  "score": 0.373,
+  "margin": 0.262
+ },
+ "st13_10035": {
+  "printingId": "ST13-019_r1",
+  "score": 0.387,
+  "margin": 1
+ },
+ "st14_10007": {
+  "printingId": "ST14-007",
+  "score": 0.26,
+  "margin": 0.324
+ },
+ "st14_10010": {
+  "printingId": "ST14-010",
+  "score": 0.234,
+  "margin": 0.324
+ },
+ "st14_10013": {
+  "printingId": "ST14-013",
+  "score": 0.253,
+  "margin": 0.316
+ },
+ "st14_10016": {
+  "printingId": "ST14-016",
+  "score": 0.215,
+  "margin": 0.323
+ },
+ "st14_10017": {
+  "printingId": "ST14-017",
+  "score": 0.193,
+  "margin": 0.316
+ },
+ "st15_10002": {
+  "printingId": "ST15-002",
+  "score": 0.524,
+  "margin": 0.317
+ },
+ "st15_10007": {
+  "printingId": "OP02-008_r1",
+  "score": 0.346,
+  "margin": 1
+ },
+ "st15_10008": {
+  "printingId": "OP02-018_r1",
+  "score": 0.319,
+  "margin": 0.34
+ },
+ "st15_10009": {
+  "printingId": "OP03-003_r1",
+  "score": 0.356,
+  "margin": 0.36
+ },
+ "st16_10003": {
+  "printingId": "ST16-003",
+  "score": 0.283,
+  "margin": 0.323
+ },
+ "st16_10004": {
+  "printingId": "ST16-004",
+  "score": 0.354,
+  "margin": 0.318
+ },
+ "st16_10005": {
+  "printingId": "ST16-005",
+  "score": 0.255,
+  "margin": 0.312
+ },
+ "st17_10002": {
+  "printingId": "ST17-002",
+  "score": 0.3,
+  "margin": 0.326
+ },
+ "st17_10003": {
+  "printingId": "ST17-003",
+  "score": 0.311,
+  "margin": 0.318
+ },
+ "st17_10005": {
+  "printingId": "ST17-005",
+  "score": 0.291,
+  "margin": 0.323
+ },
+ "st17_10007": {
+  "printingId": "OP01-073_r1",
+  "score": 0.293,
+  "margin": 0.307
+ },
+ "st17_10008": {
+  "printingId": "OP01-086_r1",
+  "score": 0.242,
+  "margin": 0.317
+ },
+ "st18_10001": {
+  "printingId": "ST18-001",
+  "score": 0.283,
+  "margin": 0.311
+ },
+ "st18_10002": {
+  "printingId": "ST18-002",
+  "score": 0.288,
+  "margin": 0.319
+ },
+ "st18_10003": {
+  "printingId": "ST18-003",
+  "score": 0.318,
+  "margin": 0.322
+ },
+ "st18_10007": {
+  "printingId": "OP05-067_r1",
+  "score": 0.292,
+  "margin": 0.318
+ },
+ "st19_10002": {
+  "printingId": "ST19-002",
+  "score": 0.353,
+  "margin": 0.321
+ },
+ "st19_10007": {
+  "printingId": "OP02-098_r1",
+  "score": 0.283,
+  "margin": 0.316
+ },
+ "st19_10008": {
+  "printingId": "OP03-089_r1",
+  "score": 0.344,
+  "margin": 0.306
+ },
+ "st20_10003": {
+  "printingId": "ST20-003",
+  "score": 0.275,
+  "margin": 0.308
+ },
+ "st20_10007": {
+  "printingId": "OP03-110_r2",
+  "score": 0.347,
+  "margin": 0.316
+ },
+ "st20_10008": {
+  "printingId": "OP03-112_r1",
+  "score": 0.288,
+  "margin": 0.355
+ },
+ "st20_10009": {
+  "printingId": "OP03-115_r1",
+  "score": 0.244,
+  "margin": 0.358
+ },
+ "st21_10001": {
+  "printingId": "ST21-001",
+  "score": 0.378,
+  "margin": 0.383
+ },
+ "st21_10002": {
+  "printingId": "ST21-001_p1",
+  "score": 0.235,
+  "margin": 1.01
+ },
+ "st21_10005": {
+  "printingId": "ST21-003",
+  "score": 0.481,
+  "margin": 1
+ },
+ "st21_10006": {
+  "printingId": "ST21-003_p1",
+  "score": 0.471,
+  "margin": 0.3
+ },
+ "st21_10028": {
+  "printingId": "ST21-014_p1",
+  "score": 0.471,
+  "margin": 1
+ },
+ "st22_10006": {
+  "printingId": "ST22-003_p1",
+  "score": 0.302,
+  "margin": 1
+ },
+ "st23_10004": {
+  "printingId": "ST23-004",
+  "score": 0.189,
+  "margin": 0.287
+ },
+ "st23_10007": {
+  "printingId": "OP09-013_r1",
+  "score": 0.286,
+  "margin": 0.311
+ },
+ "st23_10008": {
+  "printingId": "OP09-015_r1",
+  "score": 0.318,
+  "margin": 0.322
+ },
+ "st24_10005": {
+  "printingId": "ST24-005",
+  "score": 0.25,
+  "margin": 0.263
+ },
+ "st24_10007": {
+  "printingId": "OP07-021_r1",
+  "score": 0.271,
+  "margin": 0.283
+ },
+ "st24_10008": {
+  "printingId": "OP07-036",
+  "score": 0.207,
+  "margin": 1
+ },
+ "st24_10009": {
+  "printingId": "EB01-015_r1",
+  "score": 0.244,
+  "margin": 0.319
+ },
+ "st25_10007": {
+  "printingId": "OP09-051_r1",
+  "score": 0.215,
+  "margin": 0.298
+ },
+ "st25_10008": {
+  "printingId": "OP09-056_r1",
+  "score": 0.226,
+  "margin": 0.352
+ },
+ "st25_10010": {
+  "printingId": "P-084_r1",
+  "score": 0.276,
+  "margin": 0.351
+ },
+ "st26_10007": {
+  "printingId": "OP09-076_r1",
+  "score": 0.221,
+  "margin": 0.305
+ },
+ "st27_10007": {
+  "printingId": "OP09-083_r1",
+  "score": 0.269,
+  "margin": 0.3
+ },
+ "st27_10008": {
+  "printingId": "OP09-086_r1",
+  "score": 0.204,
+  "margin": 0.263
+ },
+ "st27_10009": {
+  "printingId": "OP09-090_r1",
+  "score": 0.233,
+  "margin": 0.268
+ },
+ "st27_10010": {
+  "printingId": "OP09-095_r1",
+  "score": 0.246,
+  "margin": 0.324
+ },
+ "st28_10007": {
+  "printingId": "OP06-104_r1",
+  "score": 0.287,
+  "margin": 0.363
+ },
+ "st28_10008": {
+  "printingId": "OP07-116",
+  "score": 0.293,
+  "margin": 1
+ },
+ "st29_10018": {
+  "printingId": "ST29-009_p1",
+  "score": 0.548,
+  "margin": 0.456
+ },
+ "st30_10024": {
+  "printingId": "ST30-012_p1",
+  "score": 0.547,
+  "margin": 0.524
+ }
+}
