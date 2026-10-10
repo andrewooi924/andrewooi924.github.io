@@ -32,3 +32,5 @@
 .account-button[data-signed-in="true"] .account-icon{display:block}
 .account-button:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
 @media(max-width:420px){.hdr-right{gap:5px}.ratechip{padding:5px 7px}.offline-dot{display:none}.cloud-content{padding:16px 18px 6px}.cloud-dialog-header{padding:14px 18px}}
+
+.cloud-close{padding:0;display:flex;align-items:center;justify-content:center}.cloud-close svg{display:block;width:20px;height:20px;flex:none}

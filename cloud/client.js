@@ -95,7 +95,7 @@ function showDialog(){
     dialog=element('dialog',null,'cloud-dialog');dialog.setAttribute('aria-labelledby','cloud-title');
     const header=element('div',null,'cloud-dialog-header');
     const title=element('h2','Account & sharing');title.id='cloud-title';
-    const close=element('button','×','cloud-close');close.type='button';close.setAttribute('aria-label','Close account panel');close.title='Close';close.onclick=()=>dialog.close();
+    const close=element('button',null,'cloud-close');close.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';close.type='button';close.setAttribute('aria-label','Close account panel');close.title='Close';close.onclick=()=>dialog.close();
     header.append(title,close);
     const status=element('p');status.setAttribute('role','status');
     dialog.append(header,element('div',null,'cloud-content'),status);document.body.append(dialog);
