@@ -4,11 +4,35 @@ from datetime import datetime, timezone, timedelta
 import hashlib
 import json
 from pathlib import Path
+import re
 import statistics
 import uuid
 
 NAMESPACE=uuid.UUID('e9b35f91-f42d-4161-81a0-c1b327d8d54f')
 def identity(source_id):return str(uuid.uuid5(NAMESPACE,source_id))
+COLOR_JA={'赤':'red','緑':'green','青':'blue','紫':'purple','黒':'black','黄':'yellow'}
+TYPE_EN={'LEADER':'Leader','CHARACTER':'Character','EVENT':'Event','STAGE':'Stage','DON':'DON'}
+def _value(text,label):
+    """Official fields arrive as '<label> <value>'; '-' means not applicable."""
+    text=str(text or '').strip()
+    if text.startswith(label):text=text[len(label):].strip()
+    return '' if text in ('','-') else text
+def official_fields(row):
+    """Normalize one official card-list row into catalog fields."""
+    colors=[COLOR_JA[c] for c in re.split(r'[/／]',_value(row.get('color'),'色')) if c in COLOR_JA]
+    category=TYPE_EN.get(str(row.get('category','')).upper(),'')
+    cost=str(row.get('cost') or '')
+    if not category and (row.get('rarity')=='L' or cost.startswith('ライフ')):category='Leader'
+    product=re.search(r'【([A-Z]+)-?(\d+)】',str(row.get('release') or ''))
+    prefix=str(row.get('code','')).split('-')[0]
+    card_set=f'{product[1]}{product[2]}' if product else ('PROMO' if prefix=='P' else prefix)
+    return {'colors':colors,'type':category,'set':card_set,
+            'variant':'Parallel' if re.search(r'_p\d+$',str(row.get('source_id',''))) else 'Normal',
+            'printingId':row.get('source_id',''),
+            'power':_value(row.get('power'),'パワー'),'cost':_value(cost,'コスト') if cost.startswith('コスト') else '',
+            'life':_value(cost,'ライフ') if cost.startswith('ライフ') else '','counter':_value(row.get('counter'),'カウンター'),
+            'feature':_value(row.get('feature'),'特徴'),'effect':_value(row.get('effect'),'テキスト')}
+
 def load(path,default):return json.loads(Path(path).read_text()) if Path(path).is_file() else default
 
 def reference(offers,now):
@@ -47,8 +71,8 @@ def build(root,output,ingestion=None,previous=None,now=None):
             for row in official:
                 id='b_'+identity('bandai:ja:'+row['source_id']).replace('-','')
                 catalog[id]={**catalog.get(id,{}),'id':id,'variantId':identity('bandai:ja:'+row['source_id']),
-                 'code':row['code'],'name':row['name'],'rarity':row['rarity'],'set':'Official catalog','variant':row['source_id'],
-                 'colors':[],'type':'','effect':row['effect'],'img':row['image'],'price':None,'mappingStatus':'official-unmatched'}
+                 'code':row['code'],'name':row['name'],'rarity':row['rarity'],**official_fields(row),
+                 'img':row['image'],'price':None,'mappingStatus':'official-unmatched'}
         for source,health in report.items():
             if source=='bandai' or health['status']!='ok':continue
             rows=load(ingestion/(source+'.json'),[])
