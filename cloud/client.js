@@ -21,6 +21,16 @@ async function request(path,options={}){
 }
 function message(text){dialog.querySelector('[role=status]').textContent=text;}
 function action(label,fn){const b=element('button',label,'cloud-action');b.type='button';b.onclick=async()=>{b.disabled=true;try{await fn();}catch(e){message(e.message);}finally{b.disabled=false;}};return b;}
+function updateAccountButton(){
+  const button=document.querySelector('.account-button');if(!button)return;
+  button.dataset.signedIn=String(Boolean(session));
+  button.setAttribute('aria-label',session?'Account and sharing':'Sign in with Google');
+  button.title=session?'Account and sharing':'Sign in with Google';
+}
+async function startGoogleSignIn(){
+  const {error}=await auth.auth.signInWithOAuth({provider:'google',options:{redirectTo:signInRedirect()}});
+  if(error)throw error;
+}
 async function load(){
   if(!session){rows=[];loadedFor=null;return;}
   const owner=session.user.id;
@@ -39,19 +49,7 @@ function render(){
   const content=dialog.querySelector('.cloud-content');content.replaceChildren();
   if(!ready){content.append(element('p','Cloud features are not connected yet. Your lists continue to be saved on this device.'));return;}
   if(!session){
-    content.append(element('p','Sign in to save private cloud copies and create revocable links. Local lists stay on this device until you choose to save them.'));
-    if(cfg.googleAuthEnabled)content.append(action('Continue with Google',async()=>{
-      const {error}=await auth.auth.signInWithOAuth({provider:'google',options:{redirectTo:signInRedirect()}});
-      if(error)throw error;
-    }));
-    const email=element('input');email.type='email';email.autocomplete='email';email.placeholder='Email address';email.required=true;
-    email.setAttribute('aria-label','Email address');content.append(email);
-    content.append(action('Send sign-in link',async()=>{
-      if(!email.validity.valid||!email.value.trim())throw Error('Enter a valid email address.');
-      const {error}=await auth.auth.signInWithOtp({email:email.value.trim(),options:{emailRedirectTo:signInRedirect(),shouldCreateUser:false}});
-      if(error)throw error;
-      message('Check your email for the sign-in link.');
-    }));return;
+    if(!cfg.googleAuthEnabled)content.append(element('p','Google sign-in is not configured yet.'));return;
   }
   content.append(element('p','Signed in as '+(session.user.email||'your account')));
   content.append(action('Save current wishlist / collection',save));
@@ -75,9 +73,9 @@ function render(){
     card.append(action('Delete cloud copy',async()=>{if(!confirm('Delete this cloud copy and revoke its link? Local copies remain.'))return;await request(`/v1/me/lists/${row.id}`,{method:'DELETE'});await load();render();message('Cloud copy deleted.');}));
     content.append(card);
   }
-  content.append(action('Sign out',async()=>{const {error}=await auth.auth.signOut({scope:'local'});if(error)throw error;session=null;rows=[];loadedFor=null;render();message('Signed out. Downloaded local copies remain on this device.');}));
+  content.append(action('Sign out',async()=>{const {error}=await auth.auth.signOut({scope:'local'});if(error)throw error;session=null;rows=[];loadedFor=null;updateAccountButton();dialog.close();}));
 }
-async function open(){
+function showDialog(){
   if(!dialog){
     dialog=element('dialog',null,'cloud-dialog');dialog.setAttribute('aria-labelledby','cloud-title');
     const title=element('h2','Account & sharing');title.id='cloud-title';
@@ -85,10 +83,24 @@ async function open(){
     const status=element('p');status.setAttribute('role','status');
     dialog.append(title,element('div',null,'cloud-content'),status,close);document.body.append(dialog);
   }
-  dialog.showModal();render();
-  if(auth){try{const {data,error}=await auth.auth.getSession();if(error)throw error;session=data.session;await load();render();}catch(e){message(e.message);}}
+  if(!dialog.open)dialog.showModal();render();
 }
-if(auth)auth.auth.onAuthStateChange((_event,next)=>{if(session?.user.id!==next?.user.id){rows=[];loadedFor=null;}session=next;if(dialog?.open)render();});
+async function open(){
+  if(auth){
+    try{
+      const {data,error}=await auth.auth.getSession();if(error)throw error;
+      session=data.session;updateAccountButton();
+    }catch(e){session=null;updateAccountButton();showDialog();message(e.message);return;}
+  }
+  if(!session&&ready&&cfg.googleAuthEnabled){
+    try{await startGoogleSignIn();}catch(e){showDialog();message(e.message);}
+    return;
+  }
+  showDialog();
+  if(session)try{await load();render();}catch(e){message(e.message);}
+}
+if(auth)auth.auth.onAuthStateChange((_event,next)=>{if(session?.user.id!==next?.user.id){rows=[];loadedFor=null;}session=next;updateAccountButton();if(dialog?.open)render();});
+updateAccountButton();
 let histories=null,historyFetchedAt=0;
 async function showHistory(container,items){
   container.replaceChildren(element('p','Loading observed price history…'));

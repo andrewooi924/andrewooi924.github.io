@@ -11,9 +11,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Most Wanted">
-<link rel="stylesheet" href="./cloud/style.css">
+<link rel="stylesheet" href="./cloud/style.css?v=google-only-1">
 <script src="./app-config.js"></script>
-<script src="./cloud/bundle.js" defer></script>
+<script src="./cloud/bundle.js?v=google-only-1" defer></script>
 <style>
   :root{
     --ink:#0E1B2A; --ink-2:#16273a; --parch:#F3EAD8; --surface:#FBF7EE;
@@ -353,7 +353,6 @@
   .spendrow button.del{color:var(--muted);padding:4px}
   .bigbtn{display:block;width:calc(100% - 28px);margin:12px 14px;height:50px;border-radius:14px;background:var(--brass);color:var(--ink);font-weight:800}
 </style>
-<link rel="stylesheet" href="cloud/style.css">
 </head>
 <body>
 <header>
@@ -367,7 +366,17 @@
       <div class="sub">OPTCG · JP market</div>
     </div>
     <div class="hdr-right">
-      <button class="account-button" onclick="window.MWCloud?.open()">Account</button>
+      <button class="account-button" type="button" aria-label="Sign in with Google" title="Sign in with Google" data-signed-in="false" onclick="window.MWCloud?.open()">
+        <svg class="google-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.39-.18-2.05H12v3.87h5.38a4.6 4.6 0 0 1-2 3.02v2.51h3.24c1.89-1.74 2.98-4.31 2.98-7.35Z"/>
+          <path fill="#34A853" d="M12 22c2.7 0 4.96-.9 6.62-2.42l-3.24-2.51c-.9.6-2.04.96-3.38.96-2.6 0-4.81-1.76-5.59-4.12H3.07v2.59A10 10 0 0 0 12 22Z"/>
+          <path fill="#FBBC05" d="M6.41 13.91A6 6 0 0 1 6.1 12c0-.66.11-1.3.31-1.91V7.5H3.07A10 10 0 0 0 2 12c0 1.61.39 3.14 1.07 4.5l3.34-2.59Z"/>
+          <path fill="#EA4335" d="M12 5.97c1.47 0 2.79.51 3.82 1.5L18.69 4.6C16.96 2.99 14.7 2 12 2a10 10 0 0 0-8.93 5.5l3.34 2.59C7.19 7.73 9.4 5.97 12 5.97Z"/>
+        </svg>
+        <svg class="account-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-3.5 2.8-5.5 6.5-5.5s6 2 6.5 5.5"/>
+        </svg>
+      </button>
       <button class="ratechip" id="rateChip" aria-label="Set yen to ringgit rate">¥1=RM<span id="rateVal">0.025</span></button>
       <div class="offline-dot" id="netdot"><i></i><span id="netlabel">online</span></div>
     </div>

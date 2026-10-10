@@ -7,5 +7,9 @@
 .cloud-hint,.cloud-list small{color:var(--muted);font-size:13px}
 .cloud-dialog input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}
 .cloud-dialog [role=status]{font-size:14px;color:var(--brass-deep)}
-.account-button{font-size:12px;border:1px solid var(--muted-ink);border-radius:20px;padding:7px 10px}
+.account-button{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid var(--muted-ink);border-radius:50%;background:#fff;color:var(--ink)}
+.account-button svg{width:22px;height:22px}
+.account-button .account-icon,.account-button[data-signed-in="true"] .google-icon{display:none}
+.account-button[data-signed-in="true"] .account-icon{display:block}
+.account-button:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
 @media(max-width:420px){.hdr-right{gap:5px}.ratechip{padding:5px 7px}.offline-dot{display:none}}
