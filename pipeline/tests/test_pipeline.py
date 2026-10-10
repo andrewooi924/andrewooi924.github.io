@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
-from pipeline.build import build,reference,identity,official_fields
+from pipeline.build import build,reference,identity,official_fields,link_official
 from pipeline.adapters import official,discover_official,cardrush
 
 NOW=datetime(2026,9,17,tzinfo=timezone.utc)
@@ -52,3 +52,19 @@ class OfficialFields(unittest.TestCase):
   self.assertEqual(official_fields({**self.ROW,'category':'','rarity':'C','cost':'コスト 2'})['type'],'')
 
 if __name__=='__main__':unittest.main()
+class OfficialLinks(unittest.TestCase):
+ def official(self,pid,code='OP01-001'):return {'id':'b_'+pid,'code':code,'printingId':pid,'img':f'https://o/{pid}.png'}
+ def test_unique_match_takes_official_image_and_hides_duplicate(self):
+  cat={'y1':{'id':'y1','code':'OP01-001','variant':'Parallel','img':'https://y/1.jpg'},
+       'b_OP01-001':self.official('OP01-001'),'b_OP01-001_p1':self.official('OP01-001_p1')}
+  self.assertEqual(link_official(cat,{}),1)
+  self.assertEqual(cat['y1']['img'],'https://o/OP01-001_p1.png');self.assertEqual(cat['y1']['imgAlt'],'https://y/1.jpg')
+  self.assertEqual(cat['b_OP01-001_p1']['aliasOf'],'y1');self.assertNotIn('aliasOf',cat['b_OP01-001'])
+ def test_mirrored_image_is_preferred(self):
+  cat={'y1':{'id':'y1','code':'OP01-001','variant':'Normal','img':'https://y/1.jpg'},'b_OP01-001':self.official('OP01-001')}
+  link_official(cat,{'https://o/OP01-001.png':{'uploaded':True,'url':'https://r2/x.webp'}})
+  self.assertEqual([cat['y1'][k] for k in ('img','imgAlt','imgAlt2')],['https://r2/x.webp','https://o/OP01-001.png','https://y/1.jpg'])
+ def test_ambiguous_parallels_are_not_guessed(self):
+  cat={'y1':{'id':'y1','code':'OP01-001','variant':'Parallel','img':'https://y/1.jpg'},
+       'b_OP01-001_p1':self.official('OP01-001_p1'),'b_OP01-001_p2':self.official('OP01-001_p2')}
+  self.assertEqual(link_official(cat,{}),0);self.assertEqual(cat['y1']['img'],'https://y/1.jpg')

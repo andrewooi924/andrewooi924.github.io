@@ -1159,7 +1159,7 @@ let qt; document.getElementById('q').addEventListener('input',e=>{clearTimeout(q
 
 /* ---------- filtering + sort ---------- */
 function applyFilters(list){
-  let r=list;
+  let r=list.filter(c=>!c.aliasOf); // official rows already shown through a priced retailer row
   if(F.q){const q=F.q;r=r.filter(c=>c.name.toLowerCase().includes(q)||(c.nameEn&&c.nameEn.toLowerCase().includes(q))||c.code.toLowerCase().includes(q)||c.set.toLowerCase().includes(q));}
   if(F.colors.size)r=r.filter(c=>c.colors.some(x=>F.colors.has(x)));
   if(F.rarity.size)r=r.filter(c=>F.rarity.has(rarityOf(c)));
