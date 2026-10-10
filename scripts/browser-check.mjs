@@ -41,5 +41,25 @@ try {
  assert.equal(oauthUrl.searchParams.get('provider'),'google');
  assert.equal(oauthUrl.searchParams.get('redirect_to'),'http://127.0.0.1:8000/');
  await chart.close();
- assert.deepEqual(errors,[]);console.log('Browser checks passed: account state, filters, collection quantities, persistence, mobile layout, no JS errors.');
+ const profile=await browser.newPage({viewport:{width:390,height:844}});
+ const mockSession={access_token:'test-token',refresh_token:'test-refresh',expires_at:Math.floor(Date.now()/1000)+3600,expires_in:3600,token_type:'bearer',user:{id:'11111111-1111-4111-8111-111111111111',email:'collector@example.com',app_metadata:{provider:'google'},user_metadata:{}}};
+ await profile.addInitScript(s=>localStorage.setItem('sb-gvrmtovkdlabsqmipaaw-auth-token',JSON.stringify(s)),mockSession);
+ await profile.route('**/v1/me/lists',r=>r.fulfill({contentType:'application/json',body:JSON.stringify([{id:'sample',localId:'sample',kind:'collection',title:'My collection',items:[{id:'OP01-001'}],revision:2,shared:true}])}));
+ await profile.goto('http://127.0.0.1:8000');
+ await profile.getByRole('button',{name:'Account and sharing'}).click();
+ const account=profile.getByRole('dialog',{name:'Account & sharing'});
+ await account.getByText('My collection').waitFor();
+ assert(await account.getByRole('button',{name:'Close account panel'}).isVisible());
+ assert(await account.getByRole('button',{name:'Save current list'}).isVisible());
+ await account.getByRole('button',{name:'Close account panel'}).click();
+ assert.equal(await account.isVisible(),false);
+ await profile.locator('#tabWishlist').click();
+ await profile.getByRole('button',{name:'Manage lists'}).click();
+ const listDialog=profile.getByRole('dialog',{name:'Your wishlists'});
+ assert(await listDialog.getByRole('button',{name:'Close Your wishlists'}).isVisible());
+ await profile.keyboard.press('Escape');
+ assert.equal(await listDialog.isVisible(),false);
+ assert(await profile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await profile.close();
+ assert.deepEqual(errors,[]);console.log('Browser checks passed: account panel, dialog controls, filters, collection quantities, persistence, mobile layout, no JS errors.');
 } finally {await browser.close();}

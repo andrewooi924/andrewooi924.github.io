@@ -20,7 +20,7 @@ async function request(path,options={}){
   const data=await r.json(); if(!r.ok)throw Error(data.error||'Request failed');return data;
 }
 function message(text){dialog.querySelector('[role=status]').textContent=text;}
-function action(label,fn){const b=element('button',label,'cloud-action');b.type='button';b.onclick=async()=>{b.disabled=true;try{await fn();}catch(e){message(e.message);}finally{b.disabled=false;}};return b;}
+function action(label,fn,variant=''){const b=element('button',label,`cloud-action ${variant}`);b.type='button';b.onclick=async()=>{b.disabled=true;try{await fn();}catch(e){message(e.message);}finally{b.disabled=false;}};return b;}
 function updateAccountButton(){
   const button=document.querySelector('.account-button');if(!button)return;
   button.dataset.signedIn=String(Boolean(session));
@@ -51,15 +51,26 @@ function render(){
   if(!session){
     if(!cfg.googleAuthEnabled)content.append(element('p','Google sign-in is not configured yet.'));return;
   }
-  content.append(element('p','Signed in as '+(session.user.email||'your account')));
-  content.append(action('Save current wishlist / collection',save));
-  content.append(action('Refresh cloud copies',async()=>{await load();render();message('Cloud copies refreshed.');}));
-  content.append(element('p','Cloud copies update when you save. Downloading creates a new local copy; it never replaces existing local data.','cloud-hint'));
+  const account=element('div',null,'cloud-account');
+  const avatar=element('span',(session.user.email||'A').slice(0,1).toUpperCase(),'cloud-avatar');avatar.setAttribute('aria-hidden','true');
+  const identity=element('div',null,'cloud-identity');
+  identity.append(element('small','Signed in with Google'),element('strong',session.user.email||'Your account'));
+  account.append(avatar,identity);content.append(account);
+  const current=element('section',null,'cloud-current');
+  current.append(element('h3','Current list'),element('p','Save your latest changes to your account before sharing or switching devices.'));
+  current.append(action('Save current list',save,'primary'));
+  content.append(current);
+  const heading=element('div',null,'cloud-section-heading');
+  heading.append(element('h3','Saved lists'),action('Refresh',async()=>{await load();render();message('Cloud copies refreshed.');},'quiet'));
+  content.append(heading);
+  if(!rows.length)content.append(element('p','No saved lists yet. Save your current wishlist or collection to add one here.','cloud-empty'));
   for(const row of rows){
     const card=element('section',null,'cloud-list');
-    card.append(element('strong',row.title),element('small',`${row.kind} · ${row.items.length} entries · revision ${row.revision}`));
-    card.append(action('Download a local copy',async()=>{await window.MWBridge.importList(row);message('Downloaded as a new local copy.');}));
-    card.append(action(row.shared?'Replace share link':'Create share link',async()=>{
+    const kind=row.kind==='collection'?'Collection':'Wishlist';
+    card.append(element('strong',row.title),element('small',`${kind} · ${row.items.length} ${row.items.length===1?'card':'cards'}${row.shared?' · Public link on':''}`));
+    const actions=element('div',null,'cloud-list-actions');
+    actions.append(action('Download',async()=>{await window.MWBridge.importList(row);message('Downloaded as a new local copy.');}));
+    actions.append(action(row.shared?'Replace link':'Share link',async()=>{
       if(row.shared&&!confirm('Replace this link? The previous link will stop working.'))return;
       const bytes=crypto.getRandomValues(new Uint8Array(16));const token=Array.from(bytes,x=>x.toString(16).padStart(2,'0')).join('');
       await request(`/v1/me/lists/${row.id}/share`,{method:'PUT',body:JSON.stringify({token})});
@@ -69,19 +80,25 @@ function render(){
       dialog.querySelector('.cloud-content').prepend(input);input.select();
       message('Anyone with this link can view card identities and quantities. Costs and notes remain private. Copy the selected link.');
     }));
-    if(row.shared)card.append(action('Revoke sharing',async()=>{await request(`/v1/me/lists/${row.id}/share`,{method:'PUT',body:JSON.stringify({token:null})});await load();render();message('Sharing revoked.');}));
-    card.append(action('Delete cloud copy',async()=>{if(!confirm('Delete this cloud copy and revoke its link? Local copies remain.'))return;await request(`/v1/me/lists/${row.id}`,{method:'DELETE'});await load();render();message('Cloud copy deleted.');}));
+    if(row.shared)actions.append(action('Revoke link',async()=>{await request(`/v1/me/lists/${row.id}/share`,{method:'PUT',body:JSON.stringify({token:null})});await load();render();message('Sharing revoked.');},'quiet'));
+    actions.append(action('Delete',async()=>{if(!confirm('Delete this cloud copy and revoke its link? Local copies remain.'))return;await request(`/v1/me/lists/${row.id}`,{method:'DELETE'});await load();render();message('Cloud copy deleted.');},'danger'));
+    card.append(actions);
     content.append(card);
   }
-  content.append(action('Sign out',async()=>{const {error}=await auth.auth.signOut({scope:'local'});if(error)throw error;session=null;rows=[];loadedFor=null;updateAccountButton();dialog.close();}));
+  content.append(element('p','Downloads create a separate local copy. Your existing lists stay as they are.','cloud-hint'));
+  const footer=element('div',null,'cloud-footer');
+  footer.append(action('Sign out',async()=>{const {error}=await auth.auth.signOut({scope:'local'});if(error)throw error;session=null;rows=[];loadedFor=null;updateAccountButton();dialog.close();},'quiet'));
+  content.append(footer);
 }
 function showDialog(){
   if(!dialog){
     dialog=element('dialog',null,'cloud-dialog');dialog.setAttribute('aria-labelledby','cloud-title');
+    const header=element('div',null,'cloud-dialog-header');
     const title=element('h2','Account & sharing');title.id='cloud-title';
-    const close=action('Close',()=>dialog.close());
+    const close=element('button','×','cloud-close');close.type='button';close.setAttribute('aria-label','Close account panel');close.title='Close';close.onclick=()=>dialog.close();
+    header.append(title,close);
     const status=element('p');status.setAttribute('role','status');
-    dialog.append(title,element('div',null,'cloud-content'),status,close);document.body.append(dialog);
+    dialog.append(header,element('div',null,'cloud-content'),status);document.body.append(dialog);
   }
   if(!dialog.open)dialog.showModal();render();
 }

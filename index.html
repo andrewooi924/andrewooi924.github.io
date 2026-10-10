@@ -11,9 +11,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Most Wanted">
-<link rel="stylesheet" href="./cloud/style.css?v=google-only-1">
+<link rel="stylesheet" href="./cloud/style.css?v=design-1">
 <script src="./app-config.js"></script>
-<script src="./cloud/bundle.js?v=google-only-1" defer></script>
+<script src="./cloud/bundle.js?v=design-1" defer></script>
 <style>
   :root{
     --ink:#0E1B2A; --ink-2:#16273a; --parch:#F3EAD8; --surface:#FBF7EE;
@@ -352,6 +352,116 @@
   .spendrow .sx{color:var(--muted);font-weight:700}
   .spendrow button.del{color:var(--muted);padding:4px}
   .bigbtn{display:block;width:calc(100% - 28px);margin:12px 14px;height:50px;border-radius:14px;background:var(--brass);color:var(--ink);font-weight:800}
+
+  /* Layout and interaction polish */
+  body{background:#f7f3eb}
+  header{padding:11px 24px;box-shadow:0 3px 15px rgba(14,27,42,.12)}
+  .brand h1{white-space:nowrap;letter-spacing:-.025em}
+  .brand .sub{letter-spacing:.12em}
+  .hdr-right{gap:12px}
+  .ratechip{height:36px;background:rgba(214,162,62,.09);border-width:1px}
+  .controls{position:relative;top:auto;padding:20px 24px 12px;background:transparent;border:0}
+  .search input{height:50px;border-color:var(--line);border-radius:12px;box-shadow:0 1px 3px rgba(14,27,42,.03)}
+  .chips{gap:8px;padding-top:14px;padding-bottom:3px}
+  .chip{height:38px;font-weight:700;border-width:1px}
+  .chip:hover,.lchip:hover,.tool:hover,.loadmore:hover{border-color:var(--brass-deep);background:#fffaf0}
+  .chip[aria-pressed="true"]:hover,.lchip.active:hover{background:var(--ink)}
+  .quickbar{width:fit-content;max-width:100%;margin-top:12px;padding:8px 12px;border-style:solid;background:#fff9ec;font-size:12px}
+  .quickbar .qb-caret{margin-left:12px}
+  main{padding:16px 24px 100px}
+  .meta-row{margin:3px 2px 14px}
+  .grid{gap:16px;grid-template-columns:repeat(auto-fill,minmax(172px,1fr))}
+  .card{border-radius:16px;border-color:var(--line);box-shadow:0 2px 8px rgba(14,27,42,.05);transition:box-shadow .18s,transform .18s}
+  .card:hover{box-shadow:0 10px 26px rgba(14,27,42,.13);transform:translateY(-2px)}
+  .card .imgwrap{background:#eeeae3;padding:7px 10px 0}
+  .card .body{padding:12px 13px 15px;gap:5px}
+  .card .nm{font-size:14px;line-height:1.3}
+  .card .price{font-size:16px}
+  .addbtn{width:38px;height:38px;bottom:11px;right:11px}
+  .lists{gap:8px;padding-bottom:14px}
+  .lchip{height:40px;border-width:1px}
+  .lchip.edit{width:40px;font-size:17px}
+  .summary{padding:20px 22px;border-radius:17px;box-shadow:0 8px 20px rgba(14,27,42,.11)}
+  .summary .n{font-size:32px;letter-spacing:-.04em}
+  .summary .total .v{font-size:25px;letter-spacing:-.02em}
+  .value-note{margin:-3px 2px 0;color:var(--muted);font-size:12px;line-height:1.45}
+  .value-note .delta{font-size:12px}
+  .toolbar{gap:9px;margin:18px 0 12px;flex-wrap:wrap;overflow:visible}
+  .tool{height:42px;border-radius:10px;border-width:1px}
+  .wl-item{border-color:var(--line);border-radius:15px;box-shadow:0 2px 8px rgba(14,27,42,.05);padding:14px;gap:15px}
+  .wl-item .th{width:72px;height:101px}
+  .modal{padding:16px;backdrop-filter:blur(3px)}
+  .modal .box{position:relative;max-width:440px;max-height:min(88vh,800px);overflow-y:auto;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 24px 80px rgba(14,27,42,.23)}
+  .modal h3{font-size:20px;letter-spacing:-.02em;margin:0 44px 12px 0}
+  .modal-close{position:absolute;top:14px;right:14px;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--ink);font-size:27px;font-weight:300;line-height:1}
+  .modal-close:hover{background:var(--parch)}
+  .sheet-close{position:sticky;top:0;float:right;z-index:2;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--ink);font-size:27px;font-weight:300;line-height:1;box-shadow:0 2px 8px rgba(14,27,42,.1)}
+  .sheet-close:hover{background:var(--parch)}
+  .detail-hero{display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:start;margin:0 0 16px}
+  .detail-hero .detail-img{float:none;width:100%;margin:0}
+  .detail-meta{min-width:0;padding-top:3px}
+  .detail-meta .dprice{line-height:1.25;margin:12px 0 0}
+  .detail-meta .dprice small{display:inline-block;white-space:nowrap}
+  .detail-meta .dprice small[title]{display:block;margin-top:6px;color:var(--muted);font-size:12px!important}
+  .sheet .kv{clear:none}
+  .modal .row button{border-radius:10px}
+  .filterpop{border-radius:16px;box-shadow:0 16px 44px rgba(14,27,42,.18)}
+  nav.tabbar button{transition:background .15s,color .15s}
+  nav.tabbar button:hover{background:rgba(214,162,62,.13)}
+  nav.tabbar button.active{background:rgba(214,162,62,.16)}
+  @media(min-width:900px){
+    body{padding-bottom:0}
+    header{position:sticky;top:0;height:68px;z-index:45}
+    .controls,main{margin-left:192px;max-width:calc(1280px + 192px)}
+    .controls{padding:26px 36px 8px}
+    main{padding:20px 36px 80px}
+    .navwrap{position:static}
+    nav.tabbar{top:68px;bottom:0;right:auto;width:192px;display:flex;flex-direction:column;gap:5px;padding:24px 12px;background:#f7f3eb;border-top:0;border-right:1px solid var(--line);backdrop-filter:none}
+    nav.tabbar button{flex:none;position:relative;flex-direction:row;justify-content:flex-start;gap:12px;width:100%;height:48px;padding:0 14px;text-align:left;border-radius:10px}
+    nav.tabbar button .ico{width:21px;height:21px}
+    nav.tabbar button span{font-size:14px;letter-spacing:0}
+    nav.tabbar button .tabbadge{right:10px;transform:none}
+    .summary{min-height:118px}
+  }
+  @media(max-width:899px){
+    nav.tabbar{box-shadow:0 -4px 18px rgba(14,27,42,.06)}
+    nav.tabbar button{min-height:52px}
+  }
+  @media(max-width:560px){
+    header{padding:10px 14px}
+    .brand{gap:8px}
+    .brand .mark{width:29px;height:29px}
+    .brand h1{font-size:16px}
+    .brand .sub{display:none}
+    .hdr-right{gap:7px}
+    .ratechip{font-size:11px;padding:0 7px;height:34px}
+    .offline-dot{display:none}
+    .controls{padding:14px 14px 8px}
+    main{padding:12px 14px 94px}
+    .grid{gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card .body{padding:10px 11px 12px}
+    .card .nm{font-size:13px}
+    .summary{padding:17px 18px;align-items:flex-start;gap:8px}
+    .summary .n{font-size:28px}
+    .summary .total .v{font-size:21px}
+    .summary .lbl{font-size:10px;letter-spacing:.09em}
+    .toolbar{margin:14px 0 10px;gap:7px}
+    .tool{height:39px;padding:0 11px;font-size:12px}
+    .wl-item{padding:11px;gap:11px}
+    .wl-item .th{width:64px;height:90px}
+    .modal .box{padding:20px}
+    .detail-hero{grid-template-columns:112px minmax(0,1fr);gap:14px}
+    .detail-meta .dprice{font-size:21px}
+  }
+  @media(max-width:350px){
+    header{padding-left:10px;padding-right:10px}
+    .brand{gap:6px}
+    .brand .mark{width:26px;height:26px}
+    .brand h1{font-size:15px}
+    .hdr-right{gap:5px}
+    .account-button{width:40px;height:40px}
+    .ratechip{font-size:10px;padding:0 5px}
+  }
 </style>
 </head>
 <body>
@@ -388,7 +498,7 @@
 <div class="controls" id="browseControls">
   <div class="search">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    <input id="q" type="search" inputmode="search" placeholder="Search English or Japanese name, code, set…" autocomplete="off">
+    <input id="q" type="search" inputmode="search" placeholder="Search cards by name or code…" autocomplete="off">
   </div>
   <div class="chips" id="chips"></div>
   <div class="activefilters" id="activeFilters"></div>
@@ -577,7 +687,6 @@
       <input id="linkInput" type="text" readonly aria-label="Shareable link" onfocus="this.select()">
       <button id="linkCopy">Copy</button>
     </div>
-    <div class="row" style="margin-top:14px"><button id="shClose" style="background:var(--ink);color:var(--parch)">Close</button></div>
   </div>
 </div>
 
@@ -600,9 +709,9 @@ let AUTH_TOKEN=null; // Optional token for the legacy short-link Worker when SHA
 const yen = n => (n==null ? '—' : '¥'+n.toLocaleString('en-US'));
 const myr = n => (n==null ? '—' : 'RM'+(n*RATE).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}));
 const priceMain = n => BROWSE_CUR==='myr' ? myr(n) : yen(n);
-const priceNote = c => c.priceStatus==='legacy-undated'
-  ? '<small title="Imported price with no verified observation date"> · undated</small>'
-  : c.priceStatus==='fresh' ? '<small title="Observed retailer price"> · observed</small>' : '';
+const priceNote = (c,detailed=false) => c.priceStatus==='legacy-undated'
+  ? `<small title="Imported price with no verified observation date">${detailed?'Date not verified':' · undated'}</small>`
+  : c.priceStatus==='fresh' ? `<small title="Observed retailer price">${detailed?'Observed retailer price':' · observed'}</small>` : '';
 
 /* ---------- tiny IndexedDB wrapper ---------- */
 const DB='mostwanted', ITEMS='items', SET='settings', LEGACY='wishlist', COLI='colitems';
@@ -1056,12 +1165,15 @@ function openDetail(id){
   const inWL=inAnyList(id);
   const inCol=(CMEMBER.get(id)||EMPTY).size>0;
   const sheet=document.getElementById('sheet');
-  sheet.innerHTML=`<div class="grip"></div>
-    <div class="detail-img"><img src="${esc(c.img)}" data-alt="${esc(c.imgAlt||'')}" data-alt2="${esc(c.imgAlt2||'')}" alt="" onerror="imgFallback(this)"></div>
-    <div class="dcode">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}</div>
-    <h2>${esc(c.name)}</h2>
-    ${c.nameEn?`<div class="h2-en">${esc(c.nameEn)}</div>`:''}
-    <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small>${priceNote(c)}</div>
+  sheet.innerHTML=`<button class="sheet-close" type="button" aria-label="Close card details">×</button><div class="grip"></div>
+    <div class="detail-hero">
+      <div class="detail-img"><img src="${esc(c.img)}" data-alt="${esc(c.imgAlt||'')}" data-alt2="${esc(c.imgAlt2||'')}" alt="" onerror="imgFallback(this)"></div>
+      <div class="detail-meta"><div class="dcode">${esc(c.set)} · ${esc(c.code)} · ${esc(c.rarity)}</div>
+        <h2>${esc(c.name)}</h2>
+        ${c.nameEn?`<div class="h2-en">${esc(c.nameEn)}</div>`:''}
+        <div class="dprice tnum">${yen(c.price)} <small style="font-size:14px;font-weight:700;color:var(--brass-deep)">≈ ${myr(c.price)}</small>${priceNote(c,true)}</div>
+      </div>
+    </div>
     <div class="kv">
       ${c.colors.map(col=>`<span class="k"><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px;background:${COLORS[col]||'#999'}"></span>${col}</span>`).join('')}
       ${c.type?`<span class="k"><b>Type</b> ${esc(c.type)}</span>`:''}
@@ -1076,6 +1188,7 @@ function openDetail(id){
     <button class="btn-lg btn-collect" id="dCol"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M4 9h16M9 5v4"/></svg>${inCol?'In collection — add another / edit':'Add to a collection'}</button>`;
   document.getElementById('dAdd').onclick=()=>{closeSheet();openAddPicker(id);};
   document.getElementById('dCol').onclick=()=>{closeSheet();openObtained(id);};
+  sheet.querySelector('.sheet-close').onclick=closeSheet;
   openSheet();
 }
 function openSheet(){document.getElementById('scrim').classList.add('open');document.getElementById('sheet').classList.add('open');}
@@ -1200,14 +1313,17 @@ function refreshCol(){
   const delta=colMarket(comparable)-colPaid(comparable);
   const missing=list.filter(i=>i.card.price==null).length;
   const sm=document.getElementById('colSummary');
+  document.getElementById('collectionHistory')?.remove();
   if(sm) sm.innerHTML=`<div class="summary" style="margin-top:14px">
       <div><div class="n tnum">${list.reduce((n,i)=>n+itemQuantity(i),0)}</div><div class="lbl">cards owned</div></div>
       <div class="total"><div class="lbl">estimated retail value${missing?` · ${missing} unpriced`:""}</div><div class="v tnum">${yen(mv)}</div>
         <div class="lbl" style="color:var(--brass);margin-top:2px">≈ ${myr(mv)}</div>
-        ${comparable.length?`<div class="lbl" style="margin-top:4px">known cost ${yen(colPaid(comparable))} · <span class="delta ${delta>=0?'pos':'neg'}">${delta>=0?'+':'−'}${yen(Math.abs(delta))}</span> on ${comparable.length} priced entries with known cost</div>`:''}
-      </div></div><button class="tool" id="collectionHistory" style="margin:10px 0">Price history</button><div id="collectionHistoryChart" aria-live="polite"></div>`;
+      </div></div>${comparable.length?`<div class="value-note">Paid ${yen(colPaid(comparable))} · <span class="delta ${delta>=0?'pos':'neg'}">${delta>=0?'+':'−'}${yen(Math.abs(delta))}</span> compared with today's retail estimate for ${comparable.length} priced entries.</div>`:''}<button class="tool" id="collectionHistory">Price history</button><div id="collectionHistoryChart" aria-live="polite"></div>`;
   const historyButton=document.getElementById('collectionHistory');
-  if(historyButton)historyButton.onclick=()=>window.MWCloud.showHistory(document.getElementById('collectionHistoryChart'),[...COL.values()].map(i=>({id:i.id,quantity:itemQuantity(i)})));
+  if(historyButton){
+    document.querySelector('#view .toolbar')?.prepend(historyButton);
+    historyButton.onclick=()=>window.MWCloud.showHistory(document.getElementById('collectionHistoryChart'),[...COL.values()].map(i=>({id:i.id,quantity:itemQuantity(i)})));
+  }
   const body=document.getElementById('colBody'); if(!body)return;
   if(!items.length){
     body.innerHTML=`<div class="empty" style="padding:48px 24px">
@@ -1469,10 +1585,10 @@ function buildQuickbar(){
   q.classList.toggle('col',col);
   const ico='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>';
   q.innerHTML = !QUICK_ADD
-    ? `${ico}<span>Tap + lets you <b>choose lists</b></span><span class="qb-caret">change ▾</span>`
+    ? `${ico}<span>Choose a list for each card</span><span class="qb-caret">Change ▾</span>`
     : col
-      ? `${ico}<span>Tap + adds to <b>${esc(colName(CUR_COL))}</b> <small style="opacity:.7">collection</small></span><span class="qb-caret">change ▾</span>`
-      : `${ico}<span>Tap + adds to <b>${esc((LISTS.find(l=>l.id===CURRENT)||{}).name||'a list')}</b></span><span class="qb-caret">change ▾</span>`;
+      ? `${ico}<span>Adding to <b>${esc(colName(CUR_COL))}</b></span><span class="qb-caret">Change ▾</span>`
+      : `${ico}<span>Adding to <b>${esc((LISTS.find(l=>l.id===CURRENT)||{}).name||'a list')}</b></span><span class="qb-caret">Change ▾</span>`;
   q.onclick=openTargetMenu;
 }
 function openTargetMenu(){
@@ -1732,7 +1848,6 @@ document.getElementById('shCopy').onclick=showShareLink;
 document.getElementById('linkCopy').onclick=()=>copyText(document.getElementById('linkInput').value);
 document.getElementById('shFile').onclick=shareExportFile;
 document.getElementById('shCsv').onclick=()=>{closeShareModal();exportCsv();};
-document.getElementById('shClose').onclick=closeShareModal;
 document.getElementById('shareModal').onclick=e=>{if(e.target.id==='shareModal')closeShareModal();};
 
 /* ----- read-only shared list view (opened from a #w= or #s= link) ----- */
@@ -1910,6 +2025,38 @@ window.MWBridge={
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
 let tt; function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2200);}
+
+// Give every custom dialog a consistent, labelled close control.
+document.querySelectorAll('.modal').forEach(modal=>{
+  const box=modal.querySelector('.box'),heading=box?.querySelector('h3');
+  if(!box||!heading)return;
+  if(!heading.id)heading.id=`${modal.id}-title`;
+  modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-labelledby',heading.id);
+  const close=document.createElement('button');close.type='button';close.className='modal-close';close.textContent='×';close.setAttribute('aria-label',`Close ${heading.textContent}`);
+  close.onclick=()=>modal.classList.remove('open');box.prepend(close);
+  new MutationObserver(()=>{
+    if(modal.classList.contains('open')){
+      modal._returnFocus=document.activeElement;
+      if(!modal.contains(document.activeElement))close.focus();
+    }else if(modal.contains(document.activeElement))modal._returnFocus?.focus?.();
+  }).observe(modal,{attributes:true,attributeFilter:['class']});
+});
+document.addEventListener('keydown',event=>{
+  const activeModal=document.querySelector('.modal.open');
+  if(event.key==='Tab'&&activeModal){
+    const controls=[...activeModal.querySelectorAll('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled),a[href]')].filter(el=>el.getClientRects().length);
+    if(controls.length){
+      const first=controls[0],last=controls.at(-1);
+      if(event.shiftKey&&document.activeElement===first){last.focus();event.preventDefault();}
+      else if(!event.shiftKey&&document.activeElement===last){first.focus();event.preventDefault();}
+    }
+    return;
+  }
+  if(event.key!=='Escape')return;
+  if(activeModal){activeModal.classList.remove('open');event.preventDefault();return;}
+  if(document.getElementById('filterPop').classList.contains('open')){closePop();event.preventDefault();return;}
+  if(document.getElementById('sheet').classList.contains('open')){closeSheet();event.preventDefault();}
+});
 </script>
 </body>
 </html>
