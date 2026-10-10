@@ -14,9 +14,10 @@ def official(html, url):
         src=img.get('data-src') or img.get('src')
         if not src:continue
         fields={k:(node.select_one(sel).get_text(' ',strip=True) if node.select_one(sel) else '') for k,sel in
-                {'effect':'.text','power':'.power','color':'.color','release':'.getInfo','cost':'.cost','counter':'.counter'}.items()}
+                {'effect':'.text','power':'.power','color':'.color','release':'.getInfo','cost':'.cost','counter':'.counter','feature':'.feature'}.items()}
         rows.append({'source':'bandai','source_id':node.get('id') or urlparse(src).path.rsplit('/',1)[-1],
             'code':info[0].get_text(strip=True),'rarity':info[1].get_text(strip=True) if len(info)>1 else '',
+            'category':info[2].get_text(strip=True) if len(info)>2 else '',
             'name':name.get_text(strip=True) if name else '', 'image':urljoin(url,src),'url':url,**fields})
     return rows
 

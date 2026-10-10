@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
-from pipeline.build import build,reference,identity
+from pipeline.build import build,reference,identity,official_fields
 from pipeline.adapters import official,discover_official,cardrush
 
 NOW=datetime(2026,9,17,tzinfo=timezone.utc)
@@ -32,4 +32,23 @@ class Prices(unittest.TestCase):
    self.assertEqual(json.loads((folder/'history.json').read_text()).get('op01_1',[]),[])
    self.assertEqual(json.loads((folder/'catalog.json').read_text())[0]['variantId'],identity('migration:op01_1'))
    self.assertEqual(json.loads((folder/'catalog.json').read_text())[0]['priceStatus'],'legacy-undated')
+class OfficialFields(unittest.TestCase):
+ ROW={'source_id':'ST01-001','code':'ST01-001','rarity':'L','category':'LEADER','color':'色 赤/緑','power':'パワー 5000',
+      'cost':'ライフ 5','counter':'カウンター -','feature':'特徴 超新星/麦わらの一味','effect':'テキスト 【起動メイン】効果',
+      'release':'入手情報 麦わらの一味【ST-01】 カードリスト 商品情報'}
+ def test_strips_labels_and_maps_colors_type_set(self):
+  f=official_fields(self.ROW)
+  self.assertEqual((f['colors'],f['type'],f['set'],f['variant']),(['red','green'],'Leader','ST01','Normal'))
+  self.assertEqual((f['power'],f['life'],f['cost'],f['counter']),('5000','5','',''))
+  self.assertEqual((f['feature'],f['effect']),('超新星/麦わらの一味','【起動メイン】効果'))
+ def test_reprint_set_comes_from_release_and_parallels_are_marked(self):
+  f=official_fields({**self.ROW,'source_id':'OP05-119_p2','code':'OP05-119','rarity':'SEC','category':'CHARACTER','cost':'コスト 10',
+                     'release':'入手情報 プレミアムブースター【PRB-01】'})
+  self.assertEqual((f['set'],f['variant'],f['type'],f['cost'],f['printingId']),('PRB01','Parallel','Character','10','OP05-119_p2'))
+ def test_promos_without_a_product_code_use_promo_set(self):
+  self.assertEqual(official_fields({**self.ROW,'code':'P-001','release':'入手情報 ファミリーデッキセット'})['set'],'PROMO')
+ def test_missing_category_falls_back_only_for_leaders(self):
+  self.assertEqual(official_fields({**self.ROW,'category':''})['type'],'Leader')
+  self.assertEqual(official_fields({**self.ROW,'category':'','rarity':'C','cost':'コスト 2'})['type'],'')
+
 if __name__=='__main__':unittest.main()
