@@ -75,6 +75,18 @@ async function publicImage(path: string, env: Env) {
   return new Response(object.body,{headers:{'content-type':'image/webp','etag':object.httpEtag,
     'cache-control':'public, max-age=31536000, immutable'}});
 }
+async function cachedImage(request: Request, path: string, env: Env) {
+  const cache=(globalThis as any).caches?.default as Cache|undefined;
+  const key=new Request(new URL(path,request.url).href);
+  const hit=await cache?.match(key); if(hit) return hit;
+  let response: Response;
+  try {response=await publicImage(path,env);}
+  catch(error) {return json({error:error instanceof HttpError?error.message:'Service temporarily unavailable'},error instanceof HttpError?error.status:503);}
+  response.headers.set('x-content-type-options','nosniff');
+  response.headers.set('access-control-allow-origin','*');
+  if(cache) await cache.put(key,response.clone());
+  return response;
+}
 export async function handle(request: Request, env: Env): Promise<Response> {
   const url=new URL(request.url), origin=request.headers.get('origin');
   const allowed=env.ALLOWED_ORIGINS.split(',').map(x=>x.trim());
@@ -83,6 +95,9 @@ export async function handle(request: Request, env: Env): Promise<Response> {
     if(origin&&!allowed.includes(origin)) throw new HttpError(403,'Origin not allowed');
     if(request.method==='OPTIONS') result=new Response(null,{status:204});
     else {
+      // Card images are public and immutable, and a grid loads dozens at once: skip the
+      // per-IP limit and let Cloudflare's edge cache absorb repeat requests.
+      if(url.pathname.startsWith('/v1/images/') && request.method==='GET') return await cachedImage(request,url.pathname,env);
       const ip=request.headers.get('cf-connecting-ip') || 'local';
       if(env.RATE_LIMITER && !(await env.RATE_LIMITER.limit({key:ip})).success) throw new HttpError(429,'Too many requests');
       const path=url.pathname;
@@ -109,8 +124,7 @@ export async function handle(request: Request, env: Env): Promise<Response> {
       } else if(path.startsWith('/v1/shared/') && request.method==='GET') {
         const token=path.slice('/v1/shared/'.length); if(!TOKEN.test(token)) throw new HttpError(404,'List not found');
         const data=await rpc(env,'mw_shared_list',{p_token:token}); if(!data) throw new HttpError(404,'List is private, revoked, or missing'); result=json(data);
-      } else if(path.startsWith('/v1/images/') && request.method==='GET') result=await publicImage(path,env);
-      else if(path.startsWith('/v1/') && request.method==='GET') result=await publicData(path,env);
+      } else if(path.startsWith('/v1/') && request.method==='GET') result=await publicData(path,env);
       else throw new HttpError(404,'Endpoint not found');
     }
   } catch(error) {result=json({error:error instanceof HttpError?error.message:'Service temporarily unavailable'},error instanceof HttpError?error.status:503);}
