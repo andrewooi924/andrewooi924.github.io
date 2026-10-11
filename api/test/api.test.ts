@@ -42,3 +42,8 @@ test('revision conflicts are distinct from service failures',async()=>{
  const old=globalThis.fetch;globalThis.fetch=(async()=>Response.json({code:'40001'},{status:409})) as typeof fetch;
  try{const r=await handle(new Request('https://api.example/v1/me/lists',{method:'PUT',headers:{authorization:'Bearer x','content-type':'application/json'},body:'{}'}),env());assert.equal(r.status,409);}finally{globalThis.fetch=old;}
 });
+test('card images are not throttled by the per-IP request limit',async()=>{
+ const assets={get:async()=>({body:'webp-bytes',httpEtag:'"image-hash"'})} as unknown as R2Bucket;
+ const r=await handle(new Request(`https://api.example/v1/images/${'b'.repeat(64)}/detail.webp`),env({ASSETS:assets,RATE_LIMITER:{limit:async()=>({success:false})}}));
+ assert.equal(r.status,200);
+});
