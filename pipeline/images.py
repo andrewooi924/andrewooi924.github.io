@@ -10,6 +10,9 @@ from PIL import Image
 from .storage import client
 from .http import Fetcher
 
+def save_index(s3,bucket,mapping):
+    s3.put_object(Bucket=bucket,Key='asset-index.json',Body=json.dumps(mapping).encode(),ContentType='application/json',CacheControl='no-cache')
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--root',default='images');p.add_argument('--official');p.add_argument('--limit',type=int,default=100);p.add_argument('--upload',action='store_true');p.add_argument('--refresh',action='store_true');a=p.parse_args()
     if not 1<=a.limit<=6000:raise ValueError('Image limit must be 1..6000')
@@ -42,7 +45,9 @@ def main():
                 variants[name]=f'{base}/{public_key}' if base else object_key
             mapping[key]={'url':variants['detail'],'thumbnail':variants['thumb'],'sourceHash':hashlib.sha256(raw).hexdigest(),'uploaded':bool(s3)}
         count+=1
-    if s3:s3.put_object(Bucket=bucket,Key='asset-index.json',Body=json.dumps(mapping).encode(),ContentType='application/json',CacheControl='no-cache')
+        # Save progress regularly so a run that hits the job timeout is not lost.
+        if s3 and count%100==0:save_index(s3,bucket,mapping)
+    if s3:save_index(s3,bucket,mapping)
     output.write_text(json.dumps(mapping,indent=2))
     print(('Uploaded' if s3 else 'Prepared without upload'),count,'images;',len(mapping),'mapped')
 if __name__=='__main__':main()
